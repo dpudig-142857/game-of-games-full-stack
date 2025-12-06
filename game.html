@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Game of Games</title>
+    <link rel='stylesheet' href='../css/game.css'>
+
+    <link href='https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;500&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/brackets-viewer@latest/dist/brackets-viewer.min.css' />
+
+    <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
+    <script src='js/wheel/Winwheel.js'></script>
+</head>
+<body>
+    <header>
+        <div class='header-left'>
+            <div id='current-time'>
+                <h3></h3>
+            </div>
+            <h3 id='time-extra'></h3>
+            <div id='elapsed-time'>
+                <h3></h3>
+            </div>
+        </div>
+        <div class='header-left'>
+            <div id='current-time'></div>
+            <div id='time-extra'></div>
+            <div id='elapsed-time'></div>
+        </div>
+        <div class='header-button-box'>
+            <button type='submit' class='top-button' id='left-mode-button'></button>
+        </div>
+        <div class='header' id='header'></div>
+        <div class='header-button-box'>
+            <button type='submit' class='top-button' id='right-mode-button'></button>
+        </div>
+        <div class='header-right'>
+            <button class='back-button' id='home-button'>Home</button>
+        </div>
+    </header>
+
+    <div class='main-content' id='mainContent'>
+        <div class='center-section' id='center-section'>
+            <!-- Welcome Section -->
+            <div class='top'>
+                <div id='welcome'>
+                    <h1>LET THE GAME OF GAMES BEGIN</h1>
+                    <h3>and may the odds be ever in your favour</h3>
+                </div>
+                <h1 id='top-title'></h1>
+            </div>
+        
+            <!-- Refresh Section -->
+            <h2 id='refresh-result'></h2>
+            <div id='refresh-games'>
+                <h2>Did you want to refresh all of the games?</h2>
+                <div id='refresh-buttons'>
+                    <button type='submit' class='pre-game-button' id='refresh-yes'>Yes</button>
+                    <button type='submit' class='pre-game-button' id='refresh-no'>No</button>
+                </div>
+            </div>
+
+            <!-- Pre Game Section -->
+            <h2 id='pre-game-result'></h2>
+            <div id='pre-game'>
+                <h2>Has everyone done the pre-game cone?</h2>
+                <div id='pre-game-buttons'>
+                    <button type='submit' class='pre-game-button' id='pre-game-yes'>Yes</button>
+                    <button type='submit' class='pre-game-button' id='pre-game-no'>No</button>
+                </div>
+            </div>
+        
+            <!-- Game Selection Section -->
+            <!--<div id='game_wheel'>
+                <canvas id='wheel' width='500' height='500'></canvas>
+                <div id='spin'>SPIN</div>
+            </div>-->
+            <div id='game_wheel'>
+                <canvas id='wheelCanvas' width='500' height='500'></canvas>
+                <div id='spin' class='spinner'>SPIN</div>
+            </div>
+            <div id='player_wheel'>
+                <canvas id='wheelCanvas2' width='500' height='500'></canvas>
+                <div id='spin2' class='spinner'>SPIN</div>
+            </div>
+            <div id='voting_game'>
+                <div id='voting'></div>
+            </div>
+            <div class='choosing-area'>
+                <div id='choosing_game'></div>
+            </div>
+            
+            <!-- Neigh Section -->
+            <div id='askNeigh'>
+                <br>
+                <div id='askNeigh-section'>
+                    <h2 id='ask1'>Unless someone wants to neigh?</h2>
+                    <div id='neighButtons1'>
+                        <button type='submit' class='pre-game-button neigh-button' id='yesNeigh1'>Yes</button>
+                        <button type='submit' class='pre-game-button neigh-button' id='noNeigh1'>No</button>
+                    </div>
+                    <h2 id='ask2'>Does someone want to neigh that neigh?</h2>
+                    <div id='neighButtons2'>
+                        <button type='submit' class='pre-game-button neigh-button' id='yesNeigh2'>Yes</button>
+                        <button type='submit' class='pre-game-button neigh-button' id='noNeigh2'>No</button>
+                    </div>
+                    <h2 id='ask3'>What about that neigh?</h2>
+                    <div id='neighButtons3'>
+                        <button type='submit' class='pre-game-button neigh-button' id='yesNeigh3'>Yes</button>
+                        <button type='submit' class='pre-game-button neigh-button' id='noNeigh3'>No</button>
+                    </div>
+                    <select id='selectNeighPlayer' class='game_select'></select>
+                    <select id='selectNeighType' class='game_select'></select>
+                </div>
+            </div>
+
+            <!-- Wheel Cone -->
+            <div id='wheelCone'>
+                <h1 id='ratatouille'></h1>
+                <button type='submit' class='button' id='wheelComplete'>Cone<br>Complete</button>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Intrude Game -->
+        <div class='modal-overlay' id='intrudeModal'>
+            <div class='box' id='intrude-game-box'>
+                <div class='middle-close-div'>
+                    <span id='intrude-game-close' class='middle-close'>&times;</span>
+                </div>
+                <h1 class='middle-title' id='intrude-game-title'>Who's intruding the game?</h1>
+                <div id='intrude-game-players' class='middle-players'></div>
+                <div id='intrude-game-games'></div>
+                <div id='intrude-game-specialities'></div>
+                <button type='submit' class='button middle-button' id='intrude-game-button'>Intrude Player</button>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Abandon Game -->
+        <div class='modal-overlay' id='abandonModal'>
+            <div class='box' id='abandon-game-box'>
+                <div class='middle-close-div'>
+                    <span id='abandon-game-close' class='middle-close'>&times;</span>
+                </div>
+                <h1 class='middle-title' id='abandon-game-title'>Who's abandoning the game?</h1>
+                <div id='abandon-game-players' class='middle-players'></div>
+                <div id='abandon-game-games'></div>
+                <h2 id='abandon-game-result'></h2>
+                <button type='submit' class='button middle-button' id='abandon-game-button'>Abandon Player</button>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Break Cone -->
+        <div class='modal-overlay' id='breakConeModal'>
+            <div class='box' id='break-cone-box'>
+                <div class='middle-close-div'>
+                    <span id='break-cone-close' class='middle-close'>&times;</span>
+                </div>
+                <h1 class='middle-title' id='break-cone-title'>Who's having a break cone?</h1>
+                <div id='break-cone-players' class='middle-players'></div>
+                <h2 id='break-cone-result'></h2>
+                <button type='submit' class='button middle-button' id='break-cone-button'>Cone Time!</button>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Victory Cone -->
+        <div class='modal-overlay' id='victoryConeModal'>
+            <div class='box' id='victory-cone-box'>
+                <div class='middle-close-div'>
+                    <span id='victory-cone-close' class='middle-close'>&times;</span>
+                </div>
+                <h1 class='middle-title' id='victory-cone-title'>Who's having a victory cone?</h1>
+                <div id='victory-cone-players' class='middle-players'></div>
+                <h2 id='victory-cone-result'></h2>
+                <button type='submit' class='button middle-button' id='victory-cone-button'>Cone Time!</button>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Game Box -->
+        <div class='modal-overlay' id='gameModal'>
+            <div class='box' id='gameModal-box'>
+                <!-- Game Title -->
+                <h1 id='title'></h1>
+                <h2 id='specialityTitle'></h2>
+                
+                <!-- 4:20 Game -->
+                <div id='four20game'>
+                    <div id='four20game_section'>
+                        <h1 id='four20game_title'>IT'S TIME FOR THE 4:20 GAME</h1>
+                        <h1 id='four20game_who'>WHO'S HAVING A CONE?</h1>
+                        <h3 id='four20game_optional'>it's optional</h3>
+                        <h1 id='four20game_ratatouille'>Ratatouille Everyone!</h1>
+                        <div id='four20game_players'></div>
+                        <button type='submit' class='button four20-button' id='four20'>Begin</button>
+                        <div id='four20game_row'>
+                            <div id='four20game_options'>
+                                <div id='four20game_option_photo'>
+                                    <button type='submit' class='button four20-button' id='option_photo'>Take a Photo</button>
+                                    <button type='submit' class='button four20-button' id='capture'>Capture Photo</button>
+                                    <button type='submit' class='button four20-button' id='retake'>Retake Photo</button>
+                                </div>
+                                <div id='four20game_option_upload'>
+                                    <label for='fileInput' class='button'>Upload a Photo</label>
+                                    <input type='file' id='fileInput' accept='image/*'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='four20game_results'></div>
+                    <div id='four20game_camera'></div>
+                    <div id='four20game_photoDiv'>
+                        <div id='four20game_photo'></div>
+                    </div>
+                </div>
+
+                <div class='curr_game'></div>
+
+                <!-- Game Action Buttons -->
+                <div id='buttonBox'>
+                    <button type='submit' class='button game-action-button' id='complete'>Complete<br>Game</button>
+                    <button type='submit' class='button game-action-button' id='round'>Next<br>Round</button>
+                    <button type='submit' class='button game-action-button' id='submit'>Submit<br>Game</button>
+                    <button type='submit' class='button game-action-button' id='end'>End<br>Game</button>
+                    <button type='submit' class='button game-action-button' id='refresh'>Refresh<br>Games</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class='footer-left'>
+            <button class='back-button' id='finish'>Finish</button>
+        </div>
+        <div class='footer-button-box'>
+            <button type='submit' class='bottom-button' id='intrude'>
+                <h3 class='button-text'>Intrude<br>Game</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='abandon'>
+                <h3 class='button-text'>Abandon<br>Game</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='vote'>
+                <h3 class='button-text'>Submit<br>Votes</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='break'>
+                <h3 class='button-text'>Break<br>Cone</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='victory'>
+                <h3 class='button-text'>Victory<br>Cone</h3>
+            </button>
+        </div>
+        <div class='footer-right' id='logo-area'></div>
+    </footer>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/brackets-viewer@latest/dist/brackets-viewer.min.js'></script>
+    <script type='module' src='../js/game.js'></script>
+</body>
+</html>

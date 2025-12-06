@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title id='tab-title'>Game of Games</title>
+    <link href='https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;500&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='../css/results.css'>
+</head>
+<body>
+    <header>
+        <div class='header-left'>
+            <div id='current-time'></div>
+            <div id='time-extra'></div>
+        </div>
+        <div class='title' id='title'>
+            <h1>Game of Games Results</h1>
+        </div>
+        <div class='header-right'>
+            <button class='back-button' onclick='window.history.back()'>Back</button>
+        </div>
+    </header>
+    
+    <div class='main-content'>
+        <div class='info-title' id='extra'></div>
+        <div class='info-title' id='date-time'></div>
+        <div id='main-section'>
+            <div id='no-session-box'></div>
+            <div class='main-box' id='games-box'></div>
+            <div class='main-box' id='players-box'></div>
+        </div>
+        <!--<div class='left big-box'>
+            <div id='game_time'></div>
+            <div id='game_systems'></div>
+        </div>
+        
+        <div class='middle'>
+            <div id='game_players' class='big-box'></div>
+        </div>
+        
+        <div class='right'>
+            <div id='game_games_played' class='big-box'>
+                <div id='choose_game'></div>
+                <hr id='gamesLine'>
+                <div id='show_game'></div>
+            </div>
+            <div id='game_breakdown' class='big-box'></div>
+        </div>-->
+    </div>
+    
+    <div class='modal' id='player-modal'>
+        <div class='big-box' id='player-modal-box'>
+            <div class='middle-close-div'>
+                <span class='middle-close' id='player-close'>&times;</span>
+            </div>
+            <div class='modal-scroll'>
+                <div class='modal-section' id='player-section'>
+                    <div id='modal-player-name'></div>
+                    <div class='modal-flex-row'>
+                        <div class='modal-total' id='modal-player-points-total'></div>
+                        <div class='modal-scrollable-div' id='modal-player-points-div'></div>
+                    </div>
+                    <div class='modal-flex-row'>
+                        <div class='modal-total' id='modal-player-cones-total'></div>
+                        <div class='modal-scrollable-div' id='modal-player-cones-div'></div>
+                    </div>
+                    <div class='modal-scrollable-div' id='modal-player-cards-div'></div>
+                    <div class='modal-scrollable-div' id='modal-player-games-div'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='game-modal'>
+        <div class='big-box' id='game-modal-box'>
+            <div class='middle-close-div'>
+                <span class='middle-close' id='game-close'>&times;</span>
+            </div>
+            <div class='modal-scroll'>
+                <div class='modal-section' id='game-section'>
+                    <div id='modal-game-name'></div>
+                    <div id='modal-game-speciality'></div>
+                    <div id='modal-game-extras'></div>
+                    <div id='modal-game-selected'></div>
+                    <div class='modal-scrollable-div' id='modal-game-results'></div>
+                    <div id='modal-game-photo'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class='footer-left'>
+            <button class='home-button' id='home-button'>Home</button>
+        </div>
+        <div class='footer-button-box'>
+            <!--<button type='submit' class='bottom-button' id='playersBtn' onclick='showPlayers()'>
+                <h3 class='button-text'>Players</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='gamesBtn' onclick='showGames()'>
+                <h3 class='button-text'>Games</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='totalBtn' onclick='showTotal()'>
+                <h3 class='button-text'>Totals</h3>
+            </button>-->
+        </div>
+        <div class='footer-right' id='logo-area'></div>
+    </footer>
+
+    <script type='module' src='../js/results.js'></script>
+</body>
+</html>

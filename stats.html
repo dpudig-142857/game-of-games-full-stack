@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta chraset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Game of Games</title>
+    <link href='https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;500&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='../css/stats.css'>
+</head>
+<body>
+    <header>
+        <div class='header-left'>
+            <div id='current-time'></div>
+            <div id='time-extra'></div>
+        </div>
+        <div class='title' id='title'>
+            <h1>Game of Games Stats</h1>
+        </div>
+        <div class='header-right'>
+            <button class='back-button' onclick='window.history.back()'>Back</button>
+        </div>
+    </header>
+
+    <div class='main-content'>
+        <div class='middle-section' id='players-div'>
+            <div class='middle-div' id='players'></div>
+        </div>
+        <div class='middle-section' id='games-div'>
+            <div class='middle-div' id='games'></div>
+        </div>
+        <div class='middle-section' id='total-div'>
+            <div class='middle-div' id='total'></div>
+        </div>
+        
+        <!--
+        <div id='right' class='big-box'>
+            <div id='right-total'>
+                <h1 id='total-title'>Game of Games Stats</h1>
+                <div id='total-gog'></div>
+                <div id='total-overall'>
+                    <div id='total-games'></div>
+                    <div id='total-player'></div>
+                </div>
+                <div id='total-players-div'>
+                    <div id='total-players'></div>
+                </div>
+                <div id='total-cones-div'>
+                    <div id='total-cones'></div>
+                </div>
+                <div id='total-points-div'>
+                    <div id='total-points'></div>
+                </div>
+                <div id='total-cards-div'>
+                    <div id='total-cards'></div>
+                </div>
+                <div id='total-logs-div'>
+                    <div id='total-logs'></div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+
+    <div class='modal' id='player-modal'>
+        <div class='box' id='player-modal-box'>
+            <div class='middle-close-div'>
+                <span class='middle-close' id='player-close'>&times;</span>
+            </div>
+            <div class='modal-scroll'>
+                <div class='modal-section' id='player-section'>
+                    <div id='modal-player-name'></div>
+                    <div class='modal-flex-row'>
+                        <div id='modal-player-played' class='modal-box'></div>
+                        <div id='modal-player-chance' class='modal-box'></div>
+                        <div id='modal-player-intruded' class='modal-box'></div>
+                        <div id='modal-player-abandoned' class='modal-box'></div>
+                    </div>
+                    <div class='modal-scrollable-div' id='modal-player-places-div'></div>
+                    <div class='modal-scrollable-div' id='modal-player-points-div'></div>
+                    <div class='modal-scrollable-div' id='modal-player-cones-div'></div>
+                    <div class='modal-scrollable-div' id='modal-player-cards-div'></div>
+                    <div class='modal-scrollable-div' id='modal-player-games-div'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='game-modal'>
+        <div class='box' id='game-modal-box'>
+            <div class='middle-close-div'>
+                <span class='middle-close' id='game-close'>&times;</span>
+            </div>
+            <div class='modal-scroll'>
+                <div class='modal-section' id='game-section'>
+                    <div id='modal-game-name'></div>
+                    <!--<div class='modal-flex-row'>
+                        <div id='modal-game-played' class='modal-box'></div>
+                        <div id='modal-game-selected' class='modal-box'></div>
+                    </div>
+                    <div class='modal-flex-row'>
+                        <div id='modal-game-chance' class='modal-box'></div>
+                        <div id='modal-game-neigh' class='modal-box'></div>
+                        <div id='modal-game-super' class='modal-box'></div>
+                    </div>
+                    <div class='modal-flex-row' id='modal-game-selections'>
+                        <!--<div id='modal-game-selected-choose' class='modal-box'></div>
+                        <div id='modal-game-selected-vote' class='modal-box'></div>
+                        <div id='modal-game-selected-wheel' class='modal-box'></div>--
+                    </div>--->
+                    <div class='modal-scrollable-div' id='modal-game-players-div'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='total-modal'>
+        <div class='box' id='total-modal-box'>
+            <div class='middle-close-div'>
+                <span class='middle-close' id='total-close'>&times;</span>
+            </div>
+            <div class='modal-scroll'>
+                <div class='modal-section' id='total-section'>
+                    <div id='modal-total-title'></div>
+                    <div class='modal-flex-row'>
+                        <div id='modal-total-gog' class='modal-box'></div>
+                    </div>
+                    <div class='modal-flex-row'>
+                        <div id='modal-total-games' class='modal-box'></div>
+                        <div id='modal-total-player' class='modal-box'></div>
+                    </div>
+                    <div class='modal-scrollable-div' id='modal-total-players-div'></div>
+                    <div class='modal-scrollable-div' id='modal-total-points-div'></div>
+                    <div class='modal-scrollable-div' id='modal-total-cones-div'></div>
+                    <div class='modal-scrollable-div' id='modal-total-cards-div'></div>
+                    <div class='modal-scrollable-div' id='modal-total-logs-div'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class='footer-left'></div>
+        <div class='footer-button-box'>
+            <button type='submit' class='bottom-button' id='playersBtn'>
+                <h3 class='button-text'>Players</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='gamesBtn'>
+                <h3 class='button-text'>Games</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='totalBtn'>
+                <h3 class='button-text'>Totals</h3>
+            </button>
+        </div>
+        <div class='footer-right' id='logo-area'></div>
+    </footer>
+
+    <script type='module' src='../js/stats.js'></script>
+</body>
+</html>

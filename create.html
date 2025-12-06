@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Game of Games</title>
+    <link href='https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;500&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='../css/create.css'>
+</head>
+<body>
+    <header>
+        <div class='header-left'>
+            <div id='current-time'></div>
+            <div id='time-extra'></div>
+        </div>
+        <div class='title' id='title'>
+            <h1>Creating Game of Games</h1>
+        </div>
+        <div class='header-right'>
+            <button class='back-button' onclick='window.history.back()'>Back</button>
+        </div>
+    </header>
+
+    <div class='main-content'>
+        <div class='step' id='general-step'></div>
+        <div class='step' id='players-step'></div>
+        <div class='step' id='games-step'></div>
+        <div class='step' id='specialities-step'></div>
+        <div class='step' id='confirmation-step'></div>
+    </div>
+
+    <footer>
+        <div class='footer-left'>
+            <button type='submit' class='bottom-button' id='nextBtn'>
+                <h3 class='button-text'>Next</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='startBtn'>
+                <h3 class='button-text'>Start</h3>
+            </button>
+        </div>
+        <div class='footer-button-box'>
+            <button type='submit' class='bottom-button' id='generalBtn'>
+                <h3 class='button-text'>General</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='playersBtn'>
+                <h3 class='button-text'>Players</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='gamesBtn'>
+                <h3 class='button-text'>Games</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='specialitiesBtn'>
+                <h3 class='button-text'>Specialities</h3>
+            </button>
+            <button type='submit' class='bottom-button' id='confirmationBtn'>
+                <h3 class='button-text'>Confirmation</h3>
+            </button>
+        </div>
+        <div class='footer-right' id='logo-area'></div>
+    </footer>
+    
+    <!--<div class='old-content'>
+        <div class='addPlayerDiv'>
+            <button type='submit' class='button' id='addPlayer' onclick='createAddPlayer()'>Add<br>Player</button>
+            <input type='text' id='addPlayerName' class='addPlayerName' placeholder='Enter name...'>
+            <button type='submit' class='button' id='confirmPlayer' onclick='confirmPlayer()'>Confirm<br>Player</button>
+        </div>
+
+        <div class='addGameDiv'>
+            <button type='submit' class='button' id='addGame' onclick='createAddGame()'>Add<br>Game</button>
+            <input type='text' id='addGameName' class='addGameBox' placeholder='Enter name...'>
+            <!--<input type='text' id='addGameName' class='addGameBox' placeholder='Enter game type...'>
+            <input type='text' id='addGameResults' class='addGameBox' placeholder='Enter results type...'>--
+            <input type='number' id='addGameMin' class='addGameBox' min='0' max='99' placeholder='Enter min players...'>
+            <input type='number' id='addGameMax' class='addGameBox' min='0' max='99' placeholder='Enter max players...'>
+            <button type='submit' class='button' id='confirmGame' onclick='confirmGame()'>Confirm<br>Game</button>
+        </div>
+    </div>-->
+    <script type='module' src='../js/create.js'></script>
+</body>
+</html>
