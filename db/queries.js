@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
+
 dotenv.config();
 
 const pool = new pg.Pool({
@@ -1935,4 +1937,99 @@ export async function getStats() {
     let games = await getGameStats();
     let total = await getTotalStats();
     return { players, games, total }
+}
+
+// --- Auth ---
+export async function authenticate(req) {
+    if (!req.session || !req.session.userId) {
+        return { authenticated: false };
+    }
+
+    const result = await pool.query(`
+        SELECT
+            id,
+            username,
+            role,
+            avatar_seed,
+            created_at,
+            last_login,
+            birthday,
+            version
+        FROM accounts
+        WHERE id = $1
+    `, [
+        req.session.userId
+    ]);
+
+    if (result.rows.length === 0) {
+        req.session.destroy(() => {});
+        return { authenticated: false };
+    }
+
+    return {
+        authenticated: true,
+        user: result.rows[0]
+    };
+}
+
+export async function login(req, username, password) {
+    if (!username) {
+        return {
+            authenticated: false,
+            text: 'No Username given'
+        };
+    }
+    
+    const result = await pool.query(`
+        SELECT *
+        FROM accounts
+        WHERE username = $1
+    `, [username]);
+
+    if (result.rows.length === 0) {
+        return {
+            authenticated: false,
+            text: 'Username not found'
+        };
+    }
+
+    const user = result.rows[0];
+
+    if (!password) {
+        return {
+            authenticated: false,
+            text: 'No Password given'
+        };
+    }
+
+    const ok = await bcrypt.compare(password, user.password_hash);
+    if (!ok) return {
+        authenticated: false,
+        text: 'Password Incorrect'
+    };
+
+    req.session.userId = user.id;
+
+    return {
+        authenticated: true,
+        text: 'success',
+        user
+    };
+}
+
+export async function logout(req, res) {
+    if (!req.session) {
+        return res.json({ success: true });
+    }
+
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Session destroy error:', err);
+            return res.status(500).json({ error: 'Logout failed' });
+        }
+
+        res.clearCookie('gameofgames.sid', { path: '/' });
+
+        res.json({ success: true });
+    });
 }

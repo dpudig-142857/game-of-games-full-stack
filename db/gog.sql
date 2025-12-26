@@ -1,3 +1,4 @@
+-- pg_dump -U postgres -d gog -f gog.sql
 --
 -- PostgreSQL database dump
 --
@@ -297,42 +298,6 @@ ALTER SEQUENCE public.gog_sessions_session_id_seq OWNED BY public.gog_sessions.s
 
 
 --
--- Name: players; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.players (
-    player_id integer NOT NULL,
-    name character varying(255),
-    family character varying(255),
-    colour character varying(255)
-);
-
-
-ALTER TABLE public.players OWNER TO postgres;
-
---
--- Name: players_player_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.players_player_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.players_player_id_seq OWNER TO postgres;
-
---
--- Name: players_player_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.players_player_id_seq OWNED BY public.players.player_id;
-
-
---
 -- Name: points_system; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -366,6 +331,63 @@ ALTER SEQUENCE public.points_system_points_system_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.points_system_points_system_id_seq OWNED BY public.points_system.points_system_id;
+
+
+--
+-- Name: user_sessions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.user_sessions (
+    sid character varying NOT NULL,
+    sess json NOT NULL,
+    expire timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_sessions OWNER TO postgres;
+
+--
+-- Name: accounts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts (
+    player_id integer NOT NULL,
+    name text NOT NULL,
+    family text NOT NULL,
+    colour text NOT NULL,
+    username text NOT NULL,
+    password_hash text NOT NULL,
+    role text NOT NULL,
+    avatar_seed text,
+    created_at timestamp without time zone DEFAULT now(),
+    last_login timestamp without time zone DEFAULT now(),
+    birthday date NOT NULL,
+    version text NOT NULL
+);
+
+
+ALTER TABLE public.accounts OWNER TO postgres;
+
+--
+-- Name: accounts_player_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.accounts_player_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.accounts_player_id_seq OWNER TO postgres;
+
+--
+-- Name: accounts_player_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.accounts_player_id_seq OWNED BY public.accounts.player_id;
 
 
 --
@@ -404,17 +426,17 @@ ALTER TABLE ONLY public.gog_sessions ALTER COLUMN session_id SET DEFAULT nextval
 
 
 --
--- Name: players player_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.players ALTER COLUMN player_id SET DEFAULT nextval('public.players_player_id_seq'::regclass);
-
-
---
 -- Name: points_system points_system_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.points_system ALTER COLUMN points_system_id SET DEFAULT nextval('public.points_system_points_system_id_seq'::regclass);
+
+
+--
+-- Name: accounts player_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts ALTER COLUMN player_id SET DEFAULT nextval('public.accounts_player_id_seq'::regclass);
 
 
 --
@@ -3029,25 +3051,6 @@ COPY public.gog_sessions (session_id, name, status, start_time, finish_time, poi
 
 
 --
--- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.players (player_id, name, family, colour) FROM stdin;
-1	Dan	Pudig	#E63946
-2	Gideon	Blinder	#105E2F
-3	Jake	Burgess	#800000
-4	Danny	Lawrence	#014273
-5	Alex	O'Dowd	#992ADE
-6	Max	Tester	#00805E
-7	Isabella	Kaye	#FFFF99
-8	Vanessa	Hodges	#9DC183
-9	Aryana	Afzali	#35063E
-10	Max	Valetine	#03C04A
-11	Abbey	Walker	#87CEEB
-\.
-
-
---
 -- Data for Name: points_system; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3070,6 +3073,33 @@ COPY public.points_system (points_system_id, num_players, rewards, type) FROM st
 16	8	{"3 points","2 points","1 points",Nothing,pc,nc,"1 cone","1 cone"}	cones
 17	9	{"3 points","2 points","1 point",Nothing,pn,pc,nc,"1 cone","1 cone"}	cones
 18	10	{"3 points","2 points","1 point",Nothing,pn,pc,nc,"1 cone","1 cone","1 cone"}	cones
+\.
+
+
+--
+-- Data for Name: user_sessions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.user_sessions (sid, sess, expire) FROM stdin;
+\.
+
+
+--
+-- Data for Name: accounts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts (player_id, name, family, colour, username, password_hash, role, avatar_seed, created_at, last_login, birthday, version) FROM stdin;
+1	Dan	Pudig	#E63946	DanTheMan	$2b$12$2JwoUfWesbbXXGVGO19P7e8yNpo5vKxo4/MjBZjA2DkstduhfUNkq	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=ff0000&translateX=0&translateY=0&eyes=shades&mouth=cute	2025-12-19 16:20:31.487317	2025-12-23 16:20:31.487317	2001-10-23	private
+2	Gideon	Blinder	#105E2F	Gid980	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2002-05-05	private
+3	Jake	Burgess	#800000	Jqm	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2002-02-07	private
+4	Danny	Lawrence	#014273	Dannywuh	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2000-10-26	private
+5	Alex	O'Dowd	#992ADE	Ultraturkey	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2000-09-11	private
+6	Max	Tester	#00805E	Goodbyeyou	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2001-10-11	private
+7	Isabella	Kaye	#FFFF99	Bella	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2002-02-24	private
+8	Vanessa	Hodges	#9DC183	Ness	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2002-01-06	private
+9	Aryana	Afzali	#35063E	Ari	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2002-04-19	private
+10	Max	Valetine	#03C04A	Max	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	user	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2000-09-08	private
+11	Abbey	Walker	#87CEEB	Abbey	$2b$12$JTaQAk8.WV/8d53q.ZwSeeBmxTLHcEEFmQzWOJLDQ/jz5XbGSsCAe	admin	https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=[]&translateX=0&translateY=0&eyes=plain&mouth=plain	2025-12-26 13:23:31.487317	2025-12-26 13:23:31.487317	2000-01-01	private
 \.
 
 
@@ -3109,17 +3139,17 @@ SELECT pg_catalog.setval('public.gog_sessions_session_id_seq', 20, true);
 
 
 --
--- Name: players_player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.players_player_id_seq', 11, true);
-
-
---
 -- Name: points_system_points_system_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.points_system_points_system_id_seq', 18, true);
+
+
+--
+-- Name: accounts_player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.accounts_player_id_seq', 1, true);
 
 
 --
@@ -3195,27 +3225,43 @@ ALTER TABLE ONLY public.gog_sessions
 
 
 --
--- Name: players players_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.players
-    ADD CONSTRAINT players_name_key UNIQUE (name, family);
-
-
---
--- Name: players players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.players
-    ADD CONSTRAINT players_pkey PRIMARY KEY (player_id);
-
-
---
 -- Name: points_system points_system_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.points_system
     ADD CONSTRAINT points_system_pkey PRIMARY KEY (points_system_id);
+
+
+--
+-- Name: user_sessions user_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_sessions
+    ADD CONSTRAINT user_sessions_pkey PRIMARY KEY (sid);
+
+
+--
+-- Name: accounts accounts_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_email_key UNIQUE (username);
+
+
+--
+-- Name: accounts accounts_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_name_key UNIQUE (name, family);
+
+
+--
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (player_id);
 
 
 --
@@ -3279,7 +3325,7 @@ ALTER TABLE ONLY public.gog_possible_games
 --
 
 ALTER TABLE ONLY public.gog_final_results
-    ADD CONSTRAINT gog_final_results_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+    ADD CONSTRAINT gog_final_results_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.accounts(player_id);
 
 
 --
@@ -3287,7 +3333,7 @@ ALTER TABLE ONLY public.gog_final_results
 --
 
 ALTER TABLE ONLY public.gog_game_players
-    ADD CONSTRAINT gog_game_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+    ADD CONSTRAINT gog_game_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.accounts(player_id);
 
 
 --
@@ -3303,7 +3349,7 @@ ALTER TABLE ONLY public.gog_games_neighed
 --
 
 ALTER TABLE ONLY public.gog_games_neighed
-    ADD CONSTRAINT gog_games_neighed_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+    ADD CONSTRAINT gog_games_neighed_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.accounts(player_id);
 
 
 --
@@ -3311,7 +3357,7 @@ ALTER TABLE ONLY public.gog_games_neighed
 --
 
 ALTER TABLE ONLY public.gog_players
-    ADD CONSTRAINT gog_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+    ADD CONSTRAINT gog_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.accounts(player_id);
 
 
 --
