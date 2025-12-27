@@ -2003,6 +2003,10 @@ export async function login(req, username, password) {
 
     req.session.userId = user.id;
 
+    await new Promise((resolve, reject) => {
+        req.session.save(err => err ? reject(err) : resolve());
+    });
+
     return {
         authenticated: true,
         text: 'success',
