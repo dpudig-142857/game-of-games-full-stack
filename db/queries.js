@@ -200,7 +200,7 @@ export async function getLogs() {
     const playersRes = await pool.query(`
         SELECT session_id, players.player_id, players.name, players.family
         FROM gog_players 
-        JOIN players USING (player_id)
+        JOIN accounts USING (player_id)
         ORDER BY session_id DESC, players.name;
     `);
     const rawPlayers = playersRes.rows;
@@ -231,7 +231,7 @@ export async function getLogs() {
     const winnersRes = await pool.query(`
         SELECT session_id, players.name AS winner
         FROM gog_final_results 
-        JOIN players USING (player_id)
+        JOIN accounts USING (player_id)
         WHERE place = 1;
     `);
     const winnersMap = {};
@@ -275,7 +275,7 @@ export async function getSessionById(id) {
             player_id, name, family, colour, is_playing, speciality, pg_cone, f20g_cone, l_cone,
             c_cone, w_cone, v_cone, g_point, c_point, special_w_point,
             special_l_point, neigh, super_neigh, gooc_total, gooc_used
-        FROM gog_players JOIN players USING (player_id)
+        FROM gog_players JOIN accounts USING (player_id)
         WHERE session_id = $1;
     `, [id]);
     const players = playersRes.rows;
@@ -289,8 +289,8 @@ export async function getSessionById(id) {
     const gameResultsRes = await pool.query(`
         SELECT
             game_instance_id, game_id, game_number, gog_games.name, player_id,
-            players.name, speciality, place, reward, points, stars, coins, rounds
-        FROM gog_games JOIN gog_game_players USING (game_instance_id) JOIN players USING (player_id)
+            accounts.name, speciality, place, reward, points, stars, coins, rounds
+        FROM gog_games JOIN gog_game_players USING (game_instance_id) JOIN accounts USING (player_id)
         WHERE session_id = $1;
     `, [id]);
     const gameResults = gameResultsRes.rows;
@@ -383,7 +383,7 @@ export async function getSessionResults(id) {
     const session = await getSessionById(id);
     const res = await pool.query(`
         SELECT player_id, place, points, cones
-        FROM gog_final_results JOIN players USING (player_id)
+        FROM gog_final_results JOIN accounts USING (player_id)
         WHERE session_id = $1
         ORDER BY place
     `, [id]);
@@ -1847,7 +1847,7 @@ export async function getTotalStats() {
                     (gp.pg_cone + gp.f20g_cone + gp.l_cone + gp.c_cone + gp.w_cone + gp.v_cone) ASC
                 ) AS rnk
             FROM gog_players gp
-            JOIN players p ON gp.player_id = p.player_id
+            JOIN accounts p ON gp.player_id = p.player_id
         ), top_winners AS (
             SELECT session_id, name, points, cones
             FROM winner_per_session
@@ -1897,7 +1897,7 @@ export async function getTotalStats() {
                 )
             ) FILTER (WHERE tw.name IS NOT NULL) AS winner
         FROM gog_sessions s
-        LEFT JOIN players_per_session plps USING (session_id)
+        LEFT JOIN accounts_per_session plps USING (session_id)
         LEFT JOIN games_per_session gps USING (session_id)
         LEFT JOIN points_per_session pps USING (session_id)
         LEFT JOIN cones_per_session cps USING (session_id)
