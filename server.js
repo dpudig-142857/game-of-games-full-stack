@@ -61,5 +61,10 @@ app.use('/api/points', pointsRoutes);
 app.use('/api/tournament', tournamentRoutes);
 app.use('/api/auth', authRoutes);
 
+app.get('/health/db', async (req, res) => {
+  const r = await pool.query('SELECT NOW()');
+  res.json({ ok: true, time: r.rows[0].now });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
