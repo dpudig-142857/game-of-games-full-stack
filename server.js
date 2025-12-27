@@ -17,16 +17,11 @@ import authRoutes from './routes/auth.js';
 
 dotenv.config();
 
-const pool = new pg.Pool({
+export const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
-  },
-  host: process.env.DATABASE_URL.split('@')[1].split(':')[0],
-  port: 5432,
-  // Force IPv4 DNS resolution
-  // Node will pick IPv4 over IPv6
-  family: 4,
+  }
 });
 
 const PgSession = pgSession(session);

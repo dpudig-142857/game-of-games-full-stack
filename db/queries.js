@@ -4,16 +4,9 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
+import pool from '../server.js';
 
 dotenv.config();
-
-const pool = new pg.Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE,
-});
 
 function getDisplayNames(players) {
     return players.map((p, _, all) => {

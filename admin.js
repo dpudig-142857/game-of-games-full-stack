@@ -1,15 +1,8 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import pool from '../server.js';
 dotenv.config();
-
-const pool = new pg.Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE,
-});
 
 const run = async () => {
     const password = 'password';//process.env.PASSWORD;
