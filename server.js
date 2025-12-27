@@ -17,7 +17,7 @@ import authRoutes from './routes/auth.js';
 
 dotenv.config();
 
-export const pool = new pg.Pool({
+const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -73,3 +73,5 @@ app.get('/health/db', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+export default pool;
