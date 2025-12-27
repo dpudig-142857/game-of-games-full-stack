@@ -36,6 +36,7 @@ app.use(cors({
     credentials: true
 }));
 app.use(session({
+    proxy: true,
     store: new PgSession({
         pool,
         tableName: 'user_sessions'
