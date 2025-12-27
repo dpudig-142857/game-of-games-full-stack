@@ -16,14 +16,38 @@
         <div class='header' id='title'>
             <h1></h1>
         </div>
-        <div class='header-right'></div>
+        <div class='header-right'>
+            <img
+                src='assets/default_pfp.svg'
+                alt='Profile Pic' class='profile-pic' id='profile-pic'
+            />
+            <!--
+            <img
+                src='https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&backgroundColor=ff0000'
+                alt='Profile Pic'
+                class='profile-pic'
+                id='profile-pic'
+            />
+            -->
+        </div>
     </header>
+
+    <!-- Modal Overlay for User Profile -->
+    <div class='modal-overlay' id='user-profile-modal'>
+        <div class='box' id='user-profile-box'>
+            <div class='middle-close-div'>
+                <span id='user-profile-close' class='middle-close'>&times;</span>
+            </div>
+            <h1 class='middle-title' id='user-profile-title'></h1>
+            <div class='middle-div' id='user-profile-div'></div>
+        </div>
+    </div>
 
     <div class='image'>
         <img src='assets/GameofGamesV4-Transparent.png' alt='GoG Logo' class='middle-logo'>
     </div>
     <div class='main-content'>
-        <div class='buttons'>
+        <div class='buttons' id='buttons'>
             <button class='btn hologram' id='start'>
                 <span data-text='Start New Game' class='btn-text'>Start New Game</span>
                 <div class='scan-line line-up'></div>
@@ -44,12 +68,7 @@
     </div>
 
     <footer>
-        <div class='footer-left'>
-            <button class='btn hologram' id='stats'>
-                <span data-text='Special' class='btn-text'>Special</span>
-                <div class='scan-line line-down'></div>
-            </button>
-        </div>
+        <div class='footer-left'></div>
         <div class='footer-button-box'></div>
         <div class='footer-right' id='logo-area'></div>
     </footer>

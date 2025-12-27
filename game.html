@@ -64,18 +64,11 @@
 
             <!-- Pre Game Section -->
             <h2 id='pre-game-result'></h2>
-            <div id='pre-game-private'>
-                <h2>Has everyone done the pre-game cone?</h2>
-                <div id='pre-game-private-buttons'>
-                    <button type='submit' class='pre-game-button' id='pre-game-private-yes'>Yes</button>
-                    <button type='submit' class='pre-game-button' id='pre-game-private-no'>No</button>
-                </div>
-            </div>
-            <div id='pre-game-public'>
-                <h2>Has everyone done the pre-game shot?</h2>
-                <div id='pre-game-public-buttons'>
-                    <button type='submit' class='pre-game-button' id='pre-game-public-yes'>Yes</button>
-                    <button type='submit' class='pre-game-button' id='pre-game-public-no'>No</button>
+            <div id='pre-game'>
+                <h2 id='pre-game-header'></h2>
+                <div id='pre-game-buttons'>
+                    <button type='submit' class='pre-game-button' id='pre-game-yes'>Yes</button>
+                    <button type='submit' class='pre-game-button' id='pre-game-no'>No</button>
                 </div>
             </div>
         
@@ -125,14 +118,8 @@
 
             <!-- Wheel Cone -->
             <div id='wheelCone'>
-                <h1 id='ratatouille-private'></h1>
-                <button type='submit' class='button' id='wheelComplete-private'>Cone<br>Complete</button>
-            </div>
-            
-            <!-- Wheel Shot -->
-            <div id='wheelShot'>
-                <h1 id='ratatouille-public'></h1>
-                <button type='submit' class='button' id='wheelComplete-public'>Shot<br>Complete</button>
+                <h1 id='ratatouille'></h1>
+                <button type='submit' class='button' id='wheelComplete'></button>
             </div>
         </div>
 
@@ -170,10 +157,10 @@
                 <div class='middle-close-div'>
                     <span id='break-cone-close' class='middle-close'>&times;</span>
                 </div>
-                <h1 class='middle-title' id='break-cone-title'>Who's having a break cone?</h1>
+                <h1 class='middle-title' id='break-cone-title'></h1>
                 <div id='break-cone-players' class='middle-players'></div>
                 <h2 id='break-cone-result'></h2>
-                <button type='submit' class='button middle-button' id='break-cone-button'>Cone Time!</button>
+                <button type='submit' class='button middle-button' id='break-cone-button'></button>
             </div>
         </div>
 
@@ -183,36 +170,10 @@
                 <div class='middle-close-div'>
                     <span id='victory-cone-close' class='middle-close'>&times;</span>
                 </div>
-                <h1 class='middle-title' id='victory-cone-title'>Who's having a victory cone?</h1>
+                <h1 class='middle-title' id='victory-cone-title'></h1>
                 <div id='victory-cone-players' class='middle-players'></div>
                 <h2 id='victory-cone-result'></h2>
-                <button type='submit' class='button middle-button' id='victory-cone-button'>Cone Time!</button>
-            </div>
-        </div>
-
-        <!-- Modal Overlay for Break Shot -->
-        <div class='modal-overlay' id='breakShotModal'>
-            <div class='box' id='break-shot-box'>
-                <div class='middle-close-div'>
-                    <span id='break-shot-close' class='middle-close'>&times;</span>
-                </div>
-                <h1 class='middle-title' id='break-shot-title'>Who's having a break shot?</h1>
-                <div id='break-shot-players' class='middle-players'></div>
-                <h2 id='break-shot-result'></h2>
-                <button type='submit' class='button middle-button' id='break-shot-button'>Shot Time!</button>
-            </div>
-        </div>
-
-        <!-- Modal Overlay for Victory Shot -->
-        <div class='modal-overlay' id='victoryShotModal'>
-            <div class='box' id='victory-shot-box'>
-                <div class='middle-close-div'>
-                    <span id='victory-shot-close' class='middle-close'>&times;</span>
-                </div>
-                <h1 class='middle-title' id='victory-shot-title'>Who's having a victory shot?</h1>
-                <div id='victory-shot-players' class='middle-players'></div>
-                <h2 id='victory-shot-result'></h2>
-                <button type='submit' class='button middle-button' id='victory-shot-button'>Shot Time!</button>
+                <button type='submit' class='button middle-button' id='victory-cone-button'></button>
             </div>
         </div>
 
@@ -286,12 +247,6 @@
             </button>
             <button type='submit' class='bottom-button' id='victory-cone'>
                 <h3 class='button-text'>Victory<br>Cone</h3>
-            </button>
-            <button type='submit' class='bottom-button' id='break-shot'>
-                <h3 class='button-text'>Break<br>Shot</h3>
-            </button>
-            <button type='submit' class='bottom-button' id='victory-shot'>
-                <h3 class='button-text'>Victory<br>Shot</h3>
             </button>
         </div>
         <div class='footer-right' id='logo-area'></div>

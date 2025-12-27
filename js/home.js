@@ -9,12 +9,33 @@
 // #region
 
 import {
+    openModal,
+    closeModal,
+    setupModal,
+    loadUserOption
+} from '../js/user.js';
+
+import {
     logoBox,
-    updateTimeDisplays
+    updateTimeDisplays,
+    hexToRgba
 } from '../js/utils.js';
 
-const BASE_URL = 'http://localhost:3000';
+let gog_version = 'private' // public vs private
+
+const BASE_URL = 'https://game-of-games-backend.onrender.com';
 let next = -1;
+
+let user_data = null;
+
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const modal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
@@ -67,6 +88,19 @@ async function initialise() {
 
     const res = await fetch(`${BASE_URL}/api/sessions/home`);
     next = await res.json();
+
+    user_data = await loadUserOption();
+    console.log(user_data);
+    const pfp = document.getElementById('profile-pic');
+    pfp.addEventListener('click', () => openModal(
+        modal, userBox, curr_colour, setupModal
+    ));
+
+    const close = document.getElementById('user-profile-close');
+    close.addEventListener('click', () => closeModal(modal, userBox));
+
+    const mainBtns = document.getElementById('buttons');
+    mainBtns.style.display = user_data?.authenticated ? 'flex' : 'none';
     
     const hover = (btn, hover) => {
         const line = btn.querySelector('.scan-line');

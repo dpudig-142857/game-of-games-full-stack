@@ -14,7 +14,9 @@ import {
     header
 } from '../js/utils.js';
 
-const BASE_URL = 'http://localhost:3000';
+let gog_version = 'private' // public vs private
+
+const BASE_URL = 'https://game-of-games-backend.onrender.com';
 let logs = [];
 let selectedSort = 'Most Recent';
 let selectedStatus = 'All';

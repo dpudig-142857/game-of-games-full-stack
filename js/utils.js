@@ -13,10 +13,8 @@ export function logoBox() {
     img.src = 'assets/GameofGamesV4-Transparent.png';
     img.alt = 'GoG Logo';
     img.className = 'logo';
+    img.style.width = '5rem';
     logoDiv.appendChild(img);
-    Object.assign(img.style, {
-        width: '5rem',
-    });
 
     const div = document.createElement('div');
     div.className = 'hover-box';
@@ -186,21 +184,28 @@ export function placeColour(num) {
     return '';
 }
 
-export function typeText(type) {
+export function typeText(ver, type) {
+    if (ver == 'private') {
+        switch (type) {
+            case 'overall_cone': return 'Overall Cones:';
+            case 'pg_cone': return 'Pre-Game/Break Cones:';
+            case 'f20g_cone': return '4:20 Game Cones:';
+            case 'l_cone': return 'Losing Cones:';
+            case 'c_cone': return 'Coin Flip Cones:';
+            case 'w_cone': return 'Wheel Cones:';
+            case 'v_cone': return 'Victory Cones:';
+        }
+    } else if (ver == 'public') {
+        switch (type) {
+            case 'overall_cone': return 'Overall Shots:';
+            case 'pg_cone': return 'Pre-Game/Break Shots:';
+            case 'l_cone': return 'Losing Shots:';
+            case 'c_cone': return 'Coin Flip Shots:';
+            case 'w_cone': return 'Wheel Shots:';
+            case 'v_cone': return 'Victory Shots:';
+        }
+    }
     switch (type) {
-        case 'overall_cone': return 'Overall Cones:';
-        case 'pg_cone': return 'Pre-Game/Break Cones:';
-        case 'f20g_cone': return '4:20 Game Cones:';
-        case 'l_cone': return 'Losing Cones:';
-        case 'c_cone': return 'Coin Flip Cones:';
-        case 'w_cone': return 'Wheel Cones:';
-        case 'v_cone': return 'Victory Cones:';
-        case 'overall_shot': return 'Overall Shots:';
-        case 'pg_shot': return 'Pre-Game/Break Shots:';
-        case 'l_shot': return 'Losing Shots:';
-        case 'c_shot': return 'Coin Flip Shots:';
-        case 'w_shot': return 'Wheel Shots:';
-        case 'v_shot': return 'Victory Shots:';
         case 'overall_point': return 'Overall Points:';
         case 'g_point': return 'Game Points:';
         case 'c_point': return 'Coin Flip Points:';

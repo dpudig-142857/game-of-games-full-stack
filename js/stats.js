@@ -19,6 +19,8 @@ import {
     typeText
 } from '../js/utils.js';
 
+let gog_version = 'private' // public vs private
+
 let playersDiv = document.getElementById('players-div');
 let players = document.getElementById('players');
 let gamesDiv = document.getElementById('games-div');
@@ -327,7 +329,7 @@ function fillPlayerInfo(p) {
         statsArr.forEach(s => {
             const stat = document.createElement('div');
             stat.className = 'modal-box';
-            stat.appendChild(header('h2', typeText(s.type)));
+            stat.appendChild(header('h2', typeText(gog_version, s.type)));
             add(stat, 'Total', s.total, true);
             if (s.total != 0) {
                 add(stat, 'Average', s.avg);
@@ -345,7 +347,11 @@ function fillPlayerInfo(p) {
     };
 
     statSection(playerPointsDiv, p.points);
-    statSection(playerConesDiv, p.cones);
+    if (gog_version == 'private') {
+        statSection(playerConesDiv, p.cones);
+    } else if (gog_version == 'public') {
+        statSection(playerConesDiv, p.cones.filter(s => s.type != 'f20g_cone'));
+    }
     statSection(playerCardsDiv, p.cards);
 
     p.games.forEach((g, i) => {
@@ -693,12 +699,26 @@ function setupTotal() {
     });
 
     // Total Cones
-    totalStats.cones.forEach(i => {
+    let cones = [];
+    if (gog_version == 'private') {
+        cones = totalStats.cones;
+    } else if (gog_version == 'public') {
+        cones = totalStats.cones.filter(c => c.type == 'f20g_cone');
+    }
+    cones.forEach(i => {
+        let total = i.total;
+        let avg = i.avg;
+        if (i.type == 'overall_cone' && gog_version == 'public') {
+            //tg.total_games
+            let f20 = cones.find(c => c.type == 'f20g_cone');
+            total = total - f20.total;
+            avg = total / tg.total_games;
+        }
         const box = document.createElement('div');
         box.id = i.type;
         box.className = 'modal-box';
         create(
-            box, i.type, i.total, i.avg,
+            box, i.type, total, avg,
             i.highest, i.highest_session.split(', ')
         );
         totalConesDiv.appendChild(box);
@@ -719,7 +739,8 @@ function setupTotal() {
     // GoG Log Summaries
     totalStats.logs.forEach(log => {
         const coin = log.num_players > 3;
-        const cones = log.points_system == 'Points & Cones';
+        const cones = gog_version == 'private' && log.points_system == 'Points & Cones';
+        const shots = gog_version == 'public' && log.points_system == 'Points & Cones';
 
         const div = document.createElement('div');
         div.className = 'modal-box';
@@ -741,6 +762,9 @@ function setupTotal() {
             if (cones) {
                 const w_cones = w.cones == 1 ? '1 cone' : `${w.cones} cones`;
                 add(div, 'Winning Cones', w_cones);
+            } else if (shots) {
+                const w_shots = w.cones == 1 ? '1 shot' : `${w.cones} shots`;
+                add(div, 'Winning Shots', w_shots);
             }
         } else if (log.status == 'active') {
             add(div, '', 'ACTIVE GAME', true, '');
@@ -752,6 +776,7 @@ function setupTotal() {
         add(div, 'Total Games', log.played_games);
         add(div, 'Total Points', log.overall_point);
         if (cones) add(div, 'Total Cones', log.overall_cone);
+        if (shots) add(div, 'Total Shots', log.overall_cone);
         add(div, 'Game Points', log.g_point, true);
         if (coin) add(div, 'Coin Flip Points', log.c_point);
         if (log.speciality_count > 0) {
@@ -766,6 +791,12 @@ function setupTotal() {
             if (coin) add(div, 'Coin Flip Cones', log.c_cone);
             add(div, 'Wheel Cones', log.w_cone);
             add(div, 'Victory Cones', log.v_cone);
+        } else if (shots) {
+            add(div, 'Pre-Game/Break Shots', log.pg_cone, true);
+            add(div, 'Losing Shots', log.l_cone);
+            if (coin) add(div, 'Coin Flip Shots', log.c_cone);
+            add(div, 'Wheel Shots', log.w_cone);
+            add(div, 'Victory Shots', log.v_cone);
         }
     
         add(div, 'Neighs', log.neigh, true);
@@ -801,7 +832,7 @@ function setupTotal() {
 }
 
 function create(div, type, total, avg, max, max_sessions) {
-    div.appendChild(header('h2', typeText(type)));
+    div.appendChild(header('h2', typeText(gog_version, type)));
     div.appendChild(document.createElement('br'));
     div.appendChild(header('h4', `Total: ${span(total)}`));
     if (total != 0) div.appendChild(header('h4', `Average: ${span(avg)}`));
@@ -831,7 +862,7 @@ function closeTotal() {
 
 // #region
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://game-of-games-backend.onrender.com';
 
 async function initialise() {
     logoBox();

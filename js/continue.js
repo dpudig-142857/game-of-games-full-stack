@@ -17,7 +17,9 @@ import {
     centerOrStart
 } from './utils.js';
 
-const BASE_URL = 'http://localhost:3000/api/sessions';
+let gog_version = 'private' // public vs private
+
+const BASE_URL = 'https://game-of-games-backend.onrender.com/api/sessions';
 let sessions = [];
 let logs = [];
 let curr_colour = { hex: '', rgba: '', text: '' };

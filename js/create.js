@@ -8,6 +8,14 @@
 // #region
 
 import {
+    loadMenuBurger,
+    openModal,
+    closeModal,
+    setupModal,
+    loadUserOption
+} from '../js/user.js';
+
+import {
     logoBox,
     updateTimeDisplays,
     hexToTextColour,
@@ -16,10 +24,14 @@ import {
     header,
     place,
     gameTypeText,
-    centerOrStart
+    centerOrStart,
+    hexToRgba
 } from './utils.js';
 
-let gog_version = 'private' // public vs private
+let gog_version = 'public'
+//gog_version = 'private'
+
+let user_data = null;
 
 const urlParams = new URLSearchParams(window.location.search);
 const sessionId = urlParams.get('sessionId');
@@ -29,8 +41,7 @@ if (!sessionId) {
     window.location.href = '/';
 }
 
-let currStep = 1;
-let numGog = -1;
+let numGoG = -1;
 let allPlayers = [];
 let allGames = {};
 let allGamesInfo = [];
@@ -45,10 +56,19 @@ let theSpecialities = [];
 
 let sessionType = false;
 
-const BASE_URL = 'http://localhost:3000/api/sessions';
+const BASE_URL = 'https://game-of-games-backend.onrender.com/api/sessions';
 
 const nextBtn = document.getElementById('nextBtn');
 const startBtn = document.getElementById('startBtn');
+
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const modal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
@@ -188,7 +208,11 @@ function createCheckbox(id, type, text) {
 
     const checkboxLabel = document.createElement('div');
     checkboxLabel.className = 'checkboxLabel';
-    checkboxLabel.innerHTML = text;
+    if (gog_version == 'public' && text == 'Points & Cones') {
+        checkboxLabel.innerHTML = 'Points & Shots';
+    } else {
+        checkboxLabel.innerHTML = text;
+    }
     checkbox.appendChild(checkboxLabel);
 
     return checkbox;
@@ -209,19 +233,20 @@ function createCheckbox(id, type, text) {
 const steps = ['general', 'players', 'games', 'specialities', 'confirmation'];
 let step = '';
 
-function showStep(stepId) {
+export function showStep(stepId, refresh = null) {
     //console.log('thePoints: ', thePoints);
     //console.log('theNumSpeciality: ', theNumSpeciality);
     //console.log('thePlayers: ', thePlayers);
     //console.log('theGames: ', theGames);
     //console.log('theSpecialities: ', theSpecialities);
-    
+    if (refresh) initialiseButtons();
+
     const currButton = document.querySelector('.bottom-button.active');
     document.querySelectorAll('.bottom-button').forEach(btn => {
         btn.classList.remove('active')
     });
     if (!currButton || currButton.id != `${stepId}Btn`) {
-        document.getElementById(`${stepId}Btn`).classList.add('active');
+        document.getElementById(`${stepId}Btn`)?.classList.add('active');
     }
     steps.forEach(id => {
         document.getElementById(`${id}-step`).style.display = 'none';
@@ -240,6 +265,7 @@ function nextStep() {
             nextBtn.style.display = 'none';
             showConfirmationStep();
             break;
+        default: showGeneralStep();
     }
 }
 
@@ -281,12 +307,11 @@ function createPointsSystem() {
     pointsCheckboxes.className = 'checkboxes';
     box.appendChild(pointsCheckboxes);
 
+    console.log("1")
     pointsCheckboxes.appendChild(createCheckbox(0, 'points', 'Just Points'));
-    if (gog_version == 'private') {
-        pointsCheckboxes.appendChild(createCheckbox(1, 'points', 'Points & Cones'));
-    } else if (gog_version == 'public') {
-        pointsCheckboxes.appendChild(createCheckbox(1, 'points', 'Points & Shots'));
-    }
+    console.log("2")
+    pointsCheckboxes.appendChild(createCheckbox(1, 'points', 'Points & Cones'));
+    console.log("3")
 
     const points = pointsCheckboxes.querySelectorAll('.points-checkbox');
     points.forEach(checkbox => {
@@ -320,7 +345,8 @@ function createNumSpeciality() {
     specialityCheckboxes.appendChild(createCheckbox(1, 'speciality', '1'));
     specialityCheckboxes.appendChild(createCheckbox(2, 'speciality', '2'));
     specialityCheckboxes.appendChild(createCheckbox(3, 'speciality', '3'));
-    // IMPLEMENT NUM INPUT BOX MAYBE ????
+    // ???? IMPLEMENT NUM INPUT BOX ????
+    // ???? MAYYYYBBBBBEEEEEE ????
     // 
     // specialityCheckboxes.appendChild(createCheckbox(4, 'speciality', 'More'));
 
@@ -565,15 +591,14 @@ function createGames(type, games) {
     select.addEventListener('mouseleave', () => styleBox(select, '#33eaff'));
     buttons.appendChild(select);
 
-    const checkboxes = document.createElement('div');
-    checkboxes.id = `${type}-games-checkboxes`;
-    checkboxes.className = 'checkboxes game-checkboxes';
-    box.appendChild(checkboxes);
+    const check = document.createElement('div');
+    check.id = `${type}-games-checkboxes`;
+    check.className = 'checkboxes game-checkboxes';
+    box.appendChild(check);
 
-    games.sort((a, b) => a.name.localeCompare(b.name))
-    .forEach((g, i) => {
-        checkboxes.appendChild(createCheckbox(i, 'games', g.name));
-    });
+    let curr = games.sort((a, b) => a.name.localeCompare(b.name));
+    if (gog_version == 'public') curr = curr.filter(g => g.name != '4:20 Game')
+    curr.forEach((g, i) => check.appendChild(createCheckbox(i, 'games', g.name)));
 
     return box;
 }
@@ -836,8 +861,6 @@ function createConfirmationGeneral() {
             return system.num == num && system.type == 'points';
         } else if (thePoints == 'Points & Cones') {
             return system.num == num && system.type == 'cones';
-        } else if (thePoints == 'Points & Shots') {
-            return system.num == num && system.type == 'shots';
         } else {
             return undefined;
         }
@@ -855,16 +878,24 @@ function createConfirmationGeneral() {
     if (currSystem) {
         currSystem.rewards.forEach(reward => {
             let text = reward;
-            if (reward == 'pn') {
-                text = `Coin Flip<br>${span('Point or Nothing')}`;
-            } else if (reward == 'pc') {
-                text = `Coin Flip<br>${span('Point or Cone')}`;
-            } else if (reward == 'nc') {
-                text = `Coin Flip<br>${span('Nothing or Cone')}`;
-            } else if (reward == 'ps') {
-                text = `Coin Flip<br>${span('Point or Shot')}`;
-            } else if (reward == 'ns') {
-                text = `Coin Flip<br>${span('Nothing or Shot')}`;
+            if (gog_version == 'private') {
+                if (reward == 'pn') {
+                    text = `Coin Flip<br>${span('Point or Nothing')}`;
+                } else if (reward == 'pc') {
+                    text = `Coin Flip<br>${span('Point or Cone')}`;
+                } else if (reward == 'nc') {
+                    text = `Coin Flip<br>${span('Nothing or Cone')}`;
+                }
+            } else if (gog_version == 'public') {
+                if (reward == 'pn') {
+                    text = `Coin Flip<br>${span('Point or Nothing')}`;
+                } else if (reward == 'pc') {
+                    text = `Coin Flip<br>${span('Point or Shot')}`;
+                } else if (reward == 'nc') {
+                    text = `Coin Flip<br>${span('Nothing or Shot')}`;
+                } else if (reward == '1 cone') {
+                    text = `1 shot`;
+                }
             }
 
             const rewardBox = document.createElement('div');
@@ -1123,15 +1154,56 @@ function confirmGame() {
 
 // #region
 
+function hide(text) {
+    const btns = document.querySelectorAll('.bottom-button');
+    btns.forEach(btn => btn.style.display = 'none');
+
+    const title = document.querySelector('.title h1');
+    title.innerHTML = text;
+}
+
 async function initialize() {
     logoBox();
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
 
+    loadMenuBurger();
+
+    user_data = await loadUserOption();
+    const pfp = document.getElementById('profile-pic');
+    pfp.addEventListener('click', () => openModal(
+        modal, userBox, curr_colour, setupModal
+    ));
+
+    const close = document.getElementById('user-profile-close');
+    close.addEventListener('click', () => closeModal(modal, userBox));
+    
+    console.log(user_data);
+    if (!user_data.authenticated || user_data.user.role != 'admin') {
+        hide('Access Denied');
+        return;
+    } else {
+        gog_version = user_data.user.version;
+        const btns = document.querySelectorAll('.bottom-button');
+        btns.forEach(btn => {
+            if (btn.id != 'startBtn') {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+    }
+
     const res = await fetch(`${BASE_URL}/${sessionId}/creating`);
     const info = await res.json();
     theGameTitle = `Game of Games No. ${sessionId}`;
-    numGog = info.num;
+    numGoG = info.num;
+
+    if (sessionId != numGoG) {
+        hide('Invalid session ID');
+        return;
+    }
+
     allPlayers = info.players;
     allGames = info.games;
     allGames.forEach(g => {
@@ -1158,7 +1230,7 @@ async function initialize() {
         });
     });
     
-    console.log('numGoG - ', numGog);
+    console.log('numGoG - ', numGoG);
     console.log('allPlayers - ', allPlayers);
     console.log('allGames - ', allGames);
     console.log('allGamesInfo - ', allGamesInfo);
@@ -1201,8 +1273,6 @@ async function initialize() {
             });
         }
     });
-
-    showGeneralStep();
 }
 
 async function startGame() {
@@ -1226,7 +1296,7 @@ async function startGame() {
     });
 
     const theGame = {
-        id: numGog,
+        id: numGoG,
         gog_id: theGameTitle,
         start_time: startTime.toISOString(),
         point_system: thePoints,

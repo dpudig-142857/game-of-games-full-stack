@@ -22,15 +22,17 @@ import {
     format
 } from '../js/utils.js';
 
+let gog_version = 'private' // public vs private
+
 const urlParams = new URLSearchParams(window.location.search);
 const sessionId = urlParams.get('sessionId');
 
 if (!sessionId) {
-    alert('Missing session ID!');
+    alert('Missing session ID! 3');
     window.location.href = '/';
 }
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://game-of-games-backend.onrender.com';
 
 let gamesInfo = [];
 let status = '';
@@ -207,28 +209,33 @@ function generateResults() {
     let results = [];
 
     allPlayers.forEach(p => {
-        const points = Object.entries(p).filter(([type, _]) => {
-            return type.includes('_point');
-        });
-        const cones = Object.entries(p).filter(([type, _]) => {
-            return type.includes('_cone');
-        });
-        const pointsTotal = points.reduce((sum, [, val]) => sum + val, 0);
-        const conesTotal = cones.reduce((sum, [, val]) => sum + val, 0);
+        const stat = Object.entries(p);
+        const player_id = p.player_id;
+        const name = p.name;
+        const points = stat.reduce((s, [o, k]) => o.includes('_point') ? s + k : s, 0);
+        let cones = 
+            gog_version == 'private' ?
+            stat.reduce((s, [o, k]) => o.includes('_cone') ? s + k : s, 0) :
+            gog_version == 'public' ?
+            stat.reduce((s, [o, k]) => {
+                o.includes('_cone') && !o.includes('f20g_cone') ? s + k : s, 0
+            }) : 0;
+
+
+        if (gog_version == 'private') {
+            cones = stat.reduce((s, [o, k]) => {
+                o.includes('_cone') ? s + k : s, 0
+            });
+        } else if (gog_version == 'public') {
+            cones = stat.reduce((s, [o, k]) => {
+                o.includes('_cone') && !o.includes('f20g_cone') ? s + k : s, 0
+            });
+        }
 
         if (pointsSystem == 'Points & Cones') {
-            results.push({
-                player_id: p.player_id,
-                name: p.name,
-                points: pointsTotal,
-                cones: conesTotal
-            });
+            results.push({ player_id, name, points, cones });
         } else {
-            results.push({
-                player_id: p.player_id,
-                name: p.name,
-                points: pointsTotal
-            });
+            results.push({ player_id, name, points });
         }
     });
 
@@ -351,7 +358,11 @@ function showGames() {
 
         const preGameText = document.createElement('div');
         preGameText.className = 'cell small';
-        preGameText.appendChild(header('h3', `Everyone had a PRE-GAME cone`));
+        if (gog_version == 'private') {
+            preGameText.appendChild(header('h3', `Everyone had a PRE-GAME cone`));
+        } else if (gog_version == 'public') {
+            preGameText.appendChild(header('h3', `Everyone had a PRE-GAME shot`));
+        }
         preGame.appendChild(preGameText);
 
         section.appendChild(preGame);
@@ -656,7 +667,11 @@ function showPlayers() {
         if (pointsSystem == 'Points & Cones') {
             const conesDiv = document.createElement('div');
             conesDiv.className = 'cell cones';
-            conesDiv.textContent = toSOrNotToS(r.cones, 'cone');
+            if (gog_version == 'private') {
+                conesDiv.textContent = toSOrNotToS(r.cones, 'cone');
+            } else if (gog_version == 'public') {
+                conesDiv.textContent = toSOrNotToS(r.cones, 'shot');
+            }
             div.appendChild(conesDiv);
         }
 
@@ -688,34 +703,34 @@ function fillPlayerInfo(name, info) {
     points.filter(([type, _]) => {
         return numSpeciality == 0 ? !type.includes('special_') : true;
     }).forEach(([type, value]) => {
-        makeBox(playerPointsDiv, typeText(type), value);
+        makeBox(playerPointsDiv, typeText(gog_version, type), value);
     });
     
     if (pointsSystem == 'Points & Cones') {
-        const cones = Object.entries(info).filter(([type, _]) => {
-            return type.includes('_cone');
-        });
+        const cones = Object.entries(info).filter(([t, _]) => t.includes('_cone'));
         const conesTotal = cones.reduce((sum, [, val]) => sum + val, 0);
-        makeBox(playerConesTotal, 'Total Cones:', conesTotal);
-        cones.filter(([type, _]) => {
-            return allPlayers.length < 4 ? type != 'c_cone' : true;
-        }).forEach(([type, value]) => {
-            makeBox(playerConesDiv, typeText(type), value);
-        });
+        if (gog_version == 'private') {
+            makeBox(playerConesTotal, 'Total Cones:', conesTotal);
+        } else if (gog_version == 'public') {
+            makeBox(playerConesTotal, 'Total Shots:', conesTotal);
+        }
+        cones
+            .filter(([t, _]) => allPlayers.length < 4 ? t != 'c_cone' : true)
+            .forEach(([t, v]) => makeBox(playerConesDiv, typeText(gog_version, t), v));
     }
     
     const neighs = Object.entries(info).filter(([type, _]) => {
         return type.includes('neigh');
     });
     neighs.forEach(([type, value]) => {
-        makeBox(playerCardsDiv, typeText(type), 2 - value);
+        makeBox(playerCardsDiv, typeText(gog_version, type), 2 - value);
     });
 
     const goocs = Object.entries(info).filter(([type, _]) => {
         return type.includes('gooc');
     });
     goocs.forEach(([type, value]) => {
-        makeBox(playerCardsDiv, typeText(type), value);
+        makeBox(playerCardsDiv, typeText(gog_version, type), value);
     });
 
     info.speciality
