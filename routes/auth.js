@@ -37,7 +37,11 @@ router.post('/login', async (req, res) => {
   try {
     const result = await login(req, username, password);
     console.log(result);
-    res.status(201).json(result);
+    res.status(200).json({
+      authenticated: result.authenticated,
+      user: result.user ?? null,
+      text: result.text
+    });
   } catch (error) {
     console.error('Error fetching authenticate:', error);
     res.status(500).json({ error: 'Failed to fetch authenticate' });
