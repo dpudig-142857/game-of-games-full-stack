@@ -83,6 +83,15 @@ app.get('/debug/session', (req, res) => {
     }
 });
 
+app.get('/debug/raw-cookie', (req, res) => {
+  res.cookie('debug', '1', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax'
+  });
+  res.json({ ok: true });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
