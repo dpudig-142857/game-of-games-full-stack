@@ -21,9 +21,9 @@ import {
     hexToRgba
 } from '../js/utils.js';
 
-let gog_version = 'private' // public vs private
+import { BASE_URL } from './config.js';
 
-const BASE_URL = 'https://game-of-games-backend.onrender.com';
+let gog_version = 'private' // public vs private
 let next = -1;
 
 let user_data = null;

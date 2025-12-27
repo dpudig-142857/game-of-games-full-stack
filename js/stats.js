@@ -19,6 +19,8 @@ import {
     typeText
 } from '../js/utils.js';
 
+import { BASE_URL } from './config.js';
+
 let gog_version = 'private' // public vs private
 
 let playersDiv = document.getElementById('players-div');
@@ -861,8 +863,6 @@ function closeTotal() {
 
 
 // #region
-
-const BASE_URL = 'https://game-of-games-backend.onrender.com';
 
 async function initialise() {
     logoBox();

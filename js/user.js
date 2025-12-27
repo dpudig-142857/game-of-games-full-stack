@@ -3,8 +3,8 @@ import {
     styleBox
 } from '../js/utils.js';
 
-const BASE_URL = 'https://game-of-games-backend.onrender.com';
-const BASE_FRONTEND = 'http://localhost:8080/';
+import { BASE_URL } from './config.js';
+
 const default_pfp = 'assets/default_pfp.svg';
 
 const eye_list = [
@@ -164,7 +164,7 @@ export async function setupModal() {
 }
 
 async function loadUser() {
-    const authRes = await fetch(`https://game-of-games-backend.onrender.com/api/auth/me`, {
+    const authRes = await fetch(`${BASE_URL}/api/auth/me`, {
         credentials: 'include'
     });
     return await authRes.json();

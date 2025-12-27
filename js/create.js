@@ -28,6 +28,8 @@ import {
     hexToRgba
 } from './utils.js';
 
+import { SESSION_URL } from './config.js';
+
 let gog_version = 'public'
 //gog_version = 'private'
 
@@ -55,8 +57,6 @@ let theGames = [];
 let theSpecialities = [];
 
 let sessionType = false;
-
-const BASE_URL = 'https://game-of-games-backend.onrender.com/api/sessions';
 
 const nextBtn = document.getElementById('nextBtn');
 const startBtn = document.getElementById('startBtn');

@@ -22,6 +22,8 @@ import {
     format
 } from '../js/utils.js';
 
+import { BASE_URL } from './config.js';
+
 let gog_version = 'private' // public vs private
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -31,8 +33,6 @@ if (!sessionId) {
     alert('Missing session ID! 3');
     window.location.href = '/';
 }
-
-const BASE_URL = 'https://game-of-games-backend.onrender.com';
 
 let gamesInfo = [];
 let status = '';

@@ -17,9 +17,10 @@ import {
     centerOrStart
 } from './utils.js';
 
+import { SESSION_URL } from './config.js';
+
 let gog_version = 'private' // public vs private
 
-const BASE_URL = 'https://game-of-games-backend.onrender.com/api/sessions';
 let sessions = [];
 let logs = [];
 let curr_colour = { hex: '', rgba: '', text: '' };
@@ -51,9 +52,9 @@ function statusColour(s) {
 }
 
 function theURL(id, other) {
-    if (id && other) return `${BASE_URL}/${id}/continue/${other}`;
-    if (id) return `${BASE_URL}/${id}/continue`;
-    return `${BASE_URL}/continue`;
+    if (id && other) return `${SESSION_URL}/${id}/continue/${other}`;
+    if (id) return `${SESSION_URL}/${id}/continue`;
+    return `${SESSION_URL}/continue`;
 }
 
 async function activateSession(id) {
@@ -223,7 +224,7 @@ async function completeGame(log) {
     });
 
     try {
-        const response = await fetch(`${BASE_URL}/${id}/complete`, {
+        const response = await fetch(`${BASE_URL}/api/sessions/${id}/complete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ session, results })

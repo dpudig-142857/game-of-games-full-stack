@@ -23,10 +23,11 @@ import {
     split
 } from '../js/utils.js';
 
+import { BASE_URL } from './config.js';
+
 let gog_version = 'public'
 //gog_version = 'private'
 
-const BASE_URL = 'https://game-of-games-backend.onrender.com';
 const urlParams = new URLSearchParams(window.location.search);
 const sessionId = urlParams.get('sessionId');
 
