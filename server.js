@@ -30,6 +30,10 @@ const photosPath = path.join(process.cwd(), 'photos');
 
 const app = express();
 
+app.use(cors({
+    origin: 'https://thegameofgames.win',
+    credentials: true
+}));
 app.use(session({
     store: new PgSession({
         pool,
@@ -45,10 +49,6 @@ app.use(session({
         sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
     }
-}));
-app.use(cors({
-    origin: 'https://thegameofgames.win',
-    credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
 
