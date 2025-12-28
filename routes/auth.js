@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+/*router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -44,6 +44,50 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Error fetching authenticate:', error);
     res.status(500).json({ error: 'Failed to fetch authenticate' });
+  }
+});*/
+router.post('/login', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    const result = await pool.query(
+      'SELECT * FROM accounts WHERE username = $1',
+      [username]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({ authenticated: false });
+    }
+
+    const user = result.rows[0];
+    const ok = await bcrypt.compare(password, user.password_hash);
+
+    if (!ok) {
+      return res.status(401).json({ authenticated: false });
+    }
+
+    // 🔴 THESE TWO LINES ARE CRITICAL
+    req.session.regenerate(err => {
+      if (err) return next(err);
+
+      req.session.userId = user.id;
+
+      req.session.save(err => {
+        if (err) return next(err);
+
+        res.status(200).json({
+          authenticated: true,
+          user: {
+            id: user.id,
+            username: user.username,
+            role: user.role
+          }
+        });
+      });
+    });
+
+  } catch (err) {
+    next(err);
   }
 });
 
