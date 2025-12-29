@@ -2133,7 +2133,12 @@ export function requireAuth() {
     const user = await verifySession(sessionId);
 
     if (!user) {
-      return res.status(200).json({ authenticated: false });
+        return res.status(200).json({
+            authenticated: false,
+            player_id: null,
+            username: null,
+            role: null
+        });
     }
 
     req.user = user;
