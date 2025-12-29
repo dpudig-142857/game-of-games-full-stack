@@ -1,5 +1,5 @@
 import express from 'express';
-import { requireAuth, authenticate , login, logout } from '../db/queries.js';
+import { requireAuth, login, logout } from '../db/queries.js';
 
 const router = express.Router();
 
