@@ -190,9 +190,7 @@ async function login(username, password) {
 
     // Close modal then reload
     closeModal(modal, userBox, () => {
-        console.log('LOGGED IN');
-        console.log(user_data);
-        //location.reload();
+        location.reload();
     });
 
     return data;
@@ -211,9 +209,7 @@ async function logout() {
 
     await loadUserOption();
     closeModal(modal, userBox, () => {
-        console.log('LOGGED OUT');
-        console.log(user_data);
-        //location.reload();
+        location.reload();
     });
 
     return { success: true };
