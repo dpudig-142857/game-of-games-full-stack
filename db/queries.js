@@ -2149,7 +2149,7 @@ export function requireAuth() {
   };
 }
 
-export async function logout(sessionId) {
+export async function logout(sessionId, res) {
     if (sessionId) {
         await pool.query(`
             DELETE FROM sessions WHERE session_id = $1

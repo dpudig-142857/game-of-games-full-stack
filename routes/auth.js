@@ -60,9 +60,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', async (req, res) => {
   try {
     const sessionId = req.cookies.gog_session;
-    console.log(sessionId);
-    const result = await logout(sessionId);
-    console.log(result);
+    const result = await logout(sessionId, res);
     res.status(200).json(result);
   } catch (error) {
     console.error('Error fetching authenticate:', error);
