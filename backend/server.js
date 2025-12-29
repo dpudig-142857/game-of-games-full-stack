@@ -16,6 +16,7 @@ import gamesRoutes from './routes/games.js';
 import pointsRoutes from './routes/points.js';
 import tournamentRoutes from './routes/tournament.js';
 import authRoutes from './routes/auth.js';
+import debugRoutes from './routes/debug.js';
 
 dotenv.config();
 
@@ -65,39 +66,6 @@ app.use('/api/games', gamesRoutes);
 app.use('/api/points', pointsRoutes);
 app.use('/api/tournament', tournamentRoutes);
 app.use('/api/auth', authRoutes);
-
-app.get('/debug/db', async (req, res) => {
-    try {
-        const r = await pool.query('SELECT NOW()');
-        res.json({ ok: true, time: r.rows[0].now });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ ok: false, error: err.message });
-    }
-});
-
-app.get('/debug/session', (req, res) => {
-    try {
-        req.session.views = (req.session.views || 0) + 1;
-        res.json({ ok: true, session: req.session });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ ok: false, error: err.message });
-    }
-});
-
-app.get('/debug/cookie', (req, res) => {
-  req.session.test = 'ok';
-  res.json({ ok: true });
-});
-
-app.get('/debug/raw-cookie', (req, res) => {
-  res.cookie('debug', '1', {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax'
-  });
-  res.json({ ok: true });
-});
+app.use('/debug', debugRoutes);
 
 export default app;
