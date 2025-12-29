@@ -2129,7 +2129,7 @@ export async function login(username, password, res) {
 
 export function requireAuth() {
   return async (req, res, next) => {
-    const sessionId = req.cookies.gog_session;
+    const sessionId = req.cookies.gog_session ?? null;
     const user = await verifySession(sessionId);
 
     if (!user) {
