@@ -13,7 +13,7 @@ import {
     closeModal,
     setupModal,
     loadUserOption
-} from '../js/user.js';
+} from './user.js';
 
 import {
     logoBox,

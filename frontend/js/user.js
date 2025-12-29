@@ -1,7 +1,7 @@
 import {
     header,
     styleBox
-} from '../js/utils.js';
+} from './utils.js';
 
 import { BASE_ROUTE } from './config.js';
 
