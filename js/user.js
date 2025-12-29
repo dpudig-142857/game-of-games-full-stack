@@ -164,10 +164,13 @@ export async function setupModal() {
 }
 
 async function loadUser() {
-    const authRes = await fetch(`${BASE_URL}/api/auth/me`, {
+    const res = await fetch(`${BASE_URL}/api/auth/me`, {
         credentials: 'include'
     });
-    return await authRes.json();
+    if (!res.ok) return null;
+    const data = await res.json();
+    document.body.dataset.user = data.user.username;
+    return data;
 }
 
 async function login(username, password) {
