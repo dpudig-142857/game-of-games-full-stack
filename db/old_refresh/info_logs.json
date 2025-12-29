@@ -1,0 +1,3508 @@
+[
+    {
+        "gog_id": "Game of Games No. 1",
+        "status": "complete",
+        "start_time": "28/01/2023, 00:00:00",
+        "finish_time": "28/01/2023, 23:59:59",
+        "systems": {
+            "points": "Just Points",
+            "games": "Wheel",
+            "speciality": 2
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Golf", "Skip Bo" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 24, "c_point": 0, "special_w_point": 0, "special_l_point": -2 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Golf", "Monopoly Deal" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 30, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Golf", "Shithead" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 26, "c_point": 0, "special_w_point": 0, "special_l_point": -2 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Golf", "Avocado Smash" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 31, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Golf", "Here to Slay" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 28, "c_point": 0, "special_w_point": 0, "special_l_point": -2 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Avocado Smash",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "5 points"},
+                    { "player": 5, "place": 2, "reward": "3 points"},
+                    { "player": 1, "place": 3, "reward": "2 points"},
+                    { "player": 3, "place": 4, "reward": "1 point"},
+                    { "player": 2, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "4 points"},
+                    { "player": 5, "place": 2, "reward": "3 points"},
+                    { "player": 4, "place": 3, "reward": "2 points"},
+                    { "player": 3, "place": 4, "reward": "1 point"},
+                    { "player": 1, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Monopoly Deal",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "3 points"},
+                    { "player": 3, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 2, "reward": "3 points"},
+                    { "player": 2, "place": 2, "reward": "2 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 3 ],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "3 points"},
+                    { "player": 3, "place": 3, "reward": "1 point"},
+                    { "player": 4, "place": 4, "reward": "1 point"},
+                    { "player": 2, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno Flip",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "4 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 3, "reward": "2 points"},
+                    { "player": 1, "place": 4, "reward": "1 point"},
+                    { "player": 4, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "4 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 3, "reward": "2 points"},
+                    { "player": 1, "place": 4, "reward": "0 points"},
+                    { "player": 4, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Mario Kart",
+                "extras": [ "Time Trial", "Koopa City" ],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "points": "2:16.096", "place": 1, "reward": "4 points"},
+                    { "player": 1, "points": "2:32.170", "place": 2, "reward": "3 points"},
+                    { "player": 3, "points": "2:42.477", "place": 3, "reward": "2 points"},
+                    { "player": 2, "points": "2:42.606", "place": 4, "reward": "1 point"},
+                    { "player": 5, "points": "2:45.060", "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Yahtzee Cards",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "4 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 1, "place": 3, "reward": "2 points"},
+                    { "player": 5, "place": 4, "reward": "1 point"},
+                    { "player": 3, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_9",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 1, 2, 3, 4, 5 ],
+                "results": [
+                    { "player": 2, "points": "18", "place": 1, "reward": "5 points"},
+                    { "player": 5, "points": "31", "place": 2, "reward": "2 points"},
+                    { "player": 4, "points": "36", "place": 3, "reward": "1 point"},
+                    { "player": 3, "points": "38", "place": 4, "reward": "0 points"},
+                    { "player": 1, "points": "40", "place": 5, "reward": "-1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_10",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Super Smash Bros",
+                "extras": [ "3 rounds" ],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "3 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 4, "reward": "1 point"},
+                    { "player": 3, "place": 5, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_11",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Llamas Unleashed",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "3 points"},
+                    { "player": 4, "place": 2, "reward": "3 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 2, "reward": "3 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_12",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Here to Slay",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [ 5 ],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "3 points"},
+                    { "player": 2, "place": 2, "reward": "3 points"},
+                    { "player": 4, "place": 2, "reward": "3 points"},
+                    { "player": 5, "place": 2, "reward": "2 points"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 4, "place": 1, "points": 31, "cones": 0 },
+            { "player": 2, "place": 2, "points": 30, "cones": 0 },
+            { "player": 5, "place": 3, "points": 26, "cones": 0 },
+            { "player": 3, "place": 4, "points": 24, "cones": 0 },
+            { "player": 1, "place": 5, "points": 22, "cones": 0 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 2",
+        "status": "complete",
+        "start_time": "24/02/2023, 16:20:00",
+        "finish_time": "24/02/2023, 18:55:52",
+        "systems": {
+            "points": "Just Points",
+            "games": "Choose",
+            "speciality": 1
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [ "All at the same time", "Speciality decided by Spinner Wheel" ],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Jenga" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Minigolf Adventure" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Shithead" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Skip Bo" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 9, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Skip Bo", "Minigolf Adventure", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [ 5 ],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "2 points"},
+                    { "player": 2, "place": 3, "reward": "1 point"},
+                    { "player": 3, "place": 4, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [ 3 ],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "3 points"},
+                    { "player": 3, "place": 2, "reward": "1 point"},
+                    { "player": 1, "place": 3, "reward": "1 point"},
+                    { "player": 2, "place": 4, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Minigolf Adventure",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 1, "points": 4, "place": 1, "reward": "3 points"},
+                    { "player": 5, "points": 7, "place": 2, "reward": "2 points"},
+                    { "player": 2, "points": 8, "place": 3, "reward": "0 points"},
+                    { "player": 3, "points": 11, "place": 4, "reward": "0 points"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 4, "reward": "-1 point"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 5, "place": 1, "points": 10, "cones": 0 },
+            { "player": 1, "place": 2, "points": 5, "cones": 0 },
+            { "player": 3, "place": 3, "points": 2, "cones": 0 },
+            { "player": 2, "place": 3, "points": 2, "cones": 0 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 3",
+        "status": "complete",
+        "start_time": "12/10/2023, 16:20:00",
+        "finish_time": "12/10/2023, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 0
+        },
+        "intruded": [ 4 ],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 5, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 7, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 5, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"},
+                    { "player": 7, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 6, "reward": "0 points"}
+                ],
+                "after": [ "Isabella NEIGHED Yahtzee Cards", "Jake NEIGHED Alphabetix" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "4:20 Game",
+                "extras": [ "session_3.png" ],
+                "players": [ 1, 2, 3, 5, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"},
+                    { "player": 7, "place": 1, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 7, "place": 1, "reward": "3 points"},
+                    { "player": 3, "place": 2, "reward": "2 points"},
+                    { "player": 1, "place": 3, "reward": "1 point"},
+                    { "player": 2, "place": 4, "reward": "1 point"},
+                    { "player": 5, "place": 5, "reward": "Nothing"},
+                    { "player": 6, "place": 6, "reward": "1 cone"}
+                ],
+                "after": [ "Danny INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "3 points" },
+                    { "player": 2, "place": 2, "reward": "2 points" },
+                    { "player": 6, "place": 3, "reward": "1 point" },
+                    { "player": 5, "place": 4, "reward": "1 point" },
+                    { "player": 1, "place": 5, "reward": "1 cone" },
+                    { "player": 3, "place": 6, "reward": "1 cone" },
+                    { "player": 7, "place": 7, "reward": "1 cone" }
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "3 points"},
+                    { "player": 4, "place": 2, "reward": "2 points"},
+                    { "player": 3, "place": 3, "reward": "1 point"},
+                    { "player": 2, "place": 4, "reward": "1 cone"},
+                    { "player": 6, "place": 5, "reward": "1 cone"},
+                    { "player": 1, "place": 6, "reward": "1 cone"},
+                    { "player": 7, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Alex had a VICTORY cone", "Dan NEIGHED Alphabetix" ]
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Mario Party",
+                "extras": [ "Teams" ],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 2, "stars": 5, "coins": 94, "place": 1, "reward": "2 points"},
+                    { "player": 4, "stars": 5, "coins": 94, "place": 1, "reward": "2 points"},
+                    { "player": 3, "stars": 2, "coins": 53, "place": 2, "reward": "1 point"},
+                    { "player": 1, "stars": 2, "coins": 7, "place": 3, "reward": "Nothing"},
+                    { "player": 7, "stars": 2, "coins": 7, "place": 3, "reward": "Nothing"},
+                    { "player": 5, "stars": 1, "coins": 28, "place": 4, "reward": "1 cone"},
+                    { "player": 6, "stars": 1, "coins": 28, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Jake had a BREAK cone", "Gideon had a VICTORY cone", "Danny had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 4, "place": 1, "points": 7, "cones": 2 },
+            { "player": 5, "place": 2, "points": 6, "cones": 4 },
+            { "player": 3, "place": 2, "points": 6, "cones": 4 },
+            { "player": 2, "place": 4, "points": 6, "cones": 5 },
+            { "player": 7, "place": 5, "points": 5, "cones": 4 },
+            { "player": 1, "place": 6, "points": 3, "cones": 4 },
+            { "player": 6, "place": 7, "points": 3, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 4",
+        "status": "complete",
+        "start_time": "15/10/2023, 00:00:00",
+        "finish_time": "15/10/2023, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 0
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 2, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Tennis",
+                "extras": [ "Teams" ],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 2, "reward": "1 cone"},
+                    { "player": 2, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Alex NEIGHED Alphabetix" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Catan",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 10, "place": 1, "reward": "1 point"},
+                    { "player": 2, "points": 9, "place": 2, "reward": "Nothing"},
+                    { "player": 1, "points": 7, "place": 3, "reward": "1 cone"},
+                    { "player": 5, "points": 7, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "Everyone had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [],
+                "players": [ 1, 2, 3, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 0, "place": 1, "reward": "2 points"},
+                    { "player": 3, "points": 14, "place": 2, "reward": "1 point"},
+                    { "player": 2, "points": 17, "place": 3, "reward": "Nothing"},
+                    { "player": 5, "points": 22, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone", "Jake had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 3, "place": 1, "points": 3, "cones": 3 },
+            { "player": 1, "place": 2, "points": 3, "cones": 4 },
+            { "player": 2, "place": 3, "points": 0, "cones": 3 },
+            { "player": 5, "place": 4, "points": 0, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 5",
+        "status": "complete",
+        "start_time": "15/01/2024, 00:00:00",
+        "finish_time": "15/01/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 0
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 9, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 2, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 2, "w_cone": 1, "v_cone": 1 },
+                "points": { "g_point": 7, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Catan",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 10, "place": 1, "reward": "2 points"},
+                    { "player": 2, "points": 9, "place": 2, "reward": "1 point"},
+                    { "player": 5, "points": 9, "place": 2, "reward": "1 point"},
+                    { "player": 4, "points": 8, "place": 4, "reward": "Nothing"},
+                    { "player": 3, "points": 8, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Alex had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Bowling",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 245, "place": 1, "reward": "2 points"},
+                    { "player": 3, "points": 185, "place": 2, "reward": "1 point"},
+                    { "player": 5, "points": 181, "place": 3, "reward": "1 point"},
+                    { "player": 2, "points": 179, "place": 4, "reward": "Nothing"},
+                    { "player": 4, "points": 177, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Gideon had a BREAK cone", "Alex NEIGHED Mario Kart" ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno Stacko",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno Flip",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 2, "place": 2, "reward": "1 point"},
+                    { "player": 3, "place": 3, "reward": "1 point"},
+                    { "player": 5, "place": 4, "reward": "1 cone"},
+                    { "player": 4, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 2, "reward": "1 point"},
+                    { "player": 4, "place": 3, "reward": "1 point"},
+                    { "player": 3, "place": 4, "reward": "Nothing"},
+                    { "player": 1, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Alex had a WHEEL cone" ]
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 2, "reward": "1 point"},
+                    { "player": 2, "place": 3, "reward": "1 cone"},
+                    { "player": 5, "place": 4, "reward": "1 cone"},
+                    { "player": 3, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Muffin Time",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 2, "reward": "1 point"},
+                    { "player": 2, "place": 2, "reward": "1 point"},
+                    { "player": 3, "place": 2, "reward": "1 point"},
+                    { "player": 4, "place": 2, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5 ],
+                "speciality": [],
+                "results": [
+                    { "player": 5, "points": 0, "place": 1, "reward": "2 points"},
+                    { "player": 3, "points": 14, "place": 2, "reward": "1 point"},
+                    { "player": 4, "points": 15, "place": 3, "reward": "1 cone"},
+                    { "player": 2, "points": 18, "place": 4, "reward": "1 cone"},
+                    { "player": 1, "points": 25, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Jake had a BREAK cone", "Alex had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 9, "cones": 4 },
+            { "player": 5, "place": 2, "points": 8, "cones": 6 },
+            { "player": 4, "place": 3, "points": 5, "cones": 4 },
+            { "player": 3, "place": 3, "points": 5, "cones": 4 },
+            { "player": 2, "place": 5, "points": 5, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 6",
+        "status": "complete",
+        "start_time": "25/05/2024, 00:00:00",
+        "finish_time": "25/05/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 2
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Switch Golf", "Mario Kart" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Shithead", "Super Smash Bros" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 4, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Catan", "Golf" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Gang Beasts",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 3, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 2, "place": 2, "reward": "Nothing"},
+                    { "player": 2, "points": 1, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Minigolf Adventure",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 5, "place": 1, "reward": "1 point"},
+                    { "player": 2, "points": 5, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 6, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Super Smash Bros",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 2, "reward": "Nothing"},
+                    { "player": 1, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "Jake had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Mario Party",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 2, "reward": "Nothing"},
+                    { "player": 2, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "Gideon NEIGHED Switch Golf", "Dan NEIGHED Gideon's Neigh" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Golf",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 2, "reward": "Nothing"},
+                    { "player": 2, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [ 3 ],
+                "results": [
+                    { "player": 1, "points": 13, "place": 1, "reward": "1 point"},
+                    { "player": 2, "points": 34, "place": 2, "reward": "Nothing"},
+                    { "player": 3, "points": 80, "place": 3, "reward": "1 cone -1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno Flip",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "Nothing"},
+                    { "player": 2, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Trouble (Pop-n-hop)",
+                "extras": [],
+                "players": [ 1, 2, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 2, "reward": "Nothing"},
+                    { "player": 3, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 6, "cones": 4 },
+            { "player": 2, "place": 2, "points": 3, "cones": 5 },
+            { "player": 3, "place": 3, "points": 1, "cones": 4 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 7",
+        "status": "complete",
+        "start_time": "06/09/2024, 16:20:00",
+        "finish_time": "06/09/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 2
+        },
+        "intruded": [ 2 ],
+        "abandoned": [ 6, 7 ],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Jenga", "Alphabetix" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 3, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Catan", "Super Smash Bros" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Jenga", "Skip Bo" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 1, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Jenga", "Mario Kart" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 8, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Jenga", "Skip Bo" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [ "Jenga", "Golf" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [ "Jenga", "Muffin Time" ],
+                "cones": { "pg_cone": 4, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 1, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 6, 7 ],
+                "speciality": [ 1, 3, 5, 4, 6, 7 ],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 1, "reward": "2 points"},
+                    { "player": 4, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 1, "reward": "2 points"},
+                    { "player": 7, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 6, "reward": "1 cone -1 point"}
+                ],
+                "after": [ "Isabella had a BREAK cone", "Gideon INTRUDED the Game", "Everyone had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Game of Life",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "points": 2400, "place": 1, "reward": "3 points"},
+                    { "player": 6, "points": 1770, "place": 2, "reward": "2 points"},
+                    { "player": 1, "points": 1640, "place": 3, "reward": "1 point"},
+                    { "player": 2, "points": 1595, "place": 4, "reward": "1 cone"},
+                    { "player": 5, "points": 1475, "place": 5, "reward": "Nothing"},
+                    { "player": 3, "points": 1320, "place": 6, "reward": "1 cone"},
+                    { "player": 7, "points": 1090, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a BREAK cone", "Alex had a BREAK cone", "Danny had a BREAK cone", "Max had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Bowling",
+                "extras": [ "Standard" ],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 205, "place": 1, "reward": "2 points"},
+                    { "player": 2, "points": 138, "place": 2, "reward": "1 point"},
+                    { "player": 7, "points": 138, "place": 2, "reward": "1 point"},
+                    { "player": 5, "points": 123, "place": 3, "reward": "1 cone"},
+                    { "player": 6, "points": 123, "place": 3, "reward": "1 cone"},
+                    { "player": 3, "points": 118, "place": 4, "reward": "1 cone"},
+                    { "player": 4, "points": 118, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone", "Gideon had a BREAK cone", "Isabella had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "4:20 Game",
+                "extras": [ "session_7.png" ],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point" },
+                    { "player": 2, "place": 1, "reward": "1 point" },
+                    { "player": 3, "place": 1, "reward": "1 point" },
+                    { "player": 5, "place": 1, "reward": "1 point" },
+                    { "player": 4, "place": 1, "reward": "1 point" },
+                    { "player": 6, "place": 1, "reward": "1 point" },
+                    { "player": 7, "place": 1, "reward": "1 point" }
+                ],
+                "after": [ "Isabella NEIGHED Catan" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [ 6 ],
+                "results": [
+                    { "player": 4, "points": 4, "place": 1, "reward": "3 points"},
+                    { "player": 3, "points": 8, "place": 2, "reward": "2 points"},
+                    { "player": 5, "points": 11, "place": 3, "reward": "1 point"},
+                    { "player": 7, "points": 19, "place": 4, "reward": "1 point"},
+                    { "player": 6, "points": 20, "place": 5, "reward": "-1 point"},
+                    { "player": 2, "points": 25, "place": 6, "reward": "1 cone"},
+                    { "player": 1, "points": 27, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Max ABANDONED the Game", "Isabella ABANDONED the Game" ]
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 2, "reward": "1 point"},
+                    { "player": 3, "place": 3, "reward": "1 cone"},
+                    { "player": 4, "place": 4, "reward": "Nothing"},
+                    { "player": 1, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Danny had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 4, "place": 1, "points": 9, "cones": 6 },
+            { "player": 7, "place": 2, "points": 5, "cones": 6 },
+            { "player": 5, "place": 3, "points": 4, "cones": 5 },
+            { "player": 3, "place": 4, "points": 4, "cones": 6 },
+            { "player": 6, "place": 5, "points": 3, "cones": 5 },
+            { "player": 2, "place": 6, "points": 3, "cones": 6 },
+            { "player": 1, "place": 7, "points": 3, "cones": 8 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 8",
+        "status": "complete",
+        "start_time": "08/09/2024, 16:20:00",
+        "finish_time": "08/09/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 0
+        },
+        "intruded": [],
+        "abandoned": [ 7 ],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 1, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 1, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 1, "gooc_total": 1, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 1, "super_neigh": 1, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Table Tennis",
+                "extras": [],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 2, "reward": "1 point"},
+                    { "player": 7, "place": 3, "reward": "1 cone"},
+                    { "player": 3, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Isabella NEIGHED Gang Beasts", "Dan NEIGHED Mario Party" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Minigolf Adventure",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 3, "place": 1, "reward": "2 points"},
+                    { "player": 7, "points": 8, "place": 2, "reward": "1 point"},
+                    { "player": 3, "points": 9, "place": 3, "reward": "1 cone"},
+                    { "player": 6, "points": 10, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "4 Rounds" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 7, "points": 4, "place": 1, "reward": "2 points"},
+                    { "player": 1, "points": 7, "place": 2, "reward": "1 point"},
+                    { "player": 6, "points": 10, "place": 3, "reward": "Nothing"},
+                    { "player": 3, "points": 23, "place": 4, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Bowling",
+                "extras": [ "Special" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 6, "points": 186, "place": 1, "reward": "2 points"},
+                    { "player": 1, "points": 174, "place": 2, "reward": "1 point"},
+                    { "player": 3, "points": 169, "place": 3, "reward": "Nothing"},
+                    { "player": 7, "points": 110, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Max won a GOOC card - Got a Five Bagger",
+                    "Jake NEIGHED Switch Golf",
+                    "Isabella SUPER NEIGHED Switch Basketball",
+                    "Max NEIGHED Super Smash Bros",
+                    "Max SUPER NEIGHED Gang Beasts",
+                    "Jake SUPER NEIGHED Super Smash Bros",
+                    "Dan SUPER NEIGHED Gang Beasts",
+                    "Isabella ABANDONED the Game"
+                ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [ "2 Decks" ],
+                "players": [ 1, 3, 6 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 2, "reward": "Nothing"},
+                    { "player": 1, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 6, "cones": 3 },
+            { "player": 6, "place": 2, "points": 3, "cones": 2 },
+            { "player": 7, "place": 3, "points": 3, "cones": 3 },
+            { "player": 3, "place": 4, "points": 1, "cones": 4 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 9",
+        "status": "complete",
+        "start_time": "28/01/2023, 00:00:00",
+        "finish_time": "28/01/2023, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 2
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "FIFA", "Mario Kart" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 6, "c_cone": 0, "w_cone": 0, "v_cone": 4 },
+                "points": { "g_point": 10, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 0, "super_neigh": 0, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Catan", "Jenga" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 9, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 7, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 0, "super_neigh": 0, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Unstable Unicorns",
+                "extras": [],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Uno Flip",
+                "extras": [],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Mario Kart",
+                "extras": [ "4 Races" ],
+                "players": [ 1, 3 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "4:20 Game",
+                "extras": [ "session_9.png" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Mario Party",
+                "extras": [ "Superstars", "Woody Woods", "15 Turns" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "stars": 5, "coins": 10, "place": 1, "reward": "1 point"},
+                    { "player": 3, "stars": 4, "coins": 28, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a BREAK cone (4:20)", "Jake had a BREAK cone (4:20)", "Jake NEIGHED Super Smash Bros" ]
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Gang Beasts",
+                "extras": [ "First to 3" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Tennis",
+                "extras": [ "Best of 5" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 3, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 0, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Minigolf Adventure",
+                "extras": [ "6 Holes" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 7, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 10, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_9",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [ "2 Decks" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_10",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Costumed Cats",
+                "extras": [ "First to 13" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 13, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 10, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Jake NEIGHED Injustice", "Dan NEIGHED Monopoly", "Jake SUPER NEIGHED Monopoly" ]
+            },
+            {
+                "game_id": "game_11",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "7 Rounds" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 36, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 54, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Dan had a VICTORY cone",
+                    "DINNER BREAK",
+                    "Dan had a BREAK cone",
+                    "Jake had a BREAK cone",
+                    "Dan NEIGHED Monopoly Deal"
+                ]
+            },
+            {
+                "game_id": "game_12",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Golf",
+                "extras": [],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": -1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 9, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_13",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Muffin Time",
+                "extras": [],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 10, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 8, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Dan had a VICTORY cone",
+                    "Dan SUPER NEIGHED Yahtzee Cards",
+                    "Dan SUPER NEIGHED Monopoly Deal",
+                    "Jake SUPER NEIGHED Call of Duty"
+                ]
+            },
+            {
+                "game_id": "game_14",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Switch Bowling",
+                "extras": [ "Special", "Advanced" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 168, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 138, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_15",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 3 ],
+                "speciality": [ 3 ],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 2, "reward": "1 cone -1 point"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_16",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [ "13 Cards", "2 Up 2 Down" ],
+                "players": [ 1, 3 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Jake had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 11, "cones": 14 },
+            { "player": 3, "place": 2, "points": 6, "cones": 14 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 10",
+        "status": "complete",
+        "start_time": "07/10/2024, 13:00:00",
+        "finish_time": "07/10/2024, 18:00:00",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Wheel",
+            "speciality": 2
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Table Tennis", "Switch Bowling" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Capture the Flag", "Jenga" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Quoits", "Uno Stacko" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 1, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Table Tennis", "Super Smash Bros" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Shooting", "Jenga" ],
+                "cones": { "pg_cone": 3, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [ "Handball", "Uno Stacko" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [ "Backyard Cricket", "Uno Stacko" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 1, "gooc_used": 1 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal at House on the Hill", "Chess", "Trouble (Pop-n-hop)",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga", "4:20 Game"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Table Tennis",
+                "extras": [],
+                "players": [ 1, 2, 3, 4, 5, 6, 7 ],
+                "speciality": [ 1, 4 ],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "1 point"},
+                    { "player": 3, "place": 3, "reward": "1 point"},
+                    { "player": 7, "place": 4, "reward": "1 cone"},
+                    { "player": 6, "place": 5, "reward": "Nothing"},
+                    { "player": 5, "place": 6, "reward": "1 cone"},
+                    { "player": 2, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Jake won a GOOC card - Flawless Victory",
+                    "Isabella won a GOOC card - Flawless Victory",
+                    "Everyone had a BREAK cone (4:20 cone)"
+                ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "5 rounds" ],
+                "players": [ 1, 2, 3, 4, 5, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 6, "points": 6, "place": 1, "reward": "3 points"},
+                    { "player": 1, "points": 18, "place": 2, "reward": "2 points"},
+                    { "player": 5, "points": 18, "place": 2, "reward": "2 points"},
+                    { "player": 4, "points": 20, "place": 4, "reward": "1 cone"},
+                    { "player": 2, "points": 26, "place": 5, "reward": "Nothing"},
+                    { "player": 3, "points": 38, "place": 6, "reward": "1 cone"},
+                    { "player": 7, "points": 42, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Isabella used her GOOC card",
+                    "Max had a VICTORY cone",
+                    "Dan had a BREAK cone",
+                    "Alex had a BREAK cone" 
+                ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Wheel",
+                "votes": [],
+                "name": "Basketball",
+                "extras": [ "Teams" ],
+                "players": [ 1, 2, 3, 4, 5, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 2, "reward": "1 cone"},
+                    { "player": 5, "place": 2, "reward": "1 cone"},
+                    { "player": 6, "place": 2, "reward": "1 cone"},
+                    { "player": 7, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Dan got injured :(", "Dan had a VICTORY cone (best pain relief)" ]
+            }
+        ],
+        "final_results": [
+            { "player": 4, "place": 1, "points": 5, "cones": 3 },
+            { "player": 1, "place": 2, "points": 4, "cones": 4 },
+            { "player": 6, "place": 3, "points": 3, "cones": 4 },
+            { "player": 3, "place": 4, "points": 2, "cones": 3 },
+            { "player": 5, "place": 5, "points": 2, "cones": 5 },
+            { "player": 2, "place": 6, "points": 0, "cones": 4 },
+            { "player": 7, "place": 7, "points": 0, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 11",
+        "status": "complete",
+        "start_time": "23/10/2024, 13:23:00",
+        "finish_time": "23/10/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Choose",
+            "speciality": 0
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 3, "f20g_cone": 1, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 1, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [],
+                "cones": { "pg_cone": 2, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal at House on the Hill", "Chess", "Trouble (Pop-n-hop)",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga", "4:20 Game"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Mario Party",
+                "extras": [ "Jamboree", "10 Turns", "Goomba Lagoon" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 7, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 2, "reward": "1 point"},
+                    { "player": 6, "place": 3, "reward": "Nothing"},
+                    { "player": 3, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [
+                    "Dan had a BREAK cone",
+                    "Max had a BREAK cone",
+                    "Isabella had a VICTORY cone",
+                    "LUNCH BREAK",
+                    "Dan had a BREAK cone (4:20 cone)",
+                    "Isabella had a BREAK cone (4:20 cone)"
+                ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "4 rounds" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 16, "place": 1, "reward": "2 points"},
+                    { "player": 3, "points": 18, "place": 2, "reward": "1 point"},
+                    { "player": 6, "points": 24, "place": 3, "reward": "1 cone"},
+                    { "player": 7, "points": 27, "place": 4, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Skip Bo",
+                "extras": [ "12 Cards", "2 Up 2 Down" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 2, "reward": "1 point"},
+                    { "player": 7, "place": 3, "reward": "Nothing"},
+                    { "player": 3, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "4:20 Game",
+                "extras": [ "session_11.png" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"},
+                    { "player": 7, "place": 1, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Switch Bowling",
+                "extras": [ "Standard" ],
+                "players": [ 1, 3, 6, 7 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "points": 194, "place": 1, "reward": "2 points"},
+                    { "player": 7, "points": 187, "place": 2, "reward": "1 point"},
+                    { "player": 1, "points": 184, "place": 3, "reward": "Nothing"},
+                    { "player": 6, "points": 172, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 6, "cones": 5 },
+            { "player": 3, "place": 2, "points": 4, "cones": 4 },
+            { "player": 7, "place": 3, "points": 4, "cones": 5 },
+            { "player": 6, "place": 4, "points": 2, "cones": 4 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 12",
+        "status": "complete",
+        "start_time": "24/11/2024, 00:00:00",
+        "finish_time": "24/11/2024, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Choose",
+            "speciality": 0
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 2 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 8,
+                "speciality": [],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 3, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time", "Here to Slay",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Uno No Mercy", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal", "Chess", "Trouble (Pop-n-hop)", "Avocado Smash", "Here to Slay",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Trouble (Pop-n-hop)",
+                "extras": [],
+                "players": [ 1, 8 ],
+                "speciality": [],
+                "results": [
+                    { "player": 8, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Vanessa had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Mario Kart",
+                "extras": [],
+                "players": [ 1, 8 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 8, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 8 ],
+                "speciality": [],
+                "results": [
+                    { "player": 8, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Switch Tennis",
+                "extras": [],
+                "players": [ 1, 8 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 8, "place": 2, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Choose",
+                "votes": [],
+                "name": "Golf",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 8 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 15, "place": 1, "reward": "1 point"},
+                    { "player": 8, "points": 34, "place": 2, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone" ]
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 3, "cones": 5 },
+            { "player": 8, "place": 2, "points": 2, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 13",
+        "status": "complete",
+        "start_time": "21/12/2024, 00:00:00",
+        "finish_time": "21/12/2024, 23:59:00",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Vote",
+            "speciality": 2
+        },
+        "intruded": [ 2 ],
+        "abandoned": [ 7 ],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Switch Golf", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 9, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Super Smash Bros", "Minigolf Adventure" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 8, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Quoits", "Table Tennis" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 1, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Table Tennis", "Super Smash Bros" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 7, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Shooting", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 1, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [ "Quoits", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 0, "c_cone": 2, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 2, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [ "Unstable Unicorns", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal at House on the Hill", "Chess", "Trouble (Pop-n-hop)",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga", "4:20 Game"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Uno Stacko",
+                "extras": [],
+                "players": [ 1, 3, 4, 5, 6, 7 ],
+                "speciality": [ 1, 5, 6, 7 ],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 7, "place": 6, "reward": "1 cone -1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Unstable Unicorns",
+                "extras": [],
+                "players": [ 1, 3, 4, 5, 6, 7 ],
+                "speciality": [ 7 ],
+                "results": [
+                    { "player": 7, "points": 7, "place": 1, "reward": "4 points"},
+                    { "player": 1, "points": 6, "place": 2, "reward": "2 points"},
+                    { "player": 3, "points": 5, "place": 3, "reward": "1 point"},
+                    { "player": 6, "points": 5, "place": 3, "reward": "1 point"},
+                    { "player": 5, "points": 3, "place": 5, "reward": "Nothing"},
+                    { "player": 4, "points": 3, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Gideon INTRUDED the Game", "Isabella ABANDONED the Game"]
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" }
+                ],
+                "name": "Super Smash Bros",
+                "extras": [ "Knockout" ],
+                "players": [ 1, 2, 3, 4, 5, 6 ],
+                "speciality": [ 4, 2 ],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "4 points"},
+                    { "player": 1, "place": 2, "reward": "2 points"},
+                    { "player": 4, "place": 3, "reward": "Nothing"},
+                    { "player": 5, "place": 4, "reward": "1 point"},
+                    { "player": 6, "place": 5, "reward": "1 cone"},
+                    { "player": 3, "place": 6, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" }
+                ],
+                "name": "4:20 Game",
+                "extras": [ "session_13.png" ],
+                "players": [ 1, 2, 3, 4, 5, 6 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" }
+                ],
+                "name": "Quoits",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 2, 3, 4, 5, 6 ],
+                "speciality": [ 3, 6 ],
+                "results": [
+                    { "player": 6, "points": 2, "place": 1, "reward": "1 point"},
+                    { "player": 2, "points": 1, "place": 2, "reward": "2 points"},
+                    { "player": 4, "points": 1, "place": 2, "reward": "2 points"},
+                    { "player": 3, "points": 1, "place": 2, "reward": "1 point"},
+                    { "player": 1, "points": 0, "place": 5, "reward": "Nothing"},
+                    { "player": 5, "points": 0, "place": 5, "reward": "Nothing"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" }
+                ],
+                "name": "Shooting",
+                "extras": [ "2 Rounds" ],
+                "players": [ 1, 2, 3, 4, 5, 6 ],
+                "speciality": [ 5 ],
+                "results": [
+                    { "player": 1, "points": 5, "place": 1, "reward": "3 points"},
+                    { "player": 4, "points": 4, "place": 2, "reward": "2 points"},
+                    { "player": 2, "points": 4, "place": 2, "reward": "2 points"},
+                    { "player": 3, "points": 3, "place": 4, "reward": "1 point"},
+                    { "player": 5, "points": 2, "place": 5, "reward": "-1 point"},
+                    { "player": 6, "points": 2, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 10, "cones": 2 },
+            { "player": 2, "place": 2, "points": 9, "cones": 2 },
+            { "player": 6, "place": 3, "points": 8, "cones": 4 },
+            { "player": 4, "place": 4, "points": 6, "cones": 3 },
+            { "player": 3, "place": 5, "points": 5, "cones": 3 },
+            { "player": 5, "place": 6, "points": 3, "cones": 2 },
+            { "player": 7, "place": 6, "points": 3, "cones": 2 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 14",
+        "status": "complete",
+        "start_time": "04/01/2025, 00:00:00",
+        "finish_time": "04/01/2025, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Vote",
+            "speciality": 2
+        },
+        "intruded": [],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Mario Kart", "Switch Bowling" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 3, "c_cone": 0, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Quoits", "Costumed Cats" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 4, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Catan", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 5, "c_cone": 0, "w_cone": 1, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 2, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Monopoly Bid", "Muffin Time",
+            "Unstable Unicorns", "Llamas Unleashed", "Yahtzee Cards", "FUCK the Game", "Coup", "Uno",
+            "Uno Flip", "Cards Against Humanity", "Costumed Cats", "Struggle for Catan", "Monopoly",
+            "Game of Life", "Catan", "Betrayal at House on the Hill", "Chess", "Trouble (Pop-n-hop)",
+            "Block Party", "Mario Kart", "Mario Party", "Super Smash Bros", "Switch Bowling",
+            "Switch Tennis", "Switch Basketball", "Switch Golf", "Minigolf Adventure", "Gang Beasts",
+            "FIFA", "NBA", "Call of Duty", "Injustice", "Street Fighter", "Basketball",
+            "Table Tennis", "Backyard Cricket", "Soccer", "Handball", "Capture the Flag",
+            "Quoits", "Cornhole", "Shooting", "Alphabetix", "Uno Stacko", "Jenga", "4:20 Game"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Uno Stacko",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 2, "reward": "Nothing"},
+                    { "player": 4, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Golf",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 6, "place": 1, "reward": "1 point"},
+                    { "player": 4, "points": 9, "place": 2, "reward": "Nothing"},
+                    { "player": 3, "points": 19, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Mario Kart",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 4, "place": 2, "reward": "Nothing"},
+                    { "player": 3, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Shooting",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 3, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "points": 7, "place": 1, "reward": "1 point"},
+                    { "player": 3, "points": 7, "place": 1, "reward": "1 point"},
+                    { "player": 4, "points": 4, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Mario Party",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "stars": 5, "coins": 26, "place": 1, "reward": "1 point"},
+                    { "player": 3, "stars": 4, "coins": 37, "place": 2, "reward": "Nothing"},
+                    { "player": 4, "stars": 3, "coins": 32, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "DINNER BREAK", "Dan had a VICTORY cone", "Jake had a BREAK cone" ]
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Minigolf Adventure",
+                "extras": [ "6 Holes" ],
+                "players": [ 1, 3, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "points": 10, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 11, "place": 3, "reward": "1 cone"},
+                    { "player": 3, "points": 11, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Catan",
+                "extras": [],
+                "players": [ 1, 3, 4 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "points": 10, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 9, "place": 2, "reward": "Nothing"},
+                    { "player": 3, "points": 8, "place": 3, "reward": "1 cone"}
+                ],
+                "after": [ "Danny had a WHEEL cone" ]
+            },
+            {
+                "game_id": "game_9",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Quoits",
+                "extras": [ "3 Rounds" ],
+                "players": [ 1, 3, 4 ],
+                "speciality": [ 3 ],
+                "results": [
+                    { "player": 3, "points": 2, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 0, "place": 3, "reward": "1 cone"},
+                    { "player": 4, "points": 0, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_10",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" }
+                ],
+                "name": "Switch Bowling",
+                "extras": [ "Special", "Advanced" ],
+                "players": [ 1, 3, 4 ],
+                "speciality": [ 1 ],
+                "results": [
+                    { "player": 3, "points": 156, "place": 1, "reward": "1 point"},
+                    { "player": 1, "points": 143, "place": 2, "reward": "-1 point"},
+                    { "player": 4, "points": 117, "place": 3, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 3, "place": 1, "points": 6, "cones": 6 },
+            { "player": 4, "place": 2, "points": 5, "cones": 7 },
+            { "player": 1, "place": 3, "points": 4, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 15",
+        "status": "complete",
+        "start_time": "26/01/2025, 18:00:00",
+        "finish_time": "26/01/2025, 23:59:59",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Vote",
+            "speciality": 2
+        },
+        "intruded": [ 2 ],
+        "abandoned": [ 6, 7 ],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Jenga", "Skip Bo" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 0, "c_point": 1, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Shithead", "Super Smash Bros" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 0, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Jenga", "Switch Bowling" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 3, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 1, "c_point": 1, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Jenga", "Minigolf Adventure" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 7, "c_point": 0, "special_w_point": 2, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Switch Golf", "Skip Bo" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [ "Jenga", "Skip Bo" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [ "Jenga", "Uno" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 0, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 4, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Muffin Time", "Unstable Unicorns",
+            "Coup", "Uno", "Uno Flip", "Uno No Mercy", "Cards Against Humanity",
+            "Super Smash Bros", "Switch Bowling", "Switch Golf", "Minigolf Adventure", "Jenga"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 6, 7 ],
+                "speciality": [ 1, 3, 4, 6, 7 ],
+                "results": [
+                    { "player": 3, "place": 1, "reward": "2 points"},
+                    { "player": 4, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 1, "reward": "2 points"},
+                    { "player": 7, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 6, "reward": "1 cone -1 point"}
+                ],
+                "after": [ "Gideon INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Minigolf Adventure",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "points": 3, "place": 1, "reward": "4 points"},
+                    { "player": 6, "points": 4, "place": 2, "reward": "2 points"},
+                    { "player": 2, "points": 5, "place": 3, "reward": "1 point"},
+                    { "player": 5, "points": 5, "place": 3, "reward": "1 point"},
+                    { "player": 1, "points": 6, "place": 5, "reward": "Nothing"},
+                    { "player": 3, "points": 7, "place": 6, "reward": "1 cone"},
+                    { "player": 7, "points": 7, "place": 6, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Shithead",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 7, "place": 1, "reward": "3 points"},
+                    { "player": 5, "place": 2, "reward": "2 points"},
+                    { "player": 4, "place": 3, "reward": "1 point"},
+                    { "player": 1, "place": 4, "reward": "1 point"},
+                    { "player": 2, "place": 5, "reward": "1 cone -1 point"},
+                    { "player": 3, "place": 6, "reward": "1 cone"},
+                    { "player": 6, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "DINNER BREAK", "Everyone had a BREAK cone (joint time!)" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Uno",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4, 6, 7 ],
+                "speciality": [ 7 ],
+                "results": [
+                    { "player": 6, "place": 1, "reward": "3 points"},
+                    { "player": 2, "place": 2, "reward": "2 points"},
+                    { "player": 4, "place": 3, "reward": "1 point"},
+                    { "player": 7, "place": 4, "reward": "1 cone -1 point"},
+                    { "player": 5, "place": 5, "reward": "1 cone"},
+                    { "player": 1, "place": 6, "reward": "1 cone"},
+                    { "player": 3, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Max ABANDONED the Game", "Isabella ABANDONED the Game" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Super Smash Bros",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "3 points"},
+                    { "player": 4, "place": 2, "reward": "1 point"},
+                    { "player": 3, "place": 3, "reward": "1 point"},
+                    { "player": 1, "place": 4, "reward": "Nothing"},
+                    { "player": 5, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 4, "place": 1, "points": 9, "cones": 2 },
+            { "player": 6, "place": 2, "points": 7, "cones": 3 },
+            { "player": 2, "place": 3, "points": 5, "cones": 3 },
+            { "player": 7, "place": 4, "points": 5, "cones": 4 },
+            { "player": 5, "place": 5, "points": 4, "cones": 4 },
+            { "player": 3, "place": 6, "points": 3, "cones": 5 },
+            { "player": 1, "place": 7, "points": 0, "cones": 4 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 16",
+        "status": "complete",
+        "start_time": "09/03/2025, 16:20:00",
+        "finish_time": "09/03/2025, 23:00:00",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Vote",
+            "speciality": 2
+        },
+        "intruded": [ 2 ],
+        "abandoned": [],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Mario Kart", "Switch Golf" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 8, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Jenga", "Monopoly Deal" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 0, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 1, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Catan", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Minigolf Adventure", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Game of Life", "Minigolf Adventure" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 0, "l_cone": 2, "c_cone": 1, "w_cone": 1, "v_cone": 0 },
+                "points": { "g_point": 2, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Shithead", "Golf", "Skip Bo", "Monopoly Deal", "Muffin Time", "Unstable Unicorns", "Coup",
+            "Uno", "Uno Flip", "Uno No Mercy", "Struggle for Catan", "Five Crowns", "Game of Life",
+            "Catan", "Chess", "Trouble (Pop-n-hop)", "Block Party", "Mario Kart", "Mario Party",
+            "Super Smash Bros", "Switch Bowling", "Switch Tennis", "Switch Basketball", "Switch Golf",
+            "Minigolf Adventure", "Uno Stacko", "Jenga", "4:20 Game", "Sounds Fishy"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Minigolf Adventure",
+                "extras": [ "3 Races" ],
+                "players": [ 1, 3, 5, 4 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "points": "3:02", "place": 1, "reward": "3 points"},
+                    { "player": 5, "points": "3:29", "place": 2, "reward": "Nothing"},
+                    { "player": 1, "points": "3:37", "place": 3, "reward": "1 cone"},
+                    { "player": 3, "points": "4:00", "place": 4, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Mario Party",
+                "extras": [ "Jamboree", "10 Turns", "Roll 'em Raceway" ],
+                "players": [ 1, 3, 5, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "stars": 3, "coins": 100, "place": 1, "reward": "2 points"},
+                    { "player": 3, "stars": 1, "coins": 171, "place": 2, "reward": "1 point"},
+                    { "player": 4, "stars": 1, "coins": 145, "place": 3, "reward": "1 cone"},
+                    { "player": 5, "stars": 1, "coins": 70, "place": 4, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Mario Kart",
+                "extras": [ "6 Races" ],
+                "players": [ 1, 3, 5, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 2, "reward": "Nothing"},
+                    { "player": 5, "place": 3, "reward": "Nothing"},
+                    { "player": 3, "place": 4, "reward": "1 cone"}
+                ],
+                "after": [ "Gideon INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Skip Bo",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 5, "place": 2, "reward": "1 point"},
+                    { "player": 2, "place": 3, "reward": "1 cone"},
+                    { "player": 3, "place": 4, "reward": "Nothing"},
+                    { "player": 4, "place": 5, "reward": "1 cone"}
+                ],
+                "after": [ "Dan had a VICTORY cone", "DINNER BREAK", "Alex had a WHEEL cone" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Five Crowns",
+                "extras": [ "7 Rounds", "Spinner Wheel" ],
+                "players": [ 1, 2, 3, 5, 4 ],
+                "speciality": [],
+                "results": [
+                    { "player": 1, "place": 1, "reward": "2 points"},
+                    { "player": 4, "place": 2, "reward": "1 point"},
+                    { "player": 5, "place": 3, "reward": "1 cone"},
+                    { "player": 3, "place": 4, "reward": "1 cone"},
+                    { "player": 2, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" }
+                ],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 2, 3, 5, 4 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 2, "place": 1, "reward": "2 points"},
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 5, "place": 5, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 1, "place": 1, "points": 7, "cones": 3 },
+            { "player": 4, "place": 1, "points": 7, "cones": 3 },
+            { "player": 2, "place": 3, "points": 2, "cones": 2 },
+            { "player": 3, "place": 4, "points": 2, "cones": 4 },
+            { "player": 5, "place": 5, "points": 1, "cones": 5 }
+        ]
+    },
+    {
+        "gog_id": "Game of Games No. 17",
+        "status": "complete",
+        "start_time": "05/07/2025, 14:22:00",
+        "finish_time": "05/07/2025, 23:11:00",
+        "systems": {
+            "points": "Points & Cones",
+            "games": "Vote",
+            "speciality": 2
+        },
+        "intruded": [ 9, 10 ],
+        "abandoned": [ 6, 7 ],
+        "extra": [],
+        "players": [
+            {
+                "player": 1,
+                "speciality": [ "Jenga", "Switch Bowling" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 3, "c_cone": 1, "w_cone": 0, "v_cone": 1 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 0, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 2,
+                "speciality": [ "Five Crowns", "Codenames" ],
+                "cones": { "pg_cone": 2, "f20g_cone": 1, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 9, "c_point": 0, "special_w_point": 0, "special_l_point": -2 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 3,
+                "speciality": [ "Table Tennis", "Quoits" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 5, "c_point": 1, "special_w_point": 0, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 4,
+                "speciality": [ "Minigolf Adventure", "Mario Kart" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 9, "c_point": 1, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 5,
+                "speciality": [ "Jenga", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 2, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 10, "c_point": 1, "special_w_point": 2, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 6,
+                "speciality": [ "Minigolf", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 1, "special_w_point": 1, "special_l_point": -1 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 7,
+                "speciality": [ "Jenga", "Uno Stacko" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 1, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 3, "c_point": 0, "special_w_point": 2, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 10,
+                "speciality": [ "Chess", "Super Smash Bros" ],
+                "cones": { "pg_cone": 1, "f20g_cone": 1, "l_cone": 3, "c_cone": 1, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 6, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            },
+            {
+                "player": 9,
+                "speciality": [ "Jenga", "Uno Flip" ],
+                "cones": { "pg_cone": 0, "f20g_cone": 0, "l_cone": 0, "c_cone": 0, "w_cone": 0, "v_cone": 0 },
+                "points": { "g_point": 1, "c_point": 0, "special_w_point": 1, "special_l_point": 0 },
+                "cards": { "neigh": 2, "super_neigh": 2, "gooc_total": 0, "gooc_used": 0 }
+            }
+        ],
+        "possible_games": [
+            "Alphabetix", "Avocado Smash", "Beer Pong", "Block Party", "Cards Against Humanity",
+            "Codenames", "Chess", "Cornhole", "Costumed Cats", "Five Crowns", "Flip 7",
+            "FUCK the Game", "Golf", "Injustice", "Jenga", "Karma", "Llamas Unleashed", "Mario Kart",
+            "Mario Party", "Minigolf", "Minigolf Adventure", "Monopoly Deal", "Quoits", "Shithead",
+            "Shooting", "Skip Bo", "Sounds Fishy", "Street Fighter", "Super Smash Bros",
+            "Switch Bowling", "Switch Golf", "Switch Tennis", "Table Tennis", "Tong-its",
+            "Uno", "Uno Flip", "Uno No Mercy", "Uno Stacko", "Unstable Unicorns", "4:20 Game"
+        ],
+        "games": [
+            {
+                "game_id": "game_1",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" }
+                ],
+                "name": "Uno Stacko",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 6, 7 ],
+                "speciality": [ 5, 6, 7 ],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "2 points"},
+                    { "player": 6, "place": 1, "reward": "2 points"},
+                    { "player": 7, "place": 1, "reward": "2 points"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Gideon had a BREAK cone", "Max V INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_2",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "4:20 Game",
+                "extras": [ "session_17.png" ],
+                "players": [ 1, 3, 5, 4, 2, 6, 7, 10 ],
+                "speciality": [],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"},
+                    { "player": 7, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 1, "reward": "1 point"},
+                    { "player": 10, "place": 1, "reward": "1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_3",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Minigolf",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 6, 7, 10 ],
+                "speciality": [ 6 ],
+                "results": [
+                    { "player": 5, "place": 1, "points": 2, "reward": "3 points"},
+                    { "player": 6, "place": 2, "points": 6, "reward": "1 point"},
+                    { "player": 1, "place": 3, "points": 8, "reward": "1 point"},
+                    { "player": 2, "place": 4, "points": 11, "reward": "1 cone"},
+                    { "player": 4, "place": 5, "points": 14, "reward": "Nothing"},
+                    { "player": 7, "place": 6, "points": 15, "reward": "1 cone"},
+                    { "player": 3, "place": 6, "points": 15, "reward": "1 cone"},
+                    { "player": 10, "place": 8, "points": 16, "reward": "1 cone"}
+                ],
+                "after": [ "Isabella ABANDONED the Game" ]
+            },
+            {
+                "game_id": "game_4",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Super Smash Bros",
+                "extras": [ "Knockout" ],
+                "players": [ 1, 3, 5, 4, 2, 6, 10 ],
+                "speciality": [ 10 ],
+                "results": [
+                    { "player": 10, "place": 1, "reward": "4 points"},
+                    { "player": 4, "place": 2, "reward": "2 points"},
+                    { "player": 2, "place": 3, "reward": "1 point"},
+                    { "player": 1, "place": 4, "reward": "1 cone"},
+                    { "player": 6, "place": 5, "reward": "1 cone"},
+                    { "player": 5, "place": 6, "reward": "1 cone"},
+                    { "player": 3, "place": 7, "reward": "1 cone"}
+                ],
+                "after": [ "Aryana INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_5",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 9, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Codenames",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 6, 9, 10 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 1, "place": 1, "points": 2, "reward": "1 point"},
+                    { "player": 3, "place": 1, "points": 2, "reward": "1 point"},
+                    { "player": 5, "place": 1, "points": 2, "reward": "1 point"},
+                    { "player": 6, "place": 1, "points": 2, "reward": "1 point"},
+                    { "player": 9, "place": 8, "points": 1, "reward": "Nothing"},
+                    { "player": 10, "place": 8, "points": 1, "reward": "1 cone"},
+                    { "player": 4, "place": 8, "points": 1, "reward": "1 cone"},
+                    { "player": 2, "place": 8, "points": 1, "reward": "1 cone -1 point"}
+                ],
+                "after": [ "Dan had a VICTORY cone", "DINNER BREAK", "Isabella INTRUDED the Game" ]
+            },
+            {
+                "game_id": "game_6",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" },
+                    { "player_id": 9, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Jenga",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 6, 7, 9, 10 ],
+                "speciality": [ 1, 5, 7, 9 ],
+                "results": [
+                    { "player": 5, "place": 1, "reward": "2 points"},
+                    { "player": 7, "place": 1, "reward": "2 point"},
+                    { "player": 9, "place": 1, "reward": "2 points"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 6, "place": 1, "reward": "1 point"},
+                    { "player": 10, "place": 1, "reward": "1 point"},
+                    { "player": 1, "place": 9, "reward": "1 cone -1 point"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_7",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" },
+                    { "player_id": 9, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Minigolf Adventure",
+                "extras": [ "2 Rounds", "3 Races" ],
+                "players": [ 1, 3, 5, 4, 2, 6, 7, 9, 10 ],
+                "speciality": [ 4 ],
+                "results": [
+                    { "player": 4, "place": 1, "points": 2, "reward": "4 points"},
+                    { "player": 1, "place": 2, "points": 3, "reward": "2 points"},
+                    { "player": 2, "place": 2, "points": 3, "reward": "2 points"},
+                    { "player": 5, "place": 4, "points": 4, "reward": "1 point"},
+                    { "player": 3, "place": 4, "points": 4, "reward": "1 point"},
+                    { "player": 6, "place": 4, "points": 4, "reward": "1 point"},
+                    { "player": 9, "place": 7, "points": 5, "reward": "Nothing"},
+                    { "player": 10, "place": 7, "points": 5, "reward": "1 cone"},
+                    { "player": 7, "place": 9, "points": 6, "reward": "1 cone"}
+                ],
+                "after": []
+            },
+            {
+                "game_id": "game_8",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 6, "vote": "" },
+                    { "player_id": 7, "vote": "" },
+                    { "player_id": 9, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Beer Pong",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 6, 7, 9, 10 ],
+                "speciality": [],
+                "results": [
+                    { "player": 4, "place": 1, "reward": "1 point"},
+                    { "player": 2, "place": 1, "reward": "1 point"},
+                    { "player": 3, "place": 1, "reward": "1 point"},
+                    { "player": 10, "place": 1, "reward": "1 point"},
+                    { "player": 9, "place": 9, "reward": "Nothing"},
+                    { "player": 1, "place": 9, "reward": "1 cone"},
+                    { "player": 7, "place": 9, "reward": "1 cone"},
+                    { "player": 6, "place": 9, "reward": "1 cone"},
+                    { "player": 5, "place": 9, "reward": "1 cone"}
+                ],
+                "after": [ "Max T ABANDONED the Game", "Isabella ABANDONED the Game" ]
+            },
+            {
+                "game_id": "game_9",
+                "status": "complete",
+                "selected_by": "Vote",
+                "votes": [
+                    { "player_id": 1, "vote": "" },
+                    { "player_id": 2, "vote": "" },
+                    { "player_id": 3, "vote": "" },
+                    { "player_id": 4, "vote": "" },
+                    { "player_id": 5, "vote": "" },
+                    { "player_id": 9, "vote": "" },
+                    { "player_id": 10, "vote": "" }
+                ],
+                "name": "Five Crowns",
+                "extras": [],
+                "players": [ 1, 3, 5, 4, 2, 9, 10 ],
+                "speciality": [ 2 ],
+                "results": [
+                    { "player": 5, "place": 1, "points": 14, "reward": "3 points"},
+                    { "player": 2, "place": 2, "points": 19, "reward": "1 point"},
+                    { "player": 1, "place": 3, "points": 36, "reward": "1 point"},
+                    { "player": 4, "place": 4, "points": 46, "reward": "1 point"},
+                    { "player": 3, "place": 5, "points": 61, "reward": "Nothing"},
+                    { "player": 9, "place": 6, "points": 68, "reward": "Nothing"},
+                    { "player": 10, "place": 7, "points": 100, "reward": "1 cone"}
+                ],
+                "after": []
+            }
+        ],
+        "final_results": [
+            { "player": 5, "place": 1, "points": 13, "cones": 4 },
+            { "player": 4, "place": 2, "points": 11, "cones": 3 },
+            { "player": 6, "place": 3, "points": 7, "cones": 4 },
+            { "player": 2, "place": 4, "points": 7, "cones": 5 },
+            { "player": 10, "place": 5, "points": 7, "cones": 6 },
+            { "player": 3, "place": 6, "points": 6, "cones": 4 },
+            { "player": 7, "place": 7, "points": 5, "cones": 5 },
+            { "player": 1, "place": 8, "points": 5, "cones": 7 },
+            { "player": 9, "place": 9, "points": 2, "cones": 0 }
+        ]
+    }
+]

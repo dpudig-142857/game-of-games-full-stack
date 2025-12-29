@@ -1,0 +1,740 @@
+-- pg_dump -U postgres -d gog --schema-only -f schema.sql
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.5
+-- Dumped by pg_dump version 17.5
+
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: games_info; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.games_info (
+    game_id integer NOT NULL,
+    name character varying(255),
+    tag character varying(255),
+    type character varying(255),
+    results_type character varying(255),
+    winner_criteria character varying(255),
+    header text,
+    player_min integer,
+    player_max integer,
+    starting character varying(255),
+    colour character varying(255)
+);
+
+
+ALTER TABLE public.games_info OWNER TO postgres;
+
+--
+-- Name: games_info_game_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.games_info_game_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.games_info_game_id_seq OWNER TO postgres;
+
+--
+-- Name: games_info_game_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.games_info_game_id_seq OWNED BY public.games_info.game_id;
+
+
+--
+-- Name: gog_final_results; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_final_results (
+    session_id integer NOT NULL,
+    player_id integer NOT NULL,
+    place integer,
+    points integer,
+    cones integer
+);
+
+
+ALTER TABLE public.gog_final_results OWNER TO postgres;
+
+--
+-- Name: gog_game_players; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_game_players (
+    game_instance_id integer NOT NULL,
+    player_id integer NOT NULL,
+    speciality boolean,
+    place integer,
+    reward text,
+    points text,
+    stars integer,
+    coins integer
+);
+
+
+ALTER TABLE public.gog_game_players OWNER TO postgres;
+
+--
+-- Name: gog_game_votes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_game_votes (
+    vote_id integer NOT NULL,
+    game_instance_id integer NOT NULL,
+    player_id integer NOT NULL,
+    game_name character varying(255)
+);
+
+
+ALTER TABLE public.gog_game_votes OWNER TO postgres;
+
+--
+-- Name: gog_game_votes_vote_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.gog_game_votes_vote_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.gog_game_votes_vote_id_seq OWNER TO postgres;
+
+--
+-- Name: gog_game_votes_vote_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.gog_game_votes_vote_id_seq OWNED BY public.gog_game_votes.vote_id;
+
+--
+-- Name: gog_game_votes vote_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_votes
+    ALTER COLUMN vote_id SET DEFAULT nextval('public.gog_game_votes_vote_id_seq'::regclass);
+
+--
+-- Name: gog_game_votes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_votes
+    ADD CONSTRAINT gog_game_votes_pkey PRIMARY KEY (vote_id);
+
+--
+-- Name: gog_game_votes_game_instance_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_votes
+    ADD CONSTRAINT gog_game_votes_game_instance_id_fkey FOREIGN KEY (game_instance_id) REFERENCES public.gog_games(game_instance_id);
+
+--
+-- Name: gog_game_votes_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_votes
+    ADD CONSTRAINT gog_game_votes_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+
+--
+-- Name: gog_games; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_games (
+    game_instance_id integer NOT NULL,
+    session_id integer NOT NULL,
+    game_id integer NOT NULL,
+    game_number integer NOT NULL,
+    name character varying(255),
+    status character varying(50),
+    selected_by character varying(50),
+    extras text[],
+    after text[]
+);
+
+
+ALTER TABLE public.gog_games OWNER TO postgres;
+
+--
+-- Name: gog_games_game_instance_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.gog_games_game_instance_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.gog_games_game_instance_id_seq OWNER TO postgres;
+
+--
+-- Name: gog_games_game_instance_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.gog_games_game_instance_id_seq OWNED BY public.gog_games.game_instance_id;
+
+
+--
+-- Name: gog_games_neighed; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_games_neighed (
+    game_neighed_id integer NOT NULL,
+    session_id integer NOT NULL,
+    game_id integer NOT NULL,
+    player_id integer NOT NULL,
+    type character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.gog_games_neighed OWNER TO postgres;
+
+--
+-- Name: gog_games_neighed_game_neighed_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.gog_games_neighed_game_neighed_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.gog_games_neighed_game_neighed_id_seq OWNER TO postgres;
+
+--
+-- Name: gog_games_neighed_game_neighed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.gog_games_neighed_game_neighed_id_seq OWNED BY public.gog_games_neighed.game_neighed_id;
+
+
+--
+-- Name: gog_players; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_players (
+    session_id integer NOT NULL,
+    player_id integer NOT NULL,
+    speciality text[],
+    pg_cone integer,
+    f20g_cone integer,
+    l_cone integer,
+    c_cone integer,
+    w_cone integer,
+    v_cone integer,
+    g_point integer,
+    c_point integer,
+    special_w_point integer,
+    special_l_point integer,
+    neigh integer,
+    super_neigh integer,
+    gooc_total integer,
+    gooc_used integer
+);
+
+
+ALTER TABLE public.gog_players OWNER TO postgres;
+
+--
+-- Name: gog_possible_games; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_possible_games (
+    session_id integer,
+    game_id integer,
+    game_name character varying(255)
+);
+
+
+ALTER TABLE public.gog_possible_games OWNER TO postgres;
+
+--
+-- Name: gog_sessions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gog_sessions (
+    session_id integer NOT NULL,
+    name character varying(255),
+    status character varying(50),
+    start_time timestamp with time zone,
+    finish_time timestamp with time zone,
+    points_system character varying(100),
+    speciality_count integer,
+    intruded integer[],
+    abandoned integer[],
+    extra text[]
+);
+
+
+ALTER TABLE public.gog_sessions OWNER TO postgres;
+
+--
+-- Name: gog_sessions_session_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.gog_sessions_session_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.gog_sessions_session_id_seq OWNER TO postgres;
+
+--
+-- Name: gog_sessions_session_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.gog_sessions_session_id_seq OWNED BY public.gog_sessions.session_id;
+
+
+--
+-- Name: players; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.players (
+    player_id integer NOT NULL,
+    name character varying(255),
+    family character varying(255),
+    colour character varying(255)
+);
+
+
+ALTER TABLE public.players OWNER TO postgres;
+
+--
+-- Name: players_player_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.players_player_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.players_player_id_seq OWNER TO postgres;
+
+--
+-- Name: players_player_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.players_player_id_seq OWNED BY public.players.player_id;
+
+
+--
+-- Name: points_system; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.points_system (
+    points_system_id integer NOT NULL,
+    num_players integer,
+    rewards text[],
+    type character varying(255)
+);
+
+
+ALTER TABLE public.points_system OWNER TO postgres;
+
+--
+-- Name: points_system_points_system_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.points_system_points_system_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.points_system_points_system_id_seq OWNER TO postgres;
+
+--
+-- Name: points_system_points_system_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.points_system_points_system_id_seq OWNED BY public.points_system.points_system_id;
+
+
+--
+-- Name: games_info game_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.games_info ALTER COLUMN game_id SET DEFAULT nextval('public.games_info_game_id_seq'::regclass);
+
+
+--
+-- Name: gog_games game_instance_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games ALTER COLUMN game_instance_id SET DEFAULT nextval('public.gog_games_game_instance_id_seq'::regclass);
+
+
+--
+-- Name: gog_games_neighed game_neighed_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games_neighed ALTER COLUMN game_neighed_id SET DEFAULT nextval('public.gog_games_neighed_game_neighed_id_seq'::regclass);
+
+
+--
+-- Name: gog_sessions session_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_sessions ALTER COLUMN session_id SET DEFAULT nextval('public.gog_sessions_session_id_seq'::regclass);
+
+
+--
+-- Name: players player_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.players ALTER COLUMN player_id SET DEFAULT nextval('public.players_player_id_seq'::regclass);
+
+
+--
+-- Name: points_system points_system_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.points_system ALTER COLUMN points_system_id SET DEFAULT nextval('public.points_system_points_system_id_seq'::regclass);
+
+
+--
+-- Data for Name: games_info; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.games_info (game_id, name, tag, type, results_type, winner_criteria, header, player_min, player_max, starting) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_final_results; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_final_results (session_id, player_id, place, points, cones) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_game_players; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_game_players (game_instance_id, player_id, speciality, place, reward, points, stars, coins) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_games; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_games (game_instance_id, session_id, game_id, game_number, name, status, extras, after) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_games_neighed; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_games_neighed (game_neighed_id, session_id, game_id, player_id, type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_players; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_players (session_id, player_id, speciality, pg_cone, f20g_cone, l_cone, c_cone, w_cone, v_cone, g_point, c_point, special_w_point, special_l_point, neigh, super_neigh, gooc_total, gooc_used) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_possible_games; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_possible_games (session_id, game_name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gog_sessions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.gog_sessions (session_id, name, status, start_time, finish_time, points_system, speciality_count, intruded, abandoned, extra) FROM stdin;
+\.
+
+
+--
+-- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.players (player_id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: points_system; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.points_system (points_system_id, num_players, rewards, type) FROM stdin;
+\.
+
+
+--
+-- Name: games_info_game_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.games_info_game_id_seq', 1, false);
+
+
+--
+-- Name: gog_games_game_instance_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.gog_games_game_instance_id_seq', 1, false);
+
+
+--
+-- Name: gog_games_neighed_game_neighed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.gog_games_neighed_game_neighed_id_seq', 1, false);
+
+
+--
+-- Name: gog_sessions_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.gog_sessions_session_id_seq', 1, false);
+
+
+--
+-- Name: players_player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.players_player_id_seq', 1, false);
+
+
+--
+-- Name: points_system_points_system_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.points_system_points_system_id_seq', 1, false);
+
+
+--
+-- Name: games_info games_info_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.games_info
+    ADD CONSTRAINT games_info_pkey PRIMARY KEY (game_id);
+
+
+--
+-- Name: gog_final_results gog_final_results_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_final_results
+    ADD CONSTRAINT gog_final_results_pkey PRIMARY KEY (session_id, player_id);
+
+
+--
+-- Name: gog_game_players gog_game_players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_players
+    ADD CONSTRAINT gog_game_players_pkey PRIMARY KEY (game_instance_id, player_id);
+
+
+--
+-- Name: gog_games_neighed gog_games_neighed_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games_neighed
+    ADD CONSTRAINT gog_games_neighed_pkey PRIMARY KEY (game_neighed_id);
+
+
+--
+-- Name: gog_games gog_games_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games
+    ADD CONSTRAINT gog_games_pkey PRIMARY KEY (game_instance_id);
+
+
+--
+-- Name: gog_players gog_players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_players
+    ADD CONSTRAINT gog_players_pkey PRIMARY KEY (session_id, player_id);
+
+
+--
+-- Name: gog_sessions gog_sessions_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_sessions
+    ADD CONSTRAINT gog_sessions_name_key UNIQUE (name);
+
+
+--
+-- Name: gog_sessions gog_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_sessions
+    ADD CONSTRAINT gog_sessions_pkey PRIMARY KEY (session_id);
+
+
+--
+-- Name: players players_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.players
+    ADD CONSTRAINT players_name_key UNIQUE (name, family);
+
+
+--
+-- Name: players players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.players
+    ADD CONSTRAINT players_pkey PRIMARY KEY (player_id);
+
+
+--
+-- Name: points_system points_system_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.points_system
+    ADD CONSTRAINT points_system_pkey PRIMARY KEY (points_system_id);
+
+
+--
+-- Name: gog_final_results gog_final_results_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_final_results
+    ADD CONSTRAINT gog_final_results_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+
+
+--
+-- Name: gog_final_results gog_final_results_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_final_results
+    ADD CONSTRAINT gog_final_results_session_id_fkey FOREIGN KEY (session_id) REFERENCES public.gog_sessions(session_id);
+
+
+--
+-- Name: gog_game_players gog_game_players_game_instance_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_players
+    ADD CONSTRAINT gog_game_players_game_instance_id_fkey FOREIGN KEY (game_instance_id) REFERENCES public.gog_games(game_instance_id);
+
+
+--
+-- Name: gog_game_players gog_game_players_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_game_players
+    ADD CONSTRAINT gog_game_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+
+
+--
+-- Name: gog_games_neighed gog_games_neighed_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games_neighed
+    ADD CONSTRAINT gog_games_neighed_game_id_fkey FOREIGN KEY (game_id) REFERENCES public.games_info(game_id);
+
+
+--
+-- Name: gog_games_neighed gog_games_neighed_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games_neighed
+    ADD CONSTRAINT gog_games_neighed_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+
+
+--
+-- Name: gog_games_neighed gog_games_neighed_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games_neighed
+    ADD CONSTRAINT gog_games_neighed_session_id_fkey FOREIGN KEY (session_id) REFERENCES public.gog_sessions(session_id);
+
+
+--
+-- Name: gog_games gog_games_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_games
+    ADD CONSTRAINT gog_games_session_id_fkey FOREIGN KEY (session_id) REFERENCES public.gog_sessions(session_id);
+
+
+--
+-- Name: gog_players gog_players_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_players
+    ADD CONSTRAINT gog_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
+
+
+--
+-- Name: gog_players gog_players_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_players
+    ADD CONSTRAINT gog_players_session_id_fkey FOREIGN KEY (session_id) REFERENCES public.gog_sessions(session_id);
+    
+
+--
+-- Name: gog_possible_games gog_possible_games_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gog_possible_games
+    ADD CONSTRAINT gog_possible_games_session_id_fkey FOREIGN KEY (session_id) REFERENCES public.gog_sessions(session_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

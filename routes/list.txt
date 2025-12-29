@@ -1,0 +1,18 @@
+GET /api/games - getAllGames() - gets all of the info about every game ordered by name
+GET /api/games/:id - getGameById(id) - gets the info about a particular game
+
+GET /api/players - getAllPlayers() - gets all of the info about every player ordered by name
+GET /api/players/:id - getPlayerById(id) - gets the info about a particular player
+
+GET /api/points - getAllPointsSystem() - gets every kind of points system for every number of player
+
+GET /api/sessions - getAllSessions() - gets all of the game of games that have been created
+GET /api/sessions/incomplete - getIncompleteSessions() - gets all of the games that are labeled incomplete (for continue game later)
+GET /api/sessions/:id - getSessionById(id) - gets all of the information related to the session by the id
+POST /api/sessions - createSession(data) - creates the session and generates all elements for the game
+POST /api/sessions/:id/save - saveSession(sessionId, sessionData) - updates the session and player info, and adds latest game into database
+POST /api/sessions/:id/complete - completeSession(id) - sets the status to complete and end time to now
+
+### ADD STATS STUFF BELOW ###
+
+WITH all_players_in_game AS ( SELECT DISTINCT ggp.player_id, p.name FROM gog_game_players ggp JOIN gog_games gg USING (game_instance_id) JOIN players p ON ggp.player_id = p.player_id WHERE gg.game_id = 1 UNION SELECT DISTINCT ggn.player_id, p.name FROM gog_games_neighed ggn JOIN players p ON ggn.player_id = p.player_id WHERE ggn.game_id = 1 UNION SELECT DISTINCT gp.player_id, p.name FROM gog_players gp JOIN players p ON gp.player_id = p.player_id JOIN games_info gi ON gi.name = ANY(gp.speciality) WHERE gi.game_id = 1 ), game_stats AS ( SELECT ggp.player_id, COUNT(*) AS played, COUNT(*) FILTER (WHERE ggp.place = 1) AS won, COUNT(*) FILTER (WHERE ggp.place != 1) AS lost, ROUND(100.0 * COUNT(*) FILTER (WHERE ggp.place = 1) / NULLIF(COUNT(*), 0), 2) AS win_perc, COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place = 1) AS speciality_won, COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place != 1) AS speciality_lost FROM gog_game_players ggp JOIN gog_games gg USING (game_instance_id) WHERE gg.game_id = 1 GROUP BY ggp.player_id ), neigh_stats AS ( SELECT ggn.player_id, COUNT(*) FILTER (WHERE ggn.type = 'Neigh') AS neighed, COUNT(*) FILTER (WHERE ggn.type = 'Super Neigh') AS super_neighed FROM gog_games_neighed ggn WHERE ggn.game_id = 1 GROUP BY ggn.player_id ), speciality_count AS ( SELECT gp.player_id, COUNT(*) AS speciality_chosen FROM gog_players gp JOIN games_info gi ON gi.name = ANY(gp.speciality) WHERE gi.game_id = 1 GROUP BY gp.player_id ) SELECT ap.player_id, ap.name, COALESCE(gs.played, 0) AS played, COALESCE(gs.won, 0) AS won, COALESCE(gs.lost, 0) AS lost, COALESCE(gs.win_perc, 0) AS win_perc, COALESCE(ns.neighed, 0) AS neighed, COALESCE(ns.super_neighed, 0) AS super_neighed, COALESCE(sc.speciality_chosen, 0) AS speciality_chosen, COALESCE(gs.speciality_won, 0) AS speciality_won, COALESCE(gs.speciality_lost, 0) AS speciality_lost FROM all_players_in_game ap LEFT JOIN game_stats gs ON ap.player_id = gs.player_id LEFT JOIN neigh_stats ns ON ap.player_id = ns.player_id LEFT JOIN speciality_count sc ON ap.player_id = sc.player_id ORDER BY ap.name;
