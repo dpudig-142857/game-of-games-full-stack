@@ -17,7 +17,9 @@ import {
     centerOrStart
 } from './utils.js';
 
-let route = `${process.env.ROUTE}/api/sessions`;
+import { BASE_ROUTE } from './config.js';
+
+let route = `${BASE_ROUTE}/api/sessions`;
 
 let gog_version = 'private' // public vs private
 

@@ -23,7 +23,9 @@ import {
     split
 } from '../js/utils.js';
 
-let route = `${process.env.ROUTE}/api`;
+import { BASE_ROUTE } from './config.js';
+
+let route = `${BASE_ROUTE}/api`;
 
 let gog_version = 'public'
 //gog_version = 'private'

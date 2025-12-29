@@ -21,6 +21,8 @@ import {
     hexToRgba
 } from '../js/utils.js';
 
+import { BASE_ROUTE } from './config.js';
+
 let gog_version = 'private' // public vs private
 let next = -1;
 
@@ -84,7 +86,7 @@ async function initialise() {
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
 
-    const res = await fetch(`${process.env.ROUTE}/api/sessions/home`);
+    const res = await fetch(`${BASE_ROUTE}/api/sessions/home`);
     next = await res.json();
 
     user_data = await loadUserOption();

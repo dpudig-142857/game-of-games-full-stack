@@ -3,7 +3,8 @@ import {
     styleBox
 } from './utils.js';
 
-let route = `${process.env.ROUTE}/api/auth`;
+import { BASE_ROUTE } from './config.js';
+let route = `${BASE_ROUTE}/api/auth`;
 
 const default_pfp = 'assets/default_pfp.svg';
 
