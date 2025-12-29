@@ -28,8 +28,7 @@ import {
     hexToRgba
 } from './utils.js';
 
-import { BASE_ROUTE } from './config.js';
-let route = `${BASE_ROUTE}/api/sessions`;
+let route = `${process.env.ROUTE}/api/sessions`;
 
 let gog_version = 'public'
 //gog_version = 'private'

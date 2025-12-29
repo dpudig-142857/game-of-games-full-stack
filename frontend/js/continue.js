@@ -17,7 +17,7 @@ import {
     centerOrStart
 } from './utils.js';
 
-import { BASE_ROUTE } from './config.js';
+let route = `${process.env.ROUTE}/api/sessions`;
 
 let gog_version = 'private' // public vs private
 
@@ -52,7 +52,7 @@ function statusColour(s) {
 }
 
 function theRoute(id, other) {
-    const start = `${BASE_ROUTE}/api/sessions`;
+    const start = `${session_route}/api/sessions`;
     if (id && other) return `${start}/${id}/continue/${other}`;
     if (id) return `${start}/${id}/continue`;
     return `${start}/continue`;
@@ -225,7 +225,7 @@ async function completeGame(log) {
     });
 
     try {
-        const response = await fetch(`${BASE_ROUTE}/api/sessions/${id}/complete`, {
+        const response = await fetch(`${route}/api/sessions/${id}/complete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ session, results })

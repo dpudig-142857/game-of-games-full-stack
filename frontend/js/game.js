@@ -23,7 +23,7 @@ import {
     split
 } from '../js/utils.js';
 
-import { BASE_ROUTE } from './config.js';
+let route = `${process.env.ROUTE}/api`;
 
 let gog_version = 'public'
 //gog_version = 'private'
@@ -1888,7 +1888,7 @@ async function intrude() {
         openVote();
     }
 
-    await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/intrude`, {
+    await fetch(`${route}/sessions/${sessionId}/intrude`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2179,7 +2179,7 @@ async function abandon() {
         openVote();
     }
 
-    await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/abandon`, {
+    await fetch(`${route}/sessions/${sessionId}/abandon`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2291,7 +2291,7 @@ async function breakCone() {
         const id = p.player_id;
         return breakConeOptions.find(b => b.player_id == id)?.selected;
     });
-    await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/break_cone`, {
+    await fetch(`${route}/sessions/${sessionId}/break_cone`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ game, players })
@@ -2414,7 +2414,7 @@ async function victoryCone() {
         const id = p.player_id;
         return victoryConeOptions.find(b => b.player_id == id)?.selected;
     });
-    await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/victory_cone`, {
+    await fetch(`${route}/sessions/${sessionId}/victory_cone`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ game, players })
@@ -2793,7 +2793,7 @@ function complete420Game(win) {
 
 async function save420GamePhoto() {
     if (capturedImage) {
-        await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/upload`, {
+        await fetch(`${route}/sessions/${sessionId}/upload`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -5769,7 +5769,7 @@ async function generateTeamResults() {
             });
         });
     } else if (currTeams.length > 2 && currTeams.length <= 5) {
-        const res = await fetch(`${BASE_ROUTE}/api/tournament/${currTournamentId}/results`);
+        const res = await fetch(`${route}/tournament/${currTournamentId}/results`);
         const finalResults = await res.json();
 
         const filtered = finalResults
@@ -6218,7 +6218,7 @@ async function generateTeamPointsResults() {
         });
     /*} else if (currPointTeams.length > 2 && currPointTeams.length <= 5) {
         
-        const res = await fetch(`${BASE_ROUTE}/api/tournament/${currTournamentId}/results`);
+        const res = await fetch(`${route}/tournament/${currTournamentId}/results`);
         const finalResults = await res.json();
 
         const filtered = finalResults
@@ -6307,7 +6307,7 @@ async function createTournament(curr) {
         curr.forEach(p => players.push(format(p)));
     }
     
-    const res = await fetch(`${BASE_ROUTE}/api/tournament/create`, {
+    const res = await fetch(`${route}/tournament/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -6360,7 +6360,7 @@ async function createTournament(curr) {
 }
 
 async function loadBracket(id) {
-    const res = await fetch(`${BASE_ROUTE}/api/tournament/${id}`);
+    const res = await fetch(`${route}/tournament/${id}`);
     const data = await res.json();
 
     window.bracketsViewer.render({
@@ -6386,7 +6386,7 @@ async function attachMatchClickHandlers(tournamentId) {
         const matchId = matchEl.getAttribute('data-match-id');
 
         matchEl.addEventListener('click', async () => {
-            const res = await fetch(`${BASE_ROUTE}/api/tournament/${tournamentId}`);
+            const res = await fetch(`${route}/tournament/${tournamentId}`);
             const data = await res.json();
 
             const match = data.bracket.match.find(m => m.id == matchId);
@@ -6546,7 +6546,7 @@ async function submitMatchResult(tournamentId, matchId, winnerId, scores) {
     let container = document.getElementById('left_tournament');
     if (container) container.innerHTML = '';
 
-    await fetch(`${BASE_ROUTE}/api/tournament/${tournamentId}/update`, {
+    await fetch(`${route}/tournament/${tournamentId}/update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ matchId, winnerId, scores })
@@ -6558,7 +6558,7 @@ async function submitMatchResult(tournamentId, matchId, winnerId, scores) {
 }
 
 async function checkIfFinalMatch(tournamentId) {
-    const res = await fetch(`${BASE_ROUTE}/api/tournament/${tournamentId}`);
+    const res = await fetch(`${route}/tournament/${tournamentId}`);
     const data = await res.json();
     const matches = data.bracket.match;
     const sortedMatches = [...matches].sort((a, b) => a.id - b.id);
@@ -6590,7 +6590,7 @@ async function checkIfFinalMatch(tournamentId) {
 }
 
 async function generateTournamentResults() {
-    const res = await fetch(`${BASE_ROUTE}/api/tournament/${currTournamentId}/results`);
+    const res = await fetch(`${route}/tournament/${currTournamentId}/results`);
     const finalResults = await res.json();
 
     const filtered = finalResults
@@ -7461,10 +7461,10 @@ async function loadSessionData(sessionId) {
         timeDisplay();
         //startTime = new Date();
         const [ gamesRes, playersRes, pointsRes, sessionRes ] = await Promise.all([
-            fetch(`${BASE_ROUTE}/api/games`),
-            fetch(`${BASE_ROUTE}/api/players`),
-            fetch(`${BASE_ROUTE}/api/points`),
-            fetch(`${BASE_ROUTE}/api/sessions/${sessionId}`)
+            fetch(`${route}/games`),
+            fetch(`${route}/players`),
+            fetch(`${route}/points`),
+            fetch(`${route}/sessions/${sessionId}`)
         ]);
         
         if (!gamesRes.ok) console.error('Games error');
@@ -7692,7 +7692,7 @@ function startGoG(newGame) {
 async function saveGameState(incomplete) {
     try {
         const curr = theGame.games.at(-1);
-        await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/save`, {
+        await fetch(`${route}/sessions/${sessionId}/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -7763,7 +7763,7 @@ async function finishGoG() {
     });
 
     try {
-        const response = await fetch(`${BASE_ROUTE}/api/sessions/${sessionId}/complete`, {
+        const response = await fetch(`${route}/sessions/${sessionId}/complete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

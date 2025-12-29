@@ -19,7 +19,7 @@ import authRoutes from './routes/auth.js';
 
 dotenv.config();
 
-const pool = new pg.Pool({
+export const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -100,7 +100,4 @@ app.get('/debug/raw-cookie', (req, res) => {
   res.json({ ok: true });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-export default pool;
+export default app;

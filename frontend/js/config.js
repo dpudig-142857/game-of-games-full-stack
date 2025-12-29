@@ -1,1 +1,0 @@
-export const BASE_ROUTE = 'https://api.thegameofgames.win';

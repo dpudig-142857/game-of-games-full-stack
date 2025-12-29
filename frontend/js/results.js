@@ -22,8 +22,6 @@ import {
     format
 } from '../js/utils.js';
 
-import { BASE_ROUTE } from './config.js';
-
 let gog_version = 'private' // public vs private
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -580,7 +578,7 @@ function fillGameInfo(game, info) {
         let filename = game.extras[0];
 
         const img = document.createElement('img');
-        img.src = `${BASE_ROUTE}/photos/${filename}`;
+        img.src = `${process.env.ROUTE}/photos/${filename}`;
         img.alt = '4:20 Game Photo';
         img.style.maxWidth = '100%';
         img.style.borderRadius = '1rem';
@@ -912,10 +910,10 @@ async function initialise() {
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
     
-    const gamesRes = await fetch (`${BASE_ROUTE}/api/games`);
+    const gamesRes = await fetch (`${process.env.ROUTE}/api/games`);
     gamesInfo = await gamesRes.json();
 
-    const resultsRes = await fetch (`${BASE_ROUTE}/api/sessions/${sessionId}/results`);
+    const resultsRes = await fetch (`${process.env.ROUTE}/api/sessions/${sessionId}/results`);
     const results = await resultsRes.json();
     
     const session = results.session;

@@ -14,8 +14,6 @@ import {
     header
 } from '../js/utils.js';
 
-import { BASE_ROUTE } from './config.js';
-
 let gog_version = 'private' // public vs private
 let logs = [];
 let selectedSort = 'Most Recent';
@@ -280,7 +278,7 @@ async function initialise() {
         setInterval(updateTimeDisplays, 1000);
         updateTimeDisplays();
     
-        const res = await fetch(`${BASE_ROUTE}/api/sessions/logs`);
+        const res = await fetch(`${process.env.ROUTE}/api/sessions/logs`);
         logs = await res.json();
 
         createSortandFilter();
