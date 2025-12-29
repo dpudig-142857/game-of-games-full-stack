@@ -15,10 +15,7 @@ const router = express.Router();
 router.get('/me', requireAuth(), (req, res) => {
   res.json({
     authenticated: true,
-    player_id: req.user.player_id,
-    username: req.user.username,
-    role: req.user.role,
-    avatar_seed: req.user.avatar_seed
+    user: req.user
   });
 });
 

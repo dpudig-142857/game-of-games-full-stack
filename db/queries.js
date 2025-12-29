@@ -2057,7 +2057,16 @@ export async function verifySession(sessionId) {
     if (!sessionId) return null;
 
     const result = await pool.query(`
-        SELECT a.player_id, a.username, a.role, a.avatar_seed
+        SELECT
+            a.player_id,
+            a.name,
+            a.family,
+            a.colour,
+            a.username,
+            a.role,
+            a.avatar_seed,
+            a.birthday,
+            a.version
         FROM sessions s
         JOIN accounts a USING (player_id)
         WHERE s.session_id = $1
@@ -2131,10 +2140,7 @@ export function requireAuth() {
     if (!user) {
         return res.status(200).json({
             authenticated: false,
-            player_id: null,
-            username: null,
-            role: null,
-            avatar_seed: null
+            user: null
         });
     }
 
