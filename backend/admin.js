@@ -1,7 +1,7 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-import pool from '../server.js';
+import { pool } from './db/pool.js';
 dotenv.config();
 
 const run = async () => {

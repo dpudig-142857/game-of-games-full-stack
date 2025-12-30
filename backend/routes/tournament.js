@@ -1,6 +1,6 @@
 import express from 'express';
 import pkg from 'brackets-manager';
-import { pool } from './db/pool.js';
+import { pool } from '../db/pool.js';
 
 const { BracketsManager, InMemoryDatabase } = pkg;
 const router = express.Router();
