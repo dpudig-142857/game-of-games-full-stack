@@ -1,6 +1,6 @@
 import express from 'express';
-import { BracketsManager } from 'brackets-manager';
-import { InMemoryDatabase } from 'brackets-manager/dist/storage';
+import { BracketsManager, InMemoryDatabase } from 'brackets-manager';
+import { pool } from '../server.js';
 
 const router = express.Router();
 
