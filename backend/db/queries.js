@@ -201,10 +201,10 @@ export async function getLogs() {
 
     // Get players (names and IDs)
     const playersRes = await pool.query(`
-        SELECT session_id, players.player_id, players.name, players.family
+        SELECT session_id, accounts.player_id, accounts.name, accounts.family
         FROM gog_players 
         JOIN accounts USING (player_id)
-        ORDER BY session_id DESC, players.name;
+        ORDER BY session_id DESC, accounts.name;
     `);
     const rawPlayers = playersRes.rows;
 
@@ -232,7 +232,7 @@ export async function getLogs() {
 
     // Get winners (position = 1)
     const winnersRes = await pool.query(`
-        SELECT session_id, players.name AS winner
+        SELECT session_id, accounts.name AS winner
         FROM gog_final_results 
         JOIN accounts USING (player_id)
         WHERE place = 1;
