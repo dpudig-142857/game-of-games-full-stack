@@ -58,14 +58,14 @@ app.use(session({
     }
 }));
 
-app.use('/photos', express.static(photosPath));
+//app.use('/photos', express.static(photosPath));
 app.use('/api/sessions', sessionsRoutes);
-app.use('/api/stats', statsRoutes);
-app.use('/api/players', playersRoutes);
-app.use('/api/games', gamesRoutes);
-app.use('/api/points', pointsRoutes);
-app.use('/api/tournament', tournamentRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/debug', debugRoutes);
+//app.use('/api/stats', statsRoutes);
+//app.use('/api/players', playersRoutes);
+//app.use('/api/games', gamesRoutes);
+//app.use('/api/points', pointsRoutes);
+//app.use('/api/tournament', tournamentRoutes);
+//app.use('/api/auth', authRoutes);
+//app.use('/debug', debugRoutes);
 
 export default app;
