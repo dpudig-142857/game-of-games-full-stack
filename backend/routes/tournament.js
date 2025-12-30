@@ -1,12 +1,7 @@
 import express from 'express';
 import { BracketsManager } from 'brackets-manager';
-import { JsonDatabase } from 'brackets-json-db';
-
-import { BracketsManager } from 'brackets-manager';
 import { InMemoryDatabase } from 'brackets-manager/dist/storage';
 
-let storage = new JsonDatabase();
-let manager = new BracketsManager(storage);
 const router = express.Router();
 
 function createManager(bracketData = null) {
@@ -17,26 +12,6 @@ function createManager(bracketData = null) {
     }
 
     return new BracketsManager(storage);
-}
-
-/*function resetBracketData(id) {
-    const keys = ['participant', 'stage', 'group', 'round', 'match'];
-    for (const key of keys) {
-        if (Array.isArray(storage.internal.data[key])) {
-            storage.internal.data[key] = storage.internal.data[key].filter(item => {
-                return item.tournament_id != id;
-            });
-        }
-    }
-}*/
-
-async function resetBracketData(id) {
-    try {
-        await manager.delete.tournament(id);
-        console.log(`Tournament ${id} deleted successfully.`);
-    } catch (err) {
-        console.warn(`No existing tournament with ID ${id} to delete.`, err.message);
-    }
 }
 
 function padToPowerOfTwo(players) {
@@ -55,7 +30,6 @@ function padToPowerOfTwo(players) {
 // POST /api/tournament/create
 router.post('/create', async (req, res) => {
     const { players, sessionId, game, id } = req.body;
-    await resetBracketData(id);
 
     let paddedPlayers = players[0]?.name
         ? padToPowerOfTwo(players.map(p => p.name))
