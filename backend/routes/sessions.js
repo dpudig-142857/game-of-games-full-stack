@@ -6,7 +6,15 @@ import {
 
 const router = express.Router();
 
-router.get('/', async (req, res) => res.send('root'));
+router.get('/', async (req, res) => {
+    try {
+        const sessions = await getAllSessions();
+        res.json(sessions);
+    } catch (error) {
+        console.error('Error fetching sessions:', error);
+        res.status(500).json({ error: 'Failed to fetch sessions' });
+    }
+});
 
 router.get('/home', async (req, res) => res.send('home'));
 
