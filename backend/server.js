@@ -31,7 +31,7 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://game-of-games-full-stack.vercel.app',
+    origin: 'https://thegameofgames.win',
     credentials: true
 }));
 app.set('trust proxy', 1);
