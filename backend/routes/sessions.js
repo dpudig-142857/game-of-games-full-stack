@@ -72,17 +72,6 @@ router.get('/continue', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-        const session = await getSessionById(req.params.id);
-        if (!session) return res.status(404).json({ error: 'Session not found' });
-        res.json(session);
-    } catch (error) {
-        console.error('Error fetching session by ID:', error);
-        res.status(500).json({ error: 'Failed to fetch session' });
-    }
-});
-
 router.get('/:id/creating', async (req, res) => {
     try {
         const info = await getCreatingInfo(req.params.id);
@@ -226,5 +215,16 @@ router.post('/:id/victory_cone', async (req, res) => {
         
     }
 });*/
+
+router.get('/:id', async (req, res) => {
+    try {
+        const session = await getSessionById(req.params.id);
+        if (!session) return res.status(404).json({ error: 'Session not found' });
+        res.json(session);
+    } catch (error) {
+        console.error('Error fetching session by ID:', error);
+        res.status(500).json({ error: 'Failed to fetch session' });
+    }
+});
 
 export default router;
