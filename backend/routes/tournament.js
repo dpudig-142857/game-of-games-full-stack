@@ -2,9 +2,22 @@ import express from 'express';
 import { BracketsManager } from 'brackets-manager';
 import { JsonDatabase } from 'brackets-json-db';
 
+import { BracketsManager } from 'brackets-manager';
+import { InMemoryDatabase } from 'brackets-manager/dist/storage';
+
 let storage = new JsonDatabase();
 let manager = new BracketsManager(storage);
 const router = express.Router();
+
+function createManager(bracketData = null) {
+    const storage = new InMemoryDatabase();
+
+    if (bracketData) {
+        storage.import(bracketData);
+    }
+
+    return new BracketsManager(storage);
+}
 
 /*function resetBracketData(id) {
     const keys = ['participant', 'stage', 'group', 'round', 'match'];
@@ -52,13 +65,28 @@ router.post('/create', async (req, res) => {
     console.log(paddedPlayers);
 
     try {
+        const manager = createManager();
+
         const tournament = await manager.create.stage({
             tournamentId: id,
             name: `Game of Games No. ${sessionId} - ${game}`,
             type: 'double_elimination',
             seeding: paddedPlayers,
-            settings: { grandFinal: 'double', },
+            settings: { grandFinal: 'double' },
         });
+
+        const bracketData = manager.storage.export();
+
+        await pool.query(`
+            INSERT INTO tournaments (id, game, session_id, bracket)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT (id)
+            DO UPDATE SET
+              bracket = EXCLUDED.bracket,
+              updated_at = NOW()
+        `, [
+            id, game, sessionId, bracketData
+        ]);
 
         res.json({ success: true, tournamentId: id, tournament });
     } catch (error) {
@@ -71,8 +99,15 @@ router.post('/create', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const id = Number(req.params.id);
-        const data = await manager.get.tournamentData(id);
-        res.json({ bracket: data });
+        const { rows } = await pool.query(`
+            SELECT bracket FROM tournaments WHERE id = $1
+        `, [id]);
+
+        if (!rows.length) {
+            return res.status(404).json({ error: 'Tournament not found' });
+        }
+
+        res.json({ bracket: rows[0].bracket });
     } catch (err) {
         console.error('Error retrieving tournament data:', err);
         res.status(500).json({ error: 'Failed to retrieve tournament' });
@@ -83,14 +118,18 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/results', async (req, res) => {
     try {
         const id = Number(req.params.id);
-        const data = await manager.get.tournamentData(id);
-        const stages = data.stage;
 
-        if (!stages || stages.length === 0) {
-            return res.status(404).json({ error: 'No stages found for tournament' });
+        const { rows } = await pool.query(
+            `SELECT bracket FROM tournaments WHERE id = $1`,
+            [id]
+        );
+
+        if (!rows.length) {
+            return res.status(404).json({ error: 'Tournament not found' });
         }
 
-        const stageId = stages[0].id;
+        const manager = createManager(rows[0].bracket);
+        const stageId = manager.storage.select('stage')[0].id;
         const standings = await manager.get.finalStandings(stageId);
 
         res.json(standings);
@@ -103,35 +142,47 @@ router.get('/:id/results', async (req, res) => {
 // POST /api/tournament/:id/update
 router.post('/:id/update', async (req, res) => {
     try {
-        const tournamentId = req.params.id;
+        const tournamentId = Number(req.params.id);
         const { matchId, winnerId, scores } = req.body;
-        const match = (await manager.storage.select('match')).find(m => m.id === Number(matchId));
+
+        const { rows } = await pool.query(
+            `SELECT bracket FROM tournaments WHERE id = $1`,
+            [tournamentId]
+        );
+
+        if (!rows.length) {
+            return res.status(404).json({ error: 'Tournament not found' });
+        }
+
+        const manager = createManager(rows[0].bracket);
+
+        const match = (await manager.storage.select('match'))
+            .find(m => m.id === Number(matchId));
+
         if (!match) {
-            console.error('Match not found');
             return res.status(404).json({ error: 'Match not found' });
         }
 
-        const isOpp1 = Number(winnerId) == match.opponent1.id;
+        const isOpp1 = Number(winnerId) === match.opponent1.id;
 
-        if (scores) {
-            await manager.update.match({
-                id: Number(matchId),
-                opponent1: {
-                    result: isOpp1 ? 'win' : 'loss',
-                    score: scores[match.opponent1.id]
-                },
-                opponent2: {
-                    result: isOpp1 ? 'loss' : 'win',
-                    score: scores[match.opponent2.id]
-                },
-            });
-        } else {
-            await manager.update.match({
-                id: Number(matchId),
-                opponent1: { result: isOpp1 ? 'win' : 'loss', },
-                opponent2: { result: isOpp1 ? 'loss' : 'win', },
-            });
-        }
+        await manager.update.match({
+            id: Number(matchId),
+            opponent1: {
+                result: isOpp1 ? 'win' : 'loss',
+                score: scores?.[match.opponent1.id],
+            },
+            opponent2: {
+                result: isOpp1 ? 'loss' : 'win',
+                score: scores?.[match.opponent2.id],
+            },
+        });
+
+        const updatedBracket = manager.storage.export();
+
+        await pool.query(
+            `UPDATE tournaments SET bracket = $1, updated_at = NOW() WHERE id = $2`,
+            [updatedBracket, tournamentId]
+        );
 
         res.json({ success: true });
     } catch (err) {
