@@ -92,14 +92,6 @@ router.get('/:id/results', async (req, res) => {
     }
 });
 
-/*router.put('/:id/players', async (req, res) => {
-    try {
-
-    } catch (error) {
-        console.error('Error putting players for ')
-    }
-});*/
-
 router.post('/', async (req, res) => {
     try {
         const sessionId = await createSession(req.body);
@@ -209,12 +201,6 @@ router.post('/:id/victory_cone', async (req, res) => {
         res.status(500).json({ error: 'Failed to do victory cone' });
     }
 });
-
-/*router.put('/:id', async (req, res) => {
-    try {
-        
-    }
-});*/
 
 router.get('/:id', async (req, res) => {
     try {
