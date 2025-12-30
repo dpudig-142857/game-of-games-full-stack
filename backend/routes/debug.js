@@ -38,4 +38,4 @@ router.get('/raw-cookie', (req, res) => {
   res.json({ ok: true });
 });
 
-export default router;
+export { router };

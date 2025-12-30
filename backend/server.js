@@ -9,14 +9,14 @@ import pgSession from 'connect-pg-simple';
 
 import cookieParser from "cookie-parser";
 
-import sessionsRoutes from './routes/sessions.js';
-import statsRoutes from './routes/stats.js';
-import playersRoutes from './routes/players.js';
-import gamesRoutes from './routes/games.js';
-import pointsRoutes from './routes/points.js';
-import tournamentRoutes from './routes/tournament.js';
-import authRoutes from './routes/auth.js';
-import debugRoutes from './routes/debug.js';
+import { router as sessionsRoutes } from './routes/sessions.js';
+import { router as statsRoutes } from './routes/stats.js';
+import { router as playersRoutes } from './routes/players.js';
+import { router as gamesRoutes } from './routes/games.js';
+import { router as pointsRoutes } from './routes/points.js';
+import { router as tournamentRoutes } from './routes/tournament.js';
+import { router as authRoutes } from './routes/auth.js';
+import { router as debugRoutes } from './routes/debug.js';
 
 dotenv.config();
 

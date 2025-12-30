@@ -52,4 +52,4 @@ router.post('/:id/victory_cone', async (req, res) => res.send('post id victory_c
 
 router.get('/:id', async (req, res) => res.send('id'));
 
-export default router;
+export { router };
