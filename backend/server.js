@@ -22,13 +22,6 @@ import { pool } from './db/pool.js';
 
 dotenv.config();
 
-/*export const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  }
-});*/
-
 const PgSession = pgSession(session);
 
 const photosPath = path.join(process.cwd(), 'photos');
@@ -38,7 +31,7 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://game-of-games-full-stack.vercel.app/',
+    origin: 'https://game-of-games-full-stack.vercel.app',
     credentials: true
 }));
 app.set('trust proxy', 1);
