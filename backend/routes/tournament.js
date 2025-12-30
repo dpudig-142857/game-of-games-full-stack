@@ -1,7 +1,8 @@
 import express from 'express';
-import { BracketsManager, InMemoryDatabase } from 'brackets-manager';
+import pkg from 'brackets-manager';
 import { pool } from '../server.js';
 
+const { BracketsManager, InMemoryDatabase } = pkg;
 const router = express.Router();
 
 function createManager(bracketData = null) {
