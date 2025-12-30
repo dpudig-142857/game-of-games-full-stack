@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 
-import pg from 'pg';
+//import pg from 'pg';
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 
@@ -18,14 +18,16 @@ import { router as tournamentRoutes } from './routes/tournament.js';
 import { router as authRoutes } from './routes/auth.js';
 import { router as debugRoutes } from './routes/debug.js';
 
+import { pool } from './db/pool.js';
+
 dotenv.config();
 
-export const pool = new pg.Pool({
+/*export const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   }
-});
+});*/
 
 const PgSession = pgSession(session);
 
