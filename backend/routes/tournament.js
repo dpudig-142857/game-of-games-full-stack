@@ -70,25 +70,6 @@ router.post('/create', async (req, res) => {
     }
 });
 
-// GET /api/tournament/:id
-router.get('/:id', async (req, res) => {
-    try {
-        const id = Number(req.params.id);
-        const { rows } = await pool.query(`
-            SELECT bracket FROM tournaments WHERE id = $1
-        `, [id]);
-
-        if (!rows.length) {
-            return res.status(404).json({ error: 'Tournament not found' });
-        }
-
-        res.json({ bracket: rows[0].bracket });
-    } catch (err) {
-        console.error('Error retrieving tournament data:', err);
-        res.status(500).json({ error: 'Failed to retrieve tournament' });
-    }
-});
-
 // GET /api/tournament/:id/results
 router.get('/:id/results', async (req, res) => {
     try {
@@ -166,25 +147,23 @@ router.post('/:id/update', async (req, res) => {
     }
 });
 
-/*router.post('/update-scores', async (req, res) => {
-    const { matchId, scores } = req.body;
-
+// GET /api/tournament/:id
+router.get('/:id', async (req, res) => {
     try {
-        const match = await manager.find.match(Number(matchId));
-        const opp1 = match.opponent1?.id;
-        const opp2 = match.opponent2?.id;
+        const id = Number(req.params.id);
+        const { rows } = await pool.query(`
+            SELECT bracket FROM tournaments WHERE id = $1
+        `, [id]);
 
-        await manager.update.match({
-            id: Number(matchId),
-            opponent1: { score: scores[opp1] || 0 },
-            opponent2: { score: scores[opp2] || 0 }
-        });
+        if (!rows.length) {
+            return res.status(404).json({ error: 'Tournament not found' });
+        }
 
-        res.json({ success: true });
+        res.json({ bracket: rows[0].bracket });
     } catch (err) {
-        console.error('Error updating scores:', err);
-        res.status(500).json({ error: 'Failed to update scores' });
+        console.error('Error retrieving tournament data:', err);
+        res.status(500).json({ error: 'Failed to retrieve tournament' });
     }
-});*/
+});
 
 export default router;
