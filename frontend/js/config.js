@@ -1,1 +1,1 @@
-export const BASE_ROUTE = 'https://game-of-games-backend.vercel.app';
+export const BASE_ROUTE = 'https://api.thegameofgames.win';
