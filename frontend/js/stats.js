@@ -65,6 +65,7 @@ let curr_colour = {
     text: '#000000'
 }
 
+let headerTitle = document.getElementById('title');
 const userModal = document.getElementById('user-profile-modal');
 const userBox = document.getElementById('user-profile-box');
 
