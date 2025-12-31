@@ -28,6 +28,7 @@ import {
 import { BASE_ROUTE } from './config.js';
 
 let route = `${BASE_ROUTE}/api/sessions`;
+let user_data = null;
 
 let gog_version = 'private' // public vs private
 
@@ -35,6 +36,7 @@ let sessions = [];
 let logs = [];
 let curr_colour = { hex: '', rgba: '', text: '' };
 
+let headerTitle = document.getElementById('title');
 let logsDiv = document.getElementById('logs');
 let modal = document.getElementById('gameModal');
 let gameModal = document.getElementById('gameModal-box');
@@ -62,10 +64,9 @@ function statusColour(s) {
 }
 
 function theRoute(id, other) {
-    const start = `${session_route}/api/sessions`;
-    if (id && other) return `${start}/${id}/continue/${other}`;
-    if (id) return `${start}/${id}/continue`;
-    return `${start}/continue`;
+    if (id && other) return `${route}/${id}/continue/${other}`;
+    if (id) return `${route}/${id}/continue`;
+    return `${route}/continue`;
 }
 
 async function activateSession(id) {
@@ -235,7 +236,7 @@ async function completeGame(log) {
     });
 
     try {
-        const response = await fetch(`${route}/api/sessions/${id}/complete`, {
+        const response = await fetch(`${route}/${id}/complete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ session, results })
@@ -386,6 +387,24 @@ async function initialise() {
         logoBox();
         setInterval(updateTimeDisplays, 1000);
         updateTimeDisplays();
+        loadMenuBurger();
+
+        user_data = await loadUserOption();
+        const pfp = document.getElementById('profile-pic');
+        pfp.addEventListener('click', () => openUserModal(
+            userModal, userBox, curr_colour, setupUserModal
+        ));
+    
+        const close = document.getElementById('user-profile-close');
+        close.addEventListener('click', () => closeUserModal(userModal, userBox));
+
+        console.log(user_data);
+        headerTitle.innerHTML = '';
+        if (!user_data.authenticated || user_data.user.role != 'admin') {
+            headerTitle.appendChild(header('h1', `Access Denied`));
+            return;
+        }
+        headerTitle.appendChild(header('h1', `Access Granted`));
     
         const res = await fetch(theRoute(null, ' '));
         sessions = await res.json();
