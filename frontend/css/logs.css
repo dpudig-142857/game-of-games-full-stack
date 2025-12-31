@@ -61,29 +61,12 @@ header {
 }
 
 .header-right {
+    position: relative;
     display: flex;
-    justify-content: space-around;
-    width: 70px;
+    justify-content: center;
+    width: 2.5rem;
     height: 100%;
     text-align: center;
-}
-
-.back-button {
-    font-size: 1.2em;
-    background: none;
-    border: none;
-    color: #33eaff;
-    text-shadow: #0ff 0.1rem 0.1rem 0.5rem;
-    cursor: pointer;
-}
-
-.back-button:hover {
-    text-decoration: underline;
-    transform: scale(1.1);
-}
-
-.back-button:active {
-    transform: scale(0.9);
 }
 
 /* Main Content Layout */

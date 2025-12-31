@@ -9,6 +9,14 @@
 // #region
 
 import {
+    loadMenuBurger,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
+    loadUserOption
+} from './user.js';
+
+import {
     logoBox,
     updateTimeDisplays,
     header
@@ -16,6 +24,8 @@ import {
 
 import { BASE_ROUTE } from './config.js';
 
+let user_data = null;
+let headerTitle = document.getElementById('title');
 let gog_version = 'private' // public vs private
 let logs = [];
 let selectedSort = 'Most Recent';
@@ -24,6 +34,15 @@ let searchTerm = '';
 
 let filtersDiv = document.getElementById('filters');
 let logsDiv = document.getElementById('logs');
+
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const userModal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
@@ -279,10 +298,31 @@ async function initialise() {
         logoBox();
         setInterval(updateTimeDisplays, 1000);
         updateTimeDisplays();
+        loadMenuBurger();
+        
+        user_data = await loadUserOption();
+        const pfp = document.getElementById('profile-pic');
+        pfp.addEventListener('click', () => openUserModal(
+            userModal, userBox, curr_colour, setupUserModal
+        ));
     
+        const close = document.getElementById('user-profile-close');
+        close.addEventListener('click', () => closeUserModal(userModal, userBox));
+
+        console.log(user_data);
+        headerTitle.innerHTML = '';
+        if (!user_data.authenticated) {
+            headerTitle.appendChild(header('h1', `Access Denied`));
+            return;
+        }
+        headerTitle.appendChild(header('h1', `Access Granted`));
+        
         const res = await fetch(`${BASE_ROUTE}/api/sessions/logs`);
         logs = await res.json();
 
+        headerTitle.innerHTML = '';
+        headerTitle.appendChild(header('h1', `Game of Games Logs`));
+        
         createSortandFilter();
         createLogs('Most Recent');
         //logs.forEach(log => createBox(log));
