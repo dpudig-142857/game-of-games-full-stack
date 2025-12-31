@@ -9,6 +9,14 @@
 // #region
 
 import {
+    loadMenuBurger,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
+    loadUserOption
+} from './user.js';
+
+import {
     logoBox,
     updateTimeDisplays,
     hexToRgba,
@@ -25,6 +33,7 @@ import {
 
 import { BASE_ROUTE } from './config.js';
 
+let user_data = null;
 let gog_version = 'private' // public vs private
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -61,6 +70,15 @@ let gold = 'linear-gradient(to right, rgb(191, 149, 63), rgb(252, 246, 186), rgb
 let silver = 'linear-gradient(45deg, rgb(153, 153, 153) 5%, rgb(255, 255, 255) 10%, rgb(204, 204, 204) 30%, rgb(221, 221, 221) 50%, rgb(204, 204, 204) 70%, rgb(255, 255, 255) 80%, rgb(153, 153, 153) 95%)';
 let bronze = 'linear-gradient(to right, rgb(205, 127, 50), rgb(229, 180, 126), rgb(168, 109, 40), rgb(217, 160, 103), rgb(139, 78, 19))';
 let blue = 'linear-gradient(45deg, rgb(180, 216, 255) 5%, rgb(224, 244, 255) 15%, rgb(160, 198, 230) 35%, rgb(204, 232, 255) 50%, rgb(160, 198, 230) 70%, rgb(224, 244, 255) 85%, rgb(180, 216, 255) 95%)';
+
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const userModal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
@@ -173,14 +191,14 @@ function completedSession(session, players, games, games_played, results) {
 // #region
 
 let tabTitle = document.getElementById('tab-title');
-let titleDiv = document.getElementById('title');
+let headerTitle = document.getElementById('title');
 let extraDiv = document.getElementById('extra');
 let dateTimeDiv = document.getElementById('date-time');
 let playersDiv = document.getElementById('players-box');
 let gamesDiv = document.getElementById('games-box');
 
 function clearResults() {
-    titleDiv.innerHTML = '';
+    headerTitle.innerHTML = '';
     extraDiv.innerHTML = '';
     dateTimeDiv.innerHTML = '';
     playersDiv.innerHTML = '';
@@ -282,7 +300,7 @@ function generateResults() {
 
 function showTitles() {
     tabTitle.innerHTML = `Results - GoG ${sessionId}`;
-    titleDiv.appendChild(header('h1', `Game of Games No. ${sessionId}`));
+    headerTitle.appendChild(header('h1', `Game of Games No. ${sessionId}`));
 
     extra.forEach(e => extraDiv.appendChild(header('h2', e)));
 
@@ -908,12 +926,33 @@ async function initialise() {
     logoBox();
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
+    loadMenuBurger();
+    
+    user_data = await loadUserOption();
+    const pfp = document.getElementById('profile-pic');
+    pfp.addEventListener('click', () => openUserModal(
+        userModal, userBox, curr_colour, setupUserModal
+    ));
+
+    const close = document.getElementById('user-profile-close');
+    close.addEventListener('click', () => closeUserModal(userModal, userBox));
+
+    console.log(user_data);
+    headerTitle.innerHTML = '';
+    if (!user_data.authenticated) {
+        headerTitle.appendChild(header('h1', `Access Denied`));
+        return;
+    }
+    headerTitle.appendChild(header('h1', `Access Granted`));
     
     const gamesRes = await fetch (`${BASE_ROUTE}/api/games`);
     gamesInfo = await gamesRes.json();
 
     const resultsRes = await fetch (`${BASE_ROUTE}/api/sessions/${sessionId}/results`);
     const results = await resultsRes.json();
+
+    headerTitle.innerHTML = '';
+    headerTitle.appendChild(header('h1', `Game of Games Results`));
     
     const session = results.session;
     if (!session) noSession();

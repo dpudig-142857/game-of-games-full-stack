@@ -14,13 +14,38 @@
             <div id='current-time'></div>
             <div id='time-extra'></div>
         </div>
-        <div class='title' id='title'>
-            <h1>Game of Games Stats</h1>
-        </div>
+        <div class='title' id='title'></div>
         <div class='header-right'>
-            <button class='back-button' onclick='window.history.back()'>Back</button>
+            <label class='burger' for='burger'>
+                <input type='checkbox' id='burger' aria-label='Toggle menu'>
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class='menu-box' id='menu'>
+                <!--<a>Profile</a>
+                <a>Home</a>
+                <a>View Logs</a>-->
+                <img
+                    src='assets/default_pfp.svg'
+                    alt='Profile Pic' class='profile-pic' id='profile-pic'
+                />
+            </div>
+            <!--<button class='back-button' onclick="window.location.href = '/'">Home</button>-->
         </div>
     </header>
+
+    <!-- Modal Overlay for User Profile -->
+    <div id='user-profile-modal'>
+        <div id='user-profile-box'>
+            <div class='middle-close-div'>
+                <span id='user-profile-close'>&times;</span>
+            </div>
+            <h1 id='user-profile-title'></h1>
+            <div id='user-profile-div'></div>
+        </div>
+    </div>
 
     <div class='main-content'>
         <div class='middle-section' id='players-div'>

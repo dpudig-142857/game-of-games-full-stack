@@ -9,6 +9,14 @@
 // #region
 
 import {
+    loadMenuBurger,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
+    loadUserOption
+} from './user.js';
+
+import {
     updateTimeDisplays,
     hexToRgba,
     hexToTextColour,
@@ -21,6 +29,8 @@ import {
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
+
+let user_data = null;
 
 let gog_version = 'private' // public vs private
 
@@ -49,7 +59,14 @@ let playerStats = [];
 let gameStats = [];
 let totalStats = {};
 
-let curr_colour = { hex: '', rgba: '', text: '' };
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const userModal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
@@ -865,6 +882,24 @@ async function initialise() {
     logoBox();
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
+    loadMenuBurger();
+    
+    user_data = await loadUserOption();
+    const pfp = document.getElementById('profile-pic');
+    pfp.addEventListener('click', () => openUserModal(
+        userModal, userBox, curr_colour, setupUserModal
+    ));
+
+    const close = document.getElementById('user-profile-close');
+    close.addEventListener('click', () => closeUserModal(userModal, userBox));
+
+    console.log(user_data);
+    headerTitle.innerHTML = '';
+    if (!user_data.authenticated) {
+        headerTitle.appendChild(header('h1', `Access Denied`));
+        return;
+    }
+    headerTitle.appendChild(header('h1', `Access Granted`));
     
     const res = await fetch(`${BASE_ROUTE}/api/stats`);
     const stats = await res.json();
