@@ -272,7 +272,7 @@ function renderLoginForm(div) {
 
     const btn = document.createElement('button');
     btn.type = 'submit';
-    btn.className = 'button login';
+    btn.className = 'user-button';
     btn.innerHTML = 'Login';
     form.appendChild(btn);
 
@@ -325,7 +325,7 @@ function renderLoginForm(div) {
 
     const signupBtn = document.createElement('button');
     signupBtn.type = 'submit';
-    signupBtn.className = 'button login';
+    signupBtn.className = 'login';
     signupBtn.innerHTML = 'Sign Up';
     signup.appendChild(signupBtn);
 
@@ -626,7 +626,7 @@ function renderSignUpPage(div) {
 
     const btn = document.createElement('button');
     btn.type = 'submit';
-    btn.className = 'button signup';
+    btn.className = 'user-button';
     btn.innerHTML = 'Confirm';
     form.appendChild(btn);
 }
@@ -650,7 +650,7 @@ function renderUserProfile(div, user) {
     div.style.gap = '1rem';
     div.appendChild(header('p', `Role: ${user.role}`));
     const btn = header(
-        'button', 'Log out', '', 'logout-btn', 'button login'
+        'button', 'Log out', '', 'logout-btn', 'user-button'
     )
     btn.style.cursor = 'pointer';
     div.appendChild(btn);

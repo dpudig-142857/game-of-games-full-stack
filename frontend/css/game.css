@@ -142,117 +142,6 @@ header {
     text-shadow: #0ff 0.1rem 0.1rem 0.5rem;
 }
 
-.header-right {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 2.5rem;
-    height: 100%;
-    text-align: center;
-}
-
-.burger {
-    position: relative;
-    width: 2.5rem;
-    height: 2rem;
-    background: transparent;
-    cursor: pointer;
-    display: block;
-}
-
-.burger input {
-    display: none;
-}
-
-.burger span {
-    display: block;
-    position: absolute;
-    height: 0.25rem;
-    width: 100%;
-    background: #33eaff;
-    border-radius: 1rem;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: .25s ease-in-out;
-}
-
-.burger span:nth-of-type(1) {
-    top: 0;
-    transform-origin: left center;
-}
-
-.burger span:nth-of-type(2) {
-    top: 50%;
-    transform: translateY(-50%);
-    transform-origin: left center;
-}
-
-.burger span:nth-of-type(3) {
-    top: 100%;
-    transform-origin: left center;
-    transform: translateY(-100%);
-}
-
-.burger input:checked ~ span:nth-of-type(1) {
-    transform: rotate(45deg);
-    top: 0;
-    left: 0.5rem;
-}
-
-.burger input:checked ~ span:nth-of-type(2) {
-    width: 0%;
-    opacity: 0;
-}
-
-.burger input:checked ~ span:nth-of-type(3) {
-    transform: rotate(-45deg);
-    top: 1.75rem;
-    left: 0.5rem;
-}
-
-.menu-box {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    min-width: 10rem;
-    padding: 2rem 0.75rem;
-    background: #111;
-    text-shadow: none;
-    border-radius: 2rem;
-    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.4);
-
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-0.5rem);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-}
-
-.menu-box.open {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.menu-box a:hover {
-    transform: scale(1.1);
-}
-
-.profile-pic {
-    width: 4rem;
-    transition: transform 0.3s ease;
-}
-
-.profile-pic:hover {
-    transform: scale(1.25);
-    cursor: pointer;
-}
-
 #specialityTitle {
     display: none;
     justify-content: center;
@@ -2123,30 +2012,6 @@ body.modal-active {
     margin: auto;
 }
 
-.middle-close-div {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    position: relative;
-    top: 1rem;
-    right: -1rem;
-    margin: -2rem;
-}
-
-.middle-close {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #555;
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
-    padding: 0 0.75rem;
-}
-
-.middle-close:hover {
-    transform: scale(1.3);
-    color: #33eaff;
-}
-
 .middle-players {
     display: flex;
     flex-direction: row;
@@ -2259,10 +2124,6 @@ body.modal-active {
     justify-content: center;
 }
 
-.middle-button {
-    display: none;
-}
-
 .middle-game-button {
     display: none;
     font-size: 0.8rem;
@@ -2344,25 +2205,6 @@ body.modal-active {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #004085; 
-}
-
-
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 900;
-    text-shadow: none;
-}
-.modal-overlay.active {
-    display: flex;
 }
 
 .center-section {
