@@ -405,9 +405,13 @@ async function initialise() {
             return;
         }
         headerTitle.appendChild(header('h1', `Access Granted`));
-    
+        
         const res = await fetch(theRoute(null, ' '));
         sessions = await res.json();
+        
+        headerTitle.innerHTML = '';
+        headerTitle.appendChild(header('h1', `Continue Game of Games`));
+
         logs = sessions.sort((a, b) => a.id - b.id).map(s => s.log);
         logs.forEach(l => createLog(l));
         centerOrStart(logsDiv, 'justify');
