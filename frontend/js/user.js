@@ -378,7 +378,7 @@ function createAvatarLink(
     const scale = `&scale=${scale_var}`;
     curr_setup.scale = scale_var;
     
-    const colour = colour_var == '' ?
+    const colour = colour_var == '' || colour_var == '[]' ?
         `&backgroundColor[]` : `&backgroundColor=${colour_var}`;
     curr_setup.colour = colour_var;
     
@@ -487,6 +487,14 @@ function updateMouth(option, dir) {
 function renderSignUpPage(div) {
     div.innerHTML = '';
     div.parentElement.style.overflow = 'hidden';
+
+    // First name
+    // Family name
+    // Colour
+    // Birthday
+    // Username
+    // Password
+    // Confirm password
 
     const title = document.getElementById('user-profile-title');
     title.innerHTML = 'Sign Up';

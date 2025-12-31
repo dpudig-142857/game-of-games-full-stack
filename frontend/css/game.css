@@ -283,15 +283,6 @@ header {
     height: 25%;
 }
 
-#wheelShot {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    height: 25%;
-}
-
 #wheelComplete {
     display: none;
     text-align: center;
@@ -2068,9 +2059,7 @@ body.modal-active {
 #intrude-game-box,
 #abandon-game-box,
 #break-cone-box,
-#victory-cone-box,
-#break-shot-box,
-#victory-shot-box {
+#victory-cone-box {
     gap: 2rem;
     align-items: center;
 }
@@ -2128,9 +2117,7 @@ body.modal-active {
 #intrude-game-result,
 #abandon-game-result,
 #break-cone-result,
-#victory-cone-result,
-#break-shot-result,
-#victory-shot-result {
+#victory-cone-result {
     display: none;
 }
 
@@ -2150,9 +2137,7 @@ body.modal-active {
 }
 
 #break-cone-players,
-#victory-cone-players,
-#break-shot-players,
-#victory-shot-players {
+#victory-cone-players {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -2164,9 +2149,7 @@ body.modal-active {
 }
 
 .break-cone-player,
-.victory-cone-player,
-.break-shot-player,
-.victory-shot-player {
+.victory-cone-player {
     width: 10rem;
     height: 4rem;
     align-items: center;
@@ -2196,9 +2179,7 @@ body.modal-active {
 .intrude-game-selected,
 .abandon-game-selected,
 .break-cone-selected,
-.victory-cone-selected,
-.break-shot-selected,
-.victory-shot-selected {
+.victory-cone-selected {
     background-color: #007BFF;
     color: white;
 }
@@ -2376,7 +2357,7 @@ footer {
     align-items: center;
 }
 
-#intrude, #abandon, #break_cone, #victory_cone, #break_shot, #victory_shot {
+#intrude, #abandon, #break_cone, #victory_cone {
     flex-direction: column;
     justify-content: center;
 }

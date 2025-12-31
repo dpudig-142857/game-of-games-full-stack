@@ -20,7 +20,8 @@ import {
     place,
     centerOrStart,
     format,
-    split
+    split,
+    toSOrNotToS
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
@@ -153,9 +154,9 @@ function reward(result) {
     let num = 0;
     let type = '';
 
-    if (text.includes('1 cone')) {
+    if (text.includes('cone') && gog_version == 'private') {
         type = 'cone';
-    } else if (text.includes('1 shot')) {
+    } else if (text.includes('cone') && gog_version == 'public') {
         type = 'shot';
     } else if (text.includes('point')) {
         num = parseInt(text.split(' ')[0]);
@@ -673,7 +674,6 @@ function spinWheel(type) {
     console.log(type);
     if (type == 'games' && theGameWheel) theGameWheel.startAnimation();
     if (type == 'cone' && thePlayerWheel) thePlayerWheel.startAnimation();
-    if (type == 'shot' && thePlayerWheel) thePlayerWheel.startAnimation();
 }
 
 // Handle spin result
@@ -1597,7 +1597,7 @@ function setupIntrude() {
         const playerDiv = document.createElement('div');
         playerDiv.id = `intrude-game-${p.player_id}`;
         playerDiv.className = 'intrude-game-player-div';
-        const game = numSpeciality == 1 ? 'Game' : 'Games';
+        const game = toSOrNotToS(numSpeciality, 'Game');
         playerDiv.appendChild(header('h3', `Select ${name}'s Speciality ${game}:`));
 
         const specialityDiv = document.createElement('div');
@@ -1793,7 +1793,7 @@ function addIntruderSpecialities(div, num, player, allowedGames) {
 
 function refreshAllIntruderDropdowns() {
     let selected = intrudeOptions.filter(p => p.selected);
-    intrudeGameBtn.textContent = selected.length == 1 ? 'Intrude Player' : 'Intrude Players';
+    intrudeGameBtn.textContent = toSOrNotToS(selected.length, 'Intrude Player');
     intrudeOptions.filter(p => !p.selected).forEach(p => {
         let player = intruderSpecialities.find(p2 => p2.player_id == p.player_id);
         player.selected = false;
@@ -2000,8 +2000,7 @@ function setupAbandon() {
 }
 
 function abandonGames(players) {
-    abandonGameBtn.textContent = players.length == 1 ?
-        'Abandon Player' : 'Abandon Players';
+    abandonGameBtn.textContent = toSOrNotToS(players.length, 'Abandon Player');
     
     const colour = '#33eaff';
     let num = currPlayers.length - players.length;
@@ -3148,7 +3147,7 @@ function createAlphabetix() {
         const letter = getNextLetter();
         
         const letterHeader = document.getElementById('alphabetix-current-letter');
-        const letterText = letter.length == 1 ? 'Letter:' : 'Letters:'
+        const letterText = `${toSOrNotToS(letter.length, 'Letter')}:`;
         letterHeader.textContent = `${letterText} ${letter}`;
         letterHeader.style.display = 'flex';
         
@@ -3207,7 +3206,7 @@ function submitAlphabetix(results) {
         playerBox.style.color = 'black';
         playerBox.style.background = placeColour(result.place);
         playerBox.appendChild(header('h2', `${place(result.place)} - ${result.name}`));
-        const points = result.points == 1 ? '1 point' : `${result.points} points`;
+        const points = toSOrNotToS(result.points, 'point');
         playerBox.appendChild(header('h3', `Result: ${points}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
@@ -3690,8 +3689,8 @@ function submitMarioParty(results) {
         playerBox.style.background = placeColour(result.place);
         playerBox.appendChild(header('h2', `${place(result.place)} - ${result.name}`));
         playerBox.appendChild(header('h3', `Character: ${result.character}`));
-        const stars = result.stars == 1 ? `1 star` : `${result.stars} stars`;
-        const coins = result.coins == 1 ? `1 coin` : `${result.coins} coins`;
+        const stars = toSOrNotToS(result.stars, 'star');
+        const coins = toSOrNotToS(result.coins, 'coin');
         playerBox.appendChild(header('h3', `Result: ${stars} ${coins}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
@@ -4116,8 +4115,8 @@ function submitFiveCrowns(results) {
         playerBox.style.color = 'black';
         playerBox.style.background = placeColour(result.place);
         playerBox.appendChild(header('h2', `${place(result.place)} - ${result.name}`));
-        let suffix = result.points == 1 ? ' point' : ' points';
-        playerBox.appendChild(header('h3', `Result: ${result.points}${suffix}`));
+        const points = toSOrNotToS(result.points, 'point');
+        playerBox.appendChild(header('h3', `Result: ${points}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
     });
@@ -4715,8 +4714,8 @@ function submitTableRoundsGame(results) {
         playerBox.style.color = 'black';
         playerBox.style.background = placeColour(result.place);
         playerBox.appendChild(header('h2', `${place(result.place)} - ${result.name}`));
-        let suffix = result.points == 1 ? ' point' : ' points';
-        playerBox.appendChild(header('h3', `Result: ${result.points}${suffix}`));
+        const points = toSOrNotToS(result.points, 'point');
+        playerBox.appendChild(header('h3', `Result: ${points}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
     });
@@ -4825,14 +4824,14 @@ function addQuoitsExtras(header) {
     if (option.value == 'Rounds') {
         const roundsNum = document.getElementById('quoits_roundsNum');
         if (!roundsNum) return;
-        const suffix = roundsNum.value == 1 ? ' round' : ' rounds';
-        header.innerHTML = `Throw those rings for ${roundsNum.value}${suffix}!`;
+        const rounds = toSOrNotToS(roundsNum.value, 'round');
+        header.innerHTML = `Throw those rings for ${rounds}!`;
         game.extras.push(`${roundsNum.value} rounds`);
     } else if (option.value == 'Limit') {
         const limitNum = document.getElementById('quoits_limitNum');
         if (!limitNum) return;
-        const suffix = limitNum.value == 1 ? ' point' : ' points';
-        header.innerHTML = `Throw those rings until you get to ${limitNum.value}${suffix}!`;
+        const limit = toSOrNotToS(limitNum.value, 'point');
+        header.innerHTML = `Throw those rings until you get to ${limit}!`;
         game.extras.push(`${limitNum.value} limit`);
     } else {
         header.innerHTML = 'Throws those rings!';
@@ -4986,22 +4985,20 @@ function submitTableGame(results) {
         playerBox.appendChild(header(
             'h2', `${place(result.place)} - ${result.name}`
         ));
-        let single = result.points == 1;
-        let prefix = '';
-        let suffix = '';
+        let points = '';
         if (currGame.name == 'Monopoly' || currGame.name == 'Game of Life') {
-            prefix = '$';
+            points = `$${result.points}`;
         } else if (currGame.name == 'Unstable Unicorns') {
-            suffix = single ? ' unicorn' : ' unicorns';
+            points = toSOrNotToS(result.points, 'unicorn');
         } else if (currGame.name == 'Llamas Unleashed') {
-            suffix = single ? ' animal' : ' animals';
+            points = toSOrNotToS(result.points, 'animal');
         } else if (currGame.name == 'Cards Against Humanity') {
-            suffix = single ? ' card' : ' cards';
+            points = toSOrNotToS(result.points, 'card');
         } else {
-            suffix = single ? ' point' : ' points';
+            points = toSOrNotToS(result.points, 'point');
         }
 
-        playerBox.appendChild(header('h3', `Result: ${prefix}${result.points}${suffix}`));
+        playerBox.appendChild(header('h3', `Result: ${points}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
     });
@@ -5268,22 +5265,20 @@ function submitCounterGame(results) {
         playerBox.appendChild(header(
             'h2', `${place(result.place)} - ${result.name}`
         ));
-        let single = result.points == 1;
-        let prefix = '';
-        let suffix = '';
+        let points = '';
         if (currGame.name == 'Monopoly' || currGame.name == 'Game of Life') {
-            prefix = '$';
+            points = `$${result.points}`;
         } else if (currGame.name == 'Unstable Unicorns') {
-            suffix = single ? ' unicorn' : ' unicorns';
+            points = toSOrNotToS(result.points, 'unicorn');
         } else if (currGame.name == 'Llamas Unleashed') {
-            suffix = single ? ' animal' : ' animals';
+            points = toSOrNotToS(result.points, 'animal');
         } else if (currGame.name == 'Cards Against Humanity') {
-            suffix = single ? ' card' : ' cards';
+            points = toSOrNotToS(result.points, 'card');
         } else {
-            suffix = single ? ' point' : ' points';
+            points = toSOrNotToS(result.points, 'point');
         }
 
-        playerBox.appendChild(header('h3', `Result: ${prefix}${result.points}${suffix}`));
+        playerBox.appendChild(header('h3', `Result: ${points}`));
         playerBox.appendChild(header('h3', `Reward: ${reward(result)}`));
         resultsBox.appendChild(playerBox);
     });
@@ -6869,18 +6864,13 @@ function showOverallResults() {
         box.className = 'curr_game_box';
         box.style.background = placeColour(r.place);
         box.style.color = 'black';
-
-        let points = r.points != 1 && r.points != -1 ?
-                    `${r.points} points` : `${r.points} point`;
         
         box.appendChild(header('h2', `${place(r.place)} - ${r.name}`));
-        box.appendChild(header('h3', points));
+        box.appendChild(header('h3', toSOrNotToS(r.points, 'point')));
         box.appendChild(header(
             'h3',
-            gog_version == 'private' ?
-            r.cones != 1 ? `${r.cones} cones` : `${r.cones} cone` :
-            gog_version == 'public' ?
-            r.cones != 1 ? `${r.cones} shots` : `${r.cones} shot` : ''
+            gog_version == 'private' ? toSOrNotToS(r.cones, 'cone') :
+            gog_version == 'public' ? toSOrNotToS(r.cones, 'shot') : ''
         ));
 
         overall.appendChild(box);
@@ -7449,11 +7439,7 @@ function initialiseButtons() {
     const spin = document.getElementById('spin');
     if (spin) spin.addEventListener('click', () => spinWheel('games'));
     const spin2 = document.getElementById('spin2');
-    if (spin2 && gog_version == 'private') {
-        spin2.addEventListener('click', () => spinWheel('cone'));
-    } else if (spin2 && gog_version == 'public') {
-        spin2.addEventListener('click', () => spinWheel('shot'));
-    }
+    if (spin2) spin2.addEventListener('click', () => spinWheel('cone'));
 }
 
 async function loadSessionData(sessionId) {
@@ -7621,16 +7607,16 @@ function startGoG(newGame) {
 
     intrudeBtn.style.display = newGame ? 'none': 'flex';
     abandonBtn.style.display = newGame ? 'none': 'flex';
+    breakConeBtn.style.display = newGame ? 'none' : 'flex';
+    victoryConeBtn.style.display = newGame ? 'none' : 'flex';
+    const breakTitle = breakConeBtn.querySelector('h3');
+    const victoryTitle = victoryConeBtn.querySelector('h3');
     if (gog_version == 'private') {
-        breakConeBtn.style.display = newGame ? 'none' : 'flex';
-        victoryConeBtn.style.display = newGame ? 'none' : 'flex';
-        breakShotBtn.style.display = 'none';
-        victoryShotBtn.style.display = 'none';
+        breakTitle.innerHTML = 'Break<br>Cone';
+        victoryTitle.innerHTML = 'Victory<br>Cone';
     } else if (gog_version == 'public') {
-        breakConeBtn.style.display = 'none';
-        victoryConeBtn.style.display = 'none';
-        breakShotBtn.style.display = newGame ? 'none' : 'flex';
-        victoryShotBtn.style.display = newGame ? 'none' : 'flex';
+        breakTitle.innerHTML = 'Break<br>Shot';
+        victoryTitle.innerHTML = 'Victory<br>Shot';
     }
 
     const result = document.getElementById('pre-game-result');

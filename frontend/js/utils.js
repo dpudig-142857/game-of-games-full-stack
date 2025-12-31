@@ -243,3 +243,6 @@ export function centerOrStart(div, type, dir = 'width') {
     }, 0);
 }
 
+export function toSOrNotToS(num, text) {
+    return num == 1 ? `1 ${text}` : `${num} ${text}s`;
+}

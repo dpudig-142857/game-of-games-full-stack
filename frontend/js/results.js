@@ -19,7 +19,8 @@ import {
     place,
     placeColour,
     typeText,
-    format
+    format,
+    toSOrNotToS
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
@@ -73,10 +74,6 @@ let blue = 'linear-gradient(45deg, rgb(180, 216, 255) 5%, rgb(224, 244, 255) 15%
 
 
 // #region
-
-function toSOrNotToS(num, type) {
-    return num == 1 ? `1 ${type}` : `${num} ${type}s`;
-}
 
 function span(val) {
     return `<span class='lighter'>${val}</span>`;

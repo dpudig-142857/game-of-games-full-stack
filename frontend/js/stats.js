@@ -16,7 +16,8 @@ import {
     place,
     centerOrStart,
     logoBox,
-    typeText
+    typeText,
+    toSOrNotToS
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
@@ -759,14 +760,11 @@ function setupTotal() {
                 add(div, 'Winners', `${start} and ${last}`, true);
             }
     
-            const w_points = w.points == 1 ? '1 point' : `${w.points} points`;
-            add(div, 'Winning Points', w_points);
+            add(div, 'Winning Points', toSOrNotToS(w.points, 'point'));
             if (cones) {
-                const w_cones = w.cones == 1 ? '1 cone' : `${w.cones} cones`;
-                add(div, 'Winning Cones', w_cones);
+                add(div, 'Winning Cones', toSOrNotToS(w.cones, 'cone'));
             } else if (shots) {
-                const w_shots = w.cones == 1 ? '1 shot' : `${w.cones} shots`;
-                add(div, 'Winning Shots', w_shots);
+                add(div, 'Winning Shots', toSOrNotToS(w.cones, 'shot'));
             }
         } else if (log.status == 'active') {
             add(div, '', 'ACTIVE GAME', true, '');
@@ -806,15 +804,14 @@ function setupTotal() {
         add(div, 'GooC Acquired', log.gooc_total);
         add(div, 'GooC Used', log.gooc_used);
 
-        const s = (num) => num == 1 ? 'game' : 'games';
-        const vote = log.selected_vote;
-        const choose = log.selected_choose;
-        const wheel = log.selected_wheel;
-
+        const vote = toSOrNotToS(log.selected_vote, 'game');
+        const choose = toSOrNotToS(log.selected_choose, 'game');
+        const wheel = toSOrNotToS(log.selected_wheel, 'game');
+        
         const decided = [];
-        if (vote != 0) decided.push(`${vote} ${s(vote)} selected by voting`);
-        if (choose != 0) decided.push(`${choose} ${s(choose)} selected unanimously`);
-        if (wheel != 0) decided.push(`${wheel} ${s(wheel)} selected by spinner wheel`);
+        if (vote != '0 games') decided.push(`${vote} selected by voting`);
+        if (choose != '0 games') decided.push(`${choose} selected unanimously`);
+        if (wheel != '0 games') decided.push(`${wheel} selected by spinner wheel`);
 
         if (decided.length > 0) div.appendChild(document.createElement('br'));
         decided.forEach(d => add(div, '', d, false, ''));
