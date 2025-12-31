@@ -159,8 +159,9 @@ export async function setupUserModal() {
         renderLoginForm(div);
     } else {
         const user = user_data.user;
-        title.textContent = `${user.username}'s Account`
-        renderUserProfile(div, user);
+        //title.textContent = `${user.username}'s Account`
+        //renderUserProfile(div, user);
+        renderAvatarPage(div, user, 'updating');
     }
 }
 
@@ -357,8 +358,48 @@ let curr_setup = {
     'mouth': ''
 }
 
-function renderAvatarPage(div) {
+function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
+
+    const title = document.getElementById('user-profile-title');
+
+    if (type == 'creating') {
+        title.textContent = 'Creating Avatar';
+    } else if (type == 'updating') {
+        title.textContent = 'Updating Avatar';
+    } else {
+
+    }
+
+    console.log(user);
+    const avatar_div = document.createElement('div');
+    avatar_div.id = 'avatar_div';
+    div.appendChild(avatar_div);
+
+    const avatar_preview_div = document.createElement('div');
+    avatar_preview_div.id = 'avatar_preview_div';
+    avatar_div.appendChild(avatar_preview_div);
+
+    const avatar_preview = document.createElement('img');
+    avatar_preview.id = 'avatar_preview';
+    avatar_preview.src = createAvatarLink(
+        'true',
+        '0',
+        '100',
+        'ff0000',
+        '0',
+        '0',
+        'plain',
+        'lilSmile'
+    );
+    avatar_preview_div.appendChild(avatar_preview);
+
+    const avatar_options = document.createElement('div');
+    avatar_options.id = 'avatar_options';
+    avatar_section.appendChild(avatar_options);
+
+    setupOption(avatar_options, 'eye');
+    setupOption(avatar_options, 'mouth');
 }
 
 function createAvatarLink(
@@ -556,42 +597,6 @@ function renderSignUpPage(div) {
     );
     err.style.visibility = 'hidden';
     form.appendChild(err);
-
-    const avatar_header = header(
-        'h2', 'Build your avatar', '',
-        'user-profile-avatar-title', 'middle-title'
-    );
-    avatar_header.style.textDecoration = 'underline';
-    form.appendChild(avatar_header);
-
-    const avatar_section = document.createElement('div');
-    avatar_section.id = 'avatar_section';
-    form.appendChild(avatar_section);
-
-    const avatar_preview_div = document.createElement('div');
-    avatar_preview_div.id = 'avatar_preview_div';
-    avatar_section.appendChild(avatar_preview_div);
-
-    const avatar_preview = document.createElement('img');
-    avatar_preview.id = 'avatar_preview';
-    avatar_preview.src = createAvatarLink(
-        'true',
-        '0',
-        '100',
-        'ff0000',
-        '0',
-        '0',
-        'plain',
-        'lilSmile'
-    );
-    avatar_preview_div.appendChild(avatar_preview);
-
-    const avatar_options = document.createElement('div');
-    avatar_options.id = 'avatar_options';
-    avatar_section.appendChild(avatar_options);
-
-    setupOption(avatar_options, 'eye');
-    setupOption(avatar_options, 'mouth');
 
     /*const mouth_options = document.createElement('div');
     mouth_options.id = 'mouth_options';
