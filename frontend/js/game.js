@@ -480,7 +480,11 @@ function styleButton(btn, text, bg = null, shadow = null, display = null) {
 
 // #region
 
-let curr_colour = { hex: '', rgba: '', text: '' };
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
 
 function gameBoxColour() {
     curr_colour.hex = currGame.colour;
