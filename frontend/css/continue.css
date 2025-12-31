@@ -58,9 +58,10 @@ header {
 }
 
 .header-right {
+    position: relative;
     display: flex;
-    justify-content: space-around;
-    width: 70px;
+    justify-content: center;
+    width: 2.5rem;
     height: 100%;
     text-align: center;
 }
