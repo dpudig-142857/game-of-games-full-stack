@@ -270,6 +270,7 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    align-items: center;
 }
 
 .avatar_option_title {
@@ -282,19 +283,21 @@
 
 .avatar_options_section {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 5rem;
     width: 20%;
 }
 
 .avatar_option {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+
+.avatar_option_text {
+    width: 15rem;
 }
 
 .avatar_arrow {
