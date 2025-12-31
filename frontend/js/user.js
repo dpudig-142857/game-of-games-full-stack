@@ -396,7 +396,7 @@ function renderAvatarPage(div, user, type) {
 
     const avatar_options = document.createElement('div');
     avatar_options.id = 'avatar_options';
-    avatar_section.appendChild(avatar_options);
+    avatar_div.appendChild(avatar_options);
 
     setupOption(avatar_options, 'eye');
     setupOption(avatar_options, 'mouth');
