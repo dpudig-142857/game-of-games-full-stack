@@ -242,8 +242,9 @@
         scale(0.9);
 }
 
-#avatar_section {
+#avatar_div {
     width: 100%;
+    height: 100%;
     display: flex;
     gap: 2.5rem;
     justify-content: space-between;
@@ -251,8 +252,8 @@
 }
 
 #avatar_preview_div {
-    width: 12rem;
-    height: 12rem;
+    width: 20rem;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -267,6 +268,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     gap: 2.5rem;
 }
 
@@ -301,24 +303,31 @@
 }
 
 .avatar_arrow:hover {
-    transform: scale(1.2);
     cursor: pointer;
 }
 
-.avatar_arrow:active {
-    transform: scale(0.8);
+#left_arrow {
+    transform: rotate(-90deg);
 }
 
-#down_arrow {
-    transform: rotate(180deg);
+#left_arrow:hover {
+    transform: rotate(-90deg) scale(1.2);
 }
 
-#down_arrow:hover {
-    transform: rotate(180deg) scale(1.2);
+#left_arrow:active {
+    transform: rotate(-90deg) scale(0.8);
 }
 
-#down_arrow:active {
-    transform: rotate(180deg) scale(0.8);
+#right_arrow {
+    transform: rotate(90deg);
+}
+
+#right_arrow:hover {
+    transform: rotate(90deg) scale(1.2);
+}
+
+#right_arrow:active {
+    transform: rotate(90deg) scale(0.8);
 }
 
 .user-button:hover {

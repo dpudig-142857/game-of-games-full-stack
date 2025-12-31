@@ -475,39 +475,39 @@ function setupOption(div, type) {
     options.className = 'avatar_option';
     section.appendChild(options);
     
-    const upArrow = document.createElement('img');
-    upArrow.className = 'avatar_arrow';
-    upArrow.id = 'up_arrow';
-    upArrow.src = 'assets/arrow.svg';
-    options.appendChild(upArrow);
+    const leftArrow = document.createElement('img');
+    leftArrow.className = 'avatar_arrow';
+    leftArrow.id = 'left_arrow';
+    leftArrow.src = 'assets/arrow.svg';
+    options.appendChild(leftArrow);
 
     const option = header(
         'h2', 'plain', '', `${type}_option`, `avatar_option_text`
     );
     options.appendChild(option);
 
-    const downArrow = document.createElement('img');
-    downArrow.className = 'avatar_arrow';
-    downArrow.id = 'down_arrow';
-    downArrow.src = 'assets/arrow.svg';
-    options.appendChild(downArrow);
+    const rightArrow = document.createElement('img');
+    rightArrow.className = 'avatar_arrow';
+    rightArrow.id = 'right_arrow';
+    rightArrow.src = 'assets/arrow.svg';
+    options.appendChild(rightArrow);
 
-    upArrow.addEventListener('click', () => {
-        if (type == 'eye') updateEye(option, 'up');
-        if (type == 'mouth') updateMouth(option, 'up');
+    leftArrow.addEventListener('click', () => {
+        if (type == 'eye') updateEye(option, 'left');
+        if (type == 'mouth') updateMouth(option, 'left');
     });
 
-    downArrow.addEventListener('click', () => {
-        if (type == 'eye') updateEye(option, 'down');
-        if (type == 'mouth') updateMouth(option, 'down');
+    rightArrow.addEventListener('click', () => {
+        if (type == 'eye') updateEye(option, 'right');
+        if (type == 'mouth') updateMouth(option, 'right');
     });
 }
 
 function updateEye(option, dir) {
     const curr = option.innerHTML;
     let i = eye_list.indexOf(curr);
-    if (dir == 'up') i -= 1;
-    if (dir == 'down') i += 1;
+    if (dir == 'left') i -= 1;
+    if (dir == 'right') i += 1;
     if (i == -1) i = eye_list.length - 1;
     if (i == eye_list.length) i = 0;
     option.innerHTML = eye_list[i];
@@ -520,8 +520,8 @@ function updateMouth(option, dir) {
     let i = mouth_list.indexOf(curr);
     console.log(i);
     console.log(mouth_list);
-    if (dir == 'up') i -= 1;
-    if (dir == 'down') i += 1;
+    if (dir == 'left') i -= 1;
+    if (dir == 'right') i += 1;
     if (i == -1) i = mouth_list.length - 1;
     if (i == mouth_list.length) i = 0;
     option.innerHTML = mouth_list[i];
