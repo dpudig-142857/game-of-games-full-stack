@@ -36,6 +36,9 @@ import { BASE_ROUTE } from './config.js';
 
 let user_data = null;
 
+const userModal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
+
 let route = `${BASE_ROUTE}/api`;
 
 let gog_version = 'public'
@@ -7462,11 +7465,11 @@ async function initialise(sessionId) {
         user_data = await loadUserOption();
         const pfp = document.getElementById('profile-pic');
         pfp.addEventListener('click', () => openUserModal(
-            modal, userBox, curr_colour, setupUserModal
+            userModal, userBox, curr_colour, setupUserModal
         ));
     
         const close = document.getElementById('user-profile-close');
-        close.addEventListener('click', () => closeUserModal(modal, userBox));
+        close.addEventListener('click', () => closeUserModal(userModal, userBox));
 
         console.log(user_data);
         /*if (!user_data.authenticated || user_data.user.role != 'admin') {
