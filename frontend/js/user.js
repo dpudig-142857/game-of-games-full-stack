@@ -95,7 +95,7 @@ export function updateProfilePic(user_data) {
 
 // #region
 
-export function openModal(modal, modalBox, colour = null, callback = null) {
+export function openUserModal(modal, modalBox, colour = null, callback = null) {
     modal.style.display = 'flex';
     modal.style.opacity = 0;
     modalBox.style.transform = 'translateY(100vh) scale(0.01)';
@@ -122,7 +122,7 @@ export function openModal(modal, modalBox, colour = null, callback = null) {
     }
 }
 
-export function closeModal(modal, modalBox, callback = null) {
+export function closeUserModal(modal, modalBox, callback = null) {
     modal.style.transition = 'opacity 0.4s ease';
     modalBox.style.transition = 'transform 0.4s ease';
 
@@ -147,7 +147,7 @@ export function closeModal(modal, modalBox, callback = null) {
     }, 400);
 }
 
-export async function setupModal() {
+export async function setupUserModal() {
     const user_data = await loadUser();
     
     const title = document.getElementById('user-profile-title');
@@ -190,7 +190,7 @@ async function login(username, password) {
     }
 
     // Close modal then reload
-    closeModal(modal, userBox, () => {
+    closeUserModal(modal, userBox, () => {
         location.reload();
     });
 
@@ -209,7 +209,7 @@ async function logout() {
     }
 
     await loadUserOption();
-    closeModal(modal, userBox, () => {
+    closeUserModal(modal, userBox, () => {
         location.reload();
     });
 

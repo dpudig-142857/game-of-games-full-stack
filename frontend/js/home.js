@@ -9,11 +9,11 @@
 // #region
 
 import {
-    openModal,
-    closeModal,
-    setupModal,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
     loadUserOption
-} from '../js/user.js';
+} from './user.js';
 
 import {
     logoBox,
@@ -92,12 +92,12 @@ async function initialise() {
     user_data = await loadUserOption();
     console.log(user_data);
     const pfp = document.getElementById('profile-pic');
-    pfp.addEventListener('click', () => openModal(
-        modal, userBox, curr_colour, setupModal
+    pfp.addEventListener('click', () => openUserModal(
+        modal, userBox, curr_colour, setupUserModal
     ));
 
     const close = document.getElementById('user-profile-close');
-    close.addEventListener('click', () => closeModal(modal, userBox));
+    close.addEventListener('click', () => closeUserModal(modal, userBox));
 
     const mainBtns = document.getElementById('buttons');
     mainBtns.style.display = user_data?.authenticated ? 'flex' : 'none';

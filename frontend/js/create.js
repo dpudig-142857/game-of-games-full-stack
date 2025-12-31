@@ -9,9 +9,9 @@
 
 import {
     loadMenuBurger,
-    openModal,
-    closeModal,
-    setupModal,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
     loadUserOption
 } from './user.js';
 
@@ -1168,17 +1168,16 @@ async function initialize() {
     logoBox();
     setInterval(updateTimeDisplays, 1000);
     updateTimeDisplays();
-
     loadMenuBurger();
 
     user_data = await loadUserOption();
     const pfp = document.getElementById('profile-pic');
-    pfp.addEventListener('click', () => openModal(
-        modal, userBox, curr_colour, setupModal
+    pfp.addEventListener('click', () => openUserModal(
+        modal, userBox, curr_colour, setupUserModal
     ));
 
     const close = document.getElementById('user-profile-close');
-    close.addEventListener('click', () => closeModal(modal, userBox));
+    close.addEventListener('click', () => closeUserModal(modal, userBox));
     
     console.log(user_data);
     if (!user_data.authenticated || user_data.user.role != 'admin') {

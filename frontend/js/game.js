@@ -24,7 +24,17 @@ import {
     toSOrNotToS
 } from '../js/utils.js';
 
+import {
+    loadMenuBurger,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
+    loadUserOption
+} from './user.js';
+
 import { BASE_ROUTE } from './config.js';
+
+let user_data = null;
 
 let route = `${BASE_ROUTE}/api`;
 
@@ -7442,18 +7452,51 @@ function initialiseButtons() {
     if (spin2) spin2.addEventListener('click', () => spinWheel('cone'));
 }
 
-async function loadSessionData(sessionId) {
+async function initialise(sessionId) {
     try {
         logoBox();
         setInterval(timeDisplay, 1000);
         timeDisplay();
+        loadMenuBurger();
+
+        user_data = await loadUserOption();
+        const pfp = document.getElementById('profile-pic');
+        pfp.addEventListener('click', () => openUserModal(
+            modal, userBox, curr_colour, setupUserModal
+        ));
+    
+        const close = document.getElementById('user-profile-close');
+        close.addEventListener('click', () => closeUserModal(modal, userBox));
+
+        console.log(user_data);
+        /*if (!user_data.authenticated || user_data.user.role != 'admin') {
+            hide('Access Denied');
+            return;
+        }
+
+        gog_version = user_data.user.version;
+        const btns = document.querySelectorAll('.bottom-button');
+        btns.forEach(btn => {
+            if (btn.id != 'startBtn') {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        });*/
+
+
+
+
+
+
         //startTime = new Date();
-        const [ gamesRes, playersRes, pointsRes, sessionRes ] = await Promise.all([
+        /*const [ gamesRes, playersRes, pointsRes, sessionRes ] = await Promise.all([
             fetch(`${route}/games`),
             fetch(`${route}/players`),
             fetch(`${route}/points`),
             fetch(`${route}/sessions/${sessionId}`)
         ]);
+        
         
         if (!gamesRes.ok) console.error('Games error');
         if (!playersRes.ok) console.error('Players error');
@@ -7572,7 +7615,7 @@ async function loadSessionData(sessionId) {
             });
         } else {
             startGoG(theGame.games.length == 0);
-        }
+        }*/
     } catch (err) {
         console.error('Failed to load session data', err);
     }
@@ -7766,7 +7809,7 @@ async function finishGoG() {
     }
 }
 
-loadSessionData(sessionId);
+initialise(sessionId);
 
 // #endregion
 
