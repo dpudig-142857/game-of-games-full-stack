@@ -183,7 +183,7 @@
     align-items: center;
 }
 
-.login, .signup {
+.user-input {
     position: relative;
     padding: 1.5rem;
     font-size: 1.1rem;

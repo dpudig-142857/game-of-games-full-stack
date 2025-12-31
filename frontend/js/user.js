@@ -252,7 +252,7 @@ function renderLoginForm(div) {
     username.type = 'username';
     username.id = 'username';
     username.placeholder = 'Username...';
-    username.className = 'login';
+    username.className = 'user-input';
     username.style.cursor = 'text';
     form.appendChild(username);
 
@@ -260,7 +260,7 @@ function renderLoginForm(div) {
     password.type = 'password';
     password.id = 'password';
     password.placeholder = 'Password...';
-    password.className = 'login';
+    password.className = 'user-input';
     password.style.cursor = 'text';
     form.appendChild(password);
     
@@ -272,7 +272,7 @@ function renderLoginForm(div) {
 
     const btn = document.createElement('button');
     btn.type = 'submit';
-    btn.className = 'user-button';
+    btn.className = 'user-button user-input';
     btn.innerHTML = 'Login';
     form.appendChild(btn);
 
@@ -514,7 +514,7 @@ function renderSignUpPage(div) {
     username.type = 'text';
     username.id = 'username';
     username.placeholder = 'Username...';
-    username.className = 'signup';
+    username.className = 'user-input';
     username.style.cursor = 'text';
     form.appendChild(username);
 
@@ -522,7 +522,7 @@ function renderSignUpPage(div) {
     password.type = 'text';
     password.id = 'password';
     password.placeholder = 'Password...';
-    password.className = 'signup';
+    password.className = 'user-input';
     password.style.cursor = 'text';
     form.appendChild(password);
 
@@ -530,7 +530,7 @@ function renderSignUpPage(div) {
     confirm.type = 'text';
     confirm.id = 'password';
     confirm.placeholder = 'Confirm Password...';
-    confirm.className = 'signup';
+    confirm.className = 'user-input';
     confirm.style.cursor = 'text';
     form.appendChild(confirm);
 
@@ -626,7 +626,7 @@ function renderSignUpPage(div) {
 
     const btn = document.createElement('button');
     btn.type = 'submit';
-    btn.className = 'user-button';
+    btn.className = 'user-button user-input';
     btn.innerHTML = 'Confirm';
     form.appendChild(btn);
 }
@@ -650,7 +650,7 @@ function renderUserProfile(div, user) {
     div.style.gap = '1rem';
     div.appendChild(header('p', `Role: ${user.role}`));
     const btn = header(
-        'button', 'Log out', '', 'logout-btn', 'user-button'
+        'button', 'Log out', '', 'logout-btn', 'user-button user-input'
     )
     btn.style.cursor = 'pointer';
     div.appendChild(btn);
