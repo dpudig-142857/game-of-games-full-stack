@@ -325,7 +325,7 @@ function renderLoginForm(div) {
 
     const signupBtn = document.createElement('button');
     signupBtn.type = 'submit';
-    signupBtn.className = 'login';
+    signupBtn.className = 'user-button user-input';
     signupBtn.innerHTML = 'Sign Up';
     signup.appendChild(signupBtn);
 
