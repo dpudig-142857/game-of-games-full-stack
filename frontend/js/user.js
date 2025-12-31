@@ -100,7 +100,6 @@ export function openUserModal(modal, modalBox, colour = null, callback = null) {
     modal.style.opacity = 0;
     modalBox.style.transform = 'translateY(100vh) scale(0.01)';
 
-    console.log(colour);
     if (colour) {
         modalBox.style.backgroundColor = colour.rgba;
         modalBox.style.borderColor = colour.rgba;

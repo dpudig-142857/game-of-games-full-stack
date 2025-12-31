@@ -7476,28 +7476,18 @@ async function initialise(sessionId) {
         close.addEventListener('click', () => closeUserModal(userModal, userBox));
 
         console.log(user_data);
-        /*if (!user_data.authenticated || user_data.user.role != 'admin') {
-            hide('Access Denied');
+        headerTitle.innerHTML = '';
+        if (!user_data.authenticated || user_data.user.role != 'admin') {
+            headerTitle.appendChild(header('h1', `Access Denied`));
+            document.getElementById('finish').style.display = 'none';
             return;
         }
 
         gog_version = user_data.user.version;
-        const btns = document.querySelectorAll('.bottom-button');
-        btns.forEach(btn => {
-            if (btn.id != 'startBtn') {
-                btn.style.display = 'block';
-            } else {
-                btn.style.display = 'none';
-            }
-        });*/
-
-
-
-
 
 
         //startTime = new Date();
-        /*const [ gamesRes, playersRes, pointsRes, sessionRes ] = await Promise.all([
+        const [ gamesRes, playersRes, pointsRes, sessionRes ] = await Promise.all([
             fetch(`${route}/games`),
             fetch(`${route}/players`),
             fetch(`${route}/points`),
@@ -7560,7 +7550,6 @@ async function initialise(sessionId) {
             final_results: []
         };
 
-        headerTitle.innerHTML = '';
         headerTitle.appendChild(header('h1', `${theGame.gog_id}`));
         updateHeaderButtons('start');
 
@@ -7622,7 +7611,7 @@ async function initialise(sessionId) {
             });
         } else {
             startGoG(theGame.games.length == 0);
-        }*/
+        }
     } catch (err) {
         console.error('Failed to load session data', err);
     }
