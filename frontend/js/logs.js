@@ -18,6 +18,7 @@ import {
 
 import {
     logoBox,
+    hexToRgba,
     updateTimeDisplays,
     header
 } from '../js/utils.js';
