@@ -9,6 +9,14 @@
 // #region
 
 import {
+    loadMenuBurger,
+    openUserModal,
+    closeUserModal,
+    setupUserModal,
+    loadUserOption
+} from './user.js';
+
+import {
     logoBox,
     updateTimeDisplays,
     header,
