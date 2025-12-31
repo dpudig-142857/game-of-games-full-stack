@@ -34,7 +34,6 @@ let gog_version = 'private' // public vs private
 
 let sessions = [];
 let logs = [];
-let curr_colour = { hex: '', rgba: '', text: '' };
 
 let headerTitle = document.getElementById('title');
 let logsDiv = document.getElementById('logs');
@@ -42,6 +41,15 @@ let modal = document.getElementById('gameModal');
 let gameModal = document.getElementById('gameModal-box');
 let modalTitle = document.getElementById('gameModal-title');
 let info = document.getElementById('gameModal-info');
+
+let curr_colour = {
+    hex: '#33eaff',
+    rgba: hexToRgba('#33eaff', 0.85),
+    text: '#000000'
+}
+
+const userModal = document.getElementById('user-profile-modal');
+const userBox = document.getElementById('user-profile-box');
 
 // #endregion
 
