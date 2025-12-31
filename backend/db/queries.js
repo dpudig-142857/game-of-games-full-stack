@@ -1800,7 +1800,7 @@ export async function getTotalStats() {
         FROM session_totals;
     `);
     const logs = await pool.query(`
-        WITH players_per_session AS (
+        WITH accounts_per_session AS (
             SELECT session_id, COUNT(*) AS num_players
             FROM gog_players
             GROUP BY session_id
