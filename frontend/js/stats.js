@@ -904,7 +904,7 @@ async function initialise() {
     
     const res = await fetch(`${BASE_ROUTE}/api/stats`);
     const stats = await res.json();
-    
+
     headerTitle.innerHTML = '';
     headerTitle.appendChild(header('h1', `Game of Games Stats`));
 
@@ -922,6 +922,7 @@ async function initialise() {
 
     const btns = document.querySelectorAll('.bottom-button');
     btns.forEach(btn => {
+        btn.style.display = 'flex';
         btn.addEventListener('click', () => {
             if (btn.id == 'playersBtn') showPlayers();
             if (btn.id == 'gamesBtn') showGames();
