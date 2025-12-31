@@ -1410,7 +1410,63 @@ body.modal-active {
   z-index: 1001; /* Just above the clone */
 }
 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+    text-shadow: none;
+}
 
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid #007BFF;
+    width: 75%;
+    height: 80%;
+    overflow-y: auto;
+    text-align: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    align-items: center;
+}
+
+.middle-close-div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    position: relative;
+    top: 1rem;
+    right: -1rem;
+    margin: -2rem;
+}
+
+.middle-close {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0 0.75rem;
+}
+
+.middle-close:hover {
+    transform: scale(1.3);
+    color: #33eaff;
+}
 
 #voting_game {
     display: none;
