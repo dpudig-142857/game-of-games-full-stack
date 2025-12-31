@@ -7387,8 +7387,8 @@ function noSession() {
 }
 
 function initialiseButtons() {
-    const homeBtn = document.getElementById('home-button');
-    homeBtn.addEventListener('click', () => saveGoG());
+    //const homeBtn = document.getElementById('home-button');
+    //homeBtn.addEventListener('click', () => saveGoG());
 
     const finishBtn = document.getElementById('finish');
     finishBtn.addEventListener('click', () => finishGoG());
