@@ -7391,6 +7391,7 @@ function initialiseButtons() {
     //homeBtn.addEventListener('click', () => saveGoG());
 
     const finishBtn = document.getElementById('finish');
+    finishBtn.style.display = 'flex';
     finishBtn.addEventListener('click', () => finishGoG());
 
     const neighBtns = document.querySelectorAll('.neigh-button');
