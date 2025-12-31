@@ -7480,9 +7480,9 @@ async function initialise(sessionId) {
         headerTitle.innerHTML = '';
         if (!user_data.authenticated || user_data.user.role != 'admin') {
             headerTitle.appendChild(header('h1', `Access Denied`));
-            document.getElementById('finish').style.display = 'none';
             return;
         }
+        headerTitle.appendChild(header('h1', `Access Granted`));
 
         gog_version = user_data.user.version;
 
@@ -7551,6 +7551,7 @@ async function initialise(sessionId) {
             final_results: []
         };
 
+        headerTitle.innerHTML = '';
         headerTitle.appendChild(header('h1', `${theGame.gog_id}`));
         updateHeaderButtons('start');
 
