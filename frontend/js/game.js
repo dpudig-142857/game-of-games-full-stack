@@ -7486,7 +7486,7 @@ async function initialise(sessionId) {
 
         console.log(user_data);
         headerTitle.innerHTML = '';
-        if (!user_data.authenticated || user_data.user.role != 'admin') {
+        if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {
             headerTitle.appendChild(header('h1', `Access Denied`));
             return;
         }

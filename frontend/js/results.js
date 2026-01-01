@@ -929,6 +929,8 @@ async function initialise() {
         return;
     }
     headerTitle.appendChild(header('h1', `Access Granted`));
+
+    gog_version = user_data.user.version;
     
     const gamesRes = await fetch (`${BASE_ROUTE}/api/games`);
     gamesInfo = await gamesRes.json();

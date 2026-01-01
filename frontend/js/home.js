@@ -99,6 +99,8 @@ async function initialise() {
     const close = document.getElementById('user-profile-close');
     close.addEventListener('click', () => closeUserModal(modal, userBox));
 
+    gog_version = user_data.user?.version ?? 'public';
+
     const mainBtns = document.getElementById('buttons');
     mainBtns.style.display = user_data?.authenticated ? 'flex' : 'none';
     

@@ -408,11 +408,13 @@ async function initialise() {
 
         console.log(user_data);
         headerTitle.innerHTML = '';
-        if (!user_data.authenticated || user_data.user.role != 'admin') {
+        if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {
             headerTitle.appendChild(header('h1', `Access Denied`));
             return;
         }
         headerTitle.appendChild(header('h1', `Access Granted`));
+
+        gog_version = user_data.user.version;
         
         const res = await fetch(theRoute(null, ' '));
         sessions = await res.json();

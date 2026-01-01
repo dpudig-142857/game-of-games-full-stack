@@ -1180,20 +1180,20 @@ async function initialize() {
     close.addEventListener('click', () => closeUserModal(modal, userBox));
     
     console.log(user_data);
-    if (!user_data.authenticated || user_data.user.role != 'admin') {
+    if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {
         hide('Access Denied');
         return;
-    } else {
-        gog_version = user_data.user.version;
-        const btns = document.querySelectorAll('.bottom-button');
-        btns.forEach(btn => {
-            if (btn.id != 'startBtn') {
-                btn.style.display = 'block';
-            } else {
-                btn.style.display = 'none';
-            }
-        });
     }
+
+    gog_version = user_data.user.version;
+    const btns = document.querySelectorAll('.bottom-button');
+    btns.forEach(btn => {
+        if (btn.id != 'startBtn') {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
 
     const res = await fetch(`${route}/${sessionId}/creating`);
     const info = await res.json();
@@ -1251,7 +1251,6 @@ async function initialize() {
 
     }
 
-    const btns = document.querySelectorAll('.bottom-button');
     btns.forEach(btn => {
         if (btn.id == 'startBtn') {
             if (sessionType == 'continue') {
