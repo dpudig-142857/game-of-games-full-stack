@@ -483,18 +483,16 @@ function updateAvatar() {
 
 function setupColour(div) {
     const section = document.createElement('div');
-    section.id = `${type}_section`;
+    section.id = 'colour_section';
     section.className = 'avatar_options_section';
     div.appendChild(section);
 
-    const text = 'Colour:';
-
     section.appendChild(header(
-        'h2', text, '', '', 'avatar_option_title'
+        'h2', 'Colour:', '', '', 'avatar_option_title'
     ));
 
     const options = document.createElement('div');
-    options.id = `${type}_options`;
+    options.id = 'colour_options';
     options.className = 'avatar_option';
     section.appendChild(options);
     
