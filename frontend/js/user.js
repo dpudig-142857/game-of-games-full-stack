@@ -504,6 +504,7 @@ function setupColour(div) {
     const option = document.createElement('input');
     option.id = 'avatar_colour';
     option.type = 'color';
+    option.value = '#ff0000';
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
