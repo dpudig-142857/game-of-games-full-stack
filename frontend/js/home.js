@@ -22,15 +22,13 @@ import {
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
-import { schema } from '@dicebear/core';
-import { micah } from '@dicebear/collection';
+import * as allStyles from '@dicebear/collection';
 
-const options = {
-  ...schema.properties,
-  ...micah.schema.properties,
-};
+Object.entries(allStyles).forEach(([name, style]) => {
+  console.log(name, style.schema?.properties); // some styles may not have schema
+});
 
-console.log(options);
+console.log(allOptions);
 
 let gog_version = 'private' // public vs private
 let next = -1;
