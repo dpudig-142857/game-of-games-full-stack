@@ -402,12 +402,10 @@ function renderAvatarPage(div, user, type) {
     avatar_options.id = 'avatar_options';
     avatar_div.appendChild(avatar_options);
 
-    setupOption(avatar_options, 'eye');
-    setupOption(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'eye');
+    setupGallery(avatar_options, 'mouth');
     setupColour(avatar_options);
     /*
-Colour
-
 Flip
 Rotate
 Scale
@@ -516,7 +514,7 @@ function setupColour(div) {
     });
 }
 
-function setupOption(div, type) {
+function setupGallery(div, type) {
     const section = document.createElement('div');
     section.id = `${type}_section`;
     section.className = 'avatar_options_section';
