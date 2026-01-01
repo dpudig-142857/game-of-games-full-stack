@@ -24,8 +24,8 @@ import {
 import { BASE_ROUTE } from './config.js';
 
 // Loop over all styles
-for (const [name, style] of Object.entries(window.allDiceBear)) {
-    console.log(name, ' - ', style.schema.properties);
+for (const [styleName, options] of Object.entries(window.allDiceBearOptions)) {
+    console.log(`Style: ${styleName}`, Object.keys(options));
 }
 
 let gog_version = 'private' // public vs private
