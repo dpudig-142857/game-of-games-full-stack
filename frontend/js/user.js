@@ -2,47 +2,20 @@ import {
     header,
     styleBox
 } from './utils.js';
-
 import { BASE_ROUTE } from './config.js';
+import { schema } from '@dicebear/core';
+import { micah } from '@dicebear/collection';
+
+const options = {
+  ...schema.properties,
+  ...micah.schema.properties,
+};
+
+console.log(options);
+
 let route = `${BASE_ROUTE}/api/auth`;
 
 const default_pfp = 'assets/default_pfp.svg';
-
-const eye_list = [
-    'closed',
-    'closed2',
-    'crying',
-    'cute',
-    'glasses',
-    'love',
-    'pissed',
-    'plain',
-    'sad',
-    'shades',
-    'sleepClose',
-    'stars',
-    'tearDrop',
-    'wink',
-    'wink2'
-];
-
-const mouth_list = [
-    'cute',
-    'drip',
-    'faceMask',
-    'kissHeart',
-    'lilSmile',
-    'pissed',
-    'plain',
-    'sad',
-    'shout',
-    'shy',
-    'sick',
-    'smileLol',
-    'smileTeeth',
-    'tongueOut',
-    'wideSmile'
-];
 
 let user_data = null;
 
@@ -348,15 +321,53 @@ function renderLoginForm(div) {
 // #region
 
 let curr_setup = {
+    'theme': 'fun-emoji',
+    'seed': '0',
     'flip': 'false',
     'rotate': '0',
     'scale': '100',
     'colour': '',
     'x': '0',
     'y': '0',
-    'eyes': '',
-    'mouth': ''
-}
+    'eyes': 'plain',
+    'mouth': 'plain'
+};
+
+const eye_list = [
+    'closed',
+    'closed2',
+    'crying',
+    'cute',
+    'glasses',
+    'love',
+    'pissed',
+    'plain',
+    'sad',
+    'shades',
+    'sleepClose',
+    'stars',
+    'tearDrop',
+    'wink',
+    'wink2'
+];
+
+const mouth_list = [
+    'cute',
+    'drip',
+    'faceMask',
+    'kissHeart',
+    'lilSmile',
+    'pissed',
+    'plain',
+    'sad',
+    'shout',
+    'shy',
+    'sick',
+    'smileLol',
+    'smileTeeth',
+    'tongueOut',
+    'wideSmile'
+];
 
 function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
@@ -383,6 +394,8 @@ function renderAvatarPage(div, user, type) {
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
     avatar_preview.src = createAvatarLink(
+        'fun-emoji',
+        `${user.player_id}`,
         'true',
         '0',
         '100',
@@ -403,17 +416,25 @@ function renderAvatarPage(div, user, type) {
 }
 
 function createAvatarLink(
-    flip_var,
-    rotate_var,
-    scale_var,
-    colour_var,
-    x_var,
-    y_var,
-    eyes_var,
-    mouth_var
+    theme_var = 'fun-emoji',
+    seed_var = '0',
+    flip_var = 'false',
+    rotate_var = '0',
+    scale_var = '100',
+    colour_var = '',
+    x_var = '0',
+    y_var = '0',
+    eyes_var = 'plain',
+    mouth_var = 'plain'
 ) {
-    const base = 'https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50';
+    const base = `https://api.dicebear.com/9.x/`;
     
+    const theme = `${theme_var}/svg?radius=50`;
+    curr_setup.theme = theme_var;
+    
+    const seed = `&seed=${seed_var}`;
+    curr_setup.seed = seed_var;
+
     const flip = `&flip=${flip_var}`;
     curr_setup.flip = flip_var;
     
@@ -439,12 +460,15 @@ function createAvatarLink(
     const mouth = `&mouth=${mouth_var}`;
     curr_setup.mouth = mouth_var;
 
-    return base + flip + rotate + scale + colour + x + y + eyes + mouth;
+    return base + theme + seed + flip + rotate +
+        scale + colour + x + y + eyes + mouth;
 }
 
 function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
     preview.src = createAvatarLink(
+        curr_setup.theme,
+        curr_setup.seed,
         curr_setup.flip,
         curr_setup.rotate,
         curr_setup.scale,
@@ -545,13 +569,24 @@ function renderSignUpPage(div) {
     div.innerHTML = '';
     div.parentElement.style.overflow = 'hidden';
 
-    // First name
-    // Family name
-    // Colour
-    // Birthday
+    // Step 1:
+
     // Username
     // Password
     // Confirm password
+
+    // If Username doesn't exist or passwords don't match, throw error
+
+    // Step 2:
+
+    // First name
+    // Family name
+    // Favourite Colour
+    // Birthday
+
+    // Step 3:
+    
+    // Build avatar
 
     const title = document.getElementById('user-profile-title');
     title.innerHTML = 'Sign Up';
@@ -620,6 +655,8 @@ function renderSignUpPage(div) {
     y
 
     const link = createAvatarLink(
+        'fun-emoji',
+        '0',
         'true',
         '0',
         '100',
