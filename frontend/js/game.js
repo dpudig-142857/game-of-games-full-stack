@@ -6679,7 +6679,7 @@ function setupSuperSmashBros(setup) {
     type.appendChild(createOption('', 'Tournament or Knockout...'))
     type.appendChild(createOption('Tournament', ''));
     type.appendChild(createOption('Knockout', ''));
-    type.appendChild(createOption('Knockout', ''));
+    type.appendChild(createOption('Table', ''));
     setup.appendChild(type);
 }
 
@@ -6735,6 +6735,7 @@ function generateMultipleResults() {
         if (!type) return [];
         if (type == 'Tournament') return generateTournamentResults();
         if (type == 'Knockout') return generateKnockoutResults();
+        if (type == 'Table') return generateTableResults();
     } else if (currGame.name == 'Switch Basketball') {
         const type = document.getElementById('s_basketball_type').value;
         if (!type) return [];
@@ -6750,6 +6751,7 @@ function submitMultipleGame(results) {
         if (!type) return;
         if (type == 'Tournament') submitTournamentGame(results);
         if (type == 'Knockout') submitKnockoutGame(results);
+        if (type == 'Table') submitTableGame(results);
     } else if (currGame.name == 'Switch Basketball') {
         const type = document.getElementById('s_basketball_type').value;
         if (!type) return [];
