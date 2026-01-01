@@ -404,6 +404,16 @@ function renderAvatarPage(div, user, type) {
 
     setupOption(avatar_options, 'eye');
     setupOption(avatar_options, 'mouth');
+    setupColour(avatar_options);
+    /*
+Colour
+
+Flip
+Rotate
+Scale
+X
+Y
+    */
 }
 
 function createAvatarLink(
@@ -469,6 +479,41 @@ function updateAvatar() {
         curr_setup.eyes,
         curr_setup.mouth
     );
+}
+
+function setupColour(div) {
+    const section = document.createElement('div');
+    section.id = `${type}_section`;
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    const text = 'Colour:';
+
+    section.appendChild(header(
+        'h2', text, '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = `${type}_options`;
+    options.className = 'avatar_option';
+    section.appendChild(options);
+    
+    const option = document.createElement('input');
+    option.id = 'avatar_colour';
+    option.type = 'color';
+    options.appendChild(option);
+
+    option.addEventListener('input', (e) => {
+        // Get the selected color value
+        const selectedColor = e.target.value;
+        console.log(selectedColor);
+
+        // Update the background color of the box
+        //colorBox.style.backgroundColor = selectedColor;
+
+        // Update the displayed hex code
+        //colorValueDisplay.textContent = selectedColor;
+    });
 }
 
 function setupOption(div, type) {
