@@ -22,10 +22,9 @@ import {
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
-import * as DiceBear from '@dicebear/collection';
 
 // Loop over all styles
-for (const [name, style] of Object.entries(DiceBear)) {
+for (const [name, style] of Object.entries(window.allDiceBear)) {
     console.log(name, ' - ', style.schema.properties);
 }
 
