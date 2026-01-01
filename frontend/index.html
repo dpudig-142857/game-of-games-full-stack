@@ -74,62 +74,6 @@
         <div class='footer-right' id='logo-area'></div>
     </footer>
 
-    <script type="module">
-        import * as adventurer from "https://cdn.jsdelivr.net/npm/@dicebear/adventurer@10/dist/index.esm.js";
-        import * as adventurerNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/adventurer-neutral@10/dist/index.esm.js";
-        import * as avataaars from "https://cdn.jsdelivr.net/npm/@dicebear/avataaars@10/dist/index.esm.js";
-        import * as avataaarsNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/avataaars-neutral@10/dist/index.esm.js";
-        import * as bigEars from "https://cdn.jsdelivr.net/npm/@dicebear/big-ears@10/dist/index.esm.js";
-        import * as bigEarsNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/big-ears-neutral@10/dist/index.esm.js";
-        import * as bigSmile from "https://cdn.jsdelivr.net/npm/@dicebear/big-smile@10/dist/index.esm.js";
-        import * as bottts from "https://cdn.jsdelivr.net/npm/@dicebear/bottts@10/dist/index.esm.js";
-        import * as botttsNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/bottts-neutral@10/dist/index.esm.js";
-        import * as croodles from "https://cdn.jsdelivr.net/npm/@dicebear/croodles@10/dist/index.esm.js";
-        import * as croodlesNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/croodles-neutral@10/dist/index.esm.js";
-        import * as dylan from "https://cdn.jsdelivr.net/npm/@dicebear/dylan@10/dist/index.esm.js";
-        import * as funEmoji from "https://cdn.jsdelivr.net/npm/@dicebear/fun-emoji@10/dist/index.esm.js";
-        import * as glass from "https://cdn.jsdelivr.net/npm/@dicebear/glass@10/dist/index.esm.js";
-        import * as icons from "https://cdn.jsdelivr.net/npm/@dicebear/icons@10/dist/index.esm.js";
-        import * as identicon from "https://cdn.jsdelivr.net/npm/@dicebear/identicon@10/dist/index.esm.js";
-        import * as initials from "https://cdn.jsdelivr.net/npm/@dicebear/initials@10/dist/index.esm.js";
-        import * as lorelei from "https://cdn.jsdelivr.net/npm/@dicebear/lorelei@10/dist/index.esm.js";
-        import * as loreleiNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/lorelei-neutral@10/dist/index.esm.js";
-        import * as micah from "https://cdn.jsdelivr.net/npm/@dicebear/micah@10/dist/index.esm.js";
-        import * as miniavs from "https://cdn.jsdelivr.net/npm/@dicebear/miniavs@10/dist/index.esm.js";
-        import * as notionists from "https://cdn.jsdelivr.net/npm/@dicebear/notionists@10/dist/index.esm.js";
-        import * as notionistsNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/notionists-neutral@10/dist/index.esm.js";
-        import * as openPeeps from "https://cdn.jsdelivr.net/npm/@dicebear/open-peeps@10/dist/index.esm.js";
-        import * as personas from "https://cdn.jsdelivr.net/npm/@dicebear/personas@10/dist/index.esm.js";
-        import * as pixelArt from "https://cdn.jsdelivr.net/npm/@dicebear/pixel-art@10/dist/index.esm.js";
-        import * as pixelArtNeutral from "https://cdn.jsdelivr.net/npm/@dicebear/pixel-art-neutral@10/dist/index.esm.js";
-        import * as rings from "https://cdn.jsdelivr.net/npm/@dicebear/rings@10/dist/index.esm.js";
-        import * as shapes from "https://cdn.jsdelivr.net/npm/@dicebear/shapes@10/dist/index.esm.js";
-        import * as thumbs from "https://cdn.jsdelivr.net/npm/@dicebear/thumbs@10/dist/index.esm.js";
-
-        const styles = {
-            adventurer, adventurerNeutral, avataaars, avataaarsNeutral,
-            bigEars, bigEarsNeutral, bigSmile,
-            bottts, botttsNeutral,
-            croodles, croodlesNeutral,
-            dylan, funEmoji, glass, icons, identicon, initials,
-            lorelei, loreleiNeutral, micah, miniavs,
-            notionists, notionistsNeutral,
-            openPeeps, personas,
-            pixelArt, pixelArtNeutral,
-            rings, shapes, thumbs
-        };
-
-        // 🔥 Build ALL OPTIONS object
-        const allOptions = {};
-
-        for (const [name, style] of Object.entries(styles)) {
-            allOptions[name] = style.schema?.properties ?? {};
-        }
-
-        // Make globally accessible to all modules
-        window.allDiceBearStyles = styles;
-        window.allDiceBearOptions = allOptions;
-    </script>
     <script type='module' src='../js/home.js'></script>
 </body>
 </html>

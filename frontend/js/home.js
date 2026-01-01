@@ -22,11 +22,19 @@ import {
 } from '../js/utils.js';
 
 import { BASE_ROUTE } from './config.js';
+import * as DiceBear from '@dicebear/collection';
 
-// Loop over all styles
-for (const [styleName, options] of Object.entries(window.allDiceBearOptions)) {
-    console.log(`Style: ${styleName}`, Object.keys(options));
+const allOptions = {};
+
+for (const [styleName, style] of Object.entries(DiceBear)) {
+    allOptions[styleName] = style.schema?.properties ?? {};
 }
+
+Object.entries(allOptions).forEach(([style, options]) => {
+    Object.entries(options).forEach(([optionName, optionDef]) => {
+        console.log(style, optionName, optionDef.enum);
+    });
+});
 
 let gog_version = 'private' // public vs private
 let next = -1;
