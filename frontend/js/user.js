@@ -461,8 +461,13 @@ function createAvatarLink(
     const mouth = `&mouth=${mouth_var}`;
     curr_setup.mouth = mouth_var;
 
-    return base + theme + seed + flip + rotate +
+    const final = base + theme + seed + flip + rotate +
         scale + colour + x + y + eyes + mouth;
+
+    console.log(final);
+    return final;
+    //return base + theme + seed + flip + rotate +
+    //    scale + colour + x + y + eyes + mouth;
 }
 
 function updateAvatar() {
@@ -577,8 +582,6 @@ function updateEye(option, dir) {
 function updateMouth(option, dir) {
     const curr = option.innerHTML;
     let i = mouth_list.indexOf(curr);
-    console.log(i);
-    console.log(mouth_list);
     if (dir == 'left') i -= 1;
     if (dir == 'right') i += 1;
     if (i == -1) i = mouth_list.length - 1;
