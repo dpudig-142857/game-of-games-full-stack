@@ -3,15 +3,6 @@ import {
     styleBox
 } from './utils.js';
 import { BASE_ROUTE } from './config.js';
-import { schema } from '@dicebear/core';
-import { micah } from '@dicebear/collection';
-
-const options = {
-  ...schema.properties,
-  ...micah.schema.properties,
-};
-
-console.log(options);
 
 let route = `${BASE_ROUTE}/api/auth`;
 
