@@ -26,7 +26,7 @@ import * as DiceBear from '@dicebear/collection';
 
 // Loop over all styles
 for (const [name, style] of Object.entries(DiceBear)) {
-  console.log(name, style.schema.properties);
+    console.log(name, ' - ', style.schema.properties);
 }
 
 let gog_version = 'private' // public vs private

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@dicebear/collection": "^9.2.4",
     "brackets-viewer": "^1.6.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
