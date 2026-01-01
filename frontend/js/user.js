@@ -445,8 +445,8 @@ function createAvatarLink(
     const scale = `&scale=${scale_var}`;
     curr_setup.scale = scale_var;
     
-    const colour = colour_var == '' || colour_var == '[]' ?
-        `&backgroundColor[]` : `&backgroundColor=${colour_var}`;
+    const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
+        colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
     curr_setup.colour = colour_var;
     
     const x = `&translateX=${x_var}`;
@@ -461,13 +461,8 @@ function createAvatarLink(
     const mouth = `&mouth=${mouth_var}`;
     curr_setup.mouth = mouth_var;
 
-    const final = base + theme + seed + flip + rotate +
+    return base + theme + seed + flip + rotate +
         scale + colour + x + y + eyes + mouth;
-
-    console.log(final);
-    return final;
-    //return base + theme + seed + flip + rotate +
-    //    scale + colour + x + y + eyes + mouth;
 }
 
 function updateAvatar() {
