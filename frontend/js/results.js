@@ -228,24 +228,9 @@ function generateResults() {
         const player_id = p.player_id;
         const name = p.name;
         const points = stat.reduce((s, [o, k]) => o.includes('_point') ? s + k : s, 0);
-        let cones = 
-            gog_version == 'private' ?
-            stat.reduce((s, [o, k]) => o.includes('_cone') ? s + k : s, 0) :
-            gog_version == 'public' ?
-            stat.reduce((s, [o, k]) => {
-                o.includes('_cone') && !o.includes('f20g_cone') ? s + k : s, 0
-            }) : 0;
-
-
-        if (gog_version == 'private') {
-            cones = stat.reduce((s, [o, k]) => {
-                o.includes('_cone') ? s + k : s, 0
-            });
-        } else if (gog_version == 'public') {
-            cones = stat.reduce((s, [o, k]) => {
-                o.includes('_cone') && !o.includes('f20g_cone') ? s + k : s, 0
-            });
-        }
+        let cones = stat.reduce((s, [o, k]) => o.includes('_cone') ? s + k : s, 0);
+        console.log(cones);
+        console.log(p);
 
         if (pointsSystem == 'Points & Cones') {
             results.push({ player_id, name, points, cones });
@@ -657,6 +642,7 @@ function showPlayers() {
         return place != 0 ? place : nameA.localeCompare(nameB);
     })
     .forEach(r => {
+        console.log(r);
         const player = displayNames.find(n => n.player_id == r.player_id);
         const info = allPlayers.find(p => p.player_id == r.player_id);
 

@@ -3311,7 +3311,7 @@ function setupMarioParty(setup) {
     const character = document.createElement('div');
     character.id = 'mario_party_character';
 
-    const btn = createButton(`${currGame.tag}_start`, 'button', 'Start');
+    const btn = createButton(`mario_party_start`, 'button', 'Start');
     styleButton(btn, curr_colour.text, curr_colour.hex, 'none');
     btn.style.display = 'none';
 
@@ -3472,7 +3472,7 @@ function setupMarioParty(setup) {
 }
 
 function addMarioPartyExtras(header) {
-    let game = theGame.games.find(g => g.name == currGame.name && g.num == gameNumber);
+    let game = theGame.games.find(g => g.name == 'Mario Party' && g.num == gameNumber);
     
     const versionDiv = document.getElementById('mario_party_version');
     const mapDiv = document.getElementById('mario_party_map');
@@ -3508,11 +3508,11 @@ function createMarioParty() {
         });
     }
 
-    const gameDiv = document.getElementById(`${currGame.tag}_game`);
+    const gameDiv = document.getElementById(`mario_party_game`);
     gameDiv.appendChild(document.createElement('br'));
 
     const table = document.createElement('table');
-    table.id = `${currGame.tag}_table`;
+    table.id = `mario_party_table`;
 
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
@@ -3589,7 +3589,7 @@ function createMarioParty() {
 }
 
 function generateMarioPartyResults() {
-    const table = document.getElementById(`${currGame.tag}_table`);
+    const table = document.getElementById(`mario_party_table`);
     const rows = table.querySelectorAll('tbody tr');
     const rawResults = [];
 
@@ -7051,6 +7051,7 @@ function createGame() {
 
     if (currGame.name == 'Alphabetix') setupAlphabetix(setup);
     if (currGame.name == 'Mario Party') setupMarioParty(setup);
+    if (currGame.name == 'Lego Party') setupMarioParty(setup);
     if (currGame.name == 'Betrayal') setupBetrayal(setup);
     if (currGame.name == 'Five Crowns') setupFiveCrowns(setup);
     if (currGame.name == 'Mario Kart') setupMarioKart(setup);
