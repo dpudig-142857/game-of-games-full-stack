@@ -229,8 +229,7 @@ function generateResults() {
         const name = p.name;
         const points = stat.reduce((s, [o, k]) => o.includes('_point') ? s + k : s, 0);
         let cones = stat.reduce((s, [o, k]) => o.includes('_cone') ? s + k : s, 0);
-        console.log(cones);
-        console.log(p);
+        if (gog_version == 'public') cones -= p.f20g_cone;
 
         if (pointsSystem == 'Points & Cones') {
             results.push({ player_id, name, points, cones });
