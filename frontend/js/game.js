@@ -6679,6 +6679,7 @@ function setupSuperSmashBros(setup) {
     type.appendChild(createOption('', 'Tournament or Knockout...'))
     type.appendChild(createOption('Tournament', ''));
     type.appendChild(createOption('Knockout', ''));
+    type.appendChild(createOption('Knockout', ''));
     setup.appendChild(type);
 }
 
@@ -6704,6 +6705,10 @@ function createMultiple() {
             currGame.results_type = 'knockout';
             currGame.winner_criteria = 'last';
             createKnockout();
+        } else if (type == 'table') {
+            currGame.results_type = 'table';
+            currGame.winner_criteria = 'lowest';
+            createTable();
         }
     } else if (currGame.name == 'Switch Basketball') {
         const type = document.getElementById('s_basketball_type').value;
