@@ -497,7 +497,7 @@ function setupColour(div) {
     section.appendChild(options);
 
     const colourHeader = header(
-        'h2', 'plain', '', 'colour_option', 'avatar_option_text'
+        'h2', '#000000', '', 'colour_option', 'avatar_option_text'
     );
     options.appendChild(colourHeader);
     
