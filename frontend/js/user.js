@@ -317,7 +317,7 @@ let curr_setup = {
     'flip': 'false',
     'rotate': '0',
     'scale': '100',
-    'colour': '',
+    'colour': '#000000',
     'x': '0',
     'y': '0',
     'eyes': 'plain',
@@ -390,7 +390,7 @@ function renderAvatarPage(div, user, type) {
         'true',
         '0',
         '100',
-        'ff0000',
+        '#000000',
         '0',
         '0',
         'plain',
@@ -405,6 +405,7 @@ function renderAvatarPage(div, user, type) {
     setupGallery(avatar_options, 'eye');
     setupGallery(avatar_options, 'mouth');
     setupColour(avatar_options);
+    
     /*
 Flip
 Rotate
@@ -420,7 +421,7 @@ function createAvatarLink(
     flip_var = 'false',
     rotate_var = '0',
     scale_var = '100',
-    colour_var = '',
+    colour_var = '#000000',
     x_var = '0',
     y_var = '0',
     eyes_var = 'plain',
@@ -692,7 +693,7 @@ function renderSignUpPage(div) {
         'true',
         '0',
         '100',
-        'ff0000',
+        '#000000',
         '0',
         '0',
         'shades',
