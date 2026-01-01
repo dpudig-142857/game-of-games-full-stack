@@ -80,6 +80,293 @@ console.log(allDiceBearOptions);
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
 // 
+//                          Build Avatar
+// 
+
+
+// #region
+
+let curr_setup = {
+    'theme': 'fun-emoji',
+    'seed': '0',
+    'flip': 'false',
+    'rotate': '0',
+    'scale': '100',
+    'colour': '#ffffff',
+    'x': '0',
+    'y': '0',
+    'eyes': 'plain',
+    'mouth': 'plain'
+};
+
+const eye_list = [
+    'closed',
+    'closed2',
+    'crying',
+    'cute',
+    'glasses',
+    'love',
+    'pissed',
+    'plain',
+    'sad',
+    'shades',
+    'sleepClose',
+    'stars',
+    'tearDrop',
+    'wink',
+    'wink2'
+];
+
+const mouth_list = [
+    'cute',
+    'drip',
+    'faceMask',
+    'kissHeart',
+    'lilSmile',
+    'pissed',
+    'plain',
+    'sad',
+    'shout',
+    'shy',
+    'sick',
+    'smileLol',
+    'smileTeeth',
+    'tongueOut',
+    'wideSmile'
+];
+
+export function renderAvatarPage(div, user, type) {
+    div.innerHTML = '';
+
+    const title = document.getElementById('user-profile-title');
+
+    if (type == 'creating') {
+        title.textContent = 'Creating Avatar';
+    } else if (type == 'updating') {
+        title.textContent = 'Updating Avatar';
+    } else {
+
+    }
+
+    console.log(user);
+    const avatar_div = document.createElement('div');
+    avatar_div.id = 'avatar_div';
+    div.appendChild(avatar_div);
+
+    const avatar_preview_div = document.createElement('div');
+    avatar_preview_div.id = 'avatar_preview_div';
+    avatar_div.appendChild(avatar_preview_div);
+
+    const avatar_preview = document.createElement('img');
+    avatar_preview.id = 'avatar_preview';
+    avatar_preview.src = createAvatarLink(
+        'fun-emoji',
+        `${user.player_id}`,
+        'true',
+        '0',
+        '100',
+        '#ffffff',
+        '0',
+        '0',
+        'plain',
+        'lilSmile'
+    );
+    avatar_preview_div.appendChild(avatar_preview);
+
+    const avatar_options = document.createElement('div');
+    avatar_options.id = 'avatar_options';
+    avatar_div.appendChild(avatar_options);
+
+    setupGallery(avatar_options, 'eye');
+    setupGallery(avatar_options, 'mouth');
+    setupColour(avatar_options);
+    
+    /*
+Flip
+Rotate
+Scale
+X
+Y
+    */
+}
+
+export function createAvatarLink(
+    theme_var = 'fun-emoji',
+    seed_var = '0',
+    flip_var = 'false',
+    rotate_var = '0',
+    scale_var = '100',
+    colour_var = '#ffffff',
+    x_var = '0',
+    y_var = '0',
+    eyes_var = 'plain',
+    mouth_var = 'plain'
+) {
+    const base = `https://api.dicebear.com/9.x/`;
+    
+    const theme = `${theme_var}/svg?radius=50`;
+    curr_setup.theme = theme_var;
+    
+    const seed = `&seed=${seed_var}`;
+    curr_setup.seed = seed_var;
+
+    const flip = `&flip=${flip_var}`;
+    curr_setup.flip = flip_var;
+    
+    const rotate = `&rotate=${rotate_var}`;
+    curr_setup.rotate = rotate_var;
+    
+    const scale = `&scale=${scale_var}`;
+    curr_setup.scale = scale_var;
+    
+    const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
+        colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
+    curr_setup.colour = colour_var;
+    
+    const x = `&translateX=${x_var}`;
+    curr_setup.x = x_var;
+    
+    const y = `&translateY=${y_var}`;
+    curr_setup.y = y_var;
+    
+    const eyes = `&eyes=${eyes_var}`;
+    curr_setup.eyes = eyes_var;
+    
+    const mouth = `&mouth=${mouth_var}`;
+    curr_setup.mouth = mouth_var;
+
+    return base + theme + seed + flip + rotate +
+        scale + colour + x + y + eyes + mouth;
+}
+
+export function updateAvatar() {
+    const preview = document.getElementById('avatar_preview');
+    preview.src = createAvatarLink(
+        curr_setup.theme,
+        curr_setup.seed,
+        curr_setup.flip,
+        curr_setup.rotate,
+        curr_setup.scale,
+        curr_setup.colour,
+        curr_setup.x,
+        curr_setup.y,
+        curr_setup.eyes,
+        curr_setup.mouth
+    );
+}
+
+export function setupColour(div) {
+    const section = document.createElement('div');
+    section.id = 'colour_section';
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    section.appendChild(header(
+        'h2', 'Colour:', '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = 'colour_options';
+    options.className = 'avatar_option';
+    section.appendChild(options);
+
+    const colourHeader = header(
+        'h2', '#ffffff', '', 'colour_option', 'avatar_option_text'
+    );
+    options.appendChild(colourHeader);
+    
+    const option = document.createElement('input');
+    option.id = 'avatar_colour';
+    option.type = 'color';
+    option.value = '#ffffff';
+    options.appendChild(option);
+
+    option.addEventListener('input', (e) => {
+        // Get the selected color value
+        const colour = e.target.value;
+        colourHeader.innerHTML = colour;
+        curr_setup.colour = colour;
+        updateAvatar();
+    });
+}
+
+export function setupGallery(div, type) {
+    const section = document.createElement('div');
+    section.id = `${type}_section`;
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    const text = 
+        type == 'eye' ? 'Eyes:' :
+        type == 'mouth' ? 'Mouth:' : '';
+
+    section.appendChild(header(
+        'h2', text, '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = `${type}_options`;
+    options.className = 'avatar_option';
+    section.appendChild(options);
+    
+    const leftArrow = document.createElement('img');
+    leftArrow.className = 'avatar_arrow';
+    leftArrow.id = 'left_arrow';
+    leftArrow.src = 'assets/arrow.svg';
+    options.appendChild(leftArrow);
+
+    const option = header(
+        'h2', 'plain', '', `${type}_option`, `avatar_option_text`
+    );
+    options.appendChild(option);
+
+    const rightArrow = document.createElement('img');
+    rightArrow.className = 'avatar_arrow';
+    rightArrow.id = 'right_arrow';
+    rightArrow.src = 'assets/arrow.svg';
+    options.appendChild(rightArrow);
+
+    leftArrow.addEventListener('click', () => {
+        if (type == 'eye') updateEye(option, 'left');
+        if (type == 'mouth') updateMouth(option, 'left');
+    });
+
+    rightArrow.addEventListener('click', () => {
+        if (type == 'eye') updateEye(option, 'right');
+        if (type == 'mouth') updateMouth(option, 'right');
+    });
+}
+
+export function updateEye(option, dir) {
+    const curr = option.innerHTML;
+    let i = eye_list.indexOf(curr);
+    if (dir == 'left') i -= 1;
+    if (dir == 'right') i += 1;
+    if (i == -1) i = eye_list.length - 1;
+    if (i == eye_list.length) i = 0;
+    option.innerHTML = eye_list[i];
+    curr_setup.eyes = eye_list[i];
+    updateAvatar();
+}
+
+function updateMouth(option, dir) {
+    const curr = option.innerHTML;
+    let i = mouth_list.indexOf(curr);
+    if (dir == 'left') i -= 1;
+    if (dir == 'right') i += 1;
+    if (i == -1) i = mouth_list.length - 1;
+    if (i == mouth_list.length) i = 0;
+    option.innerHTML = mouth_list[i];
+    curr_setup.mouth = mouth_list[i];
+    updateAvatar();
+}
+
+// #endregion
+
+
+// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+// 
 //                          Adventurer
 // 
 

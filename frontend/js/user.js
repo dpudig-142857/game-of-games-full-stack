@@ -311,56 +311,7 @@ function renderLoginForm(div) {
 
 // #region
 
-let curr_setup = {
-    'theme': 'fun-emoji',
-    'seed': '0',
-    'flip': 'false',
-    'rotate': '0',
-    'scale': '100',
-    'colour': '#ffffff',
-    'x': '0',
-    'y': '0',
-    'eyes': 'plain',
-    'mouth': 'plain'
-};
-
-const eye_list = [
-    'closed',
-    'closed2',
-    'crying',
-    'cute',
-    'glasses',
-    'love',
-    'pissed',
-    'plain',
-    'sad',
-    'shades',
-    'sleepClose',
-    'stars',
-    'tearDrop',
-    'wink',
-    'wink2'
-];
-
-const mouth_list = [
-    'cute',
-    'drip',
-    'faceMask',
-    'kissHeart',
-    'lilSmile',
-    'pissed',
-    'plain',
-    'sad',
-    'shout',
-    'shy',
-    'sick',
-    'smileLol',
-    'smileTeeth',
-    'tongueOut',
-    'wideSmile'
-];
-
-function renderAvatarPage(div, user, type) {
+/*export function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
     const title = document.getElementById('user-profile-title');
@@ -412,10 +363,10 @@ Rotate
 Scale
 X
 Y
-    */
+    
 }
 
-function createAvatarLink(
+export function createAvatarLink(
     theme_var = 'fun-emoji',
     seed_var = '0',
     flip_var = 'false',
@@ -464,7 +415,7 @@ function createAvatarLink(
         scale + colour + x + y + eyes + mouth;
 }
 
-function updateAvatar() {
+export function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
     preview.src = createAvatarLink(
         curr_setup.theme,
@@ -480,7 +431,7 @@ function updateAvatar() {
     );
 }
 
-function setupColour(div) {
+export function setupColour(div) {
     const section = document.createElement('div');
     section.id = 'colour_section';
     section.className = 'avatar_options_section';
@@ -515,7 +466,7 @@ function setupColour(div) {
     });
 }
 
-function setupGallery(div, type) {
+export function setupGallery(div, type) {
     const section = document.createElement('div');
     section.id = `${type}_section`;
     section.className = 'avatar_options_section';
@@ -562,29 +513,9 @@ function setupGallery(div, type) {
     });
 }
 
-function updateEye(option, dir) {
-    const curr = option.innerHTML;
-    let i = eye_list.indexOf(curr);
-    if (dir == 'left') i -= 1;
-    if (dir == 'right') i += 1;
-    if (i == -1) i = eye_list.length - 1;
-    if (i == eye_list.length) i = 0;
-    option.innerHTML = eye_list[i];
-    curr_setup.eyes = eye_list[i];
-    updateAvatar();
-}
+export function updateEye(option, dir) {
 
-function updateMouth(option, dir) {
-    const curr = option.innerHTML;
-    let i = mouth_list.indexOf(curr);
-    if (dir == 'left') i -= 1;
-    if (dir == 'right') i += 1;
-    if (i == -1) i = mouth_list.length - 1;
-    if (i == mouth_list.length) i = 0;
-    option.innerHTML = mouth_list[i];
-    curr_setup.mouth = mouth_list[i];
-    updateAvatar();
-}
+function updateMouth(option, dir) {*/
 
 // #endregion
 
