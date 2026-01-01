@@ -317,7 +317,7 @@ let curr_setup = {
     'flip': 'false',
     'rotate': '0',
     'scale': '100',
-    'colour': '#000000',
+    'colour': '#ff0000',
     'x': '0',
     'y': '0',
     'eyes': 'plain',
@@ -390,7 +390,7 @@ function renderAvatarPage(div, user, type) {
         'true',
         '0',
         '100',
-        '#000000',
+        '#ff0000',
         '0',
         '0',
         'plain',
@@ -421,7 +421,7 @@ function createAvatarLink(
     flip_var = 'false',
     rotate_var = '0',
     scale_var = '100',
-    colour_var = '#000000',
+    colour_var = '#ff0000',
     x_var = '0',
     y_var = '0',
     eyes_var = 'plain',
@@ -496,7 +496,7 @@ function setupColour(div) {
     section.appendChild(options);
 
     const colourHeader = header(
-        'h2', '#000000', '', 'colour_option', 'avatar_option_text'
+        'h2', '#ff0000', '', 'colour_option', 'avatar_option_text'
     );
     options.appendChild(colourHeader);
     
@@ -693,7 +693,7 @@ function renderSignUpPage(div) {
         'true',
         '0',
         '100',
-        '#000000',
+        '#ff0000',
         '0',
         '0',
         'shades',
