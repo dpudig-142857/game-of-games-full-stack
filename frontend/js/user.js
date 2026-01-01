@@ -495,6 +495,11 @@ function setupColour(div) {
     options.id = 'colour_options';
     options.className = 'avatar_option';
     section.appendChild(options);
+
+    const colourHeader = header(
+        'h2', 'plain', '', 'colour_option', 'avatar_option_text'
+    );
+    options.appendChild(colourHeader);
     
     const option = document.createElement('input');
     option.id = 'avatar_colour';
@@ -503,14 +508,10 @@ function setupColour(div) {
 
     option.addEventListener('input', (e) => {
         // Get the selected color value
-        const selectedColor = e.target.value;
-        console.log(selectedColor);
-
-        // Update the background color of the box
-        //colorBox.style.backgroundColor = selectedColor;
-
-        // Update the displayed hex code
-        //colorValueDisplay.textContent = selectedColor;
+        const colour = e.target.value;
+        colourHeader.innerHTML = colour;
+        curr_setup.colour = colour;
+        updateAvatar();
     });
 }
 
