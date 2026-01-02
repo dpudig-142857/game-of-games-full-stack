@@ -2240,6 +2240,16 @@ const breakConeGameBtn = document.getElementById('break-cone-button');
 let breakConeOptions = [];
 
 function openBreakCone() {
+    let breakTitle = document.getElementById('break-cone-title');
+    let breakBtn = document.getElementById('break-cone-button');
+    breakTitle.innerHTML = 
+        gog_version == 'private' ? `Who's having a break cone?`:
+        gog_version == 'public' ? `Who's having a break shot?` : '';
+
+    breakBtn.innerHTML = 
+        gog_version == 'private' ? 'Cone Time!' :
+        gog_version == 'public' ? 'Shot Time!' : '';
+    
     curr_colour.hex = '#33eaff';
     curr_colour.rgba = hexToRgba('#33eaff', 0.85);
     curr_colour.text = '#000000';
@@ -2345,6 +2355,16 @@ const victoryConeGameBtn = document.getElementById('victory-cone-button');
 let victoryConeOptions = [];
 
 function openVictoryCone() {
+    let victoryTitle = document.getElementById('victory-cone-title');
+    let victoryBtn = document.getElementById('victory-cone-button');
+    victoryTitle.innerHTML = 
+        gog_version == 'private' ? `Who's having a victory cone?`:
+        gog_version == 'public' ? `Who's having a victory shot?` : '';
+
+    victoryBtn.innerHTML = 
+        gog_version == 'private' ? 'Cone Time!' :
+        gog_version == 'public' ? 'Shot Time!' : '';
+    
     curr_colour.hex = '#33eaff';
     curr_colour.rgba = hexToRgba('#33eaff', 0.85);
     curr_colour.text = '#000000';
@@ -7294,26 +7314,6 @@ async function nextGame(from) {
     breakConeBtn.style.display = 'flex';
     victoryConeBtn.style.display = 'flex';
 
-    let breakTitle = document.getElementById('break-cone-title');
-    let breakBtn = document.getElementById('break-cone-button');
-    let victoryTitle = document.getElementById('victory-cone-title');
-    let victoryBtn = document.getElementById('victory-cone-button');
-    breakTitle.innerHTML = 
-        gog_version == 'private' ? `Who's having a break cone?`:
-        gog_version == 'public' ? `Who's having a break shot?` : '';
-
-    breakBtn.innerHTML = 
-        gog_version == 'private' ? 'Cone Time!' :
-        gog_version == 'public' ? 'Shot Time!' : '';
-    
-    victoryTitle.innerHTML = 
-        gog_version == 'private' ? `Who's having a victory cone?`:
-        gog_version == 'public' ? `Who's having a victory shot?` : '';
-
-    victoryBtn.innerHTML = 
-        gog_version == 'private' ? 'Cone Time!' :
-        gog_version == 'public' ? 'Shot Time!' : '';
-
     if (currGame.name == '4:20 Game') {
         four20game.style.display = 'none';
         camera.style.display = 'none';
@@ -7353,16 +7353,16 @@ async function nextGame(from) {
     const coin = document.getElementById('coin_box')
     if (coin) coin.style.display = 'none';
 
-    gameTitle.innerText = `Game ${gameNumber}`;
     four20game.style.display = 'none';
     wheelCone.style.display = 'none';
     askNeigh.style.display = 'none';
-
-    if (gameSelection == 'Choose') openChoosing();
-    if (gameSelection == 'Vote') openVote();
-
+    
     await saveGameState(false);
     closeGameBox('end');
+    
+    gameTitle.innerText = `Game ${gameNumber}`;
+    if (gameSelection == 'Choose') openChoosing();
+    if (gameSelection == 'Vote') openVote();
 }
 
 // #endregion
