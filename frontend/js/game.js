@@ -7229,7 +7229,7 @@ function startGame() {
 
 async function submitGame() {
     document.getElementById(`${currGame.tag}_game`).style.display = 'none';
-    const results = await generateResults();
+    const results = generateResults();
     
     let box = document.getElementById('coin_box');
     if (!box) {
@@ -7280,9 +7280,8 @@ function refreshGames() {
     refreshCount = ++theGame.refresh_count;
 }
 
-function nextGame(from) {
+async function nextGame(from) {
     gameNumber++;
-    closeGameBox('end');
     otherWelcome.innerHTML = `Game ${gameNumber}`;
     otherWelcome.style.display = 'flex';
     document.getElementById('end').style.display = 'none';
@@ -7333,7 +7332,8 @@ function nextGame(from) {
         } else if (gameSelection == 'Vote') {
             openVote();
         }
-        saveGameState(false);
+        await saveGameState(false);
+        closeGameBox('end');
         return;
     }
     
@@ -7361,7 +7361,8 @@ function nextGame(from) {
     if (gameSelection == 'Choose') openChoosing();
     if (gameSelection == 'Vote') openVote();
 
-    saveGameState(false);
+    await saveGameState(false);
+    closeGameBox('end');
 }
 
 // #endregion
@@ -7730,14 +7731,14 @@ async function saveGameState(incomplete) {
     try {
         const curr = theGame.games.at(-1);
         await fetch(`${route}/sessions/${sessionId}/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            theGame: theGame,
-            currentGame: curr,
-            currGameInfo: currGame,
-            incomplete: incomplete
-        })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                theGame: theGame,
+                currentGame: curr,
+                currGameInfo: currGame,
+                incomplete: incomplete
+            })
         });
         console.log(curr);
         console.log(currGame);
@@ -7758,7 +7759,7 @@ async function saveGoG() {
 }
 
 async function finishGoG() {
-    //saveGameState(false);
+    //await saveGameState(false);
 
     theGame.status = 'complete';
     theGame.finish_time = new Date();
