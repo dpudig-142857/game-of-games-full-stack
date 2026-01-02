@@ -7,72 +7,7 @@
 
 // #region
 
-import adventurer from './themes/adventurer.js';
-import adventurerNeutral from './themes/adventurer_neutral.js';
-import avataaars from './themes/avatars.js';
-import avataaarsNeutral from './themes/avatars_neutral.js';
-import basic from './themes/basic.js';
-import bigEars from './themes/big_ears.js';
-import bigEarsNeutral from './themes/big_ears_neutral.js';
-import bigSmile from './themes/big_smile.js';
-import bots from './themes/bots.js';
-import botsNeutral from './themes/bots_neutral.js';
-import croodles from './themes/croodles.js';
-import croodlesNeutral from './themes/croodles_neutral.js';
-import dylan from './themes/dylan.js';
-import funEmoji from './themes/fun_emoji.js';
-import glass from './themes/glass.js';
-import icons from './themes/icons.js';
-import identicon from './themes/identicon.js';
-import initials from './themes/initials.js';
-import lorelei from './themes/lorelei.js';
-import loreleiNeutral from './themes/lorelei_neutral.js';
-import micah from './themes/micah.js';
-import miniavs from './themes/miniavs.js';
-import notionists from './themes/notionists.js';
-import notionistsNeutral from './themes/notionists_neutral.js';
-import openPeeps from './themes/open_peeps.js';
-import personas from './themes/personas.js';
-import pixelArt from './themes/pixel_art.js';
-import pixelArtNeutral from './themes/pixel_art_neutral.js';
-import rings from './themes/rings.js';
-import shapes from './themes/shapes.js';
-import thumbs from './themes/thumbs.js';
 
-const allDiceBearOptions = {
-    adventurer: adventurer.schema.properties,
-    adventurerNeutral: adventurerNeutral.schema.properties,
-    avataaars: avataaars.schema.properties,
-    avataaarsNeutral: avataaarsNeutral.schema.properties,
-    bigEars: bigEars.schema.properties,
-    bigEarsNeutral: bigEarsNeutral.schema.properties,
-    bigSmile: bigSmile.schema.properties,
-    bottts: bottts.schema.properties,
-    botttsNeutral: botttsNeutral.schema.properties,
-    croodles: croodles.schema.properties,
-    croodlesNeutral: croodlesNeutral.schema.properties,
-    dylan: dylan.schema.properties,
-    funEmoji: funEmoji.schema.properties,
-    glass: glass.schema.properties,
-    icons: icons.schema.properties,
-    identicon: identicon.schema.properties,
-    initials: initials.schema.properties,
-    lorelei: lorelei.schema.properties,
-    loreleiNeutral: loreleiNeutral.schema.properties,
-    micah: micah.schema.properties,
-    miniavs: miniavs.schema.properties,
-    notionists: notionists.schema.properties,
-    notionistsNeutral: notionistsNeutral.schema.properties,
-    openPeeps: openPeeps.schema.properties,
-    personas: personas.schema.properties,
-    pixelArt: pixelArt.schema.properties,
-    pixelArtNeutral: pixelArtNeutral.schema.properties,
-    rings:  rings.schema.properties,
-    shapes: shapes.schema.properties,
-    thumbs: thumbs.schema.properties
-};
-
-console.log(allDiceBearOptions);
 
 // #endregion
 
