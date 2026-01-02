@@ -4,7 +4,7 @@
  * Plugin: https://www.figma.com/community/plugin/1005765655729342787
  * File: https://www.figma.com/file/HBLdITkkTnLs4M09BmCe4h
  */
-export const avataaars = {
+export const avatars = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
         accessories: {
