@@ -103,7 +103,7 @@ const allDiceBearOptions = {
     thumbs: thumbs.properties
 };
 
-//console.log(allDiceBearOptions);
+console.log(allDiceBearOptions);
 Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
     console.log(`${theme} - ${Object.keys(prop).join(', ')}`)
 });
