@@ -423,6 +423,44 @@ function renderAvatarPage(div, user, type) {
 
     setupGallery(avatar_options, 'eye');
     setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
+    setupGallery(avatar_options, 'mouth');
     setupColour(avatar_options);
     
     /*

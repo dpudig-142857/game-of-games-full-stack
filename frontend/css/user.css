@@ -271,6 +271,7 @@
     flex-direction: column;
     gap: 2.5rem;
     align-items: center;
+    overflow: auto;
 }
 
 .avatar_option_title {

@@ -7,7 +7,71 @@
 
 // #region
 
+import { adventurer } from './themes/adventurer.js';
+import { adventurerNeutral } from './themes/adventurer_neutral.js';
+import { avatars } from './themes/avatars.js';
+import { avatarsNeutral } from './themes/avatars_neutral.js';
+import { basic } from './themes/basic.js';
+import { bigEars } from './themes/big_ears.js';
+import { bigEarsNeutral } from './themes/big_ears_neutral.js';
+import { bigSmile } from './themes/big_smile.js';
+import { bots } from './themes/bots.js';
+import { botsNeutral } from './themes/bots_neutral.js';
+import { croodles } from './themes/croodles.js';
+import { croodlesNeutral } from './themes/croodles_neutral.js';
+import { dylan } from './themes/dylan.js';
+import { funEmoji } from './themes/fun_emoji.js';
+import { glass } from './themes/glass.js';
+import { icons } from './themes/icons.js';
+import { identicon } from './themes/identicon.js';
+import { initials } from './themes/initials.js';
+import { lorelei } from './themes/lorelei.js';
+import { loreleiNeutral } from './themes/lorelei_neutral.js';
+import { micah } from './themes/micah.js';
+import { miniavs } from './themes/miniavs.js';
+import { notionists } from './themes/notionists.js';
+import { notionistsNeutral } from './themes/notionists_neutral.js';
+import { openPeeps } from './themes/open_peeps.js';
+import { personas } from './themes/personas.js';
+import { pixelArt } from './themes/pixel_art.js';
+import { pixelArtNeutral } from './themes/pixel_art_neutral.js';
+import { rings } from './themes/rings.js';
+import { shapes } from './themes/shapes.js';
+import { thumbs } from './themes/thumbs.js';
 
+const basicDiceBearOptions = basic.properties;
+const allDiceBearOptions = {
+    adventurer: adventurer.properties,
+    adventurerNeutral: adventurerNeutral.properties,
+    avatars: avatars.properties,
+    avatarsNeutral: avatarsNeutral.properties,
+    bigEars: bigEars.properties,
+    bigEarsNeutral: bigEarsNeutral.properties,
+    bigSmile: bigSmile.properties,
+    bots: bots.properties,
+    botsNeutral: botsNeutral.properties,
+    croodles: croodles.properties,
+    croodlesNeutral: croodlesNeutral.properties,
+    dylan: dylan.properties,
+    funEmoji: funEmoji.properties,
+    glass: glass.properties,
+    icons: icons.properties,
+    identicon: identicon.properties,
+    initials: initials.properties,
+    lorelei: lorelei.properties,
+    loreleiNeutral: loreleiNeutral.properties,
+    micah: micah.properties,
+    miniavs: miniavs.properties,
+    notionists: notionists.properties,
+    notionistsNeutral: notionistsNeutral.properties,
+    openPeeps: openPeeps.properties,
+    personas: personas.properties,
+    pixelArt: pixelArt.properties,
+    pixelArtNeutral: pixelArtNeutral.properties,
+    rings:  rings.properties,
+    shapes: shapes.properties,
+    thumbs: thumbs.properties
+};
 
 // #endregion
 
@@ -21,7 +85,19 @@
 
 // #region
 
-
+console.log(basicDiceBearOptions);
+console.log(allDiceBearOptions);
+Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
+    let keys = [];
+    let vals = [];
+    Object.entries(prop).forEach(([key, val]) => {
+        if (!Object.keys(basicDiceBearOptions).includes(key)) {
+            keys.push(key);
+            vals.push(val);
+        }
+    });
+    console.log(`${theme} - ${keys.join(', ')}`);
+});
 
 // #endregion
 
