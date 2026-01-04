@@ -105,11 +105,7 @@ const allDiceBearOptions = {
 
 //console.log(allDiceBearOptions);
 Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
-    console.log(`--------------------${theme}--------------------`);
-    Object.entries(prop).forEach(([key, val]) => {
-        console.log(key);
-    });
-    console.log(`---------------------------------------------------`);
+    console.log(`${theme} - ${Object.keys(prop).join(', ')}`)
 });
 
 // #endregion
