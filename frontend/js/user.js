@@ -360,6 +360,25 @@ const mouth_list = [
     'wideSmile'
 ];
 
+// SEED ORDER
+// 0 - https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=ff0000&translateX=0&translateY=0&eyes=shades&mouth=cute"
+// 1 - 
+
+function getCurrSetupFromSeed(seed) {
+    const no_start = seed.split('api.dicebear.com/9.x/')[1];
+    curr_setup.theme = no_start.split('/svg?')[0];
+    const main = no_start.split('/svg?')[1];
+    const options = main.split('&');
+    for (const option in options) {
+        if (option == 'backgroundColor[]') {
+            curr_setup.colour = '';
+            continue;
+        }
+        const key = option.split('=')[0];
+        const val = option.split('=')[1];
+    }
+}
+
 function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
