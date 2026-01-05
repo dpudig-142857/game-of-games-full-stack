@@ -42,36 +42,36 @@ import { thumbs } from './themes/thumbs.js';
 
 const basicDiceBearOptions = basic.properties;
 const allDiceBearOptions = {
-    adventurer: adventurer.properties,
-    adventurerNeutral: adventurerNeutral.properties,
-    avatars: avatars.properties,
-    avatarsNeutral: avatarsNeutral.properties,
-    bigEars: bigEars.properties,
-    bigEarsNeutral: bigEarsNeutral.properties,
-    bigSmile: bigSmile.properties,
-    bots: bots.properties,
-    botsNeutral: botsNeutral.properties,
-    croodles: croodles.properties,
-    croodlesNeutral: croodlesNeutral.properties,
-    dylan: dylan.properties,
-    funEmoji: funEmoji.properties,
-    glass: glass.properties,
-    icons: icons.properties,
-    identicon: identicon.properties,
-    initials: initials.properties,
-    lorelei: lorelei.properties,
-    loreleiNeutral: loreleiNeutral.properties,
-    micah: micah.properties,
-    miniavs: miniavs.properties,
-    notionists: notionists.properties,
-    notionistsNeutral: notionistsNeutral.properties,
-    openPeeps: openPeeps.properties,
-    personas: personas.properties,
-    pixelArt: pixelArt.properties,
-    pixelArtNeutral: pixelArtNeutral.properties,
-    rings:  rings.properties,
-    shapes: shapes.properties,
-    thumbs: thumbs.properties
+    'adventurer': adventurer.properties,
+    'adventurer-neutral': adventurerNeutral.properties,
+    'avataaars': avatars.properties,
+    'avataaars-neutral': avatarsNeutral.properties,
+    'big-ears': bigEars.properties,
+    'big-ears-neutral': bigEarsNeutral.properties,
+    'big-smile': bigSmile.properties,
+    'bottts': bots.properties,
+    'bottts-neutral': botsNeutral.properties,
+    'croodles': croodles.properties,
+    'croodles-neutral': croodlesNeutral.properties,
+    'dylan': dylan.properties,
+    'fun-emoji': funEmoji.properties,
+    'glass': glass.properties,
+    'icons': icons.properties,
+    'identicon': identicon.properties,
+    'initials': initials.properties,
+    'lorelei': lorelei.properties,
+    'lorelei-neutral': loreleiNeutral.properties,
+    'micah': micah.properties,
+    'miniavs': miniavs.properties,
+    'notionists': notionists.properties,
+    'notionists-neutral': notionistsNeutral.properties,
+    'open-peeps': openPeeps.properties,
+    'personas': personas.properties,
+    'pixel-art': pixelArt.properties,
+    'pixel-art-neutral': pixelArtNeutral.properties,
+    'rings':  rings.properties,
+    'shapes': shapes.properties,
+    'thumbs': thumbs.properties
 };
 
 // #endregion
@@ -349,7 +349,7 @@ function setupThemeGallery(div) {
     options.appendChild(leftArrow);
 
     const option = header(
-        'h2', 'fun-emoji', '', `theme_option`, `avatar_option_text`
+        'h2', 'Fun Emoji', '', `theme_option`, `avatar_option_text`
     );
     options.appendChild(option);
 
@@ -369,17 +369,20 @@ function setupThemeGallery(div) {
 }
 
 function updateTheme(option, dir) {
-    const curr = option.innerHTML;
+    const curr = option.innerHTML.toLowerCase().join('-');
     let i = themes.indexOf(curr);
     if (dir == 'left') i -= 1;
     if (dir == 'right') i += 1;
     if (i == -1) i = themes.length - 1;
     if (i == themes.length) i = 0;
-    option.innerHTML = themes[i];
+    const theme = themes[i];
+    let words = [];
+    for (const word in theme.split('-')) {
+        words.push(word.charAt(0).toUpperCase() + word.slice(1));
+    }
+    option.innerHTML = words.join(' ');
     Object.entries(allDiceBearOptions).forEach(([key, val]) => {
-        if (key == themes[i]) {
-            console.log(val);
-        }
+        if (key == themes[i]) console.log(key, ' - ', val);
     });
     //curr_setup.theme = themes[i];
     //updateAvatar();
