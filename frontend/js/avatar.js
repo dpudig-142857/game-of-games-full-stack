@@ -268,27 +268,27 @@ function setupGallery(div, type, options) {
         'h2', text, '', '', 'avatar_option_title'
     ));
 
-    const options = document.createElement('div');
-    options.id = `${type}_options`;
-    options.className = 'avatar_option';
-    section.appendChild(options);
+    const options_div = document.createElement('div');
+    options_div.id = `${type}_options`;
+    options_div.className = 'avatar_option';
+    section.appendChild(options_div);
     
     const leftArrow = document.createElement('img');
     leftArrow.className = 'avatar_arrow';
     leftArrow.id = 'left_arrow';
     leftArrow.src = 'assets/arrow.svg';
-    options.appendChild(leftArrow);
+    options_div.appendChild(leftArrow);
 
     const option = header(
         'h2', `${options[0]}`, '', `${type}_option`, `avatar_option_text`
     );
-    options.appendChild(option);
+    options_div.appendChild(option);
 
     const rightArrow = document.createElement('img');
     rightArrow.className = 'avatar_arrow';
     rightArrow.id = 'right_arrow';
     rightArrow.src = 'assets/arrow.svg';
-    options.appendChild(rightArrow);
+    options_div.appendChild(rightArrow);
 
     leftArrow.addEventListener('click', () => {
         updateOption(option, options, 'left');
