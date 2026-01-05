@@ -218,7 +218,7 @@ function setupColour(div, key) {
     section.className = 'avatar_options_section';
     div.appendChild(section);
 
-    const text = `${key.split('Color')[0]} Colour:`;
+    const text = `${startUpper(key.split('Color')[0])} Colour:`;
     section.appendChild(header(
         'h2', text, '', '', 'avatar_option_title'
     ));
@@ -271,7 +271,8 @@ function setupGallery(div, type, options) {
     options_div.appendChild(leftArrow);
 
     const option = header(
-        'h2', `${options[0]}`, '', `${type}_option`, `avatar_option_text`
+        'h2', startUpper(options[0]), '',
+        `${type}_option`, `avatar_option_text`
     );
     options_div.appendChild(option);
 
@@ -373,6 +374,8 @@ function setupThemeGallery(div) {
     rightArrow.addEventListener('click', () => {
         updateTheme(otherOptions, option, 'right');
     });
+
+    renderFunEmoji();
 }
 
 function updateTheme(section, option, dir) {
@@ -474,8 +477,7 @@ function updateOption(div, options, dir) {
     if (i == -1) i = options.length - 1;
     if (i == options.length) i = 0;
     div.innerHTML = options[i];
-    console.log(options[i]);
-    //updateAvatar();
+    updateAvatar();
 }
 
 // #endregion
@@ -655,10 +657,8 @@ function renderDylan(div, props) {
             setupGallery(div, key, val.items.enum);
         } else if (key.includes('Color')) {
             setupColour(div, key);
-        } else if (key.includes('Probability')) {
-            let min = val.minimum;
-            let max = val.maximum;
-            console.log(key, ' - ', min, ' to ', max);
+        } else if (key == 'facialHairProbability') {
+            setupGallery(div, 'facialHair', ['Off', 'On']);
         } else {
             console.log(key, ' - ', val);
         }
@@ -712,6 +712,18 @@ const mouth_list = [
     'tongueOut',
     'wideSmile'
 ];
+
+function renderFunEmoji(div, props) {
+    div.innerHTML = '';
+
+    props.forEach(([key, val]) => {
+        if (key == 'eyes' || key == 'mouth') {
+            setupGallery(div, key, val.items.enum);
+        } else {
+            console.log(key, ' - ', val);
+        }
+    });
+}
 
 function updateEye(option, dir) {
     const curr = option.innerHTML;
