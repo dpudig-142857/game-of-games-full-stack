@@ -88,7 +88,6 @@ const allDiceBearOptions = {
 
 // #region
 
-console.log(baseProperties);
 console.log(allDiceBearOptions);
 
 let curr_setup = {
@@ -545,7 +544,7 @@ function setupSlider(div, key, min, max, val) {
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
-        console.log(option.value);
+        sliderHeader.innerHTML = option.value;
     });
 }
 
