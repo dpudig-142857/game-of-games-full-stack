@@ -140,8 +140,8 @@ export function renderAvatarPage(div, user, type) {
         '0',
         '0',
     ) + createExtras({
-        'eyes': eyes_var,
-        'mouth': mouth_var
+        'eyes': 'plain',
+        'mouth': 'plain'
     });
     avatar_preview_div.appendChild(avatar_preview);
 
