@@ -1,25 +1,3 @@
-IGNORE
-
-basic.seed
-basic.radius
-basic.size
-basic.clip
-basic.randomizeIds
-adventurer.base
-avatars.base
-avatars.nose
-avatars.style
-avatarsNeutral.nose
-bigSmile.face
-dylan.facialHair
-lorelei.freckles
-lorelei.hairAccessories
-loreleiNeutral.freckles
-micah.base
-miniavs.blushes
-notionists.base
-rings.ring
-
 GALLERY
 
 adventurer.earrings

@@ -86,6 +86,7 @@ const allDiceBearOptions = {
 // #region
 
 console.log(baseProperties);
+console.log(allDiceBearOptions);
 
 let curr_setup = {
     'theme': 'fun-emoji',
@@ -113,7 +114,7 @@ export function renderAvatarPage(div, user, type) {
 
     }
 
-    console.log(user);
+    //console.log(user);
     const avatar_div = document.createElement('div');
     avatar_div.id = 'avatar_div';
     div.appendChild(avatar_div);
@@ -313,7 +314,28 @@ function setupGallery(div, type) {
 // #region
 
 const themes = Object.keys(allDiceBearOptions);
-console.log(themes);
+
+const ignore = [
+    'basic.seed',
+    'basic.radius',
+    'basic.size',
+    'basic.clip',
+    'basic.randomizeIds',
+    'adventurer.base',
+    'avataaars.base',
+    'avataaars.nose',
+    'avataaars.style',
+    'avataaars-neutral.nose',
+    'big-smile.face',
+    'dylan.facialHair',
+    'lorelei.freckles',
+    'lorelei.hairAccessories',
+    'lorelei-neutral.freckles',
+    'micah.base',
+    'miniavs.blushes',
+    'notionists.base',
+    'rings.ring'
+];
 
 function setupThemeGallery(div) {
     const section = document.createElement('div');
@@ -371,9 +393,18 @@ function updateTheme(option, dir) {
     console.log(themes[i]);
     const props = allDiceBearOptions[themes[i]];
     Object.entries(props)
-    .filter(([key,val]) => !baseProperties.includes(key))
+    .filter(([key, val]) => !baseProperties.includes(key))
+    .filter(([key, val]) => ignore.includes(`${themes[i]}.${key}`))
     .forEach(([key, val]) => {
-        console.log(key, ' - ', val);
+        if (key.includes('Probability')) {
+            let min = val.minimum;
+            let max = val.maximum;
+            console.log(key, ' - ', min, ' to ', max);
+        } else if (key.includes('Color')) {
+            console.log(key);
+        } else {
+            console.log(key, ' - ', val);
+        }
     });
     console.log(' ');
     //curr_setup.theme = themes[i];
