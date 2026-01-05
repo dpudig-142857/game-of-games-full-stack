@@ -149,17 +149,6 @@ export function renderAvatarPage(div, user, type) {
     avatar_div.appendChild(avatar_options);
     
     setupThemeGallery(avatar_options);
-    //setupGallery(avatar_options, 'eye');
-    //setupGallery(avatar_options, 'mouth');
-    //setupColour(avatar_options);
-    
-    /*
-Flip
-Rotate
-Scale
-X
-Y
-    */
 }
 
 function createBaseLink(
@@ -213,8 +202,8 @@ function createBaseLink(
 }
 
 function updateAvatar() {
-    /*const preview = document.getElementById('avatar_preview');
-    preview.src = createAvatarLink(
+    const preview = document.getElementById('avatar_preview');
+    preview.src = createBaseLink(
         curr_setup.theme,
         curr_setup.seed,
         curr_setup.flip,
@@ -222,11 +211,8 @@ function updateAvatar() {
         curr_setup.scale,
         curr_setup.colour,
         curr_setup.x,
-        curr_setup.y,
-        curr_setup.eyes,
-        curr_setup.mouth
-    );*/
-    console.log('UPDATING');
+        curr_setup.y
+    )// + createExtras(curr_setup.other);
 }
 
 function setupColour(div, key) {
@@ -265,8 +251,9 @@ function setupColour(div, key) {
     });
 }
 
-function setupGallery(div, type, options) {
-    console.log(options);
+function setupGallery(div, type, options, initial) {
+    options = options.sort();
+
     const section = document.createElement('div');
     section.id = `${type}_section`;
     section.className = 'avatar_options_section';
@@ -288,7 +275,7 @@ function setupGallery(div, type, options) {
     options_div.appendChild(leftArrow);
 
     const option = header(
-        'h2', options[0], '', `${type}_option`, `avatar_option_text`
+        'h2', initial, '', `${type}_option`, `avatar_option_text`
     );
     options_div.appendChild(option);
 
@@ -673,11 +660,12 @@ function renderDylan(div, props) {
     console.log(div);
     props.forEach(([key, val]) => {
         if (key == 'hair' || key == 'mood') {
-            setupGallery(div, key, val.items.enum);
+            const options = val.items.enum;
+            setupGallery(div, key, options, options[0]);
         } else if (key.includes('Color')) {
             setupColour(div, key);
         } else if (key == 'facialHairProbability') {
-            setupGallery(div, 'facialHair', ['Off', 'On']);
+            setupGallery(div, 'facialHair', ['Off', 'On'], 'Off');
         } else {
             console.log(key, ' - ', val);
         }
@@ -737,7 +725,7 @@ function renderFunEmoji(div, props) {
 
     props.forEach(([key, val]) => {
         if (key == 'eyes' || key == 'mouth') {
-            setupGallery(div, key, val.items.enum);
+            setupGallery(div, key, val.items.enum, 'plain');
         } else {
             console.log(key, ' - ', val);
         }
