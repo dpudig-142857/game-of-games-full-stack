@@ -163,38 +163,38 @@ function createBaseLink(
     y_var = '0'
 ) {
     const base = `https://api.dicebear.com/9.x/${theme_var}`;
-    curr_setup.theme = theme_var;
+    curr_setup['theme'] = theme_var;
 
     const radius = `/svg?radius=50`;
 
     const seed = `&seed=${seed_var}`;
-    curr_setup.seed = seed_var;
+    curr_setup['seed'] = seed_var;
 
     const flip = `&flip=${flip_var}`;
-    curr_setup.flip = flip_var;
+    curr_setup['flip'] = flip_var;
 
     const rotate = `&rotate=${rotate_var}`;
-    curr_setup.rotate = rotate_var;
+    curr_setup['rotate'] = rotate_var;
 
     const scale = `&scale=${scale_var}`;
-    curr_setup.scale = scale_var;
+    curr_setup['scale'] = scale_var;
 
     const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
         colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
-    curr_setup.colour = colour_var;
+    curr_setup['colour'] = colour_var;
 
     const colour_type = `&backgroundType=${colour_type_var}`;
-    curr_setup.colour_type = colour_type_var;
+    curr_setup['colour_type'] = colour_type_var;
 
     const colour_rotation = colour_type_var == 'gradientLinear' ?
         `&backgroundRotation=${colour_rotation_var}` : '';
-    curr_setup.colour_rotation = colour_rotation_var;
+    curr_setup['colour_rotation'] = colour_rotation_var;
 
     const x = `&translateX=${x_var}`;
-    curr_setup.x = x_var;
+    curr_setup['x'] = x_var;
 
     const y = `&translateY=${y_var}`;
-    curr_setup.y = y_var;
+    curr_setup['y'] = y_var;
 
     return base + radius + seed + flip + rotate + scale +
         colour + colour_type + colour_rotation + x + y;
@@ -213,17 +213,17 @@ function createExtras(extras) {
 function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
     preview.src = createBaseLink(
-        curr_setup.theme,
-        curr_setup.seed,
-        curr_setup.flip,
-        curr_setup.rotate,
-        curr_setup.scale,
-        curr_setup.colour,
-        curr_setup.colour_type,
-        curr_setup.colour_rotation,
-        curr_setup.x,
-        curr_setup.y
-    ) + createExtras(curr_setup.extras);
+        curr_setup['theme'],
+        curr_setup['seed'],
+        curr_setup['flip'],
+        curr_setup['rotate'],
+        curr_setup['scale'],
+        curr_setup['colour'],
+        curr_setup['colour_type'],
+        curr_setup['colour_rotation'],
+        curr_setup['x'],
+        curr_setup['y']
+    ) + createExtras(curr_setup['extras']);
     console.log(curr_setup);
 }
 
@@ -401,7 +401,7 @@ function updateTheme(section, option, dir) {
             console.log(key, ' - ', val);
         }
     });*/
-    //curr_setup.theme = themes[i];
+    //curr_setup['theme = themes[i];
     //updateAvatar();
 }
 
@@ -413,7 +413,7 @@ function updateOption(type, div, options, dir) {
     if (i == -1) i = options.length - 1;
     if (i == options.length) i = 0;
     div.innerHTML = options[i];
-    curr_setup.extras[type] = options[i];
+    curr_setup['extras'][type] = options[i];
     updateAvatar();
 }
 
@@ -526,9 +526,9 @@ function setupColour(div, key) {
         const colour = e.target.value;
         colourHeader.innerHTML = colour;
         if (baseProperties.includes(key)) {
-            curr_setup.colour = colour;
+            curr_setup['colour'] = colour;
         } else {
-            curr_setup.extras[key] = colour;
+            curr_setup['extras'][key] = colour;
         }
         updateAvatar();
     });
@@ -564,7 +564,7 @@ function setupSwitch(div, key) {
         if (baseProperties.includes(key)) {
             curr_setup[key] = option.checked ? 'true' : 'false';
         } else {
-            curr_setup.extras[key] = option.checked ? 'true' : 'false';
+            curr_setup['extras'][key] = option.checked ? 'true' : 'false';
         }
         updateAvatar();
     });
@@ -600,11 +600,12 @@ function setupSlider(div, key, min, max, val, step) {
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
-        sliderHeader.innerHTML = option.value;
+        const num = `${option.value}`;
+        sliderHeader.innerHTML = num;
         if (baseProperties.includes(key)) {
-            curr_setup[key] = option.value;
+            curr_setup[key] = num;
         } else {
-            curr_setup.extras[key] = option.value;
+            curr_setup['extras'][key] = num;
         }
         updateAvatar();
     });
@@ -885,11 +886,10 @@ function createFunEmojiLink(
     const eyes = `&eyes=${eyes_var}`;
     const mouth = `&mouth=${mouth_var}`;
 
-    const extras = {
+    curr_setup['extras'] = {
         'eyes': eyes_var,
         'mouth': mouth_var
-    }
-    curr_setup.extras = extras;
+    };
 
     return base + eyes + mouth;
 }
@@ -902,7 +902,7 @@ function updateEye(option, dir) {
     if (i == -1) i = eye_list.length - 1;
     if (i == eye_list.length) i = 0;
     option.innerHTML = eye_list[i];
-    curr_setup.eyes = eye_list[i];
+    curr_setup['eyes'] = eye_list[i];
     updateAvatar();
 }
 
@@ -914,7 +914,7 @@ function updateMouth(option, dir) {
     if (i == -1) i = mouth_list.length - 1;
     if (i == mouth_list.length) i = 0;
     option.innerHTML = mouth_list[i];
-    curr_setup.mouth = mouth_list[i];
+    curr_setup['mouth'] = mouth_list[i];
     updateAvatar();
 }
 
