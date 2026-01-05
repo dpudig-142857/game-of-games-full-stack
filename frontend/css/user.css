@@ -340,6 +340,21 @@
     transform: rotate(90deg) scale(0.8);
 }
 
+.avatar_btn {
+    background: transparent;
+    border-radius: 20%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.avatar_btn:hover {
+    transform: scale(1.1);
+}
+
+.avatar_btn:active {
+    transform: scale(0.9);
+}
+
 .user-button:hover {
     transform: scale(1.1);
 }

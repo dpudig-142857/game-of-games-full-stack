@@ -615,7 +615,8 @@ function setupSlider(div, key, min, max, val, step) {
 
     const reset = document.createElement('input');
     reset.type = 'button';
-    reset.className = 'reset_btn';
+    reset.className = 'avatar_btn';
+    reset.textContent = 'Reset';
     options.appendChild(reset);
 
     reset.addEventListener('click', (e) => {
