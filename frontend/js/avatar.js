@@ -326,6 +326,7 @@ function setupGallery(div, type) {
 // #region
 
 const themes = Object.keys(allDiceBearOptions);
+console.log(themes);
 
 function setupThemeGallery(div) {
     const section = document.createElement('div');
@@ -370,18 +371,16 @@ function setupThemeGallery(div) {
 
 function updateTheme(option, dir) {
     const curr = option.innerHTML.toLowerCase();
-    console.log(curr);
     let i = themes.indexOf(curr.split(' ').join('-'));
     if (dir == 'left') i -= 1;
     if (dir == 'right') i += 1;
     if (i == -1) i = themes.length - 1;
     if (i == themes.length) i = 0;
-    const theme = themes[i];
+    console.log(i);
     let words = [];
-    for (const word in theme.split('-')) {
-        console.log(word);
+    themes[i].split('-').forEach(word => {
         words.push(word.charAt(0).toUpperCase() + word.slice(1));
-    }
+    });
     option.innerHTML = words.join(' ');
     Object.entries(allDiceBearOptions).forEach(([key, val]) => {
         if (key == themes[i]) console.log(key, ' - ', val);
