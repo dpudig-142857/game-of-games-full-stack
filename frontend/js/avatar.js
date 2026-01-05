@@ -409,7 +409,7 @@ function renderBaseOptions(div) {
             key != 'clip' && key != 'randomizeIds';
     }).forEach(([key, val]) => {
         if (key == 'rotate') {
-            setupSlider(div, key, val.minimum, val.maximum, val.default);
+            setupSlider(div, key, val.minimum, val.maximum, val.default, 10);
         } else {
             console.log(key, ' - ', val);
         }
@@ -515,7 +515,7 @@ function setupSwitch(div, key) {
 
 }
 
-function setupSlider(div, key, min, max, val) {
+function setupSlider(div, key, min, max, val, step) {
     const section = document.createElement('div');
     section.id = 'slider_section';
     section.className = 'avatar_options_section';
@@ -541,6 +541,7 @@ function setupSlider(div, key, min, max, val) {
     option.min = min;
     option.max = max;
     option.value = val;
+    option.step = step;
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
