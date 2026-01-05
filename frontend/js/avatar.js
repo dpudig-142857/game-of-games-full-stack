@@ -41,6 +41,7 @@ import { shapes } from './themes/shapes.js';
 import { thumbs } from './themes/thumbs.js';
 
 const basicDiceBearOptions = basic.properties;
+const baseProperties = Object.keys(basic.properties);
 const allDiceBearOptions = {
     'adventurer': adventurer.properties,
     'adventurer-neutral': adventurerNeutral.properties,
@@ -376,14 +377,25 @@ function updateTheme(option, dir) {
     if (dir == 'right') i += 1;
     if (i == -1) i = themes.length - 1;
     if (i == themes.length) i = 0;
-    console.log(i);
     let words = [];
     themes[i].split('-').forEach(word => {
         words.push(word.charAt(0).toUpperCase() + word.slice(1));
     });
     option.innerHTML = words.join(' ');
-    Object.entries(allDiceBearOptions).forEach(([key, val]) => {
-        if (key == themes[i]) console.log(key, ' - ', val);
+    Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
+        console.log(theme, '\n');
+        if (theme == themes[i]) {
+            let keys = [];
+            let vals = [];
+            Object.entries(prop).forEach(([key, val]) => {
+                if (!baseProperties.includes(key)) {
+                    keys.push(key);
+                    vals.push(val);
+                }
+            });
+            console.log(keys.join(', '));
+            //console.log(vals);
+        }
     });
     //curr_setup.theme = themes[i];
     //updateAvatar();
