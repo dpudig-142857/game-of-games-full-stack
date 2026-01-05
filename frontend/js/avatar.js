@@ -369,8 +369,8 @@ function setupThemeGallery(div) {
 }
 
 function updateTheme(option, dir) {
-    const curr = option.innerHTML.toLowerCase().join('-');
-    let i = themes.indexOf(curr);
+    const curr = option.innerHTML.toLowerCase();
+    let i = themes.indexOf(curr.split(' ').join('-'));
     if (dir == 'left') i -= 1;
     if (dir == 'right') i += 1;
     if (i == -1) i = themes.length - 1;
