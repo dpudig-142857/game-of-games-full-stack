@@ -271,8 +271,7 @@ function setupGallery(div, type, options) {
     options_div.appendChild(leftArrow);
 
     const option = header(
-        'h2', startUpper(options[0]), '',
-        `${type}_option`, `avatar_option_text`
+        'h2', options[0], '', `${type}_option`, `avatar_option_text`
     );
     options_div.appendChild(option);
 
