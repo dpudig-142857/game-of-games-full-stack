@@ -400,8 +400,7 @@ function updateTheme(section, option, dir) {
     const props = Object.entries(allDiceBearOptions[themes[i]])
     .filter(([key, val]) => !baseProperties.includes(key))
     .filter(([key, val]) => !ignore.includes(`${themes[i]}.${key}`))
-    
-    console.log(props);
+
     if (themes[i] == 'adventurer') {
         renderAdventurer();
     } else if (themes[i] == 'adventurer-neutral') {
@@ -659,8 +658,16 @@ function renderAventurer(div) {
 function renderDylan(div, props) {
     div.innerHTML = '';
 
-    console.log(props);
-    //setupGallery(div, key, val);
+    console.log(div);
+    props.forEach(([key, val]) => {
+        if (key == 'hair') {
+            setupGallery(div, key, val);
+        } else if (key.includes('Color')) {
+            setupColour(div);
+        } else {
+            console.log(key, ' - ', val);
+        }
+    });
 }
 
 // #endregion
