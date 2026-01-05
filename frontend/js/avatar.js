@@ -404,11 +404,15 @@ function updateOption(div, options, dir) {
 }
 
 function renderBaseOptions(div) {
-    Object.entries(basicDiceBearOptions).forEach(([key, val]) => {
-        console.log(key, ' - ', val);
+    Object.entries(basicDiceBearOptions)
+    .filter(([key, val]) => {
+        return key != 'seed' && key != 'radius' && key != 'size' &&
+            key != 'clip' && key != 'randomizeIds';
+    }).forEach(([key, val]) => {
         if (key == 'rotate') {
-            //const base = (val.items.minimum + val.items.maximum)/2;
-            //setupSlider(div, key, val.items.minimum, val.items.maximum, base);
+            setupSlider(div, key, val.minimum, val.maximum, val.default);
+        } else {
+            console.log(key, ' - ', val);
         }
     });
 }
