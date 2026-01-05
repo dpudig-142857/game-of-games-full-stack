@@ -281,7 +281,7 @@
 
 .avatar_option_title {
     text-decoration: underline double;
-    width: 50%;
+    width: 40%;
 }
 
 .avatar_options {
@@ -292,7 +292,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5rem;
     width: 100%;
 }
 
@@ -301,7 +300,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    width: 50%;
+    width: 60%;
 }
 
 .avatar_option_text {
