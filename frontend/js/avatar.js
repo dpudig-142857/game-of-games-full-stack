@@ -1078,7 +1078,32 @@ function renderFunEmoji(div, props) {
 // #region
 
 function renderGlass(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let shape1 = props['shape1'].items.enum;
+    setupGallery(div, 'shape1', shape1, shape1[0]);
+    
+    const x1 = basicDiceBearOptions['shape1OffsetX'];
+    setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
+    
+    const y1 = basicDiceBearOptions['shape1OffsetY'];
+    setupSlider(div, 'shape1OffsetY', y1.minimum, y1.maximum, y1.default, 5);
+    
+    const r1 = basicDiceBearOptions['shape1Rotation'];
+    setupSlider(div, 'shape1Rotation', r1.minimum, r1.maximum, r1.default, 5);
+
+    let shape2 = props['shape2'].items.enum;
+    setupGallery(div, 'shape2', shape2, shape2[0]);
+    
+    const x2 = basicDiceBearOptions['shape2OffsetX'];
+    setupSlider(div, 'shape2OffsetX', x2.minimum, x2.maximum, x2.default, 5);
+    
+    const y2 = basicDiceBearOptions['shape2OffsetY'];
+    setupSlider(div, 'shape1OffsetY', y2.minimum, y2.maximum, y2.default, 5);
+    
+    const r2 = basicDiceBearOptions['shape2Rotation'];
+    setupSlider(div, 'shape2Rotation', r2.minimum, r2.maximum, r2.default, 5);
 }
 
 // #endregion
@@ -1094,7 +1119,11 @@ function renderGlass(div, props) {
 // #region
 
 function renderIcons(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let icon = props['icon'].items.enum;
+    setupGallery(div, 'icon', icon, icon[0]);
 }
 
 // #endregion
@@ -1110,7 +1139,25 @@ function renderIcons(div, props) {
 // #region
 
 function renderIdenticon(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let row1 = props['row1'].items.enum;
+    setupGallery(div, 'row1', row1, row1[0]);
+
+    let row2 = props['row2'].items.enum;
+    setupGallery(div, 'row2', row2, row2[0]);
+
+    let row3 = props['row3'].items.enum;
+    setupGallery(div, 'row3', row3, row3[0]);
+
+    let row4 = props['row4'].items.enum;
+    setupGallery(div, 'row4', row4, row4[0]);
+
+    let row5 = props['row5'].items.enum;
+    setupGallery(div, 'row5', row5, row5[0]);
+
+    setupColour(div, 'rowColor');
 }
 
 // #endregion
@@ -1126,7 +1173,57 @@ function renderIdenticon(div, props) {
 // #region
 
 function renderLorelei(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let beard = props['beard'].items.enum;
+    beard.push('None');
+    setupGallery(div, 'beard', beard, beard[0]);
+
+    let earrings = props['earrings'].items.enum;
+    earrings.push('None');
+    setupGallery(div, 'earrings', earrings, earrings[0]);
+    setupColour(div, 'earringsColor');
+
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    setupColour(div, 'eyebrowsColor');
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    setupColour(div, 'eyesColor');
+    
+    let freckles = props['freckles'].items.enum;
+    freckles.push('None');
+    setupGallery(div, 'freckles', freckles, freckles[0]);
+    setupColour(div, 'frecklesColor');
+
+    let glasses = props['glasses'].items.enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, glasses[0]);
+    setupColour(div, 'glassesColor');
+
+    let hair = props['hair'].items.enum;
+    setupGallery(div, 'hair', hair, hair[0]);
+    setupColour(div, 'hairColor');
+
+    let hairAccessories = props['hairAccessories'].items.enum;
+    hairAccessories.push('None');
+    setupGallery(div, 'hairAccessories', hairAccessories, hairAccessories[0]);
+    setupColour(div, 'hairAccessoriesColor');
+    
+    let head = props['head'].items.enum;
+    setupGallery(div, 'head', head, head[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    setupColour(div, 'mouthColor');
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+    setupColour(div, 'noseColor');
+    
+    setupColour(div, 'skinColor');
 }
 
 // #endregion
@@ -1142,7 +1239,34 @@ function renderLorelei(div, props) {
 // #region
 
 function renderLoreleiNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    setupColour(div, 'eyebrowsColor');
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    setupColour(div, 'eyesColor');
+    
+    let freckles = props['freckles'].items.enum;
+    freckles.push('None');
+    setupGallery(div, 'freckles', freckles, freckles[0]);
+    setupColour(div, 'frecklesColor');
+
+    let glasses = props['glasses'].items.enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, glasses[0]);
+    setupColour(div, 'glassesColor');
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    setupColour(div, 'mouthColor');
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+    setupColour(div, 'noseColor');
 }
 
 // #endregion
