@@ -99,6 +99,19 @@ Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
     console.log(`${theme} - ${keys.join(', ')}`);
 });
 
+let curr_setup = {
+    'theme': 'fun-emoji',
+    'seed': '0',
+    'flip': 'false',
+    'rotate': '0',
+    'scale': '100',
+    'colour': '#ffffff',
+    'x': '0',
+    'y': '0',
+    'eyes': 'plain',
+    'mouth': 'plain'
+};
+
 export function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
