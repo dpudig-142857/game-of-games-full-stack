@@ -99,8 +99,8 @@ let curr_setup = {
     'colour': '#ffffff',
     'colour_type': 'solid',
     'colour_rotation': '0',
-    'x': '0',
-    'y': '0',
+    'translateX': '0',
+    'translateY': '0',
     'extras': {}
 };
 
@@ -191,10 +191,10 @@ function createBaseLink(
     curr_setup['colour_rotation'] = colour_rotation_var;
 
     const x = `&translateX=${x_var}`;
-    curr_setup['x'] = x_var;
+    curr_setup['translateX'] = x_var;
 
     const y = `&translateY=${y_var}`;
-    curr_setup['y'] = y_var;
+    curr_setup['translateY'] = y_var;
 
     return base + radius + seed + flip + rotate + scale +
         colour + colour_type + colour_rotation + x + y;
@@ -221,8 +221,8 @@ function updateAvatar() {
         curr_setup['colour'],
         curr_setup['colour_type'],
         curr_setup['colour_rotation'],
-        curr_setup['x'],
-        curr_setup['y']
+        curr_setup['translateX'],
+        curr_setup['translateY']
     ) + createExtras(curr_setup['extras']);
     console.log(curr_setup);
 }
