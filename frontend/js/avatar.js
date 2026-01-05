@@ -25,7 +25,6 @@ import { funEmoji } from './themes/fun_emoji.js';
 import { glass } from './themes/glass.js';
 import { icons } from './themes/icons.js';
 import { identicon } from './themes/identicon.js';
-import { initials } from './themes/initials.js';
 import { lorelei } from './themes/lorelei.js';
 import { loreleiNeutral } from './themes/lorelei_neutral.js';
 import { micah } from './themes/micah.js';
@@ -59,7 +58,6 @@ const allDiceBearOptions = {
     'glass': glass.properties,
     'icons': icons.properties,
     'identicon': identicon.properties,
-    'initials': initials.properties,
     'lorelei': lorelei.properties,
     'lorelei-neutral': loreleiNeutral.properties,
     'micah': micah.properties,
@@ -382,22 +380,26 @@ function updateTheme(option, dir) {
         words.push(word.charAt(0).toUpperCase() + word.slice(1));
     });
     option.innerHTML = words.join(' ');
-    Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
-        console.log(theme, '\n');
-        if (theme == themes[i]) {
-            let keys = [];
-            let vals = [];
-            Object.entries(prop).forEach(([key, val]) => {
-                if (!baseProperties.includes(key)) {
-                    keys.push(key);
-                    vals.push(val);
-                }
-            });
-            console.log(keys.join(', '));
-            //console.log(vals);
-        }
+    console.log(themes[i]);
+    const props = allDiceBearOptions[themes[i]];
+    Object.entries(props).forEach(([key, val]) => {
+        console.log(key);
+        console.log(val);
     });
+    console.log(' ');
     //curr_setup.theme = themes[i];
+    //updateAvatar();
+}
+
+function updateOption(div, options, dir) {
+    const curr = div.innerHTML;
+    let i = options.indexOf(curr);
+    if (dir == 'left') i -= 1;
+    if (dir == 'right') i += 1;
+    if (i == -1) i = options.length - 1;
+    if (i == options.length) i = 0;
+    div.innerHTML = options[i];
+
     //updateAvatar();
 }
 

@@ -1,448 +1,438 @@
 basic
 
-    seed
-    flip
-    rotate
-    scale
-    radius
-    size
-    backgroundColor
-    backgroundType
-    backgroundRotation
-    translateX
-    translateY
-    clip
-    randomizeIds
-
+    seed - ignore
+    flip - switch
+    rotate - slider
+    scale - slider
+    radius - ignore
+    size - ignore
+    backgroundColor - colour
+    backgroundType - switch
+    backgroundRotation - slider
+    translateX - slider
+    translateY - slider
+    clip - ignore
+    randomizeIds - ignore
     
 
 adventurer
 
-    - base
-    - earrings
-    - earringsProbability
-    - eyebrows
-    - eyes
-    - features
-    - featuresProbability
-    - glasses
-    - glassesProbability
-    - hair
-    - hairColor
-    - hairProbability
-    - mouth
-    - skinColor
+    - base - ignore
+    - earrings - gallery
+    - earringsProbability - switch
+    - eyebrows - gallery
+    - eyes - gallery
+    - features - gallery
+    - featuresProbability - switch
+    - glasses - gallery
+    - glassesProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - hairProbability - switch
+    - mouth - gallery
+    - skinColor - colour
 
 
 adventurerNeutral
 
-    - eyebrows
-    - eyes
-    - glasses
-    - glassesProbability
-    - mouth
+    - eyebrows - gallery
+    - eyes - gallery
+    - glasses - gallery
+    - glassesProbability - switch
+    - mouth - gallery
 
 
 avatars
 
-    - accessories
-    - accessoriesColor
-    - accessoriesProbability
-    - base
-    - clothesColor
-    - clothing
-    - clothingGraphic
-    - eyebrows
-    - eyes
-    - facialHair
-    - facialHairColor
-    - facialHairProbability
-    - hairColor
-    - hatColor
-    - mouth
-    - nose
-    - skinColor
-    - style
-    - top
-    - topProbability
+    - accessories - gallery
+    - accessoriesColor - colour
+    - accessoriesProbability - switch
+    - base - ignore
+    - clothesColor - colour
+    - clothing - gallery
+    - clothingGraphic - gallery
+    - eyebrows - gallery
+    - eyes - gallery
+    - facialHair - gallery
+    - facialHairColor - colour
+    - facialHairProbability - switch
+    - hairColor - colour
+    - hatColor - colour
+    - mouth - gallery
+    - nose - ignore
+    - skinColor - colour
+    - style - ignore
+    - top - gallery
+    - topProbability - switch
 
 
 avatarsNeutral
 
-    - eyebrows
-    - eyes
-    - mouth
-    - nose
+    - eyebrows - gallery
+    - eyes - gallery
+    - mouth - gallery
+    - nose - ignore
 
 
 bigEars
 
-    - cheek
-    - cheekProbability
-    - ear
-    - eyes
-    - face
-    - frontHair
-    - hair
-    - hairColor
-    - mouth
-    - nose
-    - sideburn
-    - skinColor
+    - cheek - gallery
+    - cheekProbability - switch
+    - ear - gallery
+    - eyes - gallery
+    - face - gallery
+    - frontHair - gallery
+    - hair - gallery
+    - hairColor - colour
+    - mouth - gallery
+    - nose - gallery
+    - sideburn - gallery
+    - skinColor - colour
 
 
 bigEarsNeutral
 
-    - cheek
-    - cheekProbability
-    - eyes
-    - mouth
-    - nose
+    - cheek - gallery
+    - cheekProbability - switch
+    - eyes - gallery
+    - mouth - gallery
+    - nose - gallery
 
 
 bigSmile
 
-    - accessories
-    - accessoriesProbability
-    - eyes
-    - face
-    - hair
-    - hairColor
-    - mouth
-    - skinColor
+    - accessories - gallery
+    - accessoriesProbability - switch
+    - eyes - gallery
+    - face - ignore
+    - hair - gallery
+    - hairColor - colour
+    - mouth - gallery
+    - skinColor - colour
 
 
 bots
 
-    - baseColor
-    - eyes
-    - face
-    - mouth
-    - mouthProbability
-    - sides
-    - sidesProbability
-    - texture
-    - textureProbability
-    - top
-    - topProbability
+    - baseColor - colour
+    - eyes - gallery
+    - face - gallery
+    - mouth - gallery
+    - mouthProbability - switch
+    - sides - gallery
+    - sidesProbability - switch
+    - texture - gallery
+    - textureProbability - switch
+    - top - gallery
+    - topProbability - switch
 
 
 botsNeutral
 
-    - eyes
-    - mouth
+    - eyes - gallery
+    - mouth - gallery
 
 
 croodles
 
-    - baseColor
-    - beard
-    - beardProbability
-    - eyes
-    - face
-    - mouth
-    - mustache
-    - mustacheProbability
-    - nose
-    - top
-    - topColor
+    - baseColor - colour
+    - beard - gallery
+    - beardProbability - switch
+    - eyes - gallery
+    - face - gallery
+    - mouth - gallery
+    - mustache - gallery
+    - mustacheProbability - switch
+    - nose - gallery
+    - top - gallery
+    - topColor - colour
 
 
 croodlesNeutral
 
-    - eyes
-    - mouth
-    - nose
+    - eyes - gallery
+    - mouth - gallery
+    - nose - gallery
 
 
 dylan
 
-    - facialHair
-    - facialHairProbability
-    - hair
-    - hairColor
-    - mood
-    - skinColor
+    - facialHair - ignore
+    - facialHairProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - mood - gallery
+    - skinColor - colour
 
 
 funEmoji
 
-    - eyes
-    - mouth
+    - eyes - gallery
+    - mouth - gallery
 
 
 glass
 
-    - shape1
-    - shape1OffsetX
-    - shape1OffsetY
-    - shape1Rotation
-    - shape2
-    - shape2OffsetX
-    - shape2OffsetY
-    - shape2Rotation
+    - shape1 - gallery
+    - shape1OffsetX - slider
+    - shape1OffsetY - slider
+    - shape1Rotation - slider
+    - shape2 - gallery
+    - shape2OffsetX - slider
+    - shape2OffsetY - slider
+    - shape2Rotation - slider
 
 
 icons
 
-    - icon
+    - icon - gallery
 
 
 identicon
 
-    - row1
-    - row2
-    - row3
-    - row4
-    - row5
-    - rowColor
-
-
-initials
-
-    - textColor
-    - fontFamily
-    - fontSize
-    - chars
-    - fontWeight
+    - row1 - gallery
+    - row2 - gallery
+    - row3 - gallery
+    - row4 - gallery
+    - row5 - gallery
+    - rowColor - colour
 
 
 lorelei
 
-    - beard
-    - beardProbability
-    - earrings
-    - earringsColor
-    - earringsProbability
-    - eyebrows
-    - eyebrowsColor
-    - eyes
-    - eyesColor
-    - freckles
-    - frecklesColor
-    - frecklesProbability
-    - glasses
-    - glassesColor
-    - glassesProbability
-    - hair
-    - hairAccessories
-    - hairAccessoriesColor
-    - hairAccessoriesProbability
-    - hairColor
-    - head
-    - mouth
-    - mouthColor
-    - nose
-    - noseColor
-    - skinColor
+    - beard - gallery
+    - beardProbability - switch
+    - earrings - gallery
+    - earringsColor - colour
+    - earringsProbability - switch
+    - eyebrows - gallery
+    - eyebrowsColor - colour
+    - eyes - gallery
+    - eyesColor - colour
+    - freckles - ignore
+    - frecklesColor - colour
+    - frecklesProbability - switch
+    - glasses - gallery
+    - glassesColor - colour
+    - glassesProbability - switch
+    - hair - gallery
+    - hairAccessories - ignore
+    - hairAccessoriesColor - colour
+    - hairAccessoriesProbability - switch
+    - hairColor - colour
+    - head - gallery
+    - mouth - gallery
+    - mouthColor - colour
+    - nose - gallery
+    - noseColor - colour
+    - skinColor - colour
 
 
 loreleiNeutral
 
-    - eyebrows
-    - eyebrowsColor
-    - eyes
-    - eyesColor
-    - freckles
-    - frecklesColor
-    - frecklesProbability
-    - glasses
-    - glassesColor
-    - glassesProbability
-    - mouth
-    - mouthColor
-    - nose
-    - noseColor
+    - eyebrows - gallery
+    - eyebrowsColor - colour
+    - eyes - gallery
+    - eyesColor - colour
+    - freckles - ignore
+    - frecklesColor - colour
+    - frecklesProbability - switch
+    - glasses - gallery
+    - glassesColor - colour
+    - glassesProbability - switch
+    - mouth - gallery
+    - mouthColor - colour
+    - nose - gallery
+    - noseColor - colour
 
 
 micah
 
-    - base
-    - baseColor
-    - earringColor
-    - earrings
-    - earringsProbability
-    - ears
-    - eyeShadowColor
-    - eyebrows
-    - eyebrowsColor
-    - eyes
-    - eyesColor
-    - facialHair
-    - facialHairColor
-    - facialHairProbability
-    - glasses
-    - glassesColor
-    - glassesProbability
-    - hair
-    - hairColor
-    - hairProbability
-    - mouth
-    - mouthColor
-    - nose
-    - shirt
-    - shirtColor
+    - base - ignore
+    - baseColor - colour
+    - earringColor - colour
+    - earrings - gallery
+    - earringsProbability - switch
+    - ears - gallery
+    - eyeShadowColor - colour
+    - eyebrows - gallery
+    - eyebrowsColor - colour
+    - eyes - gallery
+    - eyesColor - colour
+    - facialHair - gallery
+    - facialHairColor - colour
+    - facialHairProbability - switch
+    - glasses - gallery
+    - glassesColor - colour
+    - glassesProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - hairProbability - switch
+    - mouth - gallery
+    - mouthColor - colour
+    - nose - gallery
+    - shirt - gallery
+    - shirtColor - colour
 
 
 miniavs
 
-    - blushes
-    - blushesProbability
-    - body
-    - bodyColor
-    - eyes
-    - glasses
-    - glassesProbability
-    - hair
-    - hairColor
-    - head
-    - mouth
-    - mustache
-    - mustacheProbability
-    - skinColor
+    - blushes - ignore
+    - blushesProbability - switch
+    - body - gallery
+    - bodyColor - colour
+    - eyes - gallery
+    - glasses - gallery
+    - glassesProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - head - gallery
+    - mouth - gallery
+    - mustache - gallery
+    - mustacheProbability - switch
+    - skinColor - colour
 
 
 notionists
 
-    - base
-    - beard
-    - beardProbability
-    - body
-    - bodyIcon
-    - bodyIconProbability
-    - brows
-    - eyes
-    - gesture
-    - gestureProbability
-    - glasses
-    - glassesProbability
-    - hair
-    - lips
-    - nose
+    - base - ignore
+    - beard - gallery
+    - beardProbability - switch
+    - body - gallery
+    - bodyIcon - gallery
+    - bodyIconProbability - switch
+    - brows - gallery
+    - eyes - gallery
+    - gesture - gallery
+    - gestureProbability - switch
+    - glasses - gallery
+    - glassesProbability - switch
+    - hair - gallery
+    - lips - gallery
+    - nose - gallery
 
 
 notionistsNeutral
 
-    - brows
-    - eyes
-    - glasses
-    - glassesProbability
-    - lips
-    - nose
+    - brows - gallery
+    - eyes - gallery
+    - glasses - gallery
+    - glassesProbability - switch
+    - lips - gallery
+    - nose - gallery
 
 
 openPeeps
 
-    - accessories
-    - accessoriesProbability
-    - clothingColor
-    - face
-    - facialHair
-    - facialHairProbability
-    - head
-    - headContrastColor
-    - mask
-    - maskProbability
-    - skinColor
+    - accessories - gallery
+    - accessoriesProbability - switch
+    - clothingColor - colour
+    - face - gallery
+    - facialHair - gallery
+    - facialHairProbability - switch
+    - head - gallery
+    - headContrastColor - colour
+    - mask - gallery
+    - maskProbability - switch
+    - skinColor - colour
 
 
 personas
 
-    - body
-    - clothingColor
-    - eyes
-    - facialHair
-    - facialHairProbability
-    - hair
-    - hairColor
-    - mouth
-    - nose
-    - skinColor
+    - body - gallery
+    - clothingColor - colour
+    - eyes - gallery
+    - facialHair - gallery
+    - facialHairProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - mouth - gallery
+    - nose - gallery
+    - skinColor - colour
 
 
 pixelArt
 
-    - accessories
-    - accessoriesColor
-    - accessoriesProbability
-    - beard
-    - beardProbability
-    - clothing
-    - clothingColor
-    - eyes
-    - eyesColor
-    - glasses
-    - glassesColor
-    - glassesProbability
-    - hair
-    - hairColor
-    - hat
-    - hatColor
-    - hatProbability
-    - mouth
-    - mouthColor
-    - skinColor
+    - accessories - gallery
+    - accessoriesColor - colour
+    - accessoriesProbability - switch
+    - beard - gallery
+    - beardProbability - switch
+    - clothing - gallery
+    - clothingColor - colour
+    - eyes - gallery
+    - eyesColor - colour
+    - glasses - gallery
+    - glassesColor - colour
+    - glassesProbability - switch
+    - hair - gallery
+    - hairColor - colour
+    - hat - gallery
+    - hatColor - colour
+    - hatProbability - switch
+    - mouth - gallery
+    - mouthColor - colour
+    - skinColor - colour
 
 
 pixelArtNeutral
 
-    - eyes
-    - eyesColor
-    - glasses
-    - glassesColor
-    - glassesProbability
-    - mouth
-    - mouthColor
+    - eyes - gallery
+    - eyesColor - colour
+    - glasses - gallery
+    - glassesColor - colour
+    - glassesProbability - switch
+    - mouth - gallery
+    - mouthColor - colour
 
 
 rings
 
-    - ring
-    - ringColor
-    - ringFive
-    - ringFiveRotation
-    - ringFour
-    - ringFourRotation
-    - ringOne
-    - ringOneRotation
-    - ringRotation
-    - ringThree
-    - ringThreeRotation
-    - ringTwo
-    - ringTwoRotation
+    - ring - ignore
+    - ringColor - colour
+    - ringFive - gallery
+    - ringFiveRotation - slider
+    - ringFour - gallery
+    - ringFourRotation - slider
+    - ringOne - gallery
+    - ringOneRotation - slider
+    - ringRotation - slider
+    - ringThree - gallery
+    - ringThreeRotation - slider
+    - ringTwo - gallery
+    - ringTwoRotation - slider
 
 
 shapes
 
-    - shape1
-    - shape1Color
-    - shape1OffsetX
-    - shape1OffsetY
-    - shape1Rotation
-    - shape2
-    - shape2Color
-    - shape2OffsetX
-    - shape2OffsetY
-    - shape2Rotation
-    - shape3
-    - shape3Color
-    - shape3OffsetX
-    - shape3OffsetY
-    - shape3Rotation
+    - shape1 - gallery
+    - shape1Color - colour
+    - shape1OffsetX - slider
+    - shape1OffsetY - slider
+    - shape1Rotation - slider
+    - shape2 - gallery
+    - shape2Color - colour
+    - shape2OffsetX - slider
+    - shape2OffsetY - slider
+    - shape2Rotation - slider
+    - shape3 - gallery
+    - shape3Color - colour
+    - shape3OffsetX - slider
+    - shape3OffsetY - slider
+    - shape3Rotation - slider
 
 
 thumbs
 
-    - eyes
-    - eyesColor
-    - face
-    - faceOffsetX
-    - faceOffsetY
-    - faceRotation
-    - mouth
-    - mouthColor
-    - shape
-    - shapeColor
-    - shapeOffsetX
-    - shapeOffsetY
-    - shapeRotation
+    - eyes - gallery
+    - eyesColor - colour
+    - face - gallery
+    - faceOffsetX - slider
+    - faceOffsetY - slider
+    - faceRotation - slider
+    - mouth - gallery
+    - mouthColor - colour
+    - shape - gallery
+    - shapeColor - colour
+    - shapeOffsetX - slider
+    - shapeOffsetY - slider
+    - shapeRotation - slider
