@@ -87,7 +87,7 @@ const allDiceBearOptions = {
 
 console.log(basicDiceBearOptions);
 console.log(allDiceBearOptions);
-Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
+/*Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
     let keys = [];
     let vals = [];
     Object.entries(prop).forEach(([key, val]) => {
@@ -97,7 +97,7 @@ Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
         }
     });
     console.log(`${theme} - ${keys.join(', ')}`);
-});
+});*/
 
 let curr_setup = {
     'theme': 'fun-emoji',
@@ -332,9 +332,8 @@ function setupThemeGallery(div) {
     section.className = 'avatar_options_section';
     div.appendChild(section);
     
-    const text = type.charAt(0).toUpperCase() + type.slice(1) + ':';
     section.appendChild(header(
-        'h2', text, '', '', 'avatar_option_title'
+        'h2', 'Theme:', '', '', 'avatar_option_title'
     ));
 
     const options = document.createElement('div');
