@@ -14,436 +14,435 @@ basic
     clip
     randomizeIds
 
-
     
 
 adventurer
 
-    base
-    earrings
-    earringsProbability
-    eyebrows
-    eyes
-    features
-    featuresProbability
-    glasses
-    glassesProbability
-    hair
-    hairColor
-    hairProbability
-    mouth
-    skinColor
+    - base
+    - earrings
+    - earringsProbability
+    - eyebrows
+    - eyes
+    - features
+    - featuresProbability
+    - glasses
+    - glassesProbability
+    - hair
+    - hairColor
+    - hairProbability
+    - mouth
+    - skinColor
 
 
 adventurerNeutral
 
-    eyebrows
-    eyes
-    glasses
-    glassesProbability
-    mouth
+    - eyebrows
+    - eyes
+    - glasses
+    - glassesProbability
+    - mouth
 
 
 avatars
 
-    accessories
-    accessoriesColor
-    accessoriesProbability
-    base
-    clothesColor
-    clothing
-    clothingGraphic
-    eyebrows
-    eyes
-    facialHair
-    facialHairColor
-    facialHairProbability
-    hairColor
-    hatColor
-    mouth
-    nose
-    skinColor
-    style
-    top
-    topProbability
+    - accessories
+    - accessoriesColor
+    - accessoriesProbability
+    - base
+    - clothesColor
+    - clothing
+    - clothingGraphic
+    - eyebrows
+    - eyes
+    - facialHair
+    - facialHairColor
+    - facialHairProbability
+    - hairColor
+    - hatColor
+    - mouth
+    - nose
+    - skinColor
+    - style
+    - top
+    - topProbability
 
 
 avatarsNeutral
 
-    eyebrows
-    eyes
-    mouth
-    nose
+    - eyebrows
+    - eyes
+    - mouth
+    - nose
 
 
 bigEars
 
-    cheek
-    cheekProbability
-    ear
-    eyes
-    face
-    frontHair
-    hair
-    hairColor
-    mouth
-    nose
-    sideburn
-    skinColor
+    - cheek
+    - cheekProbability
+    - ear
+    - eyes
+    - face
+    - frontHair
+    - hair
+    - hairColor
+    - mouth
+    - nose
+    - sideburn
+    - skinColor
 
 
 bigEarsNeutral
 
-    cheek
-    cheekProbability
-    eyes
-    mouth
-    nose
+    - cheek
+    - cheekProbability
+    - eyes
+    - mouth
+    - nose
 
 
 bigSmile
 
-    accessories
-    accessoriesProbability
-    eyes
-    face
-    hair
-    hairColor
-    mouth
-    skinColor
+    - accessories
+    - accessoriesProbability
+    - eyes
+    - face
+    - hair
+    - hairColor
+    - mouth
+    - skinColor
 
 
 bots
 
-    baseColor
-    eyes
-    face
-    mouth
-    mouthProbability
-    sides
-    sidesProbability
-    texture
-    textureProbability
-    top
-    topProbability
+    - baseColor
+    - eyes
+    - face
+    - mouth
+    - mouthProbability
+    - sides
+    - sidesProbability
+    - texture
+    - textureProbability
+    - top
+    - topProbability
 
 
 botsNeutral
 
-    eyes
-    mouth
+    - eyes
+    - mouth
 
 
 croodles
 
-    baseColor
-    beard
-    beardProbability
-    eyes
-    face
-    mouth
-    mustache
-    mustacheProbability
-    nose
-    top
-    topColor
+    - baseColor
+    - beard
+    - beardProbability
+    - eyes
+    - face
+    - mouth
+    - mustache
+    - mustacheProbability
+    - nose
+    - top
+    - topColor
 
 
 croodlesNeutral
 
-    eyes
-    mouth
-    nose
+    - eyes
+    - mouth
+    - nose
 
 
 dylan
 
-    facialHair
-    facialHairProbability
-    hair
-    hairColor
-    mood
-    skinColor
+    - facialHair
+    - facialHairProbability
+    - hair
+    - hairColor
+    - mood
+    - skinColor
 
 
 funEmoji
 
-    eyes
-    mouth
+    - eyes
+    - mouth
 
 
 glass
 
-    shape1
-    shape1OffsetX
-    shape1OffsetY
-    shape1Rotation
-    shape2
-    shape2OffsetX
-    shape2OffsetY
-    shape2Rotation
+    - shape1
+    - shape1OffsetX
+    - shape1OffsetY
+    - shape1Rotation
+    - shape2
+    - shape2OffsetX
+    - shape2OffsetY
+    - shape2Rotation
 
 
 icons
 
-    icon
+    - icon
 
 
 identicon
 
-    row1
-    row2
-    row3
-    row4
-    row5
-    rowColor
+    - row1
+    - row2
+    - row3
+    - row4
+    - row5
+    - rowColor
 
 
 initials
 
-    textColor
-    fontFamily
-    fontSize
-    chars
-    fontWeight
+    - textColor
+    - fontFamily
+    - fontSize
+    - chars
+    - fontWeight
 
 
 lorelei
 
-    beard
-    beardProbability
-    earrings
-    earringsColor
-    earringsProbability
-    eyebrows
-    eyebrowsColor
-    eyes
-    eyesColor
-    freckles
-    frecklesColor
-    frecklesProbability
-    glasses
-    glassesColor
-    glassesProbability
-    hair
-    hairAccessories
-    hairAccessoriesColor
-    hairAccessoriesProbability
-    hairColor
-    head
-    mouth
-    mouthColor
-    nose
-    noseColor
-    skinColor
+    - beard
+    - beardProbability
+    - earrings
+    - earringsColor
+    - earringsProbability
+    - eyebrows
+    - eyebrowsColor
+    - eyes
+    - eyesColor
+    - freckles
+    - frecklesColor
+    - frecklesProbability
+    - glasses
+    - glassesColor
+    - glassesProbability
+    - hair
+    - hairAccessories
+    - hairAccessoriesColor
+    - hairAccessoriesProbability
+    - hairColor
+    - head
+    - mouth
+    - mouthColor
+    - nose
+    - noseColor
+    - skinColor
 
 
 loreleiNeutral
 
-    eyebrows
-    eyebrowsColor
-    eyes
-    eyesColor
-    freckles
-    frecklesColor
-    frecklesProbability
-    glasses
-    glassesColor
-    glassesProbability
-    mouth
-    mouthColor
-    nose
-    noseColor
+    - eyebrows
+    - eyebrowsColor
+    - eyes
+    - eyesColor
+    - freckles
+    - frecklesColor
+    - frecklesProbability
+    - glasses
+    - glassesColor
+    - glassesProbability
+    - mouth
+    - mouthColor
+    - nose
+    - noseColor
 
 
 micah
 
-    base
-    baseColor
-    earringColor
-    earrings
-    earringsProbability
-    ears
-    eyeShadowColor
-    eyebrows
-    eyebrowsColor
-    eyes
-    eyesColor
-    facialHair
-    facialHairColor
-    facialHairProbability
-    glasses
-    glassesColor
-    glassesProbability
-    hair
-    hairColor
-    hairProbability
-    mouth
-    mouthColor
-    nose
-    shirt
-    shirtColor
+    - base
+    - baseColor
+    - earringColor
+    - earrings
+    - earringsProbability
+    - ears
+    - eyeShadowColor
+    - eyebrows
+    - eyebrowsColor
+    - eyes
+    - eyesColor
+    - facialHair
+    - facialHairColor
+    - facialHairProbability
+    - glasses
+    - glassesColor
+    - glassesProbability
+    - hair
+    - hairColor
+    - hairProbability
+    - mouth
+    - mouthColor
+    - nose
+    - shirt
+    - shirtColor
 
 
 miniavs
 
-    blushes
-    blushesProbability
-    body
-    bodyColor
-    eyes
-    glasses
-    glassesProbability
-    hair
-    hairColor
-    head
-    mouth
-    mustache
-    mustacheProbability
-    skinColor
+    - blushes
+    - blushesProbability
+    - body
+    - bodyColor
+    - eyes
+    - glasses
+    - glassesProbability
+    - hair
+    - hairColor
+    - head
+    - mouth
+    - mustache
+    - mustacheProbability
+    - skinColor
 
 
 notionists
 
-    base
-    beard
-    beardProbability
-    body
-    bodyIcon
-    bodyIconProbability
-    brows
-    eyes
-    gesture
-    gestureProbability
-    glasses
-    glassesProbability
-    hair
-    lips
-    nose
+    - base
+    - beard
+    - beardProbability
+    - body
+    - bodyIcon
+    - bodyIconProbability
+    - brows
+    - eyes
+    - gesture
+    - gestureProbability
+    - glasses
+    - glassesProbability
+    - hair
+    - lips
+    - nose
 
 
 notionistsNeutral
 
-    brows
-    eyes
-    glasses
-    glassesProbability
-    lips
-    nose
+    - brows
+    - eyes
+    - glasses
+    - glassesProbability
+    - lips
+    - nose
 
 
 openPeeps
 
-    accessories
-    accessoriesProbability
-    clothingColor
-    face
-    facialHair
-    facialHairProbability
-    head
-    headContrastColor
-    mask
-    maskProbability
-    skinColor
+    - accessories
+    - accessoriesProbability
+    - clothingColor
+    - face
+    - facialHair
+    - facialHairProbability
+    - head
+    - headContrastColor
+    - mask
+    - maskProbability
+    - skinColor
 
 
 personas
 
-    body
-    clothingColor
-    eyes
-    facialHair
-    facialHairProbability
-    hair
-    hairColor
-    mouth
-    nose
-    skinColor
+    - body
+    - clothingColor
+    - eyes
+    - facialHair
+    - facialHairProbability
+    - hair
+    - hairColor
+    - mouth
+    - nose
+    - skinColor
 
 
 pixelArt
 
-    accessories
-    accessoriesColor
-    accessoriesProbability
-    beard
-    beardProbability
-    clothing
-    clothingColor
-    eyes
-    eyesColor
-    glasses
-    glassesColor
-    glassesProbability
-    hair
-    hairColor
-    hat
-    hatColor
-    hatProbability
-    mouth
-    mouthColor
-    skinColor
+    - accessories
+    - accessoriesColor
+    - accessoriesProbability
+    - beard
+    - beardProbability
+    - clothing
+    - clothingColor
+    - eyes
+    - eyesColor
+    - glasses
+    - glassesColor
+    - glassesProbability
+    - hair
+    - hairColor
+    - hat
+    - hatColor
+    - hatProbability
+    - mouth
+    - mouthColor
+    - skinColor
 
 
 pixelArtNeutral
 
-    eyes
-    eyesColor
-    glasses
-    glassesColor
-    glassesProbability
-    mouth
-    mouthColor
+    - eyes
+    - eyesColor
+    - glasses
+    - glassesColor
+    - glassesProbability
+    - mouth
+    - mouthColor
 
 
 rings
 
-    ring
-    ringColor
-    ringFive
-    ringFiveRotation
-    ringFour
-    ringFourRotation
-    ringOne
-    ringOneRotation
-    ringRotation
-    ringThree
-    ringThreeRotation
-    ringTwo
-    ringTwoRotation
+    - ring
+    - ringColor
+    - ringFive
+    - ringFiveRotation
+    - ringFour
+    - ringFourRotation
+    - ringOne
+    - ringOneRotation
+    - ringRotation
+    - ringThree
+    - ringThreeRotation
+    - ringTwo
+    - ringTwoRotation
 
 
 shapes
 
-    shape1
-    shape1Color
-    shape1OffsetX
-    shape1OffsetY
-    shape1Rotation
-    shape2
-    shape2Color
-    shape2OffsetX
-    shape2OffsetY
-    shape2Rotation
-    shape3
-    shape3Color
-    shape3OffsetX
-    shape3OffsetY
-    shape3Rotation
+    - shape1
+    - shape1Color
+    - shape1OffsetX
+    - shape1OffsetY
+    - shape1Rotation
+    - shape2
+    - shape2Color
+    - shape2OffsetX
+    - shape2OffsetY
+    - shape2Rotation
+    - shape3
+    - shape3Color
+    - shape3OffsetX
+    - shape3OffsetY
+    - shape3Rotation
 
 
 thumbs
 
-    eyes
-    eyesColor
-    face
-    faceOffsetX
-    faceOffsetY
-    faceRotation
-    mouth
-    mouthColor
-    shape
-    shapeColor
-    shapeOffsetX
-    shapeOffsetY
-    shapeRotation
+    - eyes
+    - eyesColor
+    - face
+    - faceOffsetX
+    - faceOffsetY
+    - faceRotation
+    - mouth
+    - mouthColor
+    - shape
+    - shapeColor
+    - shapeOffsetX
+    - shapeOffsetY
+    - shapeRotation

@@ -47,6 +47,7 @@ export function logoBox() {
     text('Logo Design', 'Madi Foley');
     text('UI/UX Design', 'Dan Pudig');
     text('Full-Stack Development', 'Dan Pudig');
+    text('Avatars', 'DiceBear');
 
     const hover = (show) => div.style.display = show ? 'flex' : 'none';
 
