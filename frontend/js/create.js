@@ -88,10 +88,6 @@ function span(val) {
     return `<span class='smaller'>${val}</span>`;
 }
 
-function capital(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
 function textToId(text, type = '') {
     return type == 'games' ? gameInfo('name', text).tag :
         `${text.toLowerCase().split(' ').join('-')}`;

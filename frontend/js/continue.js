@@ -22,7 +22,8 @@ import {
     header,
     hexToRgba,
     hexToTextColour,
-    centerOrStart
+    centerOrStart,
+    startUpper
 } from './utils.js';
 
 import { BASE_ROUTE } from './config.js';
@@ -118,7 +119,7 @@ function createLog(log) {
     statusWinner.className = 'status-winner-row';
 
     const statusBadge = document.createElement('span');
-    statusBadge.textContent = log.status.charAt(0).toUpperCase() + log.status.slice(1);
+    statusBadge.textContent = startUpper(log.status);
     statusBadge.className = 'status-badge ' + log.status;
     statusWinner.appendChild(statusBadge);
 

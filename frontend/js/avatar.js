@@ -7,7 +7,10 @@
 
 // #region
 
-import { header } from './utils.js';
+import {
+    header,
+    startUpper
+} from './utils.js';
 import { adventurer } from './themes/adventurer.js';
 import { adventurerNeutral } from './themes/adventurer_neutral.js';
 import { avatars } from './themes/avatars.js';
@@ -157,53 +160,34 @@ Y
     */
 }
 
-function createAvatarLink(
-    theme_var = 'fun-emoji',
+function addBase(
     seed_var = '0',
     flip_var = 'false',
     rotate_var = '0',
     scale_var = '100',
     colour_var = '#ffffff',
+    colour_type_var = 'solid',
+    colour_rotation_var = '0',
     x_var = '0',
-    y_var = '0',
-    eyes_var = 'plain',
-    mouth_var = 'plain'
+    y_var = '0'
 ) {
-    const base = `https://api.dicebear.com/9.x/`;
+    //const base = `https://api.dicebear.com/9.x/`;
     
-    const theme = `${theme_var}/svg?radius=50`;
-    curr_setup.theme = theme_var;
-    
+    const base = `/svg?radius=50`;
     const seed = `&seed=${seed_var}`;
-    curr_setup.seed = seed_var;
-
     const flip = `&flip=${flip_var}`;
-    curr_setup.flip = flip_var;
-    
     const rotate = `&rotate=${rotate_var}`;
-    curr_setup.rotate = rotate_var;
-    
     const scale = `&scale=${scale_var}`;
-    curr_setup.scale = scale_var;
-    
     const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
         colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
-    curr_setup.colour = colour_var;
-    
+    const colour_type = `&backgroundType=${colour_type_var}`;
+    const colour_rotation = colour_type_var == 'gradientLinear' ?
+        `&backgroundRotation=${colour_rotation_var}` : '';
     const x = `&translateX=${x_var}`;
-    curr_setup.x = x_var;
-    
     const y = `&translateY=${y_var}`;
-    curr_setup.y = y_var;
-    
-    const eyes = `&eyes=${eyes_var}`;
-    curr_setup.eyes = eyes_var;
-    
-    const mouth = `&mouth=${mouth_var}`;
-    curr_setup.mouth = mouth_var;
 
-    return base + theme + seed + flip + rotate +
-        scale + colour + x + y + eyes + mouth;
+    return base + seed + flip + rotate + scale + colour +
+        colour_type + colour_rotation + x + y;
 }
 
 function updateAvatar() {
@@ -259,14 +243,14 @@ function setupColour(div, key) {
 }
 
 function setupGallery(div, type, options) {
+    console.log(options);
     const section = document.createElement('div');
     section.id = `${type}_section`;
     section.className = 'avatar_options_section';
     div.appendChild(section);
-    
-    const text = type.charAt(0).toUpperCase() + type.slice(1) + ':';
+
     section.appendChild(header(
-        'h2', text, '', '', 'avatar_option_title'
+        'h2', `${startUpper(type)}:`, '', '', 'avatar_option_title'
     ));
 
     const options_div = document.createElement('div');
@@ -394,7 +378,7 @@ function updateTheme(section, option, dir) {
     if (i == themes.length) i = 0;
     let words = [];
     themes[i].split('-').forEach(word => {
-        words.push(word.charAt(0).toUpperCase() + word.slice(1));
+        words.push(startUpper(word));
     });
     option.innerHTML = words.join(' ');
     console.log(themes[i]);
@@ -661,7 +645,7 @@ function renderDylan(div, props) {
 
     console.log(div);
     props.forEach(([key, val]) => {
-        if (key == 'hair') {
+        if (key == 'hair' || key == 'mood') {
             setupGallery(div, key, val.items.enum);
         } else if (key.includes('Color')) {
             setupColour(div, key);

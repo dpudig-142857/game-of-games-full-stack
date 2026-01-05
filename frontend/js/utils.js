@@ -247,3 +247,7 @@ export function centerOrStart(div, type, dir = 'width') {
 export function toSOrNotToS(num, text) {
     return num == 1 ? `1 ${text}` : `${num} ${text}s`;
 }
+
+export function startUpper(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
