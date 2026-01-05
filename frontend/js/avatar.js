@@ -403,17 +403,21 @@ function updateOption(div, options, dir) {
 }
 
 function renderBaseOptions(div) {
-    Object.entries(basicDiceBearOptions)
-    .filter(([key, val]) => {
-        return key != 'seed' && key != 'radius' && key != 'size' &&
-            key != 'clip' && key != 'randomizeIds';
-    }).forEach(([key, val]) => {
-        if (key == 'rotate') {
-            setupSlider(div, key, val.minimum, val.maximum, val.default, 10);
-        } else {
-            console.log(key, ' - ', val);
-        }
-    });
+    const rotate = basicDiceBearOptions['rotate'];
+    setupSlider(div, key, rotate.minimum, rotate.maximum, rotate.default, 5);
+    
+    const scale = basicDiceBearOptions['scale'];
+    setupSlider(div, key, scale.minimum, scale.maximum, scale.default, 5);
+    
+    const x = basicDiceBearOptions['translateX'];
+    setupSlider(div, key, x.minimum, x.maximum, x.default, 5);
+    
+    const y = basicDiceBearOptions['translateY'];
+    setupSlider(div, key, y.minimum, y.maximum, y.default, 5);
+
+    setupColour(div, 'backgroundColor');
+
+    
 }
 
 // #endregion
