@@ -405,9 +405,10 @@ function updateOption(div, options, dir) {
 
 function renderBaseOptions(div) {
     Object.entries(basicDiceBearOptions).forEach(([key, val]) => {
+        console.log(key, ' - ', val);
         if (key == 'rotate') {
-            const base = (val.items.minimum + val.items.maximum)/2;
-            setupSlider(div, key, val.items.minimum, val.items.maximum, base);
+            //const base = (val.items.minimum + val.items.maximum)/2;
+            //setupSlider(div, key, val.items.minimum, val.items.maximum, base);
         }
     });
 }
