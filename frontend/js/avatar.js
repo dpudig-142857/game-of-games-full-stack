@@ -411,7 +411,7 @@ function updateOption(type, div, options, dir) {
     if (i == -1) i = options.length - 1;
     if (i == options.length) i = 0;
     div.innerHTML = options[i];
-    curr_setup.extras[type] = opions[i];
+    curr_setup.extras[type] = options[i];
     updateAvatar();
 }
 
