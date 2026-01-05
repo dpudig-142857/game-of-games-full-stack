@@ -403,7 +403,7 @@ function updateTheme(section, option, dir) {
     //updateAvatar();
 }
 
-function updateOption(div, options, dir) {
+function updateOption(type, div, options, dir) {
     const curr = div.innerHTML;
     let i = options.indexOf(curr);
     if (dir == 'left') i -= 1;
@@ -411,6 +411,7 @@ function updateOption(div, options, dir) {
     if (i == -1) i = options.length - 1;
     if (i == options.length) i = 0;
     div.innerHTML = options[i];
+    curr_setup.extras[type] = opions[i];
     updateAvatar();
 }
 
@@ -479,13 +480,13 @@ function setupGallery(div, type, options, initial) {
     options_div.appendChild(rightArrow);
 
     leftArrow.addEventListener('click', () => {
-        updateOption(option, options, 'left');
+        updateOption(type, option, options, 'left');
         //if (type == 'eye') updateEye(option, 'left');
         //if (type == 'mouth') updateMouth(option, 'left');
     });
     
     rightArrow.addEventListener('click', () => {
-        updateOption(option, options, 'right');
+        updateOption(type, option, options, 'right');
         //if (type == 'eye') updateEye(option, 'right');
         //if (type == 'mouth') updateMouth(option, 'right');
     });
@@ -522,7 +523,11 @@ function setupColour(div, key) {
         // Get the selected color value
         const colour = e.target.value;
         colourHeader.innerHTML = colour;
-        curr_setup.colour = colour;
+        if (baseProperties.includes(key)) {
+            curr_setup.colour = colour;
+        } else {
+            curr_setup.extras[key] = colour;
+        }
         updateAvatar();
     });
 }
@@ -554,6 +559,12 @@ function setupSwitch(div, key) {
 
     option.addEventListener('input', (e) => {
         switchHeader.innerHTML = option.checked ? 'Flipped' : 'Normal';
+        if (baseProperties.includes(key)) {
+            curr_setup[key] = option.checked ? 'true' : 'false';
+        } else {
+            curr_setup.extras[key] = option.checked ? 'true' : 'false';
+        }
+        updateAvatar();
     });
 }
 
@@ -588,6 +599,12 @@ function setupSlider(div, key, min, max, val, step) {
 
     option.addEventListener('input', (e) => {
         sliderHeader.innerHTML = option.value;
+        if (baseProperties.includes(key)) {
+            curr_setup[key] = option.value;
+        } else {
+            curr_setup.extras[key] = option.value;
+        }
+        updateAvatar();
     });
 }
 
