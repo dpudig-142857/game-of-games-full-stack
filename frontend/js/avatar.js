@@ -859,7 +859,7 @@ function renderBigEarsNeutral(div, props) {
 
 // #region
 
-function renderBigEars(div, props) {
+function renderBigSmile(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
 
