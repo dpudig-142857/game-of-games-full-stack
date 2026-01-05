@@ -98,10 +98,11 @@ let curr_setup = {
     'rotate': '0',
     'scale': '100',
     'colour': '#ffffff',
+    'colour_type': 'solid',
+    'colour_rotation': '0',
     'x': '0',
     'y': '0',
-    'eyes': 'plain',
-    'mouth': 'plain'
+    'other': {}
 };
 
 export function renderAvatarPage(div, user, type) {
@@ -128,17 +129,18 @@ export function renderAvatarPage(div, user, type) {
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
-    avatar_preview.src = createAvatarLink(
-        'fun-emoji',
+    avatar_preview.src = createFunEmojiLink(
         `${user.player_id}`,
         'true',
         '0',
         '100',
         '#ffffff',
+        'solid',
+        '0',
         '0',
         '0',
         'plain',
-        'lilSmile'
+        'plain'
     );
     avatar_preview_div.appendChild(avatar_preview);
 
@@ -160,14 +162,8 @@ Y
     */
 }
 
-function createAvatarLink(
-    theme = 'fun-emoji'
-) {
-    const base = `https://api.dicebear.com/9.x/`;
-    return base + theme + addBase();
-}
-
-function addBase(
+function createBaseLink(
+    theme_var = 'fun-emoji',
     seed_var = '0',
     flip_var = 'false',
     rotate_var = '0',
@@ -178,21 +174,42 @@ function addBase(
     x_var = '0',
     y_var = '0'
 ) {
-    const base = `/svg?radius=50`;
+    const base = `https://api.dicebear.com/9.x/${theme_var}`;
+    curr_setup.theme = theme_var;
+
+    const radius = `/svg?radius=50`;
+
     const seed = `&seed=${seed_var}`;
+    curr_setup.seed = seed_var;
+
     const flip = `&flip=${flip_var}`;
+    curr_setup.flip = flip_var;
+
     const rotate = `&rotate=${rotate_var}`;
+    curr_setup.rotate = rotate_var;
+
     const scale = `&scale=${scale_var}`;
+    curr_setup.scale = scale_var;
+
     const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
         colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
+    curr_setup.colour = colour_var;
+
     const colour_type = `&backgroundType=${colour_type_var}`;
+    curr_setup.colour_type = colour_type_var;
+
     const colour_rotation = colour_type_var == 'gradientLinear' ?
         `&backgroundRotation=${colour_rotation_var}` : '';
-    const x = `&translateX=${x_var}`;
-    const y = `&translateY=${y_var}`;
+    curr_setup.colour_rotation = colour_rotation_var;
 
-    return base + seed + flip + rotate + scale + colour +
-        colour_type + colour_rotation + x + y;
+    const x = `&translateX=${x_var}`;
+    curr_setup.x = x_var;
+
+    const y = `&translateY=${y_var}`;
+    curr_setup.y = y_var;
+
+    return base + radius + seed + flip + rotate + scale +
+        colour + colour_type + colour_rotation + x + y;
 }
 
 function updateAvatar() {
@@ -725,6 +742,43 @@ function renderFunEmoji(div, props) {
             console.log(key, ' - ', val);
         }
     });
+}
+
+function createFunEmojiLink(
+    seed_var = '0',
+    flip_var = 'false',
+    rotate_var = '0',
+    scale_var = '100',
+    colour_var = '#ffffff',
+    colour_type_var = 'solid',
+    colour_rotation_var = '0',
+    x_var = '0',
+    y_var = '0',
+    eyes_var = 'plain',
+    mouth_var = 'plain'
+) {
+    const base = createBaseLink(
+        'fun-emoji',
+        seed_var,
+        flip_var,
+        rotate_var,
+        scale_var,
+        colour_var,
+        colour_type_var,
+        colour_rotation_var,
+        x_var,
+        y_var
+    );
+    const eyes = `&eyes=${eyes_var}`;
+    const mouth = `&mouth=${mouth_var}`;
+
+    const other = {
+        'eyes': eyes_var,
+        'mouth': mouth_var
+    }
+    curr_setup.other = other;
+
+    return base + eyes + mouth;
 }
 
 function updateEye(option, dir) {
