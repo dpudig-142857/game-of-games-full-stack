@@ -436,3 +436,38 @@ thumbs
     - shapeOffsetX - slider
     - shapeOffsetY - slider
     - shapeRotation - slider
+
+
+
+
+
+
+
+
+
+
+
+
+
+bots
+botsNeutral
+croodles
+croodlesNeutral
+dylan
+funEmoji
+glass
+icons
+identicon
+lorelei
+loreleiNeutral
+micah
+miniavs
+notionists
+notionistsNeutral
+openPeeps
+personas
+pixelArt
+pixelArtNeutral
+rings
+shapes
+thumbs

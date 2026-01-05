@@ -257,7 +257,7 @@ function setupColour(div) {
     });
 }
 
-function setupGallery(div, type) {
+function setupGallery(div, type, options) {
     const section = document.createElement('div');
     section.id = `${type}_section`;
     section.className = 'avatar_options_section';
@@ -280,7 +280,7 @@ function setupGallery(div, type) {
     options.appendChild(leftArrow);
 
     const option = header(
-        'h2', 'plain', '', `${type}_option`, `avatar_option_text`
+        'h2', `${options[0]}`, '', `${type}_option`, `avatar_option_text`
     );
     options.appendChild(option);
 
@@ -291,13 +291,15 @@ function setupGallery(div, type) {
     options.appendChild(rightArrow);
 
     leftArrow.addEventListener('click', () => {
-        if (type == 'eye') updateEye(option, 'left');
-        if (type == 'mouth') updateMouth(option, 'left');
+        updateOption(option, options, 'left');
+        //if (type == 'eye') updateEye(option, 'left');
+        //if (type == 'mouth') updateMouth(option, 'left');
     });
-
+    
     rightArrow.addEventListener('click', () => {
-        if (type == 'eye') updateEye(option, 'right');
-        if (type == 'mouth') updateMouth(option, 'right');
+        updateOption(option, options, 'right');
+        //if (type == 'eye') updateEye(option, 'right');
+        //if (type == 'mouth') updateMouth(option, 'right');
     });
 }
 
@@ -369,16 +371,20 @@ function setupThemeGallery(div) {
     rightArrow.src = 'assets/arrow.svg';
     options.appendChild(rightArrow);
 
+    const otherOptions = document.createElement('div');
+    otherOptions.id = 'avatar_options';
+    div.appendChild(otherOptions);
+
     leftArrow.addEventListener('click', () => {
-        updateTheme(option, 'left');
+        updateTheme(otherOptions, option, 'left');
     });
     
     rightArrow.addEventListener('click', () => {
-        updateTheme(option, 'right');
+        updateTheme(otherOptions, option, 'right');
     });
 }
 
-function updateTheme(option, dir) {
+function updateTheme(section, option, dir) {
     const curr = option.innerHTML.toLowerCase();
     let i = themes.indexOf(curr.split(' ').join('-'));
     if (dir == 'left') i -= 1;
@@ -391,11 +397,71 @@ function updateTheme(option, dir) {
     });
     option.innerHTML = words.join(' ');
     console.log(themes[i]);
-    const props = allDiceBearOptions[themes[i]];
-    Object.entries(props)
+    const props = Object.entries(allDiceBearOptions[themes[i]])
     .filter(([key, val]) => !baseProperties.includes(key))
-    .filter(([key, val]) => ignore.includes(`${themes[i]}.${key}`))
-    .forEach(([key, val]) => {
+    .filter(([key, val]) => !ignore.includes(`${themes[i]}.${key}`))
+    
+    console.log(props);
+    if (themes[i] == 'adventurer') {
+        renderAdventurer();
+    } else if (themes[i] == 'adventurer-neutral') {
+        renderAdventurerNeutral();
+    } else if (themes[i] == 'avataaars') {
+        renderAvataaars();
+    } else if (themes[i] == 'avataaars-neutral') {
+        renderAvataaarsNeutral();
+    } else if (themes[i] == 'big-ears') {
+        renderBigEars();
+    } else if (themes[i] == 'big-ears-neutral') {
+        renderBigEarsNeutral();
+    } else if (themes[i] == 'big-smile') {
+        renderBigSmile();
+    } else if (themes[i] == 'bottts') {
+        renderBottts();
+    } else if (themes[i] == 'bottts-neutral') {
+        renderBotttsNeutral();
+    } else if (themes[i] == 'croodles') {
+        renderCroodles();
+    } else if (themes[i] == 'croodles-neutral') {
+        renderCroodlesNeutral();
+    } else if (themes[i] == 'dylan') {
+        renderDylan(section, props);
+    } else if (themes[i] == 'fun-emoji') {
+        renderFunEmoji(section, props);
+    } else if (themes[i] == 'glass') {
+        renderGlass();
+    } else if (themes[i] == 'icons') {
+        renderIcons();
+    } else if (themes[i] == 'identicon') {
+        renderIdenticon();
+    } else if (themes[i] == 'lorelei') {
+        renderLorelei();
+    } else if (themes[i] == 'lorelei-neutral') {
+        renderLoreleiNeutral();
+    } else if (themes[i] == 'micah') {
+        renderMicah();
+    } else if (themes[i] == 'miniavs') {
+        renderMiniavs();
+    } else if (themes[i] == 'notionists') {
+        renderNotionists();
+    } else if (themes[i] == 'notionists-neutral') {
+        renderNotionistsNeutral();
+    } else if (themes[i] == 'open-peeps') {
+        renderOpenPeeps();
+    } else if (themes[i] == 'personas') {
+        renderPersonas();
+    } else if (themes[i] == 'pixel-art') {
+        renderPixelArt();
+    } else if (themes[i] == 'pixel-art-neutral') {
+        renderPixelArtNeutral();
+    } else if (themes[i] == 'rings') {
+        renderRings();
+    } else if (themes[i] == 'shapes') {
+        renderShapes();
+    } else if (themes[i] == 'thumbs') {
+        renderThumbs();
+    }
+    /*.forEach(([key, val]) => {
         if (key.includes('Probability')) {
             let min = val.minimum;
             let max = val.maximum;
@@ -405,8 +471,7 @@ function updateTheme(option, dir) {
         } else {
             console.log(key, ' - ', val);
         }
-    });
-    console.log(' ');
+    });*/
     //curr_setup.theme = themes[i];
     //updateAvatar();
 }
@@ -419,7 +484,7 @@ function updateOption(div, options, dir) {
     if (i == -1) i = options.length - 1;
     if (i == options.length) i = 0;
     div.innerHTML = options[i];
-
+    console.log(options[i]);
     //updateAvatar();
 }
 
@@ -435,7 +500,9 @@ function updateOption(div, options, dir) {
 
 // #region
 
+function renderAventurer(div) {
 
+}
 
 // #endregion
 
@@ -589,7 +656,12 @@ function updateOption(div, options, dir) {
 
 // #region
 
+function renderDylan(div, props) {
+    div.innerHTML = '';
 
+    console.log(props);
+    //setupGallery(div, key, val);
+}
 
 // #endregion
 
