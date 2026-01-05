@@ -403,6 +403,8 @@ function updateOption(div, options, dir) {
 }
 
 function renderBaseOptions(div) {
+    setupSwitch(div, 'flip');
+
     const rotate = basicDiceBearOptions['rotate'];
     setupSlider(div, 'rotate', rotate.minimum, rotate.maximum, rotate.default, 5);
     
@@ -416,8 +418,6 @@ function renderBaseOptions(div) {
     setupSlider(div, 'translateY', y.minimum, y.maximum, y.default, 5);
 
     setupColour(div, 'backgroundColor');
-
-    
 }
 
 // #endregion
@@ -516,7 +516,33 @@ function setupColour(div, key) {
 }
 
 function setupSwitch(div, key) {
+    const section = document.createElement('div');
+    section.id = 'switch_section';
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
 
+    section.appendChild(header(
+        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = 'switch_options';
+    options.className = 'avatar_option';
+    section.appendChild(options);
+
+    //const switchHeader = header(
+    //    'h2', , '', 'switch_option', 'avatar_option_text'
+    //);
+    //options.appendChild(switchHeader);
+    
+    const option = document.createElement('input');
+    option.id = 'avatar_switch';
+    option.type = 'checkbox';
+    options.appendChild(option);
+
+    option.addEventListener('input', (e) => {
+        
+    });
 }
 
 function setupSlider(div, key, min, max, val, step) {
