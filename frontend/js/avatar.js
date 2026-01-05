@@ -404,16 +404,16 @@ function updateOption(div, options, dir) {
 
 function renderBaseOptions(div) {
     const rotate = basicDiceBearOptions['rotate'];
-    setupSlider(div, key, rotate.minimum, rotate.maximum, rotate.default, 5);
+    setupSlider(div, 'rotate', rotate.minimum, rotate.maximum, rotate.default, 5);
     
     const scale = basicDiceBearOptions['scale'];
-    setupSlider(div, key, scale.minimum, scale.maximum, scale.default, 5);
+    setupSlider(div, 'scale', scale.minimum, scale.maximum, scale.default, 5);
     
     const x = basicDiceBearOptions['translateX'];
-    setupSlider(div, key, x.minimum, x.maximum, x.default, 5);
+    setupSlider(div, 'translateX', x.minimum, x.maximum, x.default, 5);
     
     const y = basicDiceBearOptions['translateY'];
-    setupSlider(div, key, y.minimum, y.maximum, y.default, 5);
+    setupSlider(div, 'translateY', y.minimum, y.maximum, y.default, 5);
 
     setupColour(div, 'backgroundColor');
 
