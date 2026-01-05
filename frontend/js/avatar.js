@@ -85,19 +85,7 @@ const allDiceBearOptions = {
 
 // #region
 
-console.log(basicDiceBearOptions);
-console.log(allDiceBearOptions);
-/*Object.entries(allDiceBearOptions).forEach(([theme, prop]) => {
-    let keys = [];
-    let vals = [];
-    Object.entries(prop).forEach(([key, val]) => {
-        if (!Object.keys(basicDiceBearOptions).includes(key)) {
-            keys.push(key);
-            vals.push(val);
-        }
-    });
-    console.log(`${theme} - ${keys.join(', ')}`);
-});*/
+console.log(baseProperties);
 
 let curr_setup = {
     'theme': 'fun-emoji',
@@ -382,9 +370,10 @@ function updateTheme(option, dir) {
     option.innerHTML = words.join(' ');
     console.log(themes[i]);
     const props = allDiceBearOptions[themes[i]];
-    Object.entries(props).forEach(([key, val]) => {
-        console.log(key);
-        console.log(val);
+    Object.entries(props)
+    .filter(([key,val]) => !baseProperties.includes(key))
+    .forEach(([key, val]) => {
+        console.log(key, ' - ', val);
     });
     console.log(' ');
     //curr_setup.theme = themes[i];
