@@ -375,7 +375,10 @@ function setupThemeGallery(div) {
         updateTheme(otherOptions, option, 'right');
     });
 
-    renderFunEmoji();
+    renderFunEmoji(
+        otherOptions,
+        Object.entries(allDiceBearOptions['fun-emoji'])
+    );
 }
 
 function updateTheme(section, option, dir) {
