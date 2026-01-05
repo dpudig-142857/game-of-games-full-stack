@@ -140,8 +140,8 @@ croodles
     - eyes - gallery
     - face - gallery
     - mouth - gallery
-    - mustache - gallery
-    - mustacheProbability - switch
+    - moustache - gallery
+    - moustacheProbability - switch
     - nose - gallery
     - top - gallery
     - topColor - colour
@@ -287,8 +287,8 @@ miniavs
     - hairColor - colour
     - head - gallery
     - mouth - gallery
-    - mustache - gallery
-    - mustacheProbability - switch
+    - moustache - gallery
+    - moustacheProbability - switch
     - skinColor - colour
 
 

@@ -276,7 +276,11 @@
     gap: 2.5rem;
     align-items: center;
     overflow: auto;
-    padding: 1rem 0;
+    padding: 1rem;
+}
+
+#theme_options {
+    padding: 0 1rem;
 }
 
 .avatar_option_title {

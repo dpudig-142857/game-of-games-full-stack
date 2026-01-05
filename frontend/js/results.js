@@ -216,7 +216,7 @@ function showResults() {
     
     clearResults();
     showTitles();
-    showGames();
+    showLog();
     showPlayers();
 }
 
@@ -338,7 +338,7 @@ function resetGame() {
     gamePhotoDiv.innerHTML = '';
 }
 
-function showGames() {
+function showLog() {
     const section = document.createElement('div');
     section.className = 'section';
     gamesDiv.appendChild(header('h1', 'Log'));
@@ -417,7 +417,12 @@ function showGames() {
             const after = document.createElement('div');
             after.className = a == 'DINNER BREAK' || a == 'LUNCH BREAK'
                 ? 'cell large' : 'cell small';
-            after.appendChild(header('h3', a));
+            if (a.includes('cone') && gog_version == 'public') {
+                const safe = a.replace('cone', 'shot');
+                after.appendChild(header('h3', safe));
+            } else {
+                after.appendChild(header('h3', a));
+            }
             afterDiv.appendChild(after);
 
             section.appendChild(afterDiv);
@@ -543,7 +548,12 @@ function fillGameInfo(game, info) {
 
         const rewardDiv = document.createElement('div');
         rewardDiv.className = 'cell reward';
-        rewardDiv.appendChild(header('h3', `Reward: ${span(r.reward)}`));
+        if (gog_version == 'public') {
+            const safe = r.reward.replace('cone', 'shot');
+            rewardDiv.appendChild(header('h3', `Reward: ${span(safe)}`));
+        } else if (gog_version == 'private') {
+            rewardDiv.appendChild(header('h3', `Reward: ${span(r.reward)}`));
+        }
         box.appendChild(rewardDiv);
 
         let text = '';
@@ -716,6 +726,10 @@ function fillPlayerInfo(name, info) {
         }
         cones
             .filter(([t, _]) => allPlayers.length < 4 ? t != 'c_cone' : true)
+            .filter(([t, _]) => {
+                if (gog_version == 'public') return t != 'f20g_cone';
+                return true;
+            })
             .forEach(([t, v]) => makeBox(playerConesDiv, typeText(gog_version, t), v));
     }
     
@@ -761,7 +775,12 @@ function fillPlayerInfo(name, info) {
         section.className = 'modal-player-game-section';
         section.appendChild(header('h3', place(g.place)));
         section.appendChild(header('h3', '-'));
-        section.appendChild(header('h3', g.reward));
+        if (gog_version == 'public') {
+            const safe = g.reward.replace('cone', 'shot');
+            section.appendChild(header('h3', safe));
+        } else if (gog_version == 'private') {
+            section.appendChild(header('h3', g.reward));
+        }
         box.appendChild(section);
 
         playerGamesDiv.appendChild(box);

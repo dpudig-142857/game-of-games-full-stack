@@ -19,7 +19,7 @@ export const bigSmile = {
                     'sleepMask',
                     'sunglasses',
                     'faceMask',
-                    'mustache',
+                    'moustache',
                 ],
             },
             default: [
@@ -30,7 +30,7 @@ export const bigSmile = {
                 'sleepMask',
                 'sunglasses',
                 'faceMask',
-                'mustache',
+                'moustache',
             ],
         },
         accessoriesProbability: {

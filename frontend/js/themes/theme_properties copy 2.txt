@@ -134,8 +134,8 @@ lorelei.beard
 notionists.beard
 pixelArt.beard
 
-croodles.mustache
-miniavs.mustache
+croodles.moustache
+miniavs.moustache
 
 dylan.mood
 
@@ -326,7 +326,7 @@ bots.sidesProbability
 bots.textureProbability
 bots.topProbability
 croodles.beardProbability
-croodles.mustacheProbability
+croodles.moustacheProbability
 dylan.facialHairProbability
 lorelei.beardProbability
 lorelei.earringsProbability
@@ -341,7 +341,7 @@ micah.glassesProbability
 micah.hairProbability
 miniavs.blushesProbability
 miniavs.glassesProbability
-miniavs.mustacheProbability
+miniavs.moustacheProbability
 notionists.beardProbability
 notionists.bodyIconProbability
 notionists.gestureProbability

@@ -128,9 +128,10 @@ export function renderAvatarPage(div, user, type) {
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
-    avatar_preview.src = createFunEmojiLink(
+    avatar_preview.src = createBaseLink(
+        'fun-emoji',
         `${user.player_id}`,
-        'true',
+        'false',
         '0',
         '100',
         '#ffffff',
@@ -138,9 +139,10 @@ export function renderAvatarPage(div, user, type) {
         '0',
         '0',
         '0',
-        'plain',
-        'plain'
-    );
+    ) + createExtras({
+        'eyes': eyes_var,
+        'mouth': mouth_var
+    });
     avatar_preview_div.appendChild(avatar_preview);
 
     const avatar_options = document.createElement('div');
@@ -205,6 +207,7 @@ function createExtras(extras) {
     let options = [];
     Object.entries(extras).forEach(([key, val]) => {
         options.push(`&${key}=${val}`);
+        curr_setup['extras'][key] = val;
     });
     console.log(options.join(''));
     return options.join('');
@@ -326,83 +329,71 @@ function updateTheme(section, option, dir) {
         words.push(startUpper(word));
     });
     option.innerHTML = words.join(' ');
+    curr_setup['theme'] = themes[i];
     console.log(themes[i]);
     const props = Object.entries(allDiceBearOptions[themes[i]])
-    .filter(([key, val]) => !baseProperties.includes(key))
-    .filter(([key, val]) => !ignore.includes(`${themes[i]}.${key}`))
+    .filter(([key]) => !baseProperties.includes(key))
+    .filter(([key]) => !ignore.includes(`${themes[i]}.${key}`));
 
     if (themes[i] == 'adventurer') {
-        renderAdventurer();
+        renderAdventurer(section, props);
     } else if (themes[i] == 'adventurer-neutral') {
-        renderAdventurerNeutral();
+        renderAdventurerNeutral(section, props);
     } else if (themes[i] == 'avataaars') {
-        renderAvataaars();
+        renderAvataaars(section, props);
     } else if (themes[i] == 'avataaars-neutral') {
-        renderAvataaarsNeutral();
+        renderAvataaarsNeutral(section, props);
     } else if (themes[i] == 'big-ears') {
-        renderBigEars();
+        renderBigEars(section, props);
     } else if (themes[i] == 'big-ears-neutral') {
-        renderBigEarsNeutral();
+        renderBigEarsNeutral(section, props);
     } else if (themes[i] == 'big-smile') {
-        renderBigSmile();
+        renderBigSmile(section, props);
     } else if (themes[i] == 'bottts') {
-        renderBottts();
+        renderBottts(section, props);
     } else if (themes[i] == 'bottts-neutral') {
-        renderBotttsNeutral();
+        renderBotttsNeutral(section, props);
     } else if (themes[i] == 'croodles') {
-        renderCroodles();
+        renderCroodles(section, props);
     } else if (themes[i] == 'croodles-neutral') {
-        renderCroodlesNeutral();
+        renderCroodlesNeutral(section, props);
     } else if (themes[i] == 'dylan') {
         renderDylan(section, props);
     } else if (themes[i] == 'fun-emoji') {
         renderFunEmoji(section, props);
     } else if (themes[i] == 'glass') {
-        renderGlass();
+        renderGlass(section, props);
     } else if (themes[i] == 'icons') {
-        renderIcons();
+        renderIcons(section, props);
     } else if (themes[i] == 'identicon') {
-        renderIdenticon();
+        renderIdenticon(section, props);
     } else if (themes[i] == 'lorelei') {
-        renderLorelei();
+        renderLorelei(section, props);
     } else if (themes[i] == 'lorelei-neutral') {
-        renderLoreleiNeutral();
+        renderLoreleiNeutral(section, props);
     } else if (themes[i] == 'micah') {
-        renderMicah();
+        renderMicah(section, props);
     } else if (themes[i] == 'miniavs') {
-        renderMiniavs();
+        renderMiniavs(section, props);
     } else if (themes[i] == 'notionists') {
-        renderNotionists();
+        renderNotionists(section, props);
     } else if (themes[i] == 'notionists-neutral') {
-        renderNotionistsNeutral();
+        renderNotionistsNeutral(section, props);
     } else if (themes[i] == 'open-peeps') {
-        renderOpenPeeps();
+        renderOpenPeeps(section, props);
     } else if (themes[i] == 'personas') {
-        renderPersonas();
+        renderPersonas(section, props);
     } else if (themes[i] == 'pixel-art') {
-        renderPixelArt();
+        renderPixelArt(section, props);
     } else if (themes[i] == 'pixel-art-neutral') {
-        renderPixelArtNeutral();
+        renderPixelArtNeutral(section, props);
     } else if (themes[i] == 'rings') {
-        renderRings();
+        renderRings(section, props);
     } else if (themes[i] == 'shapes') {
-        renderShapes();
+        renderShapes(section, props);
     } else if (themes[i] == 'thumbs') {
-        renderThumbs();
+        renderThumbs(section, props);
     }
-    /*.forEach(([key, val]) => {
-        if (key.includes('Probability')) {
-            let min = val.minimum;
-            let max = val.maximum;
-            console.log(key, ' - ', min, ' to ', max);
-        } else if (key.includes('Color')) {
-            console.log(key);
-        } else {
-            console.log(key, ' - ', val);
-        }
-    });*/
-    //curr_setup['theme = themes[i];
-    //updateAvatar();
 }
 
 function updateOption(type, div, options, dir) {
@@ -639,8 +630,37 @@ function setupSlider(div, key, min, max, val, step) {
 
 // #region
 
-function renderAventurer(div) {
+function renderAdventurer(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let earrings = props['earrings'].items.enum;
+    earrings.push('None');
+    setupGallery(div, 'earrings', earrings, earrings[0]);
+    
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+
+    let features = props['features'].items.enum;
+    features.push('None');
+    setupGallery(div, 'features', features, features[0]);
+
+    let glasses = props['glasses'].items.enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, glasses[0]);
+
+    let hair = props['hair'].items.enum;
+    hair.push('None');
+    setupGallery(div, 'hair', hair, hair[0]);
+    setupColour(div, 'hairColor');
+
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+
+    setupColour(div, 'skinColor');
 }
 
 // #endregion
@@ -655,7 +675,23 @@ function renderAventurer(div) {
 
 // #region
 
+function renderAdventurerNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+
+    let glasses = props['glasses'].items.enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, glasses[0]);
+
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+}
 
 // #endregion
 
@@ -669,7 +705,43 @@ function renderAventurer(div) {
 
 // #region
 
+function renderAvataaars(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let accessories = props['accessories'].items.enum;
+    accessories.push('None');
+    setupGallery(div, 'accessories', accessories, accessories[0]);
+    setupColour(div, 'accessoriesColor');
+    
+    setupColour(div, 'clothesColor');
+    
+    let clothing = props['clothing'].items.enum;
+    setupGallery(div, 'clothing', clothing, clothing[0]);
+    // TODO: add clothingGraphic if clothing is graphic
+    
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let facialHair = props['facialHair'].items.enum;
+    facialHair.push('None');
+    setupGallery(div, 'facialHair', facialHair, facialHair[0]);
+    setupColour(div, 'facialHairColor');
+    
+    setupColour(div, 'hairColor');
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    
+    setupColour(div, 'skinColor');
+    
+    let top = props['top'].items.enum;
+    setupGallery(div, 'top', top, top[0]);
+    // TODO: if top is hat, hijab, turban, winterHat1, winterHat02, winterHat03, winerHat04, add hatColor
+}
 
 // #endregion
 
@@ -683,7 +755,19 @@ function renderAventurer(div) {
 
 // #region
 
+function renderAvataaarsNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let eyebrows = props['eyebrows'].items.enum;
+    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+}
 
 // #endregion
 
@@ -697,7 +781,41 @@ function renderAventurer(div) {
 
 // #region
 
+function renderBigEars(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let cheek = props['cheek'].items.enum;
+    cheek.push('None');
+    setupGallery(div, 'cheek', cheek, cheek[0]);
+    
+    let ear = props['ear'].items.enum;
+    setupGallery(div, 'ear', ear, ear[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+
+    let face = props['face'].items.enum;
+    setupGallery(div, 'face', face, face[0]);
+
+    let frontHair = props['frontHair'].items.enum;
+    setupGallery(div, 'frontHair', frontHair, frontHair[0]);
+    
+    let hair = props['hair'].items.enum;
+    setupGallery(div, 'hair', hair, hair[0]);
+    setupColour(div, 'hairColor');
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+    
+    let sideburn = props['sideburn'].items.enum;
+    setupGallery(div, 'sideburn', sideburn, sideburn[0]);
+    
+    setupColour(div, 'skinColor');
+}
 
 // #endregion
 
@@ -711,7 +829,23 @@ function renderAventurer(div) {
 
 // #region
 
+function renderBigEarsNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let cheek = props['cheek'].items.enum;
+    cheek.push('None');
+    setupGallery(div, 'cheek', cheek, cheek[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+}
 
 // #endregion
 
@@ -725,7 +859,26 @@ function renderAventurer(div) {
 
 // #region
 
+function renderBigEars(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let accessories = props['accessories'].items.enum;
+    accessories.push('None');
+    setupGallery(div, 'accessories', accessories, accessories[0]);
+
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+
+    let hair = props['hair'].items.enum;
+    setupGallery(div, 'hair', hair, hair[0]);
+    setupColour(div, 'hairColor');
+
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+
+    setupColour(div, 'skinColor');
+}
 
 // #endregion
 
@@ -739,7 +892,34 @@ function renderAventurer(div) {
 
 // #region
 
+function renderBottts(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    setupColour(div, 'baseColor');
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let face = props['face'].items.enum;
+    setupGallery(div, 'face', face, face[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    mouth.push('None');
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+
+    let sides = props['sides'].items.enum;
+    sides.push('None');
+    setupGallery(div, 'sides', sides, sides[0]);
+
+    let texture = props['texture'].items.enum;
+    texture.push('None');
+    setupGallery(div, 'texture', texture, texture[0]);
+
+    let top = props['top'].items.enum;
+    top.push('None');
+    setupGallery(div, 'top', top, top[0]);
+}
 
 // #endregion
 
@@ -753,7 +933,16 @@ function renderAventurer(div) {
 
 // #region
 
+function renderBotttsNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+}
 
 // #endregion
 
@@ -767,7 +956,36 @@ function renderAventurer(div) {
 
 // #region
 
+function renderCroodles(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
 
+    setupColour(div, 'baseColor');
+    
+    let beard = props['beard'].items.enum;
+    beard.push('None');
+    setupGallery(div, 'beard', beard, beard[0]);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let face = props['face'].items.enum;
+    setupGallery(div, 'face', face, face[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+
+    let moustache = props['moustache'].items.enum;
+    moustache.push('None');
+    setupGallery(div, 'moustache', moustache, moustache[0]);
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+    
+    let top = props['top'].items.enum;
+    setupGallery(div, 'top', top, top[0]);
+    setupColour(div, 'topColor');
+}
 
 // #endregion
 
@@ -781,7 +999,19 @@ function renderAventurer(div) {
 
 // #region
 
-
+function renderCroodlesNeutral(div, props) {
+    div.innerHTML = '';
+    renderBaseOptions(div);
+    
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, eyes[0]);
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, mouth[0]);
+    
+    let nose = props['nose'].items.enum;
+    setupGallery(div, 'nose', nose, nose[0]);
+}
 
 // #endregion
 
@@ -797,20 +1027,19 @@ function renderAventurer(div) {
 
 function renderDylan(div, props) {
     div.innerHTML = '';
-
     renderBaseOptions(div);
-    props.forEach(([key, val]) => {
-        if (key == 'hair' || key == 'mood') {
-            const options = val.items.enum;
-            setupGallery(div, key, options, options[0]);
-        } else if (key.includes('Color')) {
-            setupColour(div, key);
-        } else if (key == 'facialHairProbability') {
-            setupGallery(div, 'facialHair', ['None', 'Default'], 'None');
-        } else {
-            console.log(key, ' - ', val);
-        }
-    });
+
+    const facialHair = ['None', 'Default'];
+    setupGallery(div, 'facialHair', facialHair, facialHair[0]);
+    
+    let hair = props['hair'].items.enum;
+    setupGallery(div, 'hair', hair, hair[0]);
+    setupColour(div, 'hairColor');
+    
+    let mood = props['mood'].items.enum;
+    setupGallery(div, 'mood', mood, mood[0]);
+
+    setupColour(div, 'skinColor');
 }
 
 // #endregion
@@ -825,113 +1054,15 @@ function renderDylan(div, props) {
 
 // #region
 
-const eye_list = [
-    'closed',
-    'closed2',
-    'crying',
-    'cute',
-    'glasses',
-    'love',
-    'pissed',
-    'plain',
-    'sad',
-    'shades',
-    'sleepClose',
-    'stars',
-    'tearDrop',
-    'wink',
-    'wink2'
-];
-
-const mouth_list = [
-    'cute',
-    'drip',
-    'faceMask',
-    'kissHeart',
-    'lilSmile',
-    'pissed',
-    'plain',
-    'sad',
-    'shout',
-    'shy',
-    'sick',
-    'smileLol',
-    'smileTeeth',
-    'tongueOut',
-    'wideSmile'
-];
-
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
-
     renderBaseOptions(div);
-    props.forEach(([key, val]) => {
-        if (key == 'eyes' || key == 'mouth') {
-            setupGallery(div, key, val.items.enum, 'plain');
-        } else {
-            console.log(key, ' - ', val);
-        }
-    });
-}
 
-function createFunEmojiLink(
-    seed_var = '0',
-    flip_var = 'false',
-    rotate_var = '0',
-    scale_var = '100',
-    colour_var = '#ffffff',
-    colour_type_var = 'solid',
-    colour_rotation_var = '0',
-    x_var = '0',
-    y_var = '0',
-    eyes_var = 'plain',
-    mouth_var = 'plain'
-) {
-    const base = createBaseLink(
-        'fun-emoji',
-        seed_var,
-        flip_var,
-        rotate_var,
-        scale_var,
-        colour_var,
-        colour_type_var,
-        colour_rotation_var,
-        x_var,
-        y_var
-    );
-    const eyes = `&eyes=${eyes_var}`;
-    const mouth = `&mouth=${mouth_var}`;
-
-    curr_setup['extras'] = {
-        'eyes': eyes_var,
-        'mouth': mouth_var
-    };
-
-    return base + eyes + mouth;
-}
-
-function updateEye(option, dir) {
-    const curr = option.innerHTML;
-    let i = eye_list.indexOf(curr);
-    if (dir == 'left') i -= 1;
-    if (dir == 'right') i += 1;
-    if (i == -1) i = eye_list.length - 1;
-    if (i == eye_list.length) i = 0;
-    option.innerHTML = eye_list[i];
-    curr_setup['eyes'] = eye_list[i];
-    updateAvatar();
-}
-
-function updateMouth(option, dir) {
-    const curr = option.innerHTML;
-    let i = mouth_list.indexOf(curr);
-    if (dir == 'left') i -= 1;
-    if (dir == 'right') i += 1;
-    if (i == -1) i = mouth_list.length - 1;
-    if (i == mouth_list.length) i = 0;
-    option.innerHTML = mouth_list[i];
-    curr_setup['mouth'] = mouth_list[i];
-    updateAvatar();
+    let eyes = props['eyes'].items.enum;
+    setupGallery(div, 'eyes', eyes, 'plain');
+    
+    let mouth = props['mouth'].items.enum;
+    setupGallery(div, 'mouth', mouth, 'plain');
 }
 
 // #endregion
@@ -946,7 +1077,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderGlass(div, props) {
 
+}
 
 // #endregion
 
@@ -960,7 +1093,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderIcons(div, props) {
 
+}
 
 // #endregion
 
@@ -974,21 +1109,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderIdenticon(div, props) {
 
-
-// #endregion
-
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-// 
-//                          Initials
-// 
-
-
-// #region
-
-
+}
 
 // #endregion
 
@@ -1002,7 +1125,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderLorelei(div, props) {
 
+}
 
 // #endregion
 
@@ -1016,7 +1141,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderLoreleiNeutral(div, props) {
 
+}
 
 // #endregion
 
@@ -1030,7 +1157,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderMicah(div, props) {
 
+}
 
 // #endregion
 
@@ -1044,7 +1173,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderMiniavs(div, props) {
 
+}
 
 // #endregion
 
@@ -1058,7 +1189,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderNotionists(div, props) {
 
+}
 
 // #endregion
 
@@ -1072,7 +1205,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderNotionistsNeutral(div, props) {
 
+}
 
 // #endregion
 
@@ -1086,7 +1221,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderOpenPeeps(div, props) {
 
+}
 
 // #endregion
 
@@ -1100,7 +1237,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderPersonas(div, props) {
 
+}
 
 // #endregion
 
@@ -1114,7 +1253,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderPixelArt(div, props) {
 
+}
 
 // #endregion
 
@@ -1128,7 +1269,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderPixelArtNeutral(div, props) {
 
+}
 
 // #endregion
 
@@ -1142,7 +1285,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderRings(div, props) {
 
+}
 
 // #endregion
 
@@ -1156,7 +1301,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderShapes(div, props) {
 
+}
 
 // #endregion
 
@@ -1170,7 +1317,9 @@ function updateMouth(option, dir) {
 
 // #region
 
+function renderThumbs(div, props) {
 
+}
 
 // #endregion
 

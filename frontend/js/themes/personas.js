@@ -44,7 +44,7 @@ export const personas = {
             items: {
                 type: 'string',
                 enum: [
-                    'beardMustache',
+                    'beardmoustache',
                     'pyramid',
                     'walrus',
                     'goatee',
@@ -53,7 +53,7 @@ export const personas = {
                 ],
             },
             default: [
-                'beardMustache',
+                'beardmoustache',
                 'pyramid',
                 'walrus',
                 'goatee',

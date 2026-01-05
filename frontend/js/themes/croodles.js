@@ -149,7 +149,7 @@ export const croodles = {
                 'variant01',
             ],
         },
-        mustache: {
+        moustache: {
             type: 'array',
             items: {
                 type: 'string',
@@ -157,7 +157,7 @@ export const croodles = {
             },
             default: ['variant04', 'variant03', 'variant02', 'variant01'],
         },
-        mustacheProbability: {
+        moustacheProbability: {
             type: 'integer',
             minimum: 0,
             maximum: 100,

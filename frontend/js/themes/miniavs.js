@@ -111,7 +111,7 @@ export const miniavs = {
             },
             default: ['default', 'missingTooth'],
         },
-        mustache: {
+        moustache: {
             type: 'array',
             items: {
                 type: 'string',
@@ -119,7 +119,7 @@ export const miniavs = {
             },
             default: ['pencilThinBeard', 'pencilThin', 'horshoe', 'freddy'],
         },
-        mustacheProbability: {
+        moustacheProbability: {
             type: 'integer',
             minimum: 0,
             maximum: 100,

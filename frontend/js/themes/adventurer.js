@@ -149,9 +149,9 @@ export const adventurer = {
             type: 'array',
             items: {
                 type: 'string',
-                enum: ['mustache', 'blush', 'birthmark', 'freckles'],
+                enum: ['moustache', 'blush', 'birthmark', 'freckles'],
             },
-            default: ['mustache', 'blush', 'birthmark', 'freckles'],
+            default: ['moustache', 'blush', 'birthmark', 'freckles'],
         },
         featuresProbability: {
             type: 'integer',

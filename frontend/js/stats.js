@@ -906,6 +906,7 @@ async function initialise() {
     
     const res = await fetch(`${BASE_ROUTE}/api/stats`);
     const stats = await res.json();
+    console.log(stats);
 
     headerTitle.innerHTML = '';
     headerTitle.appendChild(header('h1', `Game of Games Stats`));

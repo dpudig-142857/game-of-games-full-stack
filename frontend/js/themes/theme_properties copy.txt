@@ -73,7 +73,7 @@ croodles.beard
 croodles.eyes
 croodles.face
 croodles.mouth
-croodles.mustache
+croodles.moustache
 croodles.nose
 croodles.top
 croodlesNeutral.eyes
@@ -121,7 +121,7 @@ miniavs.glasses
 miniavs.hair
 miniavs.head
 miniavs.mouth
-miniavs.mustache
+miniavs.moustache
 notionists.beard
 notionists.body
 notionists.bodyIcon
@@ -273,7 +273,7 @@ bots.sidesProbability
 bots.textureProbability
 bots.topProbability
 croodles.beardProbability
-croodles.mustacheProbability
+croodles.moustacheProbability
 dylan.facialHairProbability
 lorelei.beardProbability
 lorelei.earringsProbability
@@ -288,7 +288,7 @@ micah.glassesProbability
 micah.hairProbability
 miniavs.blushesProbability
 miniavs.glassesProbability
-miniavs.mustacheProbability
+miniavs.moustacheProbability
 notionists.beardProbability
 notionists.bodyIconProbability
 notionists.gestureProbability
