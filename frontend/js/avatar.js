@@ -599,8 +599,7 @@ function setupSlider(div, key, min, max, val, step) {
     option.step = step;
     options.appendChild(option);
 
-    option.addEventListener('input', (e) => {
-        const num = `${option.value}`;
+    const updateSlider = (num) => {
         sliderHeader.innerHTML = num;
         if (baseProperties.includes(key)) {
             curr_setup[key] = num;
@@ -608,7 +607,23 @@ function setupSlider(div, key, min, max, val, step) {
             curr_setup['extras'][key] = num;
         }
         updateAvatar();
+    };
+
+    option.addEventListener('input', () => {
+        updateSlider(`${option.value}`);
     });
+
+    const reset = document.createElement('input');
+    reset.type = 'button';
+    reset.className = 'reset_btn';
+    options.appendChild(reset);
+
+    reset.addEventListener('click', (e) => {
+        e.preventDefault();
+        option.value = val;
+        updateSlider(`${option.value}`);
+    });
+
 }
 
 // #endregion
