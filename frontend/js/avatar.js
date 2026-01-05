@@ -530,10 +530,10 @@ function setupSwitch(div, key) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
-    //const switchHeader = header(
-    //    'h2', , '', 'switch_option', 'avatar_option_text'
-    //);
-    //options.appendChild(switchHeader);
+    const switchHeader = header(
+        'h2', 'Normal', '', 'switch_option', 'avatar_option_text'
+    );
+    options.appendChild(switchHeader);
     
     const option = document.createElement('input');
     option.id = 'avatar_switch';
@@ -541,7 +541,7 @@ function setupSwitch(div, key) {
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
-        
+        switchHeader.innerHTML = option.checked ? 'Flipped' : 'Normal';
     });
 }
 
