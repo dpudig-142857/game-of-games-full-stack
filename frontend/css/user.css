@@ -341,6 +341,7 @@
 }
 
 .avatar_btn {
+    width: max-content;
     background: transparent;
     border-radius: 20%;
     cursor: pointer;
