@@ -101,7 +101,7 @@ let curr_setup = {
     'colour_rotation': '0',
     'x': '0',
     'y': '0',
-    'other': {}
+    'extras': {}
 };
 
 export function renderAvatarPage(div, user, type) {
@@ -200,6 +200,14 @@ function createBaseLink(
         colour + colour_type + colour_rotation + x + y;
 }
 
+function createExtras(extras) {
+    let options = [];
+    Object.entries(extras).forEach(([key, val]) => {
+        options.push(`&${key}=${val}`);
+    });
+    return options.join('');
+}
+
 function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
     preview.src = createBaseLink(
@@ -209,9 +217,11 @@ function updateAvatar() {
         curr_setup.rotate,
         curr_setup.scale,
         curr_setup.colour,
+        curr_setup.colour_type,
+        curr_setup.colour_rotation,
         curr_setup.x,
         curr_setup.y
-    )// + createExtras(curr_setup.other);
+    ) + createExtras(curr_setup.extras);
 }
 
 // #endregion
@@ -297,6 +307,7 @@ function setupThemeGallery(div) {
     renderFunEmoji(
         otherOptions,
         Object.entries(allDiceBearOptions['fun-emoji'])
+        .filter(([key, val]) => !baseProperties.includes(key))
     );
 }
 
@@ -854,11 +865,11 @@ function createFunEmojiLink(
     const eyes = `&eyes=${eyes_var}`;
     const mouth = `&mouth=${mouth_var}`;
 
-    const other = {
+    const extras = {
         'eyes': eyes_var,
         'mouth': mouth_var
     }
-    curr_setup.other = other;
+    curr_setup.extras = extras;
 
     return base + eyes + mouth;
 }
