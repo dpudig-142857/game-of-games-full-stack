@@ -160,6 +160,13 @@ Y
     */
 }
 
+function createAvatarLink(
+    theme = 'fun-emoji'
+) {
+    const base = `https://api.dicebear.com/9.x/`;
+    return base + theme + addBase();
+}
+
 function addBase(
     seed_var = '0',
     flip_var = 'false',
@@ -171,8 +178,6 @@ function addBase(
     x_var = '0',
     y_var = '0'
 ) {
-    //const base = `https://api.dicebear.com/9.x/`;
-    
     const base = `/svg?radius=50`;
     const seed = `&seed=${seed_var}`;
     const flip = `&flip=${flip_var}`;
@@ -191,7 +196,7 @@ function addBase(
 }
 
 function updateAvatar() {
-    const preview = document.getElementById('avatar_preview');
+    /*const preview = document.getElementById('avatar_preview');
     preview.src = createAvatarLink(
         curr_setup.theme,
         curr_setup.seed,
@@ -203,7 +208,8 @@ function updateAvatar() {
         curr_setup.y,
         curr_setup.eyes,
         curr_setup.mouth
-    );
+    );*/
+    console.log('UPDATING');
 }
 
 function setupColour(div, key) {
