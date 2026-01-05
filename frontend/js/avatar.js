@@ -215,89 +215,6 @@ function updateAvatar() {
     )// + createExtras(curr_setup.other);
 }
 
-function setupColour(div, key) {
-    const section = document.createElement('div');
-    section.id = 'colour_section';
-    section.className = 'avatar_options_section';
-    div.appendChild(section);
-
-    const text = `${startUpper(key.split('Color')[0])} Colour:`;
-    section.appendChild(header(
-        'h2', text, '', '', 'avatar_option_title'
-    ));
-
-    const options = document.createElement('div');
-    options.id = 'colour_options';
-    options.className = 'avatar_option';
-    section.appendChild(options);
-
-    const colourHeader = header(
-        'h2', '#ffffff', '', 'colour_option', 'avatar_option_text'
-    );
-    options.appendChild(colourHeader);
-    
-    const option = document.createElement('input');
-    option.id = 'avatar_colour';
-    option.type = 'color';
-    option.value = '#ffffff';
-    options.appendChild(option);
-
-    option.addEventListener('input', (e) => {
-        // Get the selected color value
-        const colour = e.target.value;
-        colourHeader.innerHTML = colour;
-        curr_setup.colour = colour;
-        updateAvatar();
-    });
-}
-
-function setupGallery(div, type, options, initial) {
-    options = options.sort();
-
-    const section = document.createElement('div');
-    section.id = `${type}_section`;
-    section.className = 'avatar_options_section';
-    div.appendChild(section);
-
-    section.appendChild(header(
-        'h2', `${startUpper(type)}:`, '', '', 'avatar_option_title'
-    ));
-
-    const options_div = document.createElement('div');
-    options_div.id = `${type}_options`;
-    options_div.className = 'avatar_option';
-    section.appendChild(options_div);
-    
-    const leftArrow = document.createElement('img');
-    leftArrow.className = 'avatar_arrow';
-    leftArrow.id = 'left_arrow';
-    leftArrow.src = 'assets/arrow.svg';
-    options_div.appendChild(leftArrow);
-
-    const option = header(
-        'h2', initial, '', `${type}_option`, `avatar_option_text`
-    );
-    options_div.appendChild(option);
-
-    const rightArrow = document.createElement('img');
-    rightArrow.className = 'avatar_arrow';
-    rightArrow.id = 'right_arrow';
-    rightArrow.src = 'assets/arrow.svg';
-    options_div.appendChild(rightArrow);
-
-    leftArrow.addEventListener('click', () => {
-        updateOption(option, options, 'left');
-        //if (type == 'eye') updateEye(option, 'left');
-        //if (type == 'mouth') updateMouth(option, 'left');
-    });
-    
-    rightArrow.addEventListener('click', () => {
-        updateOption(option, options, 'right');
-        //if (type == 'eye') updateEye(option, 'right');
-        //if (type == 'mouth') updateMouth(option, 'right');
-    });
-}
-
 // #endregion
 
 
@@ -486,6 +403,147 @@ function updateOption(div, options, dir) {
     updateAvatar();
 }
 
+function renderBaseOptions(div) {
+    Object.entries(basicDiceBearOptions).forEach(([key, val]) => {
+        if (key == 'rotate') {
+            const base = (val.items.minimum + val.items.maximum)/2;
+            setupSlider(div, key, val.items.minimum, val.items.maximum, base);
+        }
+    });
+}
+
+// #endregion
+
+
+// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+// 
+//                          Options
+// 
+
+
+// #region
+
+function setupGallery(div, type, options, initial) {
+    options = options.sort();
+
+    const section = document.createElement('div');
+    section.id = `${type}_section`;
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    section.appendChild(header(
+        'h2', `${startUpper(type)}:`, '', '', 'avatar_option_title'
+    ));
+
+    const options_div = document.createElement('div');
+    options_div.id = `${type}_options`;
+    options_div.className = 'avatar_option';
+    section.appendChild(options_div);
+    
+    const leftArrow = document.createElement('img');
+    leftArrow.className = 'avatar_arrow';
+    leftArrow.id = 'left_arrow';
+    leftArrow.src = 'assets/arrow.svg';
+    options_div.appendChild(leftArrow);
+
+    const option = header(
+        'h2', initial, '', `${type}_option`, `avatar_option_text`
+    );
+    options_div.appendChild(option);
+
+    const rightArrow = document.createElement('img');
+    rightArrow.className = 'avatar_arrow';
+    rightArrow.id = 'right_arrow';
+    rightArrow.src = 'assets/arrow.svg';
+    options_div.appendChild(rightArrow);
+
+    leftArrow.addEventListener('click', () => {
+        updateOption(option, options, 'left');
+        //if (type == 'eye') updateEye(option, 'left');
+        //if (type == 'mouth') updateMouth(option, 'left');
+    });
+    
+    rightArrow.addEventListener('click', () => {
+        updateOption(option, options, 'right');
+        //if (type == 'eye') updateEye(option, 'right');
+        //if (type == 'mouth') updateMouth(option, 'right');
+    });
+}
+
+function setupColour(div, key) {
+    const section = document.createElement('div');
+    section.id = 'colour_section';
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    const text = `${startUpper(key.split('Color')[0])} Colour:`;
+    section.appendChild(header(
+        'h2', text, '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = 'colour_options';
+    options.className = 'avatar_option';
+    section.appendChild(options);
+
+    const colourHeader = header(
+        'h2', '#ffffff', '', 'colour_option', 'avatar_option_text'
+    );
+    options.appendChild(colourHeader);
+    
+    const option = document.createElement('input');
+    option.id = 'avatar_colour';
+    option.type = 'color';
+    option.value = '#ffffff';
+    options.appendChild(option);
+
+    option.addEventListener('input', (e) => {
+        // Get the selected color value
+        const colour = e.target.value;
+        colourHeader.innerHTML = colour;
+        curr_setup.colour = colour;
+        updateAvatar();
+    });
+}
+
+function setupSwitch(div, key) {
+
+}
+
+function setupSlider(div, key, min, max, val) {
+    const section = document.createElement('div');
+    section.id = 'slider_section';
+    section.className = 'avatar_options_section';
+    div.appendChild(section);
+
+    section.appendChild(header(
+        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
+    ));
+
+    const options = document.createElement('div');
+    options.id = 'slider_options';
+    options.className = 'avatar_option';
+    section.appendChild(options);
+
+    const sliderHeader = header(
+        'h2', val, '', 'slider_option', 'avatar_option_text'
+    );
+    options.appendChild(sliderHeader);
+    
+    const option = document.createElement('input');
+    option.id = 'avatar_slider';
+    option.type = 'range';
+    option.min = min;
+    option.max = max;
+    option.value = val;
+    options.appendChild(option);
+
+    option.addEventListener('input', (e) => {
+        console.log(option.value);
+    });
+}
+
 // #endregion
 
 
@@ -657,7 +715,7 @@ function renderAventurer(div) {
 function renderDylan(div, props) {
     div.innerHTML = '';
 
-    console.log(div);
+    renderBaseOptions(div);
     props.forEach(([key, val]) => {
         if (key == 'hair' || key == 'mood') {
             const options = val.items.enum;
@@ -665,7 +723,7 @@ function renderDylan(div, props) {
         } else if (key.includes('Color')) {
             setupColour(div, key);
         } else if (key == 'facialHairProbability') {
-            setupGallery(div, 'facialHair', ['Off', 'On'], 'Off');
+            setupGallery(div, 'facialHair', ['None', 'Default'], 'None');
         } else {
             console.log(key, ' - ', val);
         }
@@ -723,6 +781,7 @@ const mouth_list = [
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
 
+    renderBaseOptions(div);
     props.forEach(([key, val]) => {
         if (key == 'eyes' || key == 'mouth') {
             setupGallery(div, key, val.items.enum, 'plain');
