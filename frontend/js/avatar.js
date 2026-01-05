@@ -206,6 +206,7 @@ function createExtras(extras) {
     Object.entries(extras).forEach(([key, val]) => {
         options.push(`&${key}=${val}`);
     });
+    console.log(options.join(''));
     return options.join('');
 }
 
@@ -223,6 +224,7 @@ function updateAvatar() {
         curr_setup.x,
         curr_setup.y
     ) + createExtras(curr_setup.extras);
+    console.log(curr_setup);
 }
 
 // #endregion
