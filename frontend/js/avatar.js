@@ -349,7 +349,7 @@ function setupThemeGallery(div) {
     options.appendChild(leftArrow);
 
     const option = header(
-        'h2', 'plain', '', `theme_option`, `avatar_option_text`
+        'h2', 'fun-emoji', '', `theme_option`, `avatar_option_text`
     );
     options.appendChild(option);
 
