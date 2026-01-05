@@ -370,6 +370,7 @@ function setupThemeGallery(div) {
 
 function updateTheme(option, dir) {
     const curr = option.innerHTML.toLowerCase();
+    console.log(curr);
     let i = themes.indexOf(curr.split(' ').join('-'));
     if (dir == 'left') i -= 1;
     if (dir == 'right') i += 1;
@@ -378,6 +379,7 @@ function updateTheme(option, dir) {
     const theme = themes[i];
     let words = [];
     for (const word in theme.split('-')) {
+        console.log(word);
         words.push(word.charAt(0).toUpperCase() + word.slice(1));
     }
     option.innerHTML = words.join(' ');
