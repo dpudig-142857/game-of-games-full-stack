@@ -222,14 +222,15 @@ function updateAvatar() {
     );
 }
 
-function setupColour(div) {
+function setupColour(div, key) {
     const section = document.createElement('div');
     section.id = 'colour_section';
     section.className = 'avatar_options_section';
     div.appendChild(section);
 
+    const text = `${key.split('Color')[0]} Colour:`;
     section.appendChild(header(
-        'h2', 'Colour:', '', '', 'avatar_option_title'
+        'h2', text, '', '', 'avatar_option_title'
     ));
 
     const options = document.createElement('div');
@@ -661,9 +662,13 @@ function renderDylan(div, props) {
     console.log(div);
     props.forEach(([key, val]) => {
         if (key == 'hair') {
-            setupGallery(div, key, val);
+            setupGallery(div, key, val.items.enum);
         } else if (key.includes('Color')) {
-            setupColour(div);
+            setupColour(div, key);
+        } else if (key.includes('Probability')) {
+            let min = val.minimum;
+            let max = val.maximum;
+            console.log(key, ' - ', min, ' to ', max);
         } else {
             console.log(key, ' - ', val);
         }
