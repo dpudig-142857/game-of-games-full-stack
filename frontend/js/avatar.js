@@ -614,9 +614,9 @@ function setupSlider(div, key, min, max, val, step) {
     });
 
     const reset = document.createElement('input');
-    reset.type = 'button';
     reset.className = 'avatar_btn';
-    reset.textContent = 'Reset';
+    reset.type = 'button';
+    reset.value = 'Reset';
     options.appendChild(reset);
 
     reset.addEventListener('click', (e) => {
