@@ -201,6 +201,7 @@ function createBaseLink(
 }
 
 function createExtras(extras) {
+    console.log(extras);
     let options = [];
     Object.entries(extras).forEach(([key, val]) => {
         options.push(`&${key}=${val}`);
