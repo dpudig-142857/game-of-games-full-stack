@@ -301,11 +301,11 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    width: 20rem;
+    width: 30rem;
 }
 
 .avatar_option_text {
-    width: 15rem;
+    width: 25rem;
 }
 
 .avatar_arrow {
