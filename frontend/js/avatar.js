@@ -634,30 +634,30 @@ function renderAdventurer(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
 
-    let earrings = props['earrings'].items.enum;
+    let earrings = getItems(props, 'earrings');
     earrings.push('None');
     setupGallery(div, 'earrings', earrings, earrings[0]);
     
-    let eyebrows = props['eyebrows'].items.enum;
+    let eyebrows = getItems(props, 'eyebrows');
     setupGallery(div, 'eyebrows', eyebrows, eyebrows[0]);
     
-    let eyes = props['eyes'].items.enum;
+    let eyes = getItems(props, 'eyes');
     setupGallery(div, 'eyes', eyes, eyes[0]);
 
-    let features = props['features'].items.enum;
+    let features = getItems(props, 'features');
     features.push('None');
     setupGallery(div, 'features', features, features[0]);
 
-    let glasses = props['glasses'].items.enum;
+    let glasses = getItems(props, 'glasses');
     glasses.push('None');
     setupGallery(div, 'glasses', glasses, glasses[0]);
 
-    let hair = props['hair'].items.enum;
+    let hair = getItems(props, 'hair');
     hair.push('None');
     setupGallery(div, 'hair', hair, hair[0]);
     setupColour(div, 'hairColor');
 
-    let mouth = props['mouth'].items.enum;
+    let mouth = getItems(props, 'mouth');
     setupGallery(div, 'mouth', mouth, mouth[0]);
 
     setupColour(div, 'skinColor');
@@ -1054,15 +1054,20 @@ function renderDylan(div, props) {
 
 // #region
 
+function getItems(props, item_key) {
+    const item = props.find(([key]) => key === item_key);
+    return item?.[1]?.items?.enum ?? null;
+}
+
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
     console.log(props);
 
-    let eyes = props['eyes'].items.enum;
+    let eyes = getItems(props, 'eyes');
     setupGallery(div, 'eyes', eyes, 'plain');
     
-    let mouth = props['mouth'].items.enum;
+    let mouth = getItems(props, 'mouth');
     setupGallery(div, 'mouth', mouth, 'plain');
 }
 
