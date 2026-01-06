@@ -1036,7 +1036,8 @@ function renderDylan(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
 
-    const facialHair = ['None', 'Default'];
+    let facialHair = getItems(props, 'facialHair');
+    facialHair.push('None');
     setupGallery(div, 'facialHair', facialHair, facialHair[0]);
     
     let hair = getItems(props, 'hair');
