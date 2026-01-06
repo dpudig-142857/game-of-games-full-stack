@@ -207,7 +207,11 @@ function createExtras(extras) {
     console.log(extras);
     let options = [];
     Object.entries(extras).forEach(([key, val]) => {
-        options.push(`&${key}=${val}`);
+        if (val.startsWith('#')) {
+            options.push(`&${key}=${val.slice(1)}`);
+        } else {
+            options.push(`&${key}=${val}`);
+        }
     });
     console.log(options.join(''));
     return options.join('');
@@ -517,7 +521,7 @@ function setupColour(div, key) {
     section.appendChild(options);
 
     const colour = key == 'backgroundColor' ? '#ffffff' : '#000000';
-    updateSetup(colour);
+    updateSetup(colour.slice(1));
     const colourHeader = header(
         'h2', colour, '', 'colour_option', 'avatar_option_text'
     );
