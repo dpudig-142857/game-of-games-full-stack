@@ -666,29 +666,29 @@ function renderAdventurer(div, props) {
 
     let earrings = getItems(props, 'earrings');
     earrings.push('None');
-    setupGallery(div, 'earrings', earrings, earrings[0], true);
+    setupGallery(div, 'earrings', earrings, 'None', true);
     
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
 
     let features = getItems(props, 'features');
     features.push('None');
-    setupGallery(div, 'features', features, features[0], true);
+    setupGallery(div, 'features', features, 'None', true);
 
     let glasses = getItems(props, 'glasses');
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, glasses[0], true);
+    setupGallery(div, 'glasses', glasses, 'None', true);
 
     let hair = getItems(props, 'hair');
     hair.push('None');
-    setupGallery(div, 'hair', hair, hair[0], true);
+    setupGallery(div, 'hair', hair, 'short01', true);
     setupColour(div, 'hairColor');
 
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant01', false);
 
     setupColour(div, 'skinColor');
 }
@@ -710,17 +710,17 @@ function renderAdventurerNeutral(div, props) {
     renderBaseOptions(div);
 
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
 
     let glasses = getItems(props, 'glasses');
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, glasses[0], true);
+    setupGallery(div, 'glasses', glasses, 'None', true);
 
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant01', false);
 }
 
 // #endregion
@@ -741,35 +741,35 @@ function renderAvataaars(div, props) {
 
     let accessories = getItems(props, 'accessories');
     accessories.push('None');
-    setupGallery(div, 'accessories', accessories, accessories[0], true);
+    setupGallery(div, 'accessories', accessories, 'None', true);
     setupColour(div, 'accessoriesColor');
     
     setupColour(div, 'clothesColor');
     
     let clothing = getItems(props, 'clothing');
-    setupGallery(div, 'clothing', clothing, clothing[0], false);
+    setupGallery(div, 'clothing', clothing, 'blazerAndShirt', false);
     // TODO: add clothingGraphic if clothing is graphic
     
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'default', false);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'default', false);
     
     let facialHair = getItems(props, 'facialHair');
     facialHair.push('None');
-    setupGallery(div, 'facialHair', facialHair, facialHair[0], true);
+    setupGallery(div, 'facialHair', facialHair, 'None', true);
     setupColour(div, 'facialHairColor');
     
     setupColour(div, 'hairColor');
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'default', false);
     
     setupColour(div, 'skinColor');
     
     let top = getItems(props, 'top');
-    setupGallery(div, 'top', top, top[0], false);
+    setupGallery(div, 'top', top, 'shortFlat', false);
     // TODO: if top is hat, hijab, turban, winterHat1, winterHat02, winterHat03, winerHat04, add hatColor
 }
 
@@ -790,13 +790,13 @@ function renderAvataaarsNeutral(div, props) {
     renderBaseOptions(div);
 
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'default', false);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'default', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'default', false);
 }
 
 // #endregion
@@ -817,33 +817,33 @@ function renderBigEars(div, props) {
 
     let cheek = getItems(props, 'cheek');
     cheek.push('None');
-    setupGallery(div, 'cheek', cheek, cheek[0], true);
+    setupGallery(div, 'cheek', cheek, 'None', true);
     
     let ear = getItems(props, 'ear');
-    setupGallery(div, 'ear', ear, ear[0], false);
+    setupGallery(div, 'ear', ear, 'variant01', false);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
 
     let face = getItems(props, 'face');
-    setupGallery(div, 'face', face, face[0], false);
+    setupGallery(div, 'face', face, 'variant01', false);
 
     let frontHair = getItems(props, 'frontHair');
-    setupGallery(div, 'frontHair', frontHair, frontHair[0], false);
+    setupGallery(div, 'frontHair', frontHair, 'variant01', false);
     
     let hair = getItems(props, 'hair');
-    setupGallery(div, 'hair', hair, hair[0], false);
+    setupGallery(div, 'hair', hair, 'short01', false);
     setupColour(div, 'hairColor');
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant0101', false);
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
     
     let sideburn = getItems(props, 'sideburn');
-    setupGallery(div, 'sideburn', sideburn, sideburn[0], false);
-    
+    setupGallery(div, 'sideburn', sideburn, 'variant01', false);
+
     setupColour(div, 'skinColor');
 }
 
@@ -865,16 +865,16 @@ function renderBigEarsNeutral(div, props) {
 
     let cheek = getItems(props, 'cheek');
     cheek.push('None');
-    setupGallery(div, 'cheek', cheek, cheek[0], true);
+    setupGallery(div, 'cheek', cheek, 'None', true);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant01', false);
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
 }
 
 // #endregion
@@ -895,17 +895,17 @@ function renderBigSmile(div, props) {
 
     let accessories = getItems(props, 'accessories');
     accessories.push('None');
-    setupGallery(div, 'accessories', accessories, accessories[0], true);
+    setupGallery(div, 'accessories', accessories, 'None', true);
 
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'normal', false);
 
     let hair = getItems(props, 'hair');
-    setupGallery(div, 'hair', hair, hair[0], false);
+    setupGallery(div, 'hair', hair, 'shortHair', false);
     setupColour(div, 'hairColor');
 
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'awkwardSmile', false);
 
     setupColour(div, 'skinColor');
 }
@@ -929,26 +929,26 @@ function renderBottts(div, props) {
     setupColour(div, 'baseColor');
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'eva', false);
     
     let face = getItems(props, 'face');
-    setupGallery(div, 'face', face, face[0], false);
+    setupGallery(div, 'face', face, 'round01', false);
     
     let mouth = getItems(props, 'mouth');
     mouth.push('None');
-    setupGallery(div, 'mouth', mouth, mouth[0], true);
+    setupGallery(div, 'mouth', mouth, 'bite', true);
 
     let sides = getItems(props, 'sides');
     sides.push('None');
-    setupGallery(div, 'sides', sides, sides[0], true);
+    setupGallery(div, 'sides', sides, 'None', true);
 
     let texture = getItems(props, 'texture');
     texture.push('None');
-    setupGallery(div, 'texture', texture, texture[0], true);
+    setupGallery(div, 'texture', texture, 'None', true);
 
     let top = getItems(props, 'top');
     top.push('None');
-    setupGallery(div, 'top', top, top[0], true);
+    setupGallery(div, 'top', top, 'None', true);
 }
 
 // #endregion
@@ -968,10 +968,10 @@ function renderBotttsNeutral(div, props) {
     renderBaseOptions(div);
 
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'eva', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'bite', false);
 }
 
 // #endregion
@@ -994,26 +994,26 @@ function renderCroodles(div, props) {
     
     let beard = getItems(props, 'beard');
     beard.push('None');
-    setupGallery(div, 'beard', beard, beard[0], true);
+    setupGallery(div, 'beard', beard, 'None', true);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
     
     let face = getItems(props, 'face');
-    setupGallery(div, 'face', face, face[0], false);
+    setupGallery(div, 'face', face, 'variant01', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant01', false);
 
     let moustache = getItems(props, 'moustache');
     moustache.push('None');
-    setupGallery(div, 'moustache', moustache, moustache[0], true);
+    setupGallery(div, 'moustache', moustache, 'None', true);
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
     
     let top = getItems(props, 'top');
-    setupGallery(div, 'top', top, top[0], false);
+    setupGallery(div, 'top', top, 'variant01', false);
     setupColour(div, 'topColor');
 }
 
@@ -1034,13 +1034,13 @@ function renderCroodlesNeutral(div, props) {
     renderBaseOptions(div);
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'variant01', false);
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
 }
 
 // #endregion
@@ -1060,14 +1060,14 @@ function renderDylan(div, props) {
     renderBaseOptions(div);
 
     const facialHair = ['None', 'default'];
-    setupGallery(div, 'facialHair', facialHair, facialHair[0], true);
+    setupGallery(div, 'facialHair', facialHair, 'None', true);
     
     let hair = getItems(props, 'hair');
-    setupGallery(div, 'hair', hair, hair[0], false);
+    setupGallery(div, 'hair', hair, 'plain', false);
     setupColour(div, 'hairColor');
     
     let mood = getItems(props, 'mood');
-    setupGallery(div, 'mood', mood, mood[0], false);
+    setupGallery(div, 'mood', mood, 'neutral', false);
 
     setupColour(div, 'skinColor');
 }
@@ -1112,7 +1112,7 @@ function renderGlass(div, props) {
     renderBaseOptions(div);
 
     let shape1 = getItems(props, 'shape1');
-    setupGallery(div, 'shape1', shape1, shape1[0], false);
+    setupGallery(div, 'shape1', shape1, 'a', false);
     
     const x1 = basicDiceBearOptions['shape1OffsetX'];
     setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
@@ -1124,7 +1124,7 @@ function renderGlass(div, props) {
     setupSlider(div, 'shape1Rotation', r1.minimum, r1.maximum, r1.default, 5);
 
     let shape2 = getItems(props, 'shape2');
-    setupGallery(div, 'shape2', shape2, shape2[0], false);
+    setupGallery(div, 'shape2', shape2, 'a', false);
     
     const x2 = basicDiceBearOptions['shape2OffsetX'];
     setupSlider(div, 'shape2OffsetX', x2.minimum, x2.maximum, x2.default, 5);
@@ -1153,7 +1153,7 @@ function renderIcons(div, props) {
     renderBaseOptions(div);
 
     let icon = getItems(props, 'icon');
-    setupGallery(div, 'icon', icon, icon[0], false);
+    setupGallery(div, 'icon', icon, 'emojiSmile', false);
 }
 
 // #endregion
@@ -1173,19 +1173,19 @@ function renderIdenticon(div, props) {
     renderBaseOptions(div);
 
     let row1 = getItems(props, 'row1');
-    setupGallery(div, 'row1', row1, row1[0], false);
+    setupGallery(div, 'row1', row1, 'xooox', false);
 
     let row2 = getItems(props, 'row2');
-    setupGallery(div, 'row2', row2, row2[0], false);
+    setupGallery(div, 'row2', row2, 'oxoxo', false);
 
     let row3 = getItems(props, 'row3');
-    setupGallery(div, 'row3', row3, row3[0], false);
+    setupGallery(div, 'row3', row3, 'ooxoo', false);
 
     let row4 = getItems(props, 'row4');
-    setupGallery(div, 'row4', row4, row4[0], false);
+    setupGallery(div, 'row4', row4, 'oxoxo', false);
 
     let row5 = getItems(props, 'row5');
-    setupGallery(div, 'row5', row5, row5[0], false);
+    setupGallery(div, 'row5', row5, 'xooox', false);
 
     setupColour(div, 'rowColor');
 }
@@ -1208,49 +1208,49 @@ function renderLorelei(div, props) {
 
     let beard = getItems(props, 'beard');
     beard.push('None');
-    setupGallery(div, 'beard', beard, beard[0], true);
+    setupGallery(div, 'beard', beard, 'None', true);
 
     let earrings = getItems(props, 'earrings');
     earrings.push('None');
-    setupGallery(div, 'earrings', earrings, earrings[0], true);
+    setupGallery(div, 'earrings', earrings, 'None', true);
     setupColour(div, 'earringsColor');
 
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
     setupColour(div, 'eyebrowsColor');
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
     setupColour(div, 'eyesColor');
     
     let freckles = getItems(props, 'freckles');
     freckles.push('None');
-    setupGallery(div, 'freckles', freckles, freckles[0], true);
+    setupGallery(div, 'freckles', freckles, 'None', true);
     setupColour(div, 'frecklesColor');
 
     let glasses = getItems(props, 'glasses');
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, glasses[0], true);
+    setupGallery(div, 'glasses', glasses, 'None', true);
     setupColour(div, 'glassesColor');
 
     let hair = getItems(props, 'hair');
-    setupGallery(div, 'hair', hair, hair[0], false);
+    setupGallery(div, 'hair', hair, 'variant01', false);
     setupColour(div, 'hairColor');
 
     let hairAccessories = getItems(props, 'hairAccessories');
     hairAccessories.push('None');
-    setupGallery(div, 'hairAccessories', hairAccessories, hairAccessories[0], true);
+    setupGallery(div, 'hairAccessories', hairAccessories, 'None', true);
     setupColour(div, 'hairAccessoriesColor');
     
     let head = getItems(props, 'head');
-    setupGallery(div, 'head', head, head[0], false);
+    setupGallery(div, 'head', head, 'variant01', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'happy01', false);
     setupColour(div, 'mouthColor');
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
     setupColour(div, 'noseColor');
     
     setupColour(div, 'skinColor');
@@ -1273,29 +1273,29 @@ function renderLoreleiNeutral(div, props) {
     renderBaseOptions(div);
 
     let eyebrows = getItems(props, 'eyebrows');
-    setupGallery(div, 'eyebrows', eyebrows, eyebrows[0], false);
+    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
     setupColour(div, 'eyebrowsColor');
     
     let eyes = getItems(props, 'eyes');
-    setupGallery(div, 'eyes', eyes, eyes[0], false);
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
     setupColour(div, 'eyesColor');
     
     let freckles = getItems(props, 'freckles');
     freckles.push('None');
-    setupGallery(div, 'freckles', freckles, freckles[0], true);
+    setupGallery(div, 'freckles', freckles, 'None', true);
     setupColour(div, 'frecklesColor');
 
     let glasses = getItems(props, 'glasses');
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, glasses[0], true);
+    setupGallery(div, 'glasses', glasses, 'None', true);
     setupColour(div, 'glassesColor');
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, mouth[0], false);
+    setupGallery(div, 'mouth', mouth, 'happy01', false);
     setupColour(div, 'mouthColor');
     
     let nose = getItems(props, 'nose');
-    setupGallery(div, 'nose', nose, nose[0], false);
+    setupGallery(div, 'nose', nose, 'variant01', false);
     setupColour(div, 'noseColor');
 }
 
