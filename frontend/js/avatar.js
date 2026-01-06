@@ -429,6 +429,32 @@ function renderBaseOptions(div) {
 // #region
 
 function setupGallery(div, key, options, initial, hasProbability) {
+    const updateSetup = (val) => {
+        if (hasProbability) {
+            if (val == 'None') {
+                curr_setup['extras'][`${key}Probability`] = 0;
+            } else {
+                curr_setup['extras'][key] = val;
+                curr_setup['extras'][`${key}Probability`] = 100;
+            }
+        } else {
+            curr_setup['extras'][key] = val;
+        }
+    };
+
+    const update = (dir) => {
+        const curr = option.innerHTML;
+        let i = options.indexOf(curr);
+        if (dir == 'left') i -= 1;
+        if (dir == 'right') i += 1;
+        if (i == -1) i = options.length - 1;
+        if (i == options.length) i = 0;
+        option.innerHTML = options[i];
+        updateSetup(options[i]);
+        updateAvatar();
+    }
+
+    updateSetup(initial);
     options = options.sort();
 
     const section = document.createElement('div');
@@ -461,27 +487,6 @@ function setupGallery(div, key, options, initial, hasProbability) {
     rightArrow.id = 'right_arrow';
     rightArrow.src = 'assets/arrow.svg';
     options_div.appendChild(rightArrow);
-
-    const update = (dir) => {
-        const curr = option.innerHTML;
-        let i = options.indexOf(curr);
-        if (dir == 'left') i -= 1;
-        if (dir == 'right') i += 1;
-        if (i == -1) i = options.length - 1;
-        if (i == options.length) i = 0;
-        option.innerHTML = options[i];
-        if (hasProbability) {
-            if (options[i] == 'None') {
-                curr_setup['extras'][`${key}Probability`] = 0;
-            } else {
-                curr_setup['extras'][key] = options[i];
-                curr_setup['extras'][`${key}Probability`] = 100;
-            }
-        } else {
-            curr_setup['extras'][key] = options[i];
-        }
-        updateAvatar();
-    }
 
     leftArrow.addEventListener('click', () => update('left'));
     rightArrow.addEventListener('click', () => update('right'));
