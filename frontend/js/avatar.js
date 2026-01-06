@@ -1119,6 +1119,7 @@ function renderGlass(div, props) {
     setupGallery(div, 'shape1', shape1, 'a', false);
     
     const x1 = basicDiceBearOptions['shape1OffsetX'];
+    console.log(x1);
     setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
     
     const y1 = basicDiceBearOptions['shape1OffsetY'];
