@@ -397,27 +397,6 @@ function updateTheme(section, option, dir) {
     updateAvatar();
 }
 
-function updateOption(key, div, options, dir, hasProbability) {
-    const curr = div.innerHTML;
-    let i = options.indexOf(curr);
-    if (dir == 'left') i -= 1;
-    if (dir == 'right') i += 1;
-    if (i == -1) i = options.length - 1;
-    if (i == options.length) i = 0;
-    div.innerHTML = options[i];
-    if (hasProbability) {
-        if (options[i] == 'None') {
-            curr_setup['extras'][`${key}Probability`] = 0;
-        } else {
-            curr_setup['extras'][key] = options[i];
-            curr_setup['extras'][`${key}Probability`] = 100;
-        }
-    } else {
-        curr_setup['extras'][key] = options[i];
-    }
-    updateAvatar();
-}
-
 function renderBaseOptions(div) {
     setupSwitch(div, 'flip');
 
@@ -448,20 +427,20 @@ function renderBaseOptions(div) {
 
 // #region
 
-function setupGallery(div, type, options, initial, hasProbability) {
+function setupGallery(div, key, options, initial, hasProbability) {
     options = options.sort();
 
     const section = document.createElement('div');
-    section.id = `${type}_section`;
+    section.id = `${key}_section`;
     section.className = 'avatar_options_section';
     div.appendChild(section);
 
     section.appendChild(header(
-        'h2', `${startUpper(type)}:`, '', '', 'avatar_option_title'
+        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
     ));
 
     const options_div = document.createElement('div');
-    options_div.id = `${type}_options`;
+    options_div.id = `${key}_options`;
     options_div.className = 'avatar_option';
     section.appendChild(options_div);
     
@@ -472,7 +451,7 @@ function setupGallery(div, type, options, initial, hasProbability) {
     options_div.appendChild(leftArrow);
 
     const option = header(
-        'h2', initial, '', `${type}_option`, `avatar_option_text`
+        'h2', initial, '', `${key}_option`, `avatar_option_text`
     );
     options_div.appendChild(option);
 
@@ -482,17 +461,29 @@ function setupGallery(div, type, options, initial, hasProbability) {
     rightArrow.src = 'assets/arrow.svg';
     options_div.appendChild(rightArrow);
 
-    leftArrow.addEventListener('click', () => {
-        updateOption(type, option, options, 'left', hasProbability);
-        //if (type == 'eye') updateEye(option, 'left');
-        //if (type == 'mouth') updateMouth(option, 'left');
-    });
-    
-    rightArrow.addEventListener('click', () => {
-        updateOption(type, option, options, 'right', hasProbability);
-        //if (type == 'eye') updateEye(option, 'right');
-        //if (type == 'mouth') updateMouth(option, 'right');
-    });
+    const update = (dir) => {
+        const curr = option.innerHTML;
+        let i = options.indexOf(curr);
+        if (dir == 'left') i -= 1;
+        if (dir == 'right') i += 1;
+        if (i == -1) i = options.length - 1;
+        if (i == options.length) i = 0;
+        option.innerHTML = options[i];
+        if (hasProbability) {
+            if (options[i] == 'None') {
+                curr_setup['extras'][`${key}Probability`] = 0;
+            } else {
+                curr_setup['extras'][key] = options[i];
+                curr_setup['extras'][`${key}Probability`] = 100;
+            }
+        } else {
+            curr_setup['extras'][key] = options[i];
+        }
+        updateAvatar();
+    }
+
+    leftArrow.addEventListener('click', () => update('left'));
+    rightArrow.addEventListener('click', () => update('right'));
 }
 
 function setupColour(div, key) {
