@@ -330,6 +330,7 @@ function updateTheme(section, option, dir) {
     });
     option.innerHTML = words.join(' ');
     curr_setup['theme'] = themes[i];
+    curr_setup['extras'] = {};
     console.log(themes[i]);
     const props = Object.entries(allDiceBearOptions[themes[i]])
     .filter(([key]) => !baseProperties.includes(key))
@@ -617,6 +618,11 @@ function setupSlider(div, key, min, max, val, step) {
         updateSlider(`${option.value}`);
     });
 
+}
+
+function getItems(props, item_key) {
+    const item = props.find(([key]) => key === item_key);
+    return item?.[1]?.items?.enum ?? null;
 }
 
 // #endregion
@@ -1055,15 +1061,9 @@ function renderDylan(div, props) {
 
 // #region
 
-function getItems(props, item_key) {
-    const item = props.find(([key]) => key === item_key);
-    return item?.[1]?.items?.enum ?? null;
-}
-
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
-    console.log(props);
 
     let eyes = getItems(props, 'eyes');
     setupGallery(div, 'eyes', eyes, 'plain');
