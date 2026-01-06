@@ -493,6 +493,14 @@ function setupGallery(div, key, options, initial, hasProbability) {
 }
 
 function setupColour(div, key) {
+    const updateSetup = (val) => {
+        if (baseProperties.includes(key)) {
+            curr_setup['colour'] = val;
+        } else {
+            curr_setup['extras'][key] = val;
+        }
+    };
+
     const section = document.createElement('div');
     section.id = 'colour_section';
     section.className = 'avatar_options_section';
@@ -509,6 +517,7 @@ function setupColour(div, key) {
     section.appendChild(options);
 
     const colour = key == 'backgroundColor' ? '#ffffff' : '#000000';
+    updateSetup(colour);
     const colourHeader = header(
         'h2', colour, '', 'colour_option', 'avatar_option_text'
     );
@@ -522,16 +531,21 @@ function setupColour(div, key) {
 
     option.addEventListener('input', (e) => {
         colourHeader.innerHTML = e.target.value;
-        if (baseProperties.includes(key)) {
-            curr_setup['colour'] = e.target.value;
-        } else {
-            curr_setup['extras'][key] = e.target.value;
-        }
+        updateSetup(e.target.value);
         updateAvatar();
     });
 }
 
 function setupSwitch(div, key) {
+    const updateSetup = (val) => {
+        if (baseProperties.includes(key)) {
+            curr_setup[key] = val;
+        } else {
+            curr_setup['extras'][key] = val;
+        }
+    };
+    
+    updateSetup('false');
     const section = document.createElement('div');
     section.id = 'switch_section';
     section.className = 'avatar_options_section';
@@ -558,16 +572,21 @@ function setupSwitch(div, key) {
 
     option.addEventListener('input', (e) => {
         switchHeader.innerHTML = option.checked ? 'Flipped' : 'Normal';
-        if (baseProperties.includes(key)) {
-            curr_setup[key] = option.checked ? 'true' : 'false';
-        } else {
-            curr_setup['extras'][key] = option.checked ? 'true' : 'false';
-        }
+        updateSetup(`${option.checked}`);
         updateAvatar();
     });
 }
 
 function setupSlider(div, key, min, max, val, step) {
+    const updateSetup = (num) => {
+        if (baseProperties.includes(key)) {
+            curr_setup[key] = num;
+        } else {
+            curr_setup['extras'][key] = num;
+        }
+    };
+
+    updateSetup(val);
     const section = document.createElement('div');
     section.id = 'slider_section';
     section.className = 'avatar_options_section';
@@ -598,11 +617,7 @@ function setupSlider(div, key, min, max, val, step) {
 
     const updateSlider = (num) => {
         sliderHeader.innerHTML = num;
-        if (baseProperties.includes(key)) {
-            curr_setup[key] = num;
-        } else {
-            curr_setup['extras'][key] = num;
-        }
+        updateSetup(num);
         updateAvatar();
     };
 
