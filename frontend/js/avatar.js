@@ -505,12 +505,13 @@ function setupColour(div, key) {
         }
     };
 
+    const type = key.split('Color')[0];
     const section = document.createElement('div');
     section.id = 'colour_section';
     section.className = 'avatar_options_section';
     div.appendChild(section);
 
-    const text = `${startUpper(key.split('Color')[0])} Colour:`;
+    const text = `${startUpper(type)} Colour:`;
     section.appendChild(header(
         'h2', text, '', '', 'avatar_option_title'
     ));
@@ -520,7 +521,10 @@ function setupColour(div, key) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
-    const colour = key == 'backgroundColor' ? '#ffffff' : '#000000';
+    let colour = '#000000';
+    if (type == 'background') colour = '#ffffff';
+    if (type == 'hair') colour = '#724133';
+    if (type == 'skin') colour = '#edb98a';
     updateSetup(colour.slice(1));
     const colourHeader = header(
         'h2', colour, '', 'colour_option', 'avatar_option_text'
