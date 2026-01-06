@@ -207,7 +207,7 @@ function createExtras(extras) {
     console.log(extras);
     let options = [];
     Object.entries(extras).forEach(([key, val]) => {
-        if (val.startsWith('#')) {
+        if (`${val}`.startsWith('#')) {
             options.push(`&${key}=${val.slice(1)}`);
         } else {
             options.push(`&${key}=${val}`);
