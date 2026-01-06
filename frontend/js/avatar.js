@@ -182,7 +182,8 @@ function createBaseLink(
     curr_setup['scale'] = scale_var;
 
     const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
-        colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` : '';
+        colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` :
+        colour_var.length == 6 ? `&backgroundColor=${colour_var}` : '';
     curr_setup['colour'] = colour_var;
 
     const colour_type = `&backgroundType=${colour_type_var}`;
@@ -502,25 +503,24 @@ function setupColour(div, key) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
+    const colour = key == 'backgroundColor' ? '#ffffff' : '#000000';
     const colourHeader = header(
-        'h2', '#ffffff', '', 'colour_option', 'avatar_option_text'
+        'h2', colour, '', 'colour_option', 'avatar_option_text'
     );
     options.appendChild(colourHeader);
     
     const option = document.createElement('input');
     option.id = 'avatar_colour';
     option.type = 'color';
-    option.value = '#ffffff';
+    option.value = colour.slice(1);
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
-        // Get the selected color value
-        const colour = e.target.value;
-        colourHeader.innerHTML = colour;
+        colourHeader.innerHTML = e.target.value;
         if (baseProperties.includes(key)) {
-            curr_setup['colour'] = colour;
+            curr_setup['colour'] = e.target.value;
         } else {
-            curr_setup['extras'][key] = colour;
+            curr_setup['extras'][key] = e.target.value;
         }
         updateAvatar();
     });
