@@ -524,7 +524,7 @@ function setupColour(div, key) {
     let colour = '#000000';
     if (type == 'background') colour = '#ffffff';
     if (type == 'hair') colour = '#724133';
-    if (type == 'skin') colour = '#edb98a';
+    if (type == 'skin' || type == 'base') colour = '#edb98a';
     updateSetup(colour.slice(1));
     const colourHeader = header(
         'h2', colour, '', 'colour_option', 'avatar_option_text'
