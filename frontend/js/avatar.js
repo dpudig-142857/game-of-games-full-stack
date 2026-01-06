@@ -875,7 +875,7 @@ function renderBigEarsNeutral(div, props) {
     setupGallery(div, 'eyes', eyes, 'variant01', false);
     
     let mouth = getItems(props, 'mouth');
-    setupGallery(div, 'mouth', mouth, 'variant01', false);
+    setupGallery(div, 'mouth', mouth, 'variant0101', false);
     
     let nose = getItems(props, 'nose');
     setupGallery(div, 'nose', nose, 'variant01', false);
