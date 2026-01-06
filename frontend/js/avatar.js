@@ -1057,6 +1057,7 @@ function renderDylan(div, props) {
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
     renderBaseOptions(div);
+    console.log(props);
 
     let eyes = props['eyes'].items.enum;
     setupGallery(div, 'eyes', eyes, 'plain');
