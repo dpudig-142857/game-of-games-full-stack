@@ -394,6 +394,7 @@ function updateTheme(section, option, dir) {
     } else if (themes[i] == 'thumbs') {
         renderThumbs(section, props);
     }
+    updateAvatar();
 }
 
 function updateOption(type, div, options, dir) {
