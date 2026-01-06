@@ -1119,6 +1119,8 @@ function renderGlass(div, props) {
     setupGallery(div, 'shape1', shape1, 'a', false);
 
     const x1 = getItems(props, 'shape1OffsetX');
+    console.log(x1);
+    console.log(props);
     setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
 
     const y1 = getItems(props, 'shape1OffsetY');
