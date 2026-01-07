@@ -364,6 +364,10 @@ function updateTheme(section, option, dir) {
     .filter(([key]) => !baseProperties.includes(key))
     .filter(([key]) => !ignore.includes(`${themes[i]}.${key}`));
 
+    const base = document.getElementById('avatar_base');
+    base.innerHTML = '';
+    renderBaseOptions(base);
+
     if (themes[i] == 'adventurer') {
         renderAdventurer(section, props);
     } else if (themes[i] == 'adventurer-neutral') {
