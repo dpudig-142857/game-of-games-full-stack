@@ -478,15 +478,15 @@ function setupGallery(div, key, options, initial, hasProbability) {
     const updateSetup = (val) => {
         if (hasProbability) {
             if (val == 'None') {
-                curr_setup['extras'][`${key}Probability`] = 0;
+                curr_setup['extras'][`${key}Probability`] = '0';
             } else {
-                curr_setup['extras'][key] = val;
-                curr_setup['extras'][`${key}Probability`] = 100;
+                curr_setup['extras'][key] = `${val}`;
+                curr_setup['extras'][`${key}Probability`] = '100';
             }
         } else if (key == 'backgroundType') {
-            curr_setup['backgroundType'] = val;
+            curr_setup['backgroundType'] = `${val}`;
         } else {
-            curr_setup['extras'][key] = val;
+            curr_setup['extras'][key] = `${val}`;
         }
     };
 
@@ -617,9 +617,9 @@ function setupColour(div, key, colour) {
 function setupSwitch(div, key) {
     const updateSetup = (val) => {
         if (baseProperties.includes(key)) {
-            curr_setup[key] = val;
+            curr_setup[key] = `${val}`;
         } else {
-            curr_setup['extras'][key] = val;
+            curr_setup['extras'][key] = `${val}`;
         }
     };
     
@@ -651,10 +651,10 @@ function setupSwitch(div, key) {
         const curr = switchHeader.innerHTML;
         if (curr == 'Normal') {
             switchHeader.innerHTML = 'Flipped';
-            updateSetup('Flipped');
+            updateSetup(true);
         } else {
             switchHeader.innerHTML = 'Normal';
-            updateSetup('Normal');
+            updateSetup(false);
         }
         updateAvatar();
     });
