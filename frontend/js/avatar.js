@@ -598,7 +598,8 @@ function setupSlider(div, key, min, max, val, step) {
         }
     };
 
-    let def = val ? val : ((min + max) / 2);
+    let def = val == null ? (min + max)/2 : val;
+    console.log(def);
     updateSetup(def);
     const section = document.createElement('div');
     section.id = 'slider_section';
@@ -1124,25 +1125,43 @@ function renderGlass(div, props) {
     setupGallery(div, 'shape1', shape1, 'a', false);
 
     const x1 = getItems(props, 'shape1OffsetX');
-    setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
+    setupSlider(
+        div, 'shape1OffsetX', x1.minimum,
+        x1.maximum, x1?.default ?? null, 5
+    );
 
     const y1 = getItems(props, 'shape1OffsetY');
-    setupSlider(div, 'shape1OffsetY', y1.minimum, y1.maximum, y1.default, 5);
+    setupSlider(
+        div, 'shape1OffsetY', y1.minimum,
+        y1.maximum, y1?.default ?? null, 5
+    );
 
     const r1 = getItems(props, 'shape1Rotation');
-    setupSlider(div, 'shape1Rotation', r1.minimum, r1.maximum, r1.default, 5);
+    setupSlider(
+        div, 'shape1Rotation', r1.minimum,
+        r1.maximum, r1?.default ?? null, 5
+    );
 
     let shape2 = getItems(props, 'shape2').enum;
     setupGallery(div, 'shape2', shape2, 'a', false);
 
     const x2 = getItems(props, 'shape2OffsetX');
-    setupSlider(div, 'shape2OffsetX', x2.minimum, x2.maximum, x2.default, 5);
+    setupSlider(
+        div, 'shape2OffsetX', x2.minimum,
+        x2.maximum, x2?.default ?? null, 5
+    );
 
     const y2 = getItems(props, 'shape2OffsetY');
-    setupSlider(div, 'shape2OffsetY', y2.minimum, y2.maximum, y2.default, 5);
+    setupSlider(
+        div, 'shape2OffsetY', y2.minimum,
+        y2.maximum, y2?.default ?? null, 5
+    );
 
     const r2 = getItems(props, 'shape2Rotation');
-    setupSlider(div, 'shape2Rotation', r2.minimum, r2.maximum, r2.default, 5);
+    setupSlider(
+        div, 'shape2Rotation', r2.minimum,
+        r2.maximum, r2?.default ?? null, 5
+    );
 }
 
 // #endregion
