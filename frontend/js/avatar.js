@@ -1971,7 +1971,7 @@ function renderThumbs(div, props) {
         faceRot.maximum, faceRot?.default ?? null, 5
     );
 
-    let mouth = getItems(props, 'mouth');
+    let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'variant1', false);
     setupColour(div, 'mouthColour', '#000000');
 
