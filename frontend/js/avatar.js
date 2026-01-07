@@ -96,7 +96,7 @@ let curr_setup = {
     'flip': 'false',
     'rotate': '0',
     'scale': '100',
-    'colour': '#ffffff',
+    'colour': '#FFFFFF',
     'colour_type': 'solid',
     'colour_rotation': '0',
     'translateX': '0',
@@ -134,7 +134,7 @@ export function renderAvatarPage(div, user, type) {
         'false',
         '0',
         '100',
-        '#ffffff',
+        '#FFFFFF',
         'solid',
         '0',
         '0',
@@ -158,7 +158,7 @@ function createBaseLink(
     flip_var = 'false',
     rotate_var = '0',
     scale_var = '100',
-    colour_var = '#ffffff',
+    colour_var = '#FFFFFF',
     colour_type_var = 'solid',
     colour_rotation_var = '0',
     x_var = '0',
@@ -402,22 +402,23 @@ function updateTheme(section, option, dir) {
     updateAvatar();
 }
 
-function renderBaseOptions(div) {
+function renderBaseOptions(div, key) {
     setupSwitch(div, 'flip');
 
     const rotate = basicDiceBearOptions['rotate'];
-    setupSlider(div, 'rotate', rotate.minimum, rotate.maximum, rotate.default, 5);
+    setupSlider(div, 'rotate', rotate.minimum, rotate.maximum, 0, 5);
     
     const scale = basicDiceBearOptions['scale'];
-    setupSlider(div, 'scale', scale.minimum, scale.maximum, scale.default, 5);
+    setupSlider(div, 'scale', scale.minimum, scale.maximum, 100, 5);
     
     const x = basicDiceBearOptions['translateX'];
-    setupSlider(div, 'translateX', x.minimum, x.maximum, x.default, 5);
+    setupSlider(div, 'translateX', x.minimum, x.maximum, 0, 5);
     
     const y = basicDiceBearOptions['translateY'];
-    setupSlider(div, 'translateY', y.minimum, y.maximum, y.default, 5);
+    setupSlider(div, 'translateY', y.minimum, y.maximum, 0, 5);
 
-    setupColour(div, 'backgroundColor');
+    const colour = key == 'icons' ? '#000000' : '#FFFFFF';
+    setupColour(div, 'backgroundColor', colour);
 }
 
 // #endregion
@@ -496,7 +497,7 @@ function setupGallery(div, key, options, initial, hasProbability) {
     rightArrow.addEventListener('click', () => update('right'));
 }
 
-function setupColour(div, key) {
+function setupColour(div, key, colour) {
     const updateSetup = (val) => {
         if (baseProperties.includes(key)) {
             curr_setup['colour'] = val;
@@ -521,10 +522,13 @@ function setupColour(div, key) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
-    let colour = '#000000';
-    if (type == 'background') colour = '#ffffff';
-    if (type == 'hair') colour = '#724133';
-    if (type == 'skin' || type == 'base') colour = '#edb98a';
+    //let colour = '#000000';
+    //if (type == 'background')
+    //      colour = '#FFFFFF';
+    //if (type == 'hair')
+    //      colour = '#724133';
+    //if (type == 'skin' || type == 'base')
+    //      colour = '#EDB98A';
     updateSetup(colour.slice(1));
     const colourHeader = header(
         'h2', colour, '', 'colour_option', 'avatar_option_text'
@@ -534,7 +538,7 @@ function setupColour(div, key) {
     const option = document.createElement('input');
     option.id = 'avatar_colour';
     option.type = 'color';
-    option.value = colour.slice(1);
+    option.value = colour;
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
@@ -667,7 +671,7 @@ function getItems(props, item_key) {
 
 function renderAdventurer(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'adventurer');
 
     let earrings = getItems(props, 'earrings').enum;
     earrings.push('None');
@@ -690,12 +694,12 @@ function renderAdventurer(div, props) {
     let hair = getItems(props, 'hair').enum;
     hair.push('None');
     setupGallery(div, 'hair', hair, 'short01', true);
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
 
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'variant01', false);
 
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
 }
 
 // #endregion
@@ -712,7 +716,7 @@ function renderAdventurer(div, props) {
 
 function renderAdventurerNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'adventurer-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
@@ -742,14 +746,14 @@ function renderAdventurerNeutral(div, props) {
 
 function renderAvataaars(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'avataaars');
 
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
     setupGallery(div, 'accessories', accessories, 'None', true);
-    setupColour(div, 'accessoriesColor');
+    setupColour(div, 'accessoriesColor', '#000000');
     
-    setupColour(div, 'clothesColor');
+    setupColour(div, 'clothesColor', '#000000');
     
     let clothing = getItems(props, 'clothing').enum;
     setupGallery(div, 'clothing', clothing, 'blazerAndShirt', false);
@@ -764,14 +768,14 @@ function renderAvataaars(div, props) {
     let facialHair = getItems(props, 'facialHair').enum;
     facialHair.push('None');
     setupGallery(div, 'facialHair', facialHair, 'None', true);
-    setupColour(div, 'facialHairColor');
+    setupColour(div, 'facialHairColor', '#000000');
     
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
     
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'default', false);
     
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
     
     let top = getItems(props, 'top').enum;
     setupGallery(div, 'top', top, 'shortFlat', false);
@@ -792,7 +796,7 @@ function renderAvataaars(div, props) {
 
 function renderAvataaarsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'avataaars-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'default', false);
@@ -818,7 +822,7 @@ function renderAvataaarsNeutral(div, props) {
 
 function renderBigEars(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'big-ears');
 
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
@@ -838,7 +842,7 @@ function renderBigEars(div, props) {
     
     let hair = getItems(props, 'hair').enum;
     setupGallery(div, 'hair', hair, 'short01', false);
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
     
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'variant0101', false);
@@ -849,7 +853,7 @@ function renderBigEars(div, props) {
     let sideburn = getItems(props, 'sideburn').enum;
     setupGallery(div, 'sideburn', sideburn, 'variant01', false);
 
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
 }
 
 // #endregion
@@ -866,7 +870,7 @@ function renderBigEars(div, props) {
 
 function renderBigEarsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'big-ears-neutral');
 
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
@@ -896,7 +900,7 @@ function renderBigEarsNeutral(div, props) {
 
 function renderBigSmile(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'big-smile');
 
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
@@ -907,12 +911,12 @@ function renderBigSmile(div, props) {
 
     let hair = getItems(props, 'hair').enum;
     setupGallery(div, 'hair', hair, 'shortHair', false);
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
 
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'awkwardSmile', false);
 
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
 }
 
 // #endregion
@@ -929,9 +933,9 @@ function renderBigSmile(div, props) {
 
 function renderBottts(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'bottts');
 
-    setupColour(div, 'baseColor');
+    setupColour(div, 'baseColor', '#EDB98A');
     
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'eva', false);
@@ -970,7 +974,7 @@ function renderBottts(div, props) {
 
 function renderBotttsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'bottts-neutral');
 
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'eva', false);
@@ -993,9 +997,9 @@ function renderBotttsNeutral(div, props) {
 
 function renderCroodles(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'croodles');
 
-    setupColour(div, 'baseColor');
+    setupColour(div, 'baseColor', '#EDB98A');
     
     let beard = getItems(props, 'beard').enum;
     beard.push('None');
@@ -1019,7 +1023,7 @@ function renderCroodles(div, props) {
     
     let top = getItems(props, 'top').enum;
     setupGallery(div, 'top', top, 'variant01', false);
-    setupColour(div, 'topColor');
+    setupColour(div, 'topColor', '#000000');
 }
 
 // #endregion
@@ -1036,7 +1040,7 @@ function renderCroodles(div, props) {
 
 function renderCroodlesNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'croodles-neutral');
     
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'variant01', false);
@@ -1062,19 +1066,19 @@ function renderCroodlesNeutral(div, props) {
 
 function renderDylan(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'dylan');
 
     const facialHair = ['None', 'default'];
     setupGallery(div, 'facialHair', facialHair, 'None', true);
     
     let hair = getItems(props, 'hair').enum;
     setupGallery(div, 'hair', hair, 'plain', false);
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
     
     let mood = getItems(props, 'mood').enum;
     setupGallery(div, 'mood', mood, 'neutral', false);
 
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
 }
 
 // #endregion
@@ -1091,7 +1095,7 @@ function renderDylan(div, props) {
 
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'fun-emoji');
 
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'plain', false);
@@ -1114,7 +1118,7 @@ function renderFunEmoji(div, props) {
 
 function renderGlass(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'glass');
 
     let shape1 = getItems(props, 'shape1').enum;
     setupGallery(div, 'shape1', shape1, 'a', false);
@@ -1155,7 +1159,7 @@ function renderGlass(div, props) {
 
 function renderIcons(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'icons');
 
     let icon = getItems(props, 'icon').enum;
     setupGallery(div, 'icon', icon, 'emojiSmile', false);
@@ -1175,7 +1179,7 @@ function renderIcons(div, props) {
 
 function renderIdenticon(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'identicon');
 
     let row1 = getItems(props, 'row1').enum;
     setupGallery(div, 'row1', row1, 'xooox', false);
@@ -1192,7 +1196,7 @@ function renderIdenticon(div, props) {
     let row5 = getItems(props, 'row5').enum;
     setupGallery(div, 'row5', row5, 'xooox', false);
 
-    setupColour(div, 'rowColor');
+    setupColour(div, 'rowColor', '#000000');
 }
 
 // #endregion
@@ -1209,7 +1213,7 @@ function renderIdenticon(div, props) {
 
 function renderLorelei(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'lorelei');
 
     let beard = getItems(props, 'beard').enum;
     beard.push('None');
@@ -1218,47 +1222,47 @@ function renderLorelei(div, props) {
     let earrings = getItems(props, 'earrings').enum;
     earrings.push('None');
     setupGallery(div, 'earrings', earrings, 'None', true);
-    setupColour(div, 'earringsColor');
+    setupColour(div, 'earringsColor', '#000000');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
-    setupColour(div, 'eyebrowsColor');
+    setupColour(div, 'eyebrowsColor', '#000000');
     
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'variant01', false);
-    setupColour(div, 'eyesColor');
+    setupColour(div, 'eyesColor', '#000000');
     
     let freckles = getItems(props, 'freckles').enum;
     freckles.push('None');
     setupGallery(div, 'freckles', freckles, 'None', true);
-    setupColour(div, 'frecklesColor');
+    setupColour(div, 'frecklesColor', '#000000');
 
     let glasses = getItems(props, 'glasses').enum;
     glasses.push('None');
     setupGallery(div, 'glasses', glasses, 'None', true);
-    setupColour(div, 'glassesColor');
+    setupColour(div, 'glassesColor', '#000000');
 
     let hair = getItems(props, 'hair').enum;
     setupGallery(div, 'hair', hair, 'variant01', false);
-    setupColour(div, 'hairColor');
+    setupColour(div, 'hairColor', '#724133');
 
     let hairAccessories = getItems(props, 'hairAccessories').enum;
     hairAccessories.push('None');
     setupGallery(div, 'hairAccessories', hairAccessories, 'None', true);
-    setupColour(div, 'hairAccessoriesColor');
+    setupColour(div, 'hairAccessoriesColor', '#000000');
     
     let head = getItems(props, 'head').enum;
     setupGallery(div, 'head', head, 'variant01', false);
     
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'happy01', false);
-    setupColour(div, 'mouthColor');
+    setupColour(div, 'mouthColor', '#000000');
     
     let nose = getItems(props, 'nose').enum;
     setupGallery(div, 'nose', nose, 'variant01', false);
-    setupColour(div, 'noseColor');
+    setupColour(div, 'noseColor', '#000000');
     
-    setupColour(div, 'skinColor');
+    setupColour(div, 'skinColor', '#EDB98A');
 }
 
 // #endregion
@@ -1275,33 +1279,33 @@ function renderLorelei(div, props) {
 
 function renderLoreleiNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div);
+    renderBaseOptions(div, 'lorelei-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
-    setupColour(div, 'eyebrowsColor');
+    setupColour(div, 'eyebrowsColor', '#000000');
     
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'variant01', false);
-    setupColour(div, 'eyesColor');
+    setupColour(div, 'eyesColor', '#000000');
     
     let freckles = getItems(props, 'freckles').enum;
     freckles.push('None');
     setupGallery(div, 'freckles', freckles, 'None', true);
-    setupColour(div, 'frecklesColor');
+    setupColour(div, 'frecklesColor', '#000000');
 
     let glasses = getItems(props, 'glasses').enum;
     glasses.push('None');
     setupGallery(div, 'glasses', glasses, 'None', true);
-    setupColour(div, 'glassesColor');
+    setupColour(div, 'glassesColor', '#000000');
     
     let mouth = getItems(props, 'mouth').enum;
     setupGallery(div, 'mouth', mouth, 'happy01', false);
-    setupColour(div, 'mouthColor');
+    setupColour(div, 'mouthColor', '#000000');
     
     let nose = getItems(props, 'nose').enum;
     setupGallery(div, 'nose', nose, 'variant01', false);
-    setupColour(div, 'noseColor');
+    setupColour(div, 'noseColor', '#000000');
 }
 
 // #endregion
