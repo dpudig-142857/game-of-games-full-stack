@@ -424,6 +424,11 @@ function renderBaseOptions(div) {
     setupSlider(div, 'translateY', y.minimum, y.maximum, 0, 5);
 
     setupColour(div, 'backgroundColor', '#FFFFFF');
+
+    const bg_type = ['solid', 'gradientLinear'];
+    setupGallery(div, 'backgroundType', bg_type, 'solid', false);
+
+    setupSlider(div, 'backgroundRotation', 0, 360, 0, 5);
 }
 
 function updateBaseOptions(key) {
@@ -468,6 +473,14 @@ function setupGallery(div, key, options, initial, hasProbability) {
         if (i == -1) i = options.length - 1;
         if (i == options.length) i = 0;
         option.innerHTML = options[i];
+        if (key == 'backgroundType') {
+            const bg = document.querySelector('.background_rotation');
+            if (options[i] == 'gradientLinear') {
+                bg.style.display = 'none';
+            } else {
+                bg.style.display = 'flex';
+            }
+        }
         updateSetup(options[i]);
         updateAvatar();
     }
@@ -615,7 +628,12 @@ function setupSlider(div, key, min, max, val, step) {
     updateSetup(def);
     const section = document.createElement('div');
     section.id = 'slider_section';
-    section.className = 'avatar_options_section';
+    if (key == 'backgroundRotation') {
+        section.className = 'avatar_options_section background_rotation';
+        section.style.display = 'none';
+    } else {
+        section.className = 'avatar_options_section';
+    }
     div.appendChild(section);
 
     section.appendChild(header(
@@ -1346,7 +1364,7 @@ function renderLoreleiNeutral(div, props) {
 // -------------------------------------------------------------------------------------------------
 // 
 //                          Micah
-// 
+//
 
 
 // #region
