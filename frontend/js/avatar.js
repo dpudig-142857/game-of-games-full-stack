@@ -594,7 +594,8 @@ function setupSlider(div, key, min, max, val, step) {
         }
     };
 
-    updateSetup(val);
+    let def = val ? val : ((min + max) / 2);
+    updateSetup(def);
     const section = document.createElement('div');
     section.id = 'slider_section';
     section.className = 'avatar_options_section';
@@ -610,7 +611,7 @@ function setupSlider(div, key, min, max, val, step) {
     section.appendChild(options);
 
     const sliderHeader = header(
-        'h2', val, '', 'slider_option', 'avatar_option_text'
+        'h2', def, '', 'slider_option', 'avatar_option_text'
     );
     options.appendChild(sliderHeader);
     
@@ -619,7 +620,7 @@ function setupSlider(div, key, min, max, val, step) {
     option.type = 'range';
     option.min = min;
     option.max = max;
-    option.value = val;
+    option.value = def;
     option.step = step;
     options.appendChild(option);
 
@@ -641,7 +642,7 @@ function setupSlider(div, key, min, max, val, step) {
 
     reset.addEventListener('click', (e) => {
         e.preventDefault();
-        option.value = val;
+        option.value = def;
         updateSlider(`${option.value}`);
     });
 
@@ -1119,8 +1120,6 @@ function renderGlass(div, props) {
     setupGallery(div, 'shape1', shape1, 'a', false);
 
     const x1 = getItems(props, 'shape1OffsetX');
-    console.log(x1);
-    console.log(props);
     setupSlider(div, 'shape1OffsetX', x1.minimum, x1.maximum, x1.default, 5);
 
     const y1 = getItems(props, 'shape1OffsetY');
@@ -1136,7 +1135,7 @@ function renderGlass(div, props) {
     setupSlider(div, 'shape2OffsetX', x2.minimum, x2.maximum, x2.default, 5);
 
     const y2 = getItems(props, 'shape2OffsetY');
-    setupSlider(div, 'shape1OffsetY', y2.minimum, y2.maximum, y2.default, 5);
+    setupSlider(div, 'shape2OffsetY', y2.minimum, y2.maximum, y2.default, 5);
 
     const r2 = getItems(props, 'shape2Rotation');
     setupSlider(div, 'shape2Rotation', r2.minimum, r2.maximum, r2.default, 5);
