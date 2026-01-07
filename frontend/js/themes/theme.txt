@@ -389,17 +389,17 @@ rings
 
     - ring - ignore
     - ringColour - colour
-    - ringFive - gallery
-    - ringFiveRotation - slider
-    - ringFour - gallery
-    - ringFourRotation - slider
+    - ringRotation - slider
     - ringOne - gallery
     - ringOneRotation - slider
-    - ringRotation - slider
-    - ringThree - gallery
-    - ringThreeRotation - slider
     - ringTwo - gallery
     - ringTwoRotation - slider
+    - ringThree - gallery
+    - ringThreeRotation - slider
+    - ringFour - gallery
+    - ringFourRotation - slider
+    - ringFive - gallery
+    - ringFiveRotation - slider
 
 
 shapes

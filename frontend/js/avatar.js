@@ -237,7 +237,8 @@ function createExtras(extras) {
             key.includes('Colour') ? key.replace('Colour', 'Color') :
             key.includes('moustache') ? key.replace('moustache', 'mustache') : key;
         const right =
-            val.startsWith('#') ? val.slice(1) : val;
+            val.startsWith('#') ? val.slice(1) :
+            val.includes('moustache') ? val.replace('moustache', 'mustache') : val;
         options.push(`&${left}=${right}`);
     });
     console.log(options.join(''));
@@ -1435,7 +1436,54 @@ function renderLoreleiNeutral(div, props) {
 // #region
 
 function renderMicah(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('micah');
 
+    setupColour(div, 'baseColour', '#EDB98A');
+
+    let earrings = getItems(props, 'earrings').enum;
+    earrings.push('None');
+    setupGallery(div, 'earrings', earrings, 'None', true);
+    setupColour(div, 'earringColour', '#000000');
+
+    let ears = getItems(props, 'ears').enum;
+    setupGallery(div, 'ears', ears, 'attached', false);
+
+    setupColour(div, 'eyeShadowColour', '#000000');
+
+    let eyebrows = getItems(props, 'eyebrows').enum;
+    setupGallery(div, 'eyebrows', eyebrows, 'up', false);
+    setupColour(div, 'eyebrowsColour', '#000000');
+    
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'eyes', false);
+    setupColour(div, 'eyesColour', '#000000');
+    
+    let facialHair = getItems(props, 'facialHair').enum;
+    facialHair.push('None');
+    setupGallery(div, 'facialHair', facialHair, 'None', true);
+    setupColour(div, 'facialHairColour', '#000000');
+
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    setupColour(div, 'glassesColour', '#000000');
+    
+    let hair = getItems(props, 'hair').enum;
+    hair.push('None');
+    setupGallery(div, 'hair', hair, 'dannyPhantom', true);
+    setupColour(div, 'hairColour', '#724133');
+    
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, 'smile', false);
+    setupColour(div, 'mouthColour', '#000000');
+
+    let nose = getItems(props, 'nose').enum;
+    setupGallery(div, 'nose', nose, 'curve', false);
+
+    let shirt = getItems(props, 'shirt').enum;
+    setupGallery(div, 'shirt', shirt, 'collared', false);
+    setupColour(div, 'shirtColour', '#000000');
 }
 
 // #endregion
@@ -1451,7 +1499,38 @@ function renderMicah(div, props) {
 // #region
 
 function renderMiniavs(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('micah');
+    
+    let blushes = ['None', 'default'];
+    setupGallery(div, 'blushes', blushes, 'None', true);
 
+    let body = getItems(props, 'body').enum;
+    setupGallery(div, 'body', body, 'tShirt', false);
+    setupColour(div, 'bodyColour', '#000000');
+    
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'normal', false);
+
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    
+    let hair = getItems(props, 'hair').enum;
+    setupGallery(div, 'hair', hair, 'classic01', false);
+    setupColour(div, 'hairColour', '#724133');
+
+    let head = getItems(props, 'head').enum;
+    setupGallery(div, 'head', head, 'normal', false);
+    
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, 'default', false);
+
+    let moustache = getItems(props, 'moustache').enum;
+    moustache.push('None');
+    setupGallery(div, 'moustache', moustache, 'None', true);
+
+    setupColour(div, 'skinColour', '#EDB98A');
 }
 
 // #endregion
@@ -1467,7 +1546,42 @@ function renderMiniavs(div, props) {
 // #region
 
 function renderNotionists(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('notionists');
+    
+    let beard = getItems(props, 'beard').enum;
+    beard.push('None');
+    setupGallery(div, 'beard', beard, 'None', true);
+    
+    let body = getItems(props, 'body').enum;
+    setupGallery(div, 'body', body, 'variant01', false);
+    
+    let bodyIcon = getItems(props, 'bodyIcon').enum;
+    bodyIcon.push('None');
+    setupGallery(div, 'bodyIcon', bodyIcon, 'None', false);
+    
+    let brows = getItems(props, 'brows').enum;
+    setupGallery(div, 'brows', brows, 'variant01', false);
+    
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
 
+    let gesture = getItems(props, 'gesture').enum;
+    gesture.push('None');
+    setupGallery(div, 'gesture', gesture, 'None', true);
+
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    
+    let hair = getItems(props, 'hair').enum;
+    setupGallery(div, 'hair', hair, 'variant01', false);
+    
+    let lips = getItems(props, 'lips').enum;
+    setupGallery(div, 'lips', lips, 'variant01', false);
+    
+    let nose = getItems(props, 'nose').enum;
+    setupGallery(div, 'nose', nose, 'variant01', false);
 }
 
 // #endregion
@@ -1483,7 +1597,24 @@ function renderNotionists(div, props) {
 // #region
 
 function renderNotionistsNeutral(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('notionists-neutral');
+    
+    let brows = getItems(props, 'brows').enum;
+    setupGallery(div, 'brows', brows, 'variant01', false);
+    
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
 
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    
+    let lips = getItems(props, 'lips').enum;
+    setupGallery(div, 'lips', lips, 'variant01', false);
+    
+    let nose = getItems(props, 'nose').enum;
+    setupGallery(div, 'nose', nose, 'variant01', false);
 }
 
 // #endregion
@@ -1499,7 +1630,32 @@ function renderNotionistsNeutral(div, props) {
 // #region
 
 function renderOpenPeeps(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('open-peeps');
 
+    let accessories = getItems(props, 'accessories').enum;
+    accessories.push('None');
+    setupGallery(div, 'accessories', accessories, 'None', true);
+    
+    setupColour(div, 'clothingColour', '#000000');
+    
+    let face = getItems(props, 'face').enum;
+    setupGallery(div, 'face', face, 'smile', false);
+    
+    let facialHair = getItems(props, 'facialHair').enum;
+    facialHair.push('None');
+    setupGallery(div, 'facialHair', facialHair, 'None', true);
+    
+    let head = getItems(props, 'head').enum;
+    setupGallery(div, 'head', head, 'short1', false);
+
+    setupColour(div, 'headContrastColour', '#724133');
+    
+    let mask = getItems(props, 'mask').enum;
+    mask.push('None');
+    setupGallery(div, 'mask', mask, 'None', true);
+    
+    setupColour(div, 'skinColour', '#EDB98A');
 }
 
 // #endregion
@@ -1515,7 +1671,32 @@ function renderOpenPeeps(div, props) {
 // #region
 
 function renderPersonas(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('personas');
 
+    let body = getItems(props, 'body').enum;
+    setupGallery(div, 'body', body, 'rounded', false);
+    
+    setupColour(div, 'clothingColour', '#000000');
+
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'open', false);
+
+    let facialHair = getItems(props, 'facialHair').enum;
+    facialHair.push('None');
+    setupGallery(div, 'facialHair', facialHair, 'None', true);
+
+    let hair = getItems(props, 'hair').enum;
+    setupGallery(div, 'hair', hair, 'shortCombover', false);
+    setupColour(div, 'hairColour', '#724133');
+
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, 'smile', false);
+
+    let nose = getItems(props, 'nose').enum;
+    setupGallery(div, 'nose', nose, 'smallRound', false);
+    
+    setupColour(div, 'skinColour', '#EDB98A');
 }
 
 // #endregion
@@ -1531,7 +1712,45 @@ function renderPersonas(div, props) {
 // #region
 
 function renderPixelArt(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('pixel-art');
 
+    let accessories = getItems(props, 'accessories').enum;
+    accessories.push('None');
+    setupGallery(div, 'accessories', accessories, 'None', true);
+    setupColour(div, 'accessoriesColour', '#000000');
+
+    let beard = getItems(props, 'beard').enum;
+    beard.push('None');
+    setupGallery(div, 'beard', beard, 'None', true);
+    
+    let clothing = getItems(props, 'clothing').enum;
+    setupGallery(div, 'clothing', clothing, 'variant01', false);
+    setupColour(div, 'clothingColour', '#000000');
+    
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupColour(div, 'eyesColour', '#000000');
+    
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    setupColour(div, 'glassesColour', '#000000');
+    
+    let hair = getItems(props, 'hair').enum;
+    setupGallery(div, 'hair', hair, 'short01', false);
+    setupColour(div, 'hairColour', '#724133');
+    
+    let hat = getItems(props, 'hat').enum;
+    hat.push('None');
+    setupGallery(div, 'hat', hat, 'None', true);
+    setupColour(div, 'hatColour', '#000000');
+
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, 'happy01', false);
+    setupColour(div, 'mouthColour', '#000000');
+    
+    setupColour(div, 'skinColour', '#EDB98A');
 }
 
 // #endregion
@@ -1547,7 +1766,21 @@ function renderPixelArt(div, props) {
 // #region
 
 function renderPixelArtNeutral(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('pixel-art-neutral');
 
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupColour(div, 'eyesColour', '#000000');
+    
+    let glasses = getItems(props, 'glasses').enum;
+    glasses.push('None');
+    setupGallery(div, 'glasses', glasses, 'None', true);
+    setupColour(div, 'glassesColour', '#000000');
+
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, 'happy01', false);
+    setupColour(div, 'mouthColour', '#000000');
 }
 
 // #endregion
@@ -1563,7 +1796,55 @@ function renderPixelArtNeutral(div, props) {
 // #region
 
 function renderRings(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('rings');
 
+    setupColour(div, 'ringColour', '#000000');
+
+    let ring1 = getItems(props, 'ringOne').enum;
+    setupGallery(div, 'ringOne', ring1, 'full', false);
+
+    const ring1Rot = getItems(props, 'ringOneRotation');
+    setupSlider(
+        div, 'ringOneRotation', ring1Rot.minimum,
+        ring1Rot.maximum, ring1Rot?.default ?? null, 5
+    );
+
+    let ring2 = getItems(props, 'ringTwo').enum;
+    setupGallery(div, 'ringTwo', ring2, 'full', false);
+
+    const ring2Rot = getItems(props, 'ringTwoRotation');
+    setupSlider(
+        div, 'ringTwoRotation', ring2Rot.minimum,
+        ring2Rot.maximum, ring2Rot?.default ?? null, 5
+    );
+
+    let ring3 = getItems(props, 'ringThree').enum;
+    setupGallery(div, 'ringThree', ring3, 'full', false);
+
+    const ring3Rot = getItems(props, 'ringThreeRotation');
+    setupSlider(
+        div, 'ringThreeRotation', ring3Rot.minimum,
+        ring3Rot.maximum, ring3Rot?.default ?? null, 5
+    );
+
+    let ring4 = getItems(props, 'ringFour').enum;
+    setupGallery(div, 'ringFour', ring4, 'full', false);
+
+    const ring4Rot = getItems(props, 'ringFourRotation');
+    setupSlider(
+        div, 'ringFourRotation', ring4Rot.minimum,
+        ring4Rot.maximum, ring4Rot?.default ?? null, 5
+    );
+
+    let ring5 = getItems(props, 'ringFive').enum;
+    setupGallery(div, 'ringFive', ring5, 'full', false);
+
+    const ring5Rot = getItems(props, 'ringFiveRotation');
+    setupSlider(
+        div, 'ringFiveRotation', ring5Rot.minimum,
+        ring5Rot.maximum, ring5Rot?.default ?? null, 5
+    );
 }
 
 // #endregion
@@ -1579,7 +1860,74 @@ function renderRings(div, props) {
 // #region
 
 function renderShapes(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('shapes');
 
+    let shape1 = getItems(props, 'shape1').enum;
+    setupGallery(div, 'shape1', shape1, 'ellipse', false);
+    setupColour(div, 'shape1Colour', '#000000');
+    
+    const shape1X = getItems(props, 'shape1OffsetX');
+    setupSlider(
+        div, 'shape1OffsetX', shape1X.minimum,
+        shape1X.maximum, shape1X?.default ?? null, 5
+    );
+    
+    const shape1Y = getItems(props, 'shape1OffsetY');
+    setupSlider(
+        div, 'shape1OffsetY', shape1Y.minimum,
+        shape1Y.maximum, shape1Y?.default ?? null, 5
+    );
+    
+    const shape1Rot = getItems(props, 'shape1Rotation');
+    setupSlider(
+        div, 'shape1Rotation', shape1Rot.minimum,
+        shape1Rot.maximum, shape1Rot?.default ?? null, 5
+    );
+
+    let shape2 = getItems(props, 'shape2').enum;
+    setupGallery(div, 'shape2', shape2, 'ellipse', false);
+    setupColour(div, 'shape2Colour', '#000000');
+    
+    const shape2X = getItems(props, 'shape2OffsetX');
+    setupSlider(
+        div, 'shape2OffsetX', shape2X.minimum,
+        shape2X.maximum, shape2X?.default ?? null, 5
+    );
+    
+    const shape2Y = getItems(props, 'shape2OffsetY');
+    setupSlider(
+        div, 'shape2OffsetY', shape2Y.minimum,
+        shape2Y.maximum, shape2Y?.default ?? null, 5
+    );
+    
+    const shape2Rot = getItems(props, 'shape2Rotation');
+    setupSlider(
+        div, 'shape2Rotation', shape2Rot.minimum,
+        shape2Rot.maximum, shape2Rot?.default ?? null, 5
+    );
+
+    let shape3 = getItems(props, 'shape3').enum;
+    setupGallery(div, 'shape3', shape3, 'ellipse', false);
+    setupColour(div, 'shape3Colour', '#000000');
+    
+    const shape3X = getItems(props, 'shape3OffsetX');
+    setupSlider(
+        div, 'shape3OffsetX', shape3X.minimum,
+        shape3X.maximum, shape3X?.default ?? null, 5
+    );
+    
+    const shape3Y = getItems(props, 'shape3OffsetY');
+    setupSlider(
+        div, 'shape3OffsetY', shape3Y.minimum,
+        shape3Y.maximum, shape3Y?.default ?? null, 5
+    );
+    
+    const shape3Rot = getItems(props, 'shape3Rotation');
+    setupSlider(
+        div, 'shape3Rotation', shape3Rot.minimum,
+        shape3Rot.maximum, shape3Rot?.default ?? null, 5
+    );
 }
 
 // #endregion
@@ -1595,7 +1943,59 @@ function renderShapes(div, props) {
 // #region
 
 function renderThumbs(div, props) {
+    div.innerHTML = '';
+    updateBaseOptions('thumbs');
 
+    let eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, 'variant5W10', false);
+    setupColour(div, 'eyesColour', '#000000');
+
+    let face = getItems(props, 'face').enum;
+    setupGallery(div, 'face', face, 'variant1', false);
+    
+    const faceX = getItems(props, 'faceOffsetX');
+    setupSlider(
+        div, 'faceOffsetX', faceX.minimum,
+        faceX.maximum, faceX?.default ?? null, 5
+    );
+    
+    const faceY = getItems(props, 'faceOffsetY');
+    setupSlider(
+        div, 'faceOffsetY', faceY.minimum,
+        faceY.maximum, faceY?.default ?? null, 5
+    );
+    
+    const faceRot = getItems(props, 'faceRotation');
+    setupSlider(
+        div, 'faceRotation', faceRot.minimum,
+        faceRot.maximum, faceRot?.default ?? null, 5
+    );
+
+    let mouth = getItems(props, 'mouth');
+    setupGallery(div, 'mouth', mouth, 'variant1', false);
+    setupColour(div, 'mouthColour', '#000000');
+
+    let shape = getItems(props, 'shape').enum;
+    setupGallery(div, 'shape', shape, 'ellipse', false);
+    setupColour(div, 'shapeColour', '#000000');
+    
+    const shapeX = getItems(props, 'shapeOffsetX');
+    setupSlider(
+        div, 'shapeOffsetX', shapeX.minimum,
+        shapeX.maximum, shapeX?.default ?? null, 5
+    );
+    
+    const shapeY = getItems(props, 'shapeOffsetY');
+    setupSlider(
+        div, 'shapeOffsetY', shapeY.minimum,
+        shapeY.maximum, shapeY?.default ?? null, 5
+    );
+    
+    const shapeRot = getItems(props, 'shapeRotation');
+    setupSlider(
+        div, 'shapeRotation', shapeRot.minimum,
+        shapeRot.maximum, shapeRot?.default ?? null, 5
+    );
 }
 
 // #endregion
