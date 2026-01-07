@@ -76,6 +76,10 @@ const allDiceBearOptions = {
     'thumbs': thumbs.properties
 };
 
+function splitCapitals(str) {
+    return startUpper(str).split(/(?=[A-Z])/).join(' ');
+};
+
 // #endregion
 
 
@@ -476,9 +480,9 @@ function setupGallery(div, key, options, initial, hasProbability) {
         if (key == 'backgroundType') {
             const bg = document.querySelector('.background_rotation');
             if (options[i] == 'gradientLinear') {
-                bg.style.display = 'none';
-            } else {
                 bg.style.display = 'flex';
+            } else {
+                bg.style.display = 'none';
             }
         }
         updateSetup(options[i]);
@@ -494,7 +498,7 @@ function setupGallery(div, key, options, initial, hasProbability) {
     div.appendChild(section);
 
     section.appendChild(header(
-        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
+        'h2', `${splitCapitals(key)}:`, '', '', 'avatar_option_title'
     ));
 
     const options_div = document.createElement('div');
@@ -538,7 +542,7 @@ function setupColour(div, key, colour) {
     section.className = 'avatar_options_section background_colour_div';
     div.appendChild(section);
 
-    const text = `${startUpper(type)} Colour:`;
+    const text = `${splitCapitals(type)} Colour:`;
     section.appendChild(header(
         'h2', text, '', '', 'avatar_option_title'
     ));
@@ -590,7 +594,7 @@ function setupSwitch(div, key) {
     div.appendChild(section);
 
     section.appendChild(header(
-        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
+        'h2', `${splitCapitals(key)}:`, '', '', 'avatar_option_title'
     ));
 
     const options = document.createElement('div');
@@ -637,7 +641,7 @@ function setupSlider(div, key, min, max, val, step) {
     div.appendChild(section);
 
     section.appendChild(header(
-        'h2', `${startUpper(key)}:`, '', '', 'avatar_option_title'
+        'h2', `${splitCapitals(key)}:`, '', '', 'avatar_option_title'
     ));
 
     const options = document.createElement('div');
