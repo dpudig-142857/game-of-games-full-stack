@@ -124,9 +124,9 @@ export async function setupUserModal() {
         renderLoginForm(div);
     } else {
         const user = user_data.user;
-        //title.textContent = `${user.username}'s Account`
-        //renderUserProfile(div, user);
-        renderAvatarPage(div, user, 'updating');
+        title.textContent = `${user.username}'s Account`
+        renderUserProfile(div, user);
+        //renderAvatarPage(div, user, 'updating');
     }
 }
 
