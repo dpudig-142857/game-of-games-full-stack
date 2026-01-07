@@ -361,22 +361,25 @@ function renderSignUpPage(div) {
     div.innerHTML = '';
     div.parentElement.style.overflow = 'hidden';
 
-    // Step 1:
+    // Page 1:
 
     // Username
     // Password
     // Confirm password
 
-    // If Username doesn't exist or passwords don't match, throw error
+    // If Username already exists or passwords don't match, throw error
+    // If Username doesn't exist and passwords match, clear page 1 and open page 2
 
-    // Step 2:
+    // Page 2:
 
     // First name
     // Family name
     // Favourite Colour
     // Birthday
 
-    // Step 3:
+    // If everything is valid, clear page 2 and open page 3
+
+    // Page 3:
     
     // Build avatar
 
@@ -495,10 +498,17 @@ function renderSignUpPage(div) {
 
 function renderUserProfile(div, user) {
     div.innerHTML = '';
-    div.style.display = 'flex';
-    div.style.flexDirection = 'column';
-    div.style.gap = '1rem';
     div.appendChild(header('p', `Role: ${user.role}`));
+
+    const avatar_div = document.createElement('div');
+    avatar_div.className = 'user_avatar_div';
+    div.appendChild(avatar_div);
+
+    const avatar = document.createElement('img');
+    avatar.id = 'user_avatar';
+    avatar.src = user.avatar_seed;
+    avatar_div.appendChild(avatar);
+
     const btn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
     )
