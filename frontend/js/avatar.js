@@ -454,9 +454,12 @@ function renderBaseOptions(div) {
 function updateBaseOptions(key) {
     const colour = key == 'icons' ? '#000000' : '#FFFFFF';
     const div = document.querySelector('.background_colour_div');
+    const grad = document.querySelector('.gradient_colour_div');
     const parent = div.parentElement;
     div.remove();
+    grad.remove();
     setupColour(parent, 'backgroundColour', colour);
+    setupColour(parent, 'backgroundColour2', '#FFFFFF');
 }
 
 // #endregion
