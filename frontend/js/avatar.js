@@ -646,8 +646,20 @@ function setupSwitch(div, key) {
         'h2', 'Normal', '', 'switch_option', 'avatar_option_text'
     );
     options.appendChild(switchHeader);
+
+    switchHeader.addEventListener('click', () => {
+        const curr = switchHeader.innerHTML;
+        if (curr == 'Normal') {
+            switchHeader.innerHTML = 'Flipped';
+            updateSetup('Flipped');
+        } else {
+            switchHeader.innerHTML = 'Normal';
+            updateSetup('Normal');
+        }
+        updateAvatar();
+    });
     
-    const option = document.createElement('input');
+    /*const option = document.createElement('input');
     option.id = 'avatar_switch';
     option.type = 'checkbox';
     options.appendChild(option);
@@ -656,7 +668,7 @@ function setupSwitch(div, key) {
         switchHeader.innerHTML = option.checked ? 'Flipped' : 'Normal';
         updateSetup(`${option.checked}`);
         updateAvatar();
-    });
+    });*/
 }
 
 function setupSlider(div, key, min, max, val, step) {

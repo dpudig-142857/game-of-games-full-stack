@@ -323,6 +323,10 @@
     width: 25rem;
 }
 
+#switch_option {
+    cursor: pointer;
+}
+
 .avatar_arrow {
     width: 2rem;
     transition: transform 0.3s ease;
