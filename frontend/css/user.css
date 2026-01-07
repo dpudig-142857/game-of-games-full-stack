@@ -326,10 +326,16 @@
 #switch_option {
     cursor: pointer;
     text-decoration: none;
+    transition: transform 0.3s ease;
 }
 
 #switch_option:hover {
     text-decoration: underline;
+    transform: scale(1.1);
+}
+
+#switch_option:active {
+    transform: scale(0.9);
 }
 
 .avatar_arrow {

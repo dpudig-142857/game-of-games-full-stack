@@ -231,9 +231,13 @@ function createExtras(extras) {
     //console.log(extras);
     let options = [];
     Object.entries(extras).forEach(([key_var, val_var]) => {
-        const left = `${key_var}`.replace('Colour', 'Color');
+        const key = `${key_var}`;
         const val = `${val_var}`;
-        const right = val.startsWith('#') ? val.slice(1) : val;
+        const left =
+            key.includes('Colour') ? key.replace('Colour', 'Color') :
+            key.includes('moustache') ? key.replace('moustache', 'mustache') : key;
+        const right =
+            val.startsWith('#') ? val.slice(1) : val;
         options.push(`&${left}=${right}`);
     });
     console.log(options.join(''));
