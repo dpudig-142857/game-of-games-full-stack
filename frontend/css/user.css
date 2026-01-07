@@ -325,6 +325,11 @@
 
 #switch_option {
     cursor: pointer;
+    text-decoration: none;
+}
+
+#switch_option:hover {
+    text-decoration: underline;
 }
 
 .avatar_arrow {

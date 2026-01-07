@@ -228,14 +228,13 @@ function createBaseLink(
 }
 
 function createExtras(extras) {
-    console.log(extras);
+    //console.log(extras);
     let options = [];
-    Object.entries(extras).forEach(([key, val]) => {
-        if (`${val}`.startsWith('#')) {
-            options.push(`&${key}=${val.slice(1)}`);
-        } else {
-            options.push(`&${key}=${val}`);
-        }
+    Object.entries(extras).forEach(([key_var, val_var]) => {
+        const left = `${key_var}`.replace('Colour', 'Color');
+        const val = `${val_var}`;
+        const right = val.startsWith('#') ? val.slice(1) : val;
+        options.push(`&${left}=${right}`);
     });
     console.log(options.join(''));
     return options.join('');
