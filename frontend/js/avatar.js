@@ -156,7 +156,7 @@ export function renderAvatarPage(div, user, type) {
     renderBaseOptions(avatar_base);
 
     const avatar_options = document.createElement('div');
-    avatar_options.id = 'avatar_options';
+    avatar_options.className = 'avatar_options';
     avatar_div.appendChild(avatar_options);
     
     setupThemeGallery(avatar_options);
@@ -313,7 +313,7 @@ function setupThemeGallery(div) {
     options.appendChild(rightArrow);
 
     const otherOptions = document.createElement('div');
-    otherOptions.id = 'avatar_options';
+    otherOptions.className = 'avatar_options';
     div.appendChild(otherOptions);
 
     leftArrow.addEventListener('click', () => {
@@ -464,6 +464,8 @@ function setupGallery(div, key, options, initial, hasProbability) {
                 curr_setup['extras'][key] = val;
                 curr_setup['extras'][`${key}Probability`] = 100;
             }
+        } else if (key == 'backgroundType') {
+            curr_setup['colour_type'] = val;
         } else {
             curr_setup['extras'][key] = val;
         }
@@ -621,10 +623,12 @@ function setupSwitch(div, key) {
 
 function setupSlider(div, key, min, max, val, step) {
     const updateSetup = (num) => {
-        if (baseProperties.includes(key)) {
-            curr_setup[key] = num;
+        if (key == 'backgroundRotation') {
+            curr_setup['colour_rotation'] = `${num}`;
+        } else if (baseProperties.includes(key)) {
+            curr_setup[key] = `${num}`;
         } else {
-            curr_setup['extras'][key] = num;
+            curr_setup['extras'][key] = `${num}`;
         }
     };
 

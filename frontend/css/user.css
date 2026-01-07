@@ -268,7 +268,7 @@
     height: 20rem;
 }
 
-#avatar_options {
+.avatar_options {
     width: 100%;
     height: 100%;
     display: flex;
@@ -297,10 +297,6 @@
 .avatar_option_title {
     text-decoration: underline double;
     width: 40%;
-}
-
-.avatar_options {
-
 }
 
 .avatar_options_section {
