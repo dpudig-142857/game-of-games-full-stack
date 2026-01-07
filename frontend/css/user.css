@@ -296,16 +296,19 @@
 
 .avatar_option_title {
     text-decoration: underline double;
-    width: 40%;
+    width: 100%;
 }
 
 .avatar_options_section {
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+.base {
+    flex-direction: column;
 }
 
 .avatar_option {

@@ -515,7 +515,11 @@ function setupGallery(div, key, options, initial, hasProbability) {
 
     const section = document.createElement('div');
     section.id = `${key}_section`;
-    section.className = 'avatar_options_section';
+    if (baseProperties.includes(key)) {
+        section.className = 'avatar_options_section base';
+    } else {
+        section.className = 'avatar_options_section';
+    }
     div.appendChild(section);
 
     section.appendChild(header(
@@ -566,11 +570,11 @@ function setupColour(div, key, colour) {
     section.id = 'colour_section';
     if (key == 'backgroundColour') {
         section.style.display = 'flex';
-        section.className = 'avatar_options_section background_colour_div';
+        section.className = 'avatar_options_section background_colour_div base';
         text = `Background Colour:`
     } else if (key == 'backgroundColour2') {
         section.style.display = 'none';
-        section.className = 'avatar_options_section gradient_colour_div';
+        section.className = 'avatar_options_section gradient_colour_div base';
         text = `Background Colour 2:`
     } else {
         section.style.display = 'flex';
@@ -619,7 +623,11 @@ function setupSwitch(div, key) {
     updateSetup('false');
     const section = document.createElement('div');
     section.id = 'switch_section';
-    section.className = 'avatar_options_section';
+    if (key == 'flip') {
+        section.className = 'avatar_options_section base';
+    } else {
+        section.className = 'avatar_options_section';
+    }
     div.appendChild(section);
 
     section.appendChild(header(
@@ -662,8 +670,10 @@ function setupSlider(div, key, min, max, val, step) {
     const section = document.createElement('div');
     section.id = 'slider_section';
     if (key == 'backgroundRotation') {
-        section.className = 'avatar_options_section background_rotation';
+        section.className = 'avatar_options_section background_rotation base';
         section.style.display = 'none';
+    } else if (baseProperties.includes(key)) {
+        section.className = 'avatar_options_section base';
     } else {
         section.className = 'avatar_options_section';
     }
