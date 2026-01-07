@@ -149,7 +149,7 @@ export function renderAvatarPage(div, user, type) {
     avatar_base.id = 'avatar_base';
     avatar_pb_div.appendChild(avatar_base);
 
-    renderBaseOptions(div);
+    renderBaseOptions(avatar_base);
 
     const avatar_options = document.createElement('div');
     avatar_options.id = 'avatar_options';
@@ -408,7 +408,7 @@ function updateTheme(section, option, dir) {
     updateAvatar();
 }
 
-function renderBaseOptions(div, key) {
+function renderBaseOptions(div) {
     setupSwitch(div, 'flip');
 
     const rotate = basicDiceBearOptions['rotate'];
@@ -612,7 +612,6 @@ function setupSlider(div, key, min, max, val, step) {
     };
 
     let def = val == null ? (min + max)/2 : val;
-    console.log(def);
     updateSetup(def);
     const section = document.createElement('div');
     section.id = 'slider_section';
