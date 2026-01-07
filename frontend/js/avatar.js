@@ -496,11 +496,14 @@ function setupGallery(div, key, options, initial, hasProbability) {
         if (i == options.length) i = 0;
         option.innerHTML = options[i];
         if (key == 'backgroundType') {
-            const bg = document.querySelector('.background_rotation');
+            const rot = document.querySelector('.background_rotation');
+            const grad = document.querySelector('.gradient_colour_div');
             if (options[i] == 'gradientLinear') {
-                bg.style.display = 'flex';
+                rot.style.display = 'flex';
+                grad.style.display = 'flex';
             } else {
-                bg.style.display = 'none';
+                rot.style.display = 'none';
+                grad.style.display = 'none';
             }
         }
         updateSetup(options[i]);
@@ -559,8 +562,16 @@ function setupColour(div, key, colour) {
     const type = key.split('Colour')[0];
     const section = document.createElement('div');
     section.id = 'colour_section';
-    section.className = 'avatar_options_section gradient_colour_div';
-    if (key == 'backgroundColour2') section.style.display = 'none';
+    if (key == 'backgroundColour') {
+        section.style.display = 'flex';
+        section.className = 'avatar_options_section background_colour_div';
+    } else if (key == 'backgroundColour2') {
+        section.style.display = 'none';
+        section.className = 'avatar_options_section gradient_colour_div';
+    } else {
+        section.style.display = 'flex';
+        section.className = 'avatar_options_section';
+    }
     div.appendChild(section);
 
     const text = `${splitCapitals(type)} Colour:`;
