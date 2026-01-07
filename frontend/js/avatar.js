@@ -1558,7 +1558,7 @@ function renderNotionists(div, props) {
     
     let bodyIcon = getItems(props, 'bodyIcon').enum;
     bodyIcon.push('None');
-    setupGallery(div, 'bodyIcon', bodyIcon, 'None', false);
+    setupGallery(div, 'bodyIcon', bodyIcon, 'None', true);
     
     let brows = getItems(props, 'brows').enum;
     setupGallery(div, 'brows', brows, 'variant01', false);
