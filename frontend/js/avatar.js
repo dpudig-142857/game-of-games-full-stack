@@ -100,9 +100,9 @@ let curr_setup = {
     'flip': 'false',
     'rotate': '0',
     'scale': '100',
-    'colour': '#FFFFFF',
-    'colour_type': 'solid',
-    'colour_rotation': '0',
+    'backgroundColor': '#FFFFFF',
+    'backgroundType': 'solid',
+    'backgroundRotation': '0',
     'translateX': '0',
     'translateY': '0',
     'extras': {}
@@ -169,8 +169,8 @@ function createBaseLink(
     rotate_var = '0',
     scale_var = '100',
     colour_var = '#FFFFFF',
-    colour_type_var = 'solid',
-    colour_rotation_var = '0',
+    backgroundType_var = 'solid',
+    backgroundRotation_var = '0',
     x_var = '0',
     y_var = '0'
 ) {
@@ -196,12 +196,12 @@ function createBaseLink(
         colour_var.length == 6 ? `&backgroundColor=${colour_var}` : '';
     curr_setup['colour'] = colour_var;
 
-    const colour_type = `&backgroundType=${colour_type_var}`;
-    curr_setup['colour_type'] = colour_type_var;
+    const backgroundType = `&backgroundType=${backgroundType_var}`;
+    curr_setup['backgroundType'] = backgroundType_var;
 
-    const colour_rotation = colour_type_var == 'gradientLinear' ?
-        `&backgroundRotation=${colour_rotation_var}` : '';
-    curr_setup['colour_rotation'] = colour_rotation_var;
+    const backgroundRotation = backgroundType_var == 'gradientLinear' ?
+        `&backgroundRotation=${backgroundRotation_var}` : '';
+    curr_setup['backgroundRotation'] = backgroundRotation_var;
 
     const x = `&translateX=${x_var}`;
     curr_setup['translateX'] = x_var;
@@ -210,7 +210,7 @@ function createBaseLink(
     curr_setup['translateY'] = y_var;
 
     return base + radius + seed + flip + rotate + scale +
-        colour + colour_type + colour_rotation + x + y;
+        colour + backgroundType + backgroundRotation + x + y;
 }
 
 function createExtras(extras) {
@@ -236,8 +236,8 @@ function updateAvatar() {
         curr_setup['rotate'],
         curr_setup['scale'],
         curr_setup['colour'],
-        curr_setup['colour_type'],
-        curr_setup['colour_rotation'],
+        curr_setup['backgroundType'],
+        curr_setup['backgroundRotation'],
         curr_setup['translateX'],
         curr_setup['translateY']
     ) + createExtras(curr_setup['extras']);
@@ -465,7 +465,7 @@ function setupGallery(div, key, options, initial, hasProbability) {
                 curr_setup['extras'][`${key}Probability`] = 100;
             }
         } else if (key == 'backgroundType') {
-            curr_setup['colour_type'] = val;
+            curr_setup['backgroundType'] = val;
         } else {
             curr_setup['extras'][key] = val;
         }
@@ -623,9 +623,7 @@ function setupSwitch(div, key) {
 
 function setupSlider(div, key, min, max, val, step) {
     const updateSetup = (num) => {
-        if (key == 'backgroundRotation') {
-            curr_setup['colour_rotation'] = `${num}`;
-        } else if (baseProperties.includes(key)) {
+        if (baseProperties.includes(key)) {
             curr_setup[key] = `${num}`;
         } else {
             curr_setup['extras'][key] = `${num}`;
