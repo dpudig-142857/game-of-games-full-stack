@@ -15,7 +15,7 @@ export const micah = {
             },
             default: ['standard'],
         },
-        baseColor: {
+        baseColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -23,7 +23,7 @@ export const micah = {
             },
             default: ['f9c9b6', 'ac6651', '77311d'],
         },
-        earringColor: {
+        earringColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -67,7 +67,7 @@ export const micah = {
             },
             default: ['attached', 'detached'],
         },
-        eyeShadowColor: {
+        eyeShadowColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -83,7 +83,7 @@ export const micah = {
             },
             default: ['up', 'down', 'eyelashesUp', 'eyelashesDown'],
         },
-        eyebrowsColor: {
+        eyebrowsColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -99,7 +99,7 @@ export const micah = {
             },
             default: ['eyes', 'round', 'eyesShadow', 'smiling', 'smilingShadow'],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -115,7 +115,7 @@ export const micah = {
             },
             default: ['beard', 'scruff'],
         },
-        facialHairColor: {
+        facialHairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -137,7 +137,7 @@ export const micah = {
             },
             default: ['round', 'square'],
         },
-        glassesColor: {
+        glassesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -191,7 +191,7 @@ export const micah = {
                 'pixie',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -245,7 +245,7 @@ export const micah = {
                 'smirk',
             ],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -269,7 +269,7 @@ export const micah = {
             },
             default: ['open', 'crew', 'collared'],
         },
-        shirtColor: {
+        shirtColour: {
             type: 'array',
             items: {
                 type: 'string',

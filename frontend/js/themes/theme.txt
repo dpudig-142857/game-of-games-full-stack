@@ -6,7 +6,7 @@ basic
     scale - slider
     radius - ignore
     size - ignore
-    backgroundColor - colour
+    backgroundColour - colour
     backgroundType - switch
     backgroundRotation - slider
     translateX - slider
@@ -27,10 +27,10 @@ adventurer
     - glasses - gallery
     - glassesProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - hairProbability - switch
     - mouth - gallery
-    - skinColor - colour
+    - skinColour - colour
 
 
 adventurerNeutral
@@ -45,22 +45,22 @@ adventurerNeutral
 avatars
 
     - accessories - gallery
-    - accessoriesColor - colour
+    - accessoriesColour - colour
     - accessoriesProbability - switch
     - base - ignore
-    - clothesColor - colour
+    - clothesColour - colour
     - clothing - gallery
     - clothingGraphic - gallery
     - eyebrows - gallery
     - eyes - gallery
     - facialHair - gallery
-    - facialHairColor - colour
+    - facialHairColour - colour
     - facialHairProbability - switch
-    - hairColor - colour
-    - hatColor - colour
+    - hairColour - colour
+    - hatColour - colour
     - mouth - gallery
     - nose - ignore
-    - skinColor - colour
+    - skinColour - colour
     - style - ignore
     - top - gallery
     - topProbability - switch
@@ -83,11 +83,11 @@ bigEars
     - face - gallery
     - frontHair - gallery
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - mouth - gallery
     - nose - gallery
     - sideburn - gallery
-    - skinColor - colour
+    - skinColour - colour
 
 
 bigEarsNeutral
@@ -106,14 +106,14 @@ bigSmile
     - eyes - gallery
     - face - ignore
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - mouth - gallery
-    - skinColor - colour
+    - skinColour - colour
 
 
 bots
 
-    - baseColor - colour
+    - baseColour - colour
     - eyes - gallery
     - face - gallery
     - mouth - gallery
@@ -134,7 +134,7 @@ botsNeutral
 
 croodles
 
-    - baseColor - colour
+    - baseColour - colour
     - beard - gallery
     - beardProbability - switch
     - eyes - gallery
@@ -144,7 +144,7 @@ croodles
     - moustacheProbability - switch
     - nose - gallery
     - top - gallery
-    - topColor - colour
+    - topColour - colour
 
 
 croodlesNeutral
@@ -159,9 +159,9 @@ dylan
     - facialHair - ignore
     - facialHairProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - mood - gallery
-    - skinColor - colour
+    - skinColour - colour
 
 
 funEmoji
@@ -194,7 +194,7 @@ identicon
     - row3 - gallery
     - row4 - gallery
     - row5 - gallery
-    - rowColor - colour
+    - rowColour - colour
 
 
 lorelei
@@ -202,76 +202,76 @@ lorelei
     - beard - gallery
     - beardProbability - switch
     - earrings - gallery
-    - earringsColor - colour
+    - earringsColour - colour
     - earringsProbability - switch
     - eyebrows - gallery
-    - eyebrowsColor - colour
+    - eyebrowsColour - colour
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - freckles - ignore
-    - frecklesColor - colour
+    - frecklesColour - colour
     - frecklesProbability - switch
     - glasses - gallery
-    - glassesColor - colour
+    - glassesColour - colour
     - glassesProbability - switch
     - hair - gallery
     - hairAccessories - ignore
-    - hairAccessoriesColor - colour
+    - hairAccessoriesColour - colour
     - hairAccessoriesProbability - switch
-    - hairColor - colour
+    - hairColour - colour
     - head - gallery
     - mouth - gallery
-    - mouthColor - colour
+    - mouthColour - colour
     - nose - gallery
-    - noseColor - colour
-    - skinColor - colour
+    - noseColour - colour
+    - skinColour - colour
 
 
 loreleiNeutral
 
     - eyebrows - gallery
-    - eyebrowsColor - colour
+    - eyebrowsColour - colour
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - freckles - ignore
-    - frecklesColor - colour
+    - frecklesColour - colour
     - frecklesProbability - switch
     - glasses - gallery
-    - glassesColor - colour
+    - glassesColour - colour
     - glassesProbability - switch
     - mouth - gallery
-    - mouthColor - colour
+    - mouthColour - colour
     - nose - gallery
-    - noseColor - colour
+    - noseColour - colour
 
 
 micah
 
     - base - ignore
-    - baseColor - colour
-    - earringColor - colour
+    - baseColour - colour
+    - earringColour - colour
     - earrings - gallery
     - earringsProbability - switch
     - ears - gallery
-    - eyeShadowColor - colour
+    - eyeShadowColour - colour
     - eyebrows - gallery
-    - eyebrowsColor - colour
+    - eyebrowsColour - colour
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - facialHair - gallery
-    - facialHairColor - colour
+    - facialHairColour - colour
     - facialHairProbability - switch
     - glasses - gallery
-    - glassesColor - colour
+    - glassesColour - colour
     - glassesProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - hairProbability - switch
     - mouth - gallery
-    - mouthColor - colour
+    - mouthColour - colour
     - nose - gallery
     - shirt - gallery
-    - shirtColor - colour
+    - shirtColour - colour
 
 
 miniavs
@@ -279,17 +279,17 @@ miniavs
     - blushes - ignore
     - blushesProbability - switch
     - body - gallery
-    - bodyColor - colour
+    - bodyColour - colour
     - eyes - gallery
     - glasses - gallery
     - glassesProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - head - gallery
     - mouth - gallery
     - moustache - gallery
     - moustacheProbability - switch
-    - skinColor - colour
+    - skinColour - colour
 
 
 notionists
@@ -325,70 +325,70 @@ openPeeps
 
     - accessories - gallery
     - accessoriesProbability - switch
-    - clothingColor - colour
+    - clothingColour - colour
     - face - gallery
     - facialHair - gallery
     - facialHairProbability - switch
     - head - gallery
-    - headContrastColor - colour
+    - headContrastColour - colour
     - mask - gallery
     - maskProbability - switch
-    - skinColor - colour
+    - skinColour - colour
 
 
 personas
 
     - body - gallery
-    - clothingColor - colour
+    - clothingColour - colour
     - eyes - gallery
     - facialHair - gallery
     - facialHairProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - mouth - gallery
     - nose - gallery
-    - skinColor - colour
+    - skinColour - colour
 
 
 pixelArt
 
     - accessories - gallery
-    - accessoriesColor - colour
+    - accessoriesColour - colour
     - accessoriesProbability - switch
     - beard - gallery
     - beardProbability - switch
     - clothing - gallery
-    - clothingColor - colour
+    - clothingColour - colour
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - glasses - gallery
-    - glassesColor - colour
+    - glassesColour - colour
     - glassesProbability - switch
     - hair - gallery
-    - hairColor - colour
+    - hairColour - colour
     - hat - gallery
-    - hatColor - colour
+    - hatColour - colour
     - hatProbability - switch
     - mouth - gallery
-    - mouthColor - colour
-    - skinColor - colour
+    - mouthColour - colour
+    - skinColour - colour
 
 
 pixelArtNeutral
 
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - glasses - gallery
-    - glassesColor - colour
+    - glassesColour - colour
     - glassesProbability - switch
     - mouth - gallery
-    - mouthColor - colour
+    - mouthColour - colour
 
 
 rings
 
     - ring - ignore
-    - ringColor - colour
+    - ringColour - colour
     - ringFive - gallery
     - ringFiveRotation - slider
     - ringFour - gallery
@@ -405,17 +405,17 @@ rings
 shapes
 
     - shape1 - gallery
-    - shape1Color - colour
+    - shape1Colour - colour
     - shape1OffsetX - slider
     - shape1OffsetY - slider
     - shape1Rotation - slider
     - shape2 - gallery
-    - shape2Color - colour
+    - shape2Colour - colour
     - shape2OffsetX - slider
     - shape2OffsetY - slider
     - shape2Rotation - slider
     - shape3 - gallery
-    - shape3Color - colour
+    - shape3Colour - colour
     - shape3OffsetX - slider
     - shape3OffsetY - slider
     - shape3Rotation - slider
@@ -424,15 +424,15 @@ shapes
 thumbs
 
     - eyes - gallery
-    - eyesColor - colour
+    - eyesColour - colour
     - face - gallery
     - faceOffsetX - slider
     - faceOffsetY - slider
     - faceRotation - slider
     - mouth - gallery
-    - mouthColor - colour
+    - mouthColour - colour
     - shape - gallery
-    - shapeColor - colour
+    - shapeColour - colour
     - shapeOffsetX - slider
     - shapeOffsetY - slider
     - shapeRotation - slider

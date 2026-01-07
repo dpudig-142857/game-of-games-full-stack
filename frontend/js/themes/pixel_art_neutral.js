@@ -7,7 +7,7 @@
 export const pixelArtNeutral = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -58,7 +58,7 @@ export const pixelArtNeutral = {
                 'variant01',
             ],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -104,7 +104,7 @@ export const pixelArtNeutral = {
                 'dark01',
             ],
         },
-        glassesColor: {
+        glassesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -174,7 +174,7 @@ export const pixelArtNeutral = {
                 'happy01',
             ],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',

@@ -53,35 +53,35 @@ shape
 COLOUR
 
 
-backgroundColor
-hairColor
-skinColor
-accessoriesColor
-clothesColor
-facialHairColor
-hatColor
-baseColor
-topColor
-rowColor
-earringsColor
-eyebrowsColor
-eyesColor
-frecklesColor
-glassesColor
-hairAccessoriesColor
-mouthColor
-noseColor
-earringColor
-eyeShadowColor
-shirtColor
-bodyColor
-clothingColor
-headContrastColor
-ringColor
-shape1Color
-shape2Color
-shape3Color
-shapeColor
+backgroundColour
+hairColour
+skinColour
+accessoriesColour
+clothesColour
+facialHairColour
+hatColour
+baseColour
+topColour
+rowColour
+earringsColour
+eyebrowsColour
+eyesColour
+frecklesColour
+glassesColour
+hairAccessoriesColour
+mouthColour
+noseColour
+earringColour
+eyeShadowColour
+shirtColour
+bodyColour
+clothingColour
+headContrastColour
+ringColour
+shape1Colour
+shape2Colour
+shape3Colour
+shapeColour
 
 
 

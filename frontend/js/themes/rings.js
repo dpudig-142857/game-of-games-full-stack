@@ -15,7 +15,7 @@ export const rings = {
             },
             default: ['container'],
         },
-        ringColor: {
+        ringColour: {
             type: 'array',
             items: {
                 type: 'string',

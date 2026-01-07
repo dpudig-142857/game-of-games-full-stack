@@ -29,7 +29,7 @@ export const miniavs = {
             },
             default: ['tShirt', 'golf'],
         },
-        bodyColor: {
+        bodyColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -87,7 +87,7 @@ export const miniavs = {
                 'classic01',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -125,7 +125,7 @@ export const miniavs = {
             maximum: 100,
             default: 20,
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

@@ -31,7 +31,7 @@ export const avatars = {
                 'eyepatch',
             ],
         },
-        accessoriesColor: {
+        accessoriesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -61,7 +61,7 @@ export const avatars = {
             maximum: 100,
             default: 10,
         },
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -77,7 +77,7 @@ export const avatars = {
             },
             default: ['default'],
         },
-        clothesColor: {
+        clothesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -248,7 +248,7 @@ export const avatars = {
                 'moustacheMagnum',
             ],
         },
-        facialHairColor: {
+        facialHairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -273,7 +273,7 @@ export const avatars = {
             maximum: 100,
             default: 10,
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -292,7 +292,7 @@ export const avatars = {
                 'e8e1e1',
             ],
         },
-        hatColor: {
+        hatColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -358,7 +358,7 @@ export const avatars = {
             },
             default: ['default'],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

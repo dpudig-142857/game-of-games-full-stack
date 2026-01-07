@@ -279,7 +279,7 @@ export const adventurer = {
                 'long21',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -378,7 +378,7 @@ export const adventurer = {
                 'variant01',
             ],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

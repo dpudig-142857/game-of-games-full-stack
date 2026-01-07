@@ -47,7 +47,7 @@ export const identicon = {
             },
             default: ['xooox', 'xxoxx', 'xoxox', 'oxxxo', 'xxxxx', 'oxoxo', 'ooxoo'],
         },
-        rowColor: {
+        rowColour: {
             type: 'array',
             items: {
                 type: 'string',

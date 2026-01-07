@@ -31,7 +31,7 @@ export const basic = {
             type: 'integer',
             minimum: 1,
         },
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',

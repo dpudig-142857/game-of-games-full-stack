@@ -109,7 +109,7 @@ export const bigSmile = {
                 'curlyShortHair',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -152,7 +152,7 @@ export const bigSmile = {
                 'kawaii',
             ],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

@@ -29,7 +29,7 @@ export const lorelei = {
             },
             default: ['variant01', 'variant02', 'variant03'],
         },
-        earringsColor: {
+        earringsColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -79,7 +79,7 @@ export const lorelei = {
                 'variant01',
             ],
         },
-        eyebrowsColor: {
+        eyebrowsColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -145,7 +145,7 @@ export const lorelei = {
                 'variant01',
             ],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -161,7 +161,7 @@ export const lorelei = {
             },
             default: ['variant01'],
         },
-        frecklesColor: {
+        frecklesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -189,7 +189,7 @@ export const lorelei = {
                 'variant05',
             ],
         },
-        glassesColor: {
+        glassesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -317,7 +317,7 @@ export const lorelei = {
             },
             default: ['flowers'],
         },
-        hairAccessoriesColor: {
+        hairAccessoriesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -331,7 +331,7 @@ export const lorelei = {
             maximum: 100,
             default: 5,
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -411,7 +411,7 @@ export const lorelei = {
                 'sad09',
             ],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -441,7 +441,7 @@ export const lorelei = {
                 'variant06',
             ],
         },
-        noseColor: {
+        noseColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -449,7 +449,7 @@ export const lorelei = {
             },
             default: ['000000'],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

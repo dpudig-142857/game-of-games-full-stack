@@ -201,106 +201,106 @@ thumbs.shape
 COLOUR
 
 
-basic.backgroundColor
+basic.backgroundColour
 
-adventurer.hairColor
-avatars.hairColor
-bigEars.hairColor
-bigSmile.hairColor
-dylan.hairColor
-lorelei.hairColor
-micah.hairColor
-miniavs.hairColor
-personas.hairColor
-pixelArt.hairColor
+adventurer.hairColour
+avatars.hairColour
+bigEars.hairColour
+bigSmile.hairColour
+dylan.hairColour
+lorelei.hairColour
+micah.hairColour
+miniavs.hairColour
+personas.hairColour
+pixelArt.hairColour
 
-adventurer.skinColor
-avatars.skinColor
-bigEars.skinColor
-bigSmile.skinColor
-dylan.skinColor
-lorelei.skinColor
-miniavs.skinColor
-openPeeps.skinColor
-personas.skinColor
-pixelArt.skinColor
+adventurer.skinColour
+avatars.skinColour
+bigEars.skinColour
+bigSmile.skinColour
+dylan.skinColour
+lorelei.skinColour
+miniavs.skinColour
+openPeeps.skinColour
+personas.skinColour
+pixelArt.skinColour
 
-avatars.accessoriesColor
-pixelArt.accessoriesColor
+avatars.accessoriesColour
+pixelArt.accessoriesColour
 
-avatars.clothesColor
+avatars.clothesColour
 
-avatars.facialHairColor
-micah.facialHairColor
+avatars.facialHairColour
+micah.facialHairColour
 
-avatars.hatColor
-pixelArt.hatColor
+avatars.hatColour
+pixelArt.hatColour
 
-bots.baseColor
-croodles.baseColor
-micah.baseColor
+bots.baseColour
+croodles.baseColour
+micah.baseColour
 
-croodles.topColor
+croodles.topColour
 
-identicon.rowColor
+identicon.rowColour
 
-lorelei.earringsColor
+lorelei.earringsColour
 
-lorelei.eyebrowsColor
-loreleiNeutral.eyebrowsColor
-micah.eyebrowsColor
+lorelei.eyebrowsColour
+loreleiNeutral.eyebrowsColour
+micah.eyebrowsColour
 
-lorelei.eyesColor
-loreleiNeutral.eyesColor
-micah.eyesColor
-pixelArt.eyesColor
-pixelArtNeutral.eyesColor
-thumbs.eyesColor
+lorelei.eyesColour
+loreleiNeutral.eyesColour
+micah.eyesColour
+pixelArt.eyesColour
+pixelArtNeutral.eyesColour
+thumbs.eyesColour
 
-lorelei.frecklesColor
-loreleiNeutral.frecklesColor
+lorelei.frecklesColour
+loreleiNeutral.frecklesColour
 
-lorelei.glassesColor
-loreleiNeutral.glassesColor
-micah.glassesColor
-pixelArt.glassesColor
-pixelArtNeutral.glassesColor
+lorelei.glassesColour
+loreleiNeutral.glassesColour
+micah.glassesColour
+pixelArt.glassesColour
+pixelArtNeutral.glassesColour
 
-lorelei.hairAccessoriesColor
+lorelei.hairAccessoriesColour
 
-lorelei.mouthColor
-loreleiNeutral.mouthColor
-micah.mouthColor
-pixelArt.mouthColor
-pixelArtNeutral.mouthColor
-thumbs.mouthColor
+lorelei.mouthColour
+loreleiNeutral.mouthColour
+micah.mouthColour
+pixelArt.mouthColour
+pixelArtNeutral.mouthColour
+thumbs.mouthColour
 
-lorelei.noseColor
-loreleiNeutral.noseColor
+lorelei.noseColour
+loreleiNeutral.noseColour
 
-micah.earringColor
+micah.earringColour
 
-micah.eyeShadowColor
+micah.eyeShadowColour
 
-micah.shirtColor
+micah.shirtColour
 
-miniavs.bodyColor
+miniavs.bodyColour
 
-openPeeps.clothingColor
-personas.clothingColor
-pixelArt.clothingColor
+openPeeps.clothingColour
+personas.clothingColour
+pixelArt.clothingColour
 
-openPeeps.headContrastColor
+openPeeps.headContrastColour
 
-rings.ringColor
+rings.ringColour
 
-shapes.shape1Color
+shapes.shape1Colour
 
-shapes.shape2Color
+shapes.shape2Colour
 
-shapes.shape3Color
+shapes.shape3Colour
 
-thumbs.shapeColor
+thumbs.shapeColour
 
 
 

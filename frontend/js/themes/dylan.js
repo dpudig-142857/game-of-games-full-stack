@@ -7,7 +7,7 @@
 export const dylan = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -63,7 +63,7 @@ export const dylan = {
                 'shaggy',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -95,7 +95,7 @@ export const dylan = {
                 'confused',
             ],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

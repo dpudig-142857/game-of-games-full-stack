@@ -7,7 +7,7 @@
 export const glass = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',

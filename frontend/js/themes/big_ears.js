@@ -289,7 +289,7 @@ export const bigEars = {
                 'short01',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -452,7 +452,7 @@ export const bigEars = {
                 'variant01',
             ],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

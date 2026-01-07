@@ -7,7 +7,7 @@
 export const thumbs = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -97,7 +97,7 @@ export const thumbs = {
                 'variant9W16',
             ],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -151,7 +151,7 @@ export const thumbs = {
             },
             default: ['variant2', 'variant1', 'variant3', 'variant4', 'variant5'],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -167,7 +167,7 @@ export const thumbs = {
             },
             default: ['default'],
         },
-        shapeColor: {
+        shapeColour: {
             type: 'array',
             items: {
                 type: 'string',

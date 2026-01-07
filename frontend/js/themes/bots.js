@@ -7,7 +7,7 @@
 export const bots = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        baseColor: {
+        baseColour: {
             type: 'array',
             items: {
                 type: 'string',

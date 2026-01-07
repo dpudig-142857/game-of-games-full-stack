@@ -7,7 +7,7 @@
 export const shapes = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -31,7 +31,7 @@ export const shapes = {
             },
             default: ['rectangleFilled', 'ellipseFilled', 'polygonFilled'],
         },
-        shape1Color: {
+        shape1Colour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -85,7 +85,7 @@ export const shapes = {
             },
             default: ['rectangleFilled', 'ellipseFilled', 'polygonFilled', 'line'],
         },
-        shape2Color: {
+        shape2Colour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -147,7 +147,7 @@ export const shapes = {
                 'line',
             ],
         },
-        shape3Color: {
+        shape3Colour: {
             type: 'array',
             items: {
                 type: 'string',

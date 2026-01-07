@@ -39,7 +39,7 @@ export const openPeeps = {
             maximum: 100,
             default: 20,
         },
-        clothingColor: {
+        clothingColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -279,7 +279,7 @@ export const openPeeps = {
                 'twists2',
             ],
         },
-        headContrastColor: {
+        headContrastColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -312,7 +312,7 @@ export const openPeeps = {
             maximum: 100,
             default: 5,
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

@@ -7,7 +7,7 @@
 export const croodles = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        baseColor: {
+        baseColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -259,7 +259,7 @@ export const croodles = {
                 'variant01',
             ],
         },
-        topColor: {
+        topColour: {
             type: 'array',
             items: {
                 type: 'string',

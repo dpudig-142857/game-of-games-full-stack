@@ -7,7 +7,7 @@
 export const loreleiNeutral = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     properties: {
-        backgroundColor: {
+        backgroundColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -51,7 +51,7 @@ export const loreleiNeutral = {
                 'variant01',
             ],
         },
-        eyebrowsColor: {
+        eyebrowsColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -117,7 +117,7 @@ export const loreleiNeutral = {
                 'variant01',
             ],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -133,7 +133,7 @@ export const loreleiNeutral = {
             },
             default: ['variant01'],
         },
-        frecklesColor: {
+        frecklesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -161,7 +161,7 @@ export const loreleiNeutral = {
                 'variant05',
             ],
         },
-        glassesColor: {
+        glassesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -239,7 +239,7 @@ export const loreleiNeutral = {
                 'sad09',
             ],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -269,7 +269,7 @@ export const loreleiNeutral = {
                 'variant06',
             ],
         },
-        noseColor: {
+        noseColour: {
             type: 'array',
             items: {
                 type: 'string',

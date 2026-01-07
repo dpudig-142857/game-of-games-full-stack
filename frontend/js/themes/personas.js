@@ -15,7 +15,7 @@ export const personas = {
             },
             default: ['squared', 'rounded', 'small', 'checkered'],
         },
-        clothingColor: {
+        clothingColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -117,7 +117,7 @@ export const personas = {
                 'mohawk',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -165,7 +165,7 @@ export const personas = {
             },
             default: ['mediumRound', 'smallRound', 'wrinkles'],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',

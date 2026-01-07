@@ -15,7 +15,7 @@ export const pixelArt = {
             },
             default: ['variant04', 'variant03', 'variant02', 'variant01'],
         },
-        accessoriesColor: {
+        accessoriesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -117,7 +117,7 @@ export const pixelArt = {
                 'variant01',
             ],
         },
-        clothingColor: {
+        clothingColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -172,7 +172,7 @@ export const pixelArt = {
                 'variant01',
             ],
         },
-        eyesColor: {
+        eyesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -218,7 +218,7 @@ export const pixelArt = {
                 'dark01',
             ],
         },
-        glassesColor: {
+        glassesColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -332,7 +332,7 @@ export const pixelArt = {
                 'long01',
             ],
         },
-        hairColor: {
+        hairColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -382,7 +382,7 @@ export const pixelArt = {
                 'variant01',
             ],
         },
-        hatColor: {
+        hatColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -460,7 +460,7 @@ export const pixelArt = {
                 'happy01',
             ],
         },
-        mouthColor: {
+        mouthColour: {
             type: 'array',
             items: {
                 type: 'string',
@@ -468,7 +468,7 @@ export const pixelArt = {
             },
             default: ['d29985', 'c98276', 'e35d6a', 'de0f0d'],
         },
-        skinColor: {
+        skinColour: {
             type: 'array',
             items: {
                 type: 'string',
