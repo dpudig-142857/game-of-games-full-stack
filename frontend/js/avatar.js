@@ -1975,8 +1975,6 @@ function renderThumbs(div, props) {
     setupGallery(div, 'mouth', mouth, 'variant1', false);
     setupColour(div, 'mouthColour', '#000000');
 
-    let shape = getItems(props, 'shape').enum;
-    setupGallery(div, 'shape', shape, 'ellipse', false);
     setupColour(div, 'shapeColour', '#000000');
     
     const shapeX = getItems(props, 'shapeOffsetX');
