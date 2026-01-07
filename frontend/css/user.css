@@ -301,6 +301,8 @@
 
 .avatar_options_section {
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -311,7 +313,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    width: 60%;
+    width: 100%;
 }
 
 .avatar_option_text {

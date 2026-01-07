@@ -560,21 +560,25 @@ function setupColour(div, key, colour) {
     };
 
     const type = key.split('Colour')[0];
+    let text = '';
+
     const section = document.createElement('div');
     section.id = 'colour_section';
     if (key == 'backgroundColour') {
         section.style.display = 'flex';
         section.className = 'avatar_options_section background_colour_div';
+        text = `Background Colour:`
     } else if (key == 'backgroundColour2') {
         section.style.display = 'none';
         section.className = 'avatar_options_section gradient_colour_div';
+        text = `Background Colour 2:`
     } else {
         section.style.display = 'flex';
         section.className = 'avatar_options_section';
+        text = `${splitCapitals(type)} Colour:`
     }
     div.appendChild(section);
 
-    const text = `${splitCapitals(type)} Colour:`;
     section.appendChild(header(
         'h2', text, '', '', 'avatar_option_title'
     ));
