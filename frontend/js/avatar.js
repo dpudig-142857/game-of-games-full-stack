@@ -122,9 +122,9 @@ export function renderAvatarPage(div, user, type) {
     avatar_div.id = 'avatar_div';
     div.appendChild(avatar_div);
 
-    const avatar_preview_div = document.createElement('div');
-    avatar_preview_div.id = 'avatar_preview_div';
-    avatar_div.appendChild(avatar_preview_div);
+    const avatar_pb_div = document.createElement('div');
+    avatar_pb_div.id = 'avatar_preview_and_base';
+    avatar_div.appendChild(avatar_pb_div);
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
@@ -143,7 +143,13 @@ export function renderAvatarPage(div, user, type) {
         'eyes': 'plain',
         'mouth': 'plain'
     });
-    avatar_preview_div.appendChild(avatar_preview);
+    avatar_pb_div.appendChild(avatar_preview);
+
+    const avatar_base = document.createElement('div');
+    avatar_base.id = 'avatar_base';
+    avatar_pb_div.appendChild(avatar_base);
+
+    renderBaseOptions(div);
 
     const avatar_options = document.createElement('div');
     avatar_options.id = 'avatar_options';
@@ -417,8 +423,15 @@ function renderBaseOptions(div, key) {
     const y = basicDiceBearOptions['translateY'];
     setupSlider(div, 'translateY', y.minimum, y.maximum, 0, 5);
 
+    setupColour(div, 'backgroundColor', '#FFFFFF');
+}
+
+function updateBaseOptions(key) {
     const colour = key == 'icons' ? '#000000' : '#FFFFFF';
-    setupColour(div, 'backgroundColor', colour);
+    const div = document.querySelector('.background_colour_div');
+    const parent = div.parentElement;
+    div.remove();
+    setupColour(parent, 'backgroundColor', colour);
 }
 
 // #endregion
@@ -509,7 +522,7 @@ function setupColour(div, key, colour) {
     const type = key.split('Color')[0];
     const section = document.createElement('div');
     section.id = 'colour_section';
-    section.className = 'avatar_options_section';
+    section.className = 'avatar_options_section background_colour_div';
     div.appendChild(section);
 
     const text = `${startUpper(type)} Colour:`;
@@ -672,7 +685,7 @@ function getItems(props, item_key) {
 
 function renderAdventurer(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'adventurer');
+    updateBaseOptions('adventurer');
 
     let earrings = getItems(props, 'earrings').enum;
     earrings.push('None');
@@ -717,7 +730,7 @@ function renderAdventurer(div, props) {
 
 function renderAdventurerNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'adventurer-neutral');
+    updateBaseOptions('adventurer-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
@@ -747,7 +760,7 @@ function renderAdventurerNeutral(div, props) {
 
 function renderAvataaars(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'avataaars');
+    updateBaseOptions('avataaars');
 
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
@@ -797,7 +810,7 @@ function renderAvataaars(div, props) {
 
 function renderAvataaarsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'avataaars-neutral');
+    updateBaseOptions('avataaars-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'default', false);
@@ -823,7 +836,7 @@ function renderAvataaarsNeutral(div, props) {
 
 function renderBigEars(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'big-ears');
+    updateBaseOptions('big-ears');
 
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
@@ -871,7 +884,7 @@ function renderBigEars(div, props) {
 
 function renderBigEarsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'big-ears-neutral');
+    updateBaseOptions('big-ears-neutral');
 
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
@@ -901,7 +914,7 @@ function renderBigEarsNeutral(div, props) {
 
 function renderBigSmile(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'big-smile');
+    updateBaseOptions('big-smile');
 
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
@@ -934,7 +947,7 @@ function renderBigSmile(div, props) {
 
 function renderBottts(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'bottts');
+    updateBaseOptions('bottts');
 
     setupColour(div, 'baseColor', '#EDB98A');
     
@@ -975,7 +988,7 @@ function renderBottts(div, props) {
 
 function renderBotttsNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'bottts-neutral');
+    updateBaseOptions('bottts-neutral');
 
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'eva', false);
@@ -998,7 +1011,7 @@ function renderBotttsNeutral(div, props) {
 
 function renderCroodles(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'croodles');
+    updateBaseOptions('croodles');
 
     setupColour(div, 'baseColor', '#EDB98A');
     
@@ -1041,7 +1054,7 @@ function renderCroodles(div, props) {
 
 function renderCroodlesNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'croodles-neutral');
+    updateBaseOptions('croodles-neutral');
     
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'variant01', false);
@@ -1067,7 +1080,7 @@ function renderCroodlesNeutral(div, props) {
 
 function renderDylan(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'dylan');
+    updateBaseOptions('dylan');
 
     const facialHair = ['None', 'default'];
     setupGallery(div, 'facialHair', facialHair, 'None', true);
@@ -1096,7 +1109,7 @@ function renderDylan(div, props) {
 
 function renderFunEmoji(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'fun-emoji');
+    updateBaseOptions('fun-emoji');
 
     let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, 'plain', false);
@@ -1119,7 +1132,7 @@ function renderFunEmoji(div, props) {
 
 function renderGlass(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'glass');
+    updateBaseOptions('glass');
 
     let shape1 = getItems(props, 'shape1').enum;
     setupGallery(div, 'shape1', shape1, 'a', false);
@@ -1178,7 +1191,7 @@ function renderGlass(div, props) {
 
 function renderIcons(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'icons');
+    updateBaseOptions('icons');
 
     let icon = getItems(props, 'icon').enum;
     setupGallery(div, 'icon', icon, 'emojiSmile', false);
@@ -1198,7 +1211,7 @@ function renderIcons(div, props) {
 
 function renderIdenticon(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'identicon');
+    updateBaseOptions('identicon');
 
     let row1 = getItems(props, 'row1').enum;
     setupGallery(div, 'row1', row1, 'xooox', false);
@@ -1232,7 +1245,7 @@ function renderIdenticon(div, props) {
 
 function renderLorelei(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'lorelei');
+    updateBaseOptions('lorelei');
 
     let beard = getItems(props, 'beard').enum;
     beard.push('None');
@@ -1298,7 +1311,7 @@ function renderLorelei(div, props) {
 
 function renderLoreleiNeutral(div, props) {
     div.innerHTML = '';
-    renderBaseOptions(div, 'lorelei-neutral');
+    updateBaseOptions('lorelei-neutral');
 
     let eyebrows = getItems(props, 'eyebrows').enum;
     setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
