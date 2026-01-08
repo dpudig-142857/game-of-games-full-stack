@@ -247,8 +247,8 @@
     border: none;
 }
 
-.user_read:focus-visible {
-    border: none;
+.user_read:focus {
+    outline: none;
 }
 
 #logout-btn {
