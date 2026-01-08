@@ -242,7 +242,7 @@ function renderLoginForm(div) {
     form.appendChild(btn);
 
     const eye = document.createElement('img');
-    eye.id = 'password_eye';
+    eye.className = 'password_eye';
     eye.src = 'assets/eye_on.svg';
     form.appendChild(eye);
     eye.addEventListener('click', () => {
@@ -516,9 +516,52 @@ function renderUserProfile(div, user) {
     user_div.className = 'user_div';
     section.appendChild(user_div);
 
-    const btn = header(
+    const form = document.createElement('div');
+    form.id = 'user_form';
+    form.className = 'form';
+    user_div.appendChild(form);
+
+    const username = document.createElement('input');
+    username.type = 'username';
+    username.id = 'user_username';
+    username.placeholder = 'Username...';
+    username.className = 'user-input';
+    username.style.cursor = 'text';
+    form.appendChild(username);
+
+    const password = document.createElement('input');
+    password.type = 'password';
+    password.id = 'user_password';
+    password.placeholder = 'Password...';
+    password.className = 'user-input';
+    password.style.cursor = 'text';
+    form.appendChild(password);
+
+    const btn = document.createElement('button');
+    btn.type = 'submit';
+    btn.className = 'user-button user-input';
+    btn.innerHTML = 'Login';
+    form.appendChild(btn);
+
+    const eye = document.createElement('img');
+    eye.className = 'password_eye';
+    eye.src = 'assets/eye_on.svg';
+    form.appendChild(eye);
+    eye.addEventListener('click', () => {
+        if (password.type == 'password') {
+            password.type = 'text';
+            eye.src = 'assets/eye_off.svg';
+            eye.style.textDecoration = 'line-through';
+        } else {
+            password.type = 'password';
+            eye.src = 'assets/eye_on.svg';
+            eye.style.textDecoration = 'none';
+        }
+    });
+
+    const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
     )
-    div.appendChild(btn);
-    btn.addEventListener('click', logout);
+    div.appendChild(logoutBtn);
+    logoutBtn.addEventListener('click', logout);
 }

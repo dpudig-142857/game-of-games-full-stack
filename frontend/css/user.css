@@ -193,8 +193,11 @@
 
 .user_avatar_div {
     width: 40%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 #user_avatar {
@@ -204,15 +207,17 @@
 }
 
 #user_avatar:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #user_avatar:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 .user_div {
     width: 60%;
+    height: 100%;
+    overflow: auto;
 }
 
 #logout-btn {
@@ -259,7 +264,7 @@
     gap: 1rem;
 }
 
-#password_eye {
+.password_eye {
     position: relative;
     width: 2rem;
     transform:
@@ -269,7 +274,7 @@
     z-index: 1000;
 }
 
-#password_eye:hover {
+.password_eye:hover {
     transform:
         translateX(13rem)
         translateY(-12.5rem)
@@ -277,7 +282,7 @@
     cursor: pointer;
 }
 
-#password_eye:active {
+.password_eye:active {
     transform:
         translateX(13rem)
         translateY(-12.5rem)
