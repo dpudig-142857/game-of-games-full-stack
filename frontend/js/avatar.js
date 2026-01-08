@@ -131,7 +131,9 @@ function getCurrSetupFromSeed(seed) {
     }
     let keys = Object.keys(setup);
     const entries = Object.entries(setup);
-    for (const [key, val] of entries) {
+    console.log(entries);
+    for (const index of entries) {
+        const [key, val] = index;
         if (key.includes('Probability')) continue;
         console.log(key, ' - ', val);
         if (keys.includes(`${key}Probability`)) {
