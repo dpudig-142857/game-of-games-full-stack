@@ -115,38 +115,58 @@ let curr_setup = {
 // 1 - 
 
 function getCurrSetupFromSeed(seed) {
-    const no_start = seed.split('api.dicebear.com/9.x/')[1];
-    curr_setup.theme = no_start.split('/svg?')[0];
-    const main = no_start.split('/svg?')[1];
-    const options = main.split('&');
-    let setup = {};
-    console.log(options);
+    
     options.forEach(option => {
         if (option == 'backgroundColor[]') {
             curr_setup['background'] = '';
             curr_setup['background2'] = '';
-        } else if (option == 'flip') {
-            
         } else {
             const sides = option.split('=');
             setup[sides[0]] = sides[1];
         }
     });
-    let keys = Object.keys(setup);
     const entries = Object.entries(setup);
-    console.log(setup);
-    console.log(entries);
-    entries
-    .filter(([key]) => !key.includes('Probability'))
-    .forEach(([key, val]) => {
-        console.log(key, ' - ', val);
-        if (keys.includes(`${key}Probability`)) {
-            const prob = entries.find(([k]) => k == `${key}Probability`);
-            console.log(prob);
+    entries.forEach(([key, val]) => {
+        if (key == 'backgroundColour') {
+            const colours = val.split(',');
+            if (colours.length >= 2) {
+                curr_setup['background'] = colours[0];
+                curr_setup['background2'] = colours[1];
+            } else {
+                curr_setup['background'] = val;
+                curr_setup['background2'] = val;
+            }
+        } else if (baseProperties.includes(key)) {
+            curr_setup[key] = val;
         } else {
-            
+            curr_setup['extras'][key];
         }
     });
+
+
+    const [, rest] = seed.split('api.dicebear.com/9.x/');
+    if (!rest) return;
+
+    const [theme, query] = rest.split('/svg?');
+    curr_setup['theme'] = theme;
+
+    const params = new URLSearchParams(query);
+    curr_setup['extras'] ??= {};
+
+    for (const [key, val] of params.entries()) {
+        if (key == 'backgroundColor[]') {
+            curr_setup['background'] = '';
+            curr_setup['background2'] = '';
+        } else if (key == 'backgroundColor') {
+            const colours = val.split(',');
+            curr_setup['background']  = colours[0] ?? '';
+            curr_setup['background2'] = colours[1] ?? colours[0] ?? '';
+        } else if (baseProperties.includes(key)) {
+            curr_setup[key] = val;
+        } else {
+            curr_setup['extras'][key] = val;
+        }
+    }
 }
 
 export function renderAvatarPage(div, user, type) {
@@ -158,7 +178,9 @@ export function renderAvatarPage(div, user, type) {
         title.textContent = 'Creating Avatar';
     } else if (type == 'updating') {
         title.textContent = 'Updating Avatar';
+        console.log(curr_setup);
         getCurrSetupFromSeed(user.avatar_seed);
+        console.log(curr_setup);
     } else {
 
     }
