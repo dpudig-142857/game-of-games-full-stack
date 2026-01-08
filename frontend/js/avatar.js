@@ -110,6 +110,34 @@ let curr_setup = {
     'extras': {}
 };
 
+// SEED ORDER
+// 0 - https://api.dicebear.com/9.x/fun-emoji/svg?seed=Emery&radius=50&flip=false&rotate=0&scale=100&backgroundColor=ff0000&translateX=0&translateY=0&eyes=shades&mouth=cute"
+// 1 - 
+
+function getCurrSetupFromSeed(seed) {
+    const no_start = seed.split('api.dicebear.com/9.x/')[1];
+    curr_setup.theme = no_start.split('/svg?')[0];
+    const main = no_start.split('/svg?')[1];
+    const options = main.split('&');
+    let setup = {};
+    for (const option in options) {
+        if (option == 'backgroundColor[]') {
+            curr_setup['background'] = '';
+            curr_setup['background2'] = '';
+            continue;
+        }
+        const sides = option.split('=');
+        setup[sides[0]] = sides[1];
+    }
+    let keys = Object.keys(setup);
+    const entries = Object.entries(setup);
+    for (const [key, val] of entries) {
+        if (key.includes('Probability')) continue;
+        console.log(key, ' - ', val);
+
+    }
+}
+
 export function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
@@ -501,6 +529,9 @@ function setupGallery(div, key, options, initial, hasProbability) {
     const update = (dir) => {
         const curr = option.innerHTML;
         let i = options.indexOf(curr);
+        console.log(curr);
+        console.log(i);
+        console.log(options);
         if (dir == 'left') i -= 1;
         if (dir == 'right') i += 1;
         if (i == -1) i = options.length - 1;

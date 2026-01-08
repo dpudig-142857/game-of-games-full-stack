@@ -126,8 +126,8 @@
     border-radius: 1rem;
     border: 2px solid #007BFF;
     width: 75%;
-    height: 80%;
-    overflow-y: auto;
+    height: 85%;
+    overflow: visible;
     text-align: center;
     justify-content: flex-start;
     gap: 2rem;
