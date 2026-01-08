@@ -251,6 +251,10 @@
     outline: none;
 }
 
+#username-btn {
+    width: 15rem;
+}
+
 #logout-btn {
     cursor: pointer;
 }

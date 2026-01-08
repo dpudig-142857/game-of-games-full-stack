@@ -538,7 +538,7 @@ function renderUserProfile(div, user) {
     const usernameBtn = header(
         'button', 'Edit Username', '', 'username-btn', 'user-button user-input'
     )
-    div.appendChild(usernameBtn);
+    username_div.appendChild(usernameBtn);
     
     const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
