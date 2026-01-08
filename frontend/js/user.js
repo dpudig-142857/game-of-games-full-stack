@@ -499,25 +499,26 @@ function renderSignUpPage(div) {
 function renderUserProfile(div, user) {
     div.innerHTML = '';
 
-    const middle = document.createElement('div');
-    middle.className = 'user_middle_div';
-    div.appendChild(middle);
+    const section = document.createElement('div');
+    section.className = 'user_middle_div';
+    div.appendChild(section);
 
     const avatar_div = document.createElement('div');
     avatar_div.className = 'user_avatar_div';
-    middle.appendChild(avatar_div);
+    section.appendChild(avatar_div);
 
     const avatar = document.createElement('img');
     avatar.id = 'user_avatar';
     avatar.src = user.avatar_seed;
     avatar_div.appendChild(avatar);
 
+    const user_div = document.createElement('div');
+    user_div.className = 'user_div';
+    section.appendChild(user_div);
+
     const btn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
     )
-    btn.style.cursor = 'pointer';
     div.appendChild(btn);
-    //header(type, text, colour = '', id = '', className = '')
-
-    btn.addEventListener('click', () => logout());
+    btn.addEventListener('click', logout);
 }
