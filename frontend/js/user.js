@@ -511,6 +511,9 @@ function renderUserProfile(div, user) {
     const avatar = document.createElement('img');
     avatar.id = 'user_avatar';
     avatar.src = user.avatar_seed;
+    avatar.addEventListener('click', () => {
+        renderAvatarPage(div, user, 'updating');
+    });
     avatar_div.appendChild(avatar);
 
     const user_div = document.createElement('div');
@@ -590,6 +593,9 @@ function renderUserProfile(div, user) {
         'button', 'Edit Password', '', 'password-btn', 'user-button user-input'
     )
     password_div.appendChild(passwordBtn);
+    passwordBtn.addEventListener('click', () => {
+
+    });
 
     if (user.role == 'admin' || user.role == 'owner') {
         const updateVersion = (isPublic) => {
@@ -599,7 +605,7 @@ function renderUserProfile(div, user) {
         const section = document.createElement('div');
         section.id = 'switch_section';
         section.className = 'avatar_options_section';
-        div.appendChild(section);
+        form.appendChild(section);
     
         section.appendChild(header(
             'h2', `GoG Version:`, '', '', 'avatar_option_title'
