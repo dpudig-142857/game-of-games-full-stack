@@ -247,6 +247,10 @@
     border: none;
 }
 
+.user_read:focus-visible {
+    border: none;
+}
+
 #logout-btn {
     cursor: pointer;
 }

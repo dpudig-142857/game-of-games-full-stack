@@ -524,10 +524,10 @@ function renderUserProfile(div, user) {
     const username = document.createElement('input');
     username.type = 'username';
     username.id = 'user_username';
-    username.placeholder = 'Username...';
+    username.value = `${user.username}`;
     username.className = 'user-input user_read';
     username.style.cursor = 'text';
-    username.readOnly = true;
+    username.setAttribute('readonly', true);
     form.appendChild(username);
     
     const password_div = document.createElement('div');
@@ -540,7 +540,7 @@ function renderUserProfile(div, user) {
     password.placeholder = 'Password...';
     password.className = 'user-input user_read';
     password.style.cursor = 'text';
-    username.readOnly = false;
+    password.setAttribute('readonly', true);
     password_div.appendChild(password);
 
     const eye = document.createElement('img');
