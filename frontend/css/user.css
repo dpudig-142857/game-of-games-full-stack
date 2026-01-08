@@ -220,6 +220,28 @@
     overflow: auto;
 }
 
+#user_form {
+    padding: 1rem 0;
+}
+
+#user_eye {
+    transform: translateX(12.25rem) translateY(-4.25rem);
+}
+
+#user_eye:hover {
+    transform:
+        translateX(12.25rem)
+        translateY(-4.25rem)
+        scale(1.1);
+}
+
+#user_eye:active {
+    transform:
+        translateX(12.25rem)
+        translateY(-4.25rem)
+        scale(0.9);
+}
+
 #logout-btn {
     cursor: pointer;
 }
@@ -265,13 +287,11 @@
 }
 
 .password_eye {
-    position: relative;
     width: 2rem;
     transform:
         translateX(13rem)
         translateY(-12.5rem);
     transition: transform 0.3s ease;
-    z-index: 1000;
 }
 
 .password_eye:hover {

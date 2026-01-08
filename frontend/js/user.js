@@ -529,24 +529,22 @@ function renderUserProfile(div, user) {
     username.style.cursor = 'text';
     form.appendChild(username);
 
+    const password_div = document.createElement('div');
+    password_div.className = 'user_input_section';
+    form.appendChild(password_div);
+
     const password = document.createElement('input');
     password.type = 'password';
     password.id = 'user_password';
     password.placeholder = 'Password...';
     password.className = 'user-input';
     password.style.cursor = 'text';
-    form.appendChild(password);
-
-    const btn = document.createElement('button');
-    btn.type = 'submit';
-    btn.className = 'user-button user-input';
-    btn.innerHTML = 'Login';
-    form.appendChild(btn);
+    password_div.appendChild(password);
 
     const eye = document.createElement('img');
+    eye.id = 'user_eye';
     eye.className = 'password_eye';
     eye.src = 'assets/eye_on.svg';
-    form.appendChild(eye);
     eye.addEventListener('click', () => {
         if (password.type == 'password') {
             password.type = 'text';
@@ -558,6 +556,7 @@ function renderUserProfile(div, user) {
             eye.style.textDecoration = 'none';
         }
     });
+    password_div.appendChild(eye);
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
