@@ -134,7 +134,10 @@ function getCurrSetupFromSeed(seed) {
     for (const [key, val] of entries) {
         if (key.includes('Probability')) continue;
         console.log(key, ' - ', val);
-
+        if (keys.includes(`${key}Probability`)) {
+            const [p_key, p_val] = entries.find(([k]) => k == `${k}Probability`);
+            console.log(p_key, ' - ', p_val);
+        }
     }
 }
 
@@ -147,6 +150,7 @@ export function renderAvatarPage(div, user, type) {
         title.textContent = 'Creating Avatar';
     } else if (type == 'updating') {
         title.textContent = 'Updating Avatar';
+        getCurrSetupFromSeed(user.avatar_seed);
     } else {
 
     }

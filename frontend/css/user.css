@@ -217,7 +217,7 @@
 .user_div {
     width: 60%;
     height: 100%;
-    overflow: auto;
+    overflow: visible;
 }
 
 #user_form {
@@ -229,23 +229,8 @@
     gap: 1rem;
 }
 
-#user_eye {
-    transform: translateX(-3rem) translateY(1.25rem);
-    position: absolute;
-}
-
-#user_eye:hover {
-    transform:
-        translateX(-3rem)
-        translateY(1.25rem)
-        scale(1.1);
-}
-
-#user_eye:active {
-    transform:
-        translateX(-3rem)
-        translateY(1.25rem)
-        scale(0.9);
+.user_input_div {
+    position: relative;
 }
 
 .user_read {
@@ -305,25 +290,26 @@
 }
 
 .password_eye {
+    position: absolute;
     width: 2rem;
     transform:
-        translateX(13rem)
-        translateY(-12.5rem);
+        translateX(-3rem)
+        translateY(1.25rem);
     transition: transform 0.3s ease;
 }
 
 .password_eye:hover {
     transform:
-        translateX(13rem)
-        translateY(-12.5rem)
+        translateX(-3rem)
+        translateY(1.25rem)
         scale(1.1);
     cursor: pointer;
 }
 
 .password_eye:active {
     transform:
-        translateX(13rem)
-        translateY(-12.5rem)
+        translateX(-3rem)
+        translateY(1.25rem)
         scale(0.9);
 }
 

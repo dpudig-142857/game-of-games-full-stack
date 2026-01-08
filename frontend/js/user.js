@@ -227,13 +227,33 @@ function renderLoginForm(div) {
     username.style.cursor = 'text';
     form.appendChild(username);
 
+    const password_div = document.createElement('div');
+    password_div.className = 'user_input_div';
+    form.appendChild(password_div);
+    
     const password = document.createElement('input');
     password.type = 'password';
     password.id = 'password';
     password.placeholder = 'Password...';
     password.className = 'user-input';
     password.style.cursor = 'text';
-    form.appendChild(password);
+    password_div.appendChild(password);
+
+    const eye = document.createElement('img');
+    eye.className = 'password_eye';
+    eye.src = 'assets/eye_on.svg';
+    password_div.appendChild(eye);
+    eye.addEventListener('click', () => {
+        if (password.type == 'password') {
+            password.type = 'text';
+            eye.src = 'assets/eye_off.svg';
+            eye.style.textDecoration = 'line-through';
+        } else {
+            password.type = 'password';
+            eye.src = 'assets/eye_on.svg';
+            eye.style.textDecoration = 'none';
+        }
+    });
     
     const err = form.appendChild(header(
         'h3', 'ERROR', 'red',
@@ -246,22 +266,6 @@ function renderLoginForm(div) {
     btn.className = 'user-button user-input';
     btn.innerHTML = 'Login';
     form.appendChild(btn);
-
-    const eye = document.createElement('img');
-    eye.className = 'password_eye';
-    eye.src = 'assets/eye_on.svg';
-    form.appendChild(eye);
-    eye.addEventListener('click', () => {
-        if (password.type == 'password') {
-            password.type = 'text';
-            eye.src = 'assets/eye_off.svg';
-            eye.style.textDecoration = 'line-through';
-        } else {
-            password.type = 'password';
-            eye.src = 'assets/eye_on.svg';
-            eye.style.textDecoration = 'none';
-        }
-    });
 
     const error = (text) => {
         err.innerHTML = text;
@@ -344,32 +348,24 @@ function renderLoginForm(div) {
 
 function renderSignUpPage(div) {
     div.innerHTML = '';
-    div.parentElement.style.overflow = 'hidden';
-
-    // Page 1:
-
-    // Username
-    // Password
-    // Confirm password
-
-    // If Username already exists or passwords don't match, throw error
-    // If Username doesn't exist and passwords match, clear page 1 and open page 2
-
-    // Page 2:
-
-    // First name
-    // Family name
-    // Favourite Colour
-    // Birthday
-
-    // If everything is valid, clear page 2 and open page 3
-
-    // Page 3:
     
-    // Build avatar
-
     const title = document.getElementById('user-profile-title');
     title.innerHTML = 'Sign Up';
+
+    renderSignUpStep1(div);
+}
+
+// Step 1:
+
+// Username
+// Password
+// Confirm password
+
+// If Username already exists or passwords don't match, throw error
+// If Username doesn't exist and passwords match, clear step 1 and open step 2
+
+function renderSignUpStep1(div) {
+    div.innerHTML = '';
 
     const container = document.createElement('div');
     container.id = 'signup_form_container';
@@ -390,21 +386,59 @@ function renderSignUpPage(div) {
     username.style.cursor = 'text';
     form.appendChild(username);
 
+    const password_div = document.createElement('div');
+    password_div.className = 'user_input_div';
+    form.appendChild(password_div);
+    
     const password = document.createElement('input');
-    password.type = 'text';
+    password.type = 'password';
     password.id = 'password';
     password.placeholder = 'Password...';
     password.className = 'user-input';
     password.style.cursor = 'text';
-    form.appendChild(password);
+    password_div.appendChild(password);
 
+    const eye = document.createElement('img');
+    eye.className = 'password_eye';
+    eye.src = 'assets/eye_on.svg';
+    password_div.appendChild(eye);
+    eye.addEventListener('click', () => {
+        if (password.type == 'password') {
+            password.type = 'text';
+            eye.src = 'assets/eye_off.svg';
+            eye.style.textDecoration = 'line-through';
+        } else {
+            password.type = 'password';
+            eye.src = 'assets/eye_on.svg';
+            eye.style.textDecoration = 'none';
+        }
+    });
+
+    const confirm_div = document.createElement('div');
+    confirm_div.className = 'user_input_div';
+    form.appendChild(confirm_div);
+    
     const confirm = document.createElement('input');
-    confirm.type = 'text';
+    confirm.type = 'password';
     confirm.id = 'password';
     confirm.placeholder = 'Confirm Password...';
     confirm.className = 'user-input';
     confirm.style.cursor = 'text';
-    form.appendChild(confirm);
+    confirm_div.appendChild(confirm);
+
+    const confirm_eye = document.createElement('img');
+    confirm_eye.className = 'password_eye';
+    confirm_eye.src = 'assets/eye_on.svg';
+    confirm_div.appendChild(confirm_eye);
+    confirm_eye.addEventListener('click', () => {
+        if (confirm.type == 'password') {
+            confirm.type = 'text';
+            confirm_eye.src = 'assets/eye_off.svg';
+        } else {
+            confirm.type = 'password';
+            confirm_eye.src = 'assets/eye_on.svg';
+        }
+    });
 
     const err = header(
         'h3', 'ERROR', 'red',
@@ -413,60 +447,44 @@ function renderSignUpPage(div) {
     err.style.visibility = 'hidden';
     form.appendChild(err);
 
-    /*const mouth_options = document.createElement('div');
-    mouth_options.id = 'mouth_options';
-    mouth_options.className = 'avatar_options_section';
-    avatar_options.appendChild(mouth_options);
-    
-    mouth_options.appendChild(header('h1', '&#8593;'));
-    mouth_options.appendChild(header(
-        'h3', 'Plain', '', 'mouth_option_plain', 'mouth_option'
-    ));
-    mouth_options.appendChild(header('h1', '&#8595;'));*/
-    /*
-    eyes
-    mouth
-    colour
-
-    flip
-    rotate
-    scale
-    x
-    y
-
-    const link = createAvatarLink(
-        'fun-emoji',
-        '0',
-        'true',
-        '0',
-        '100',
-        '#ffffff',
-        '0',
-        '0',
-        'shades',
-        'smileTeeth'
-    );
-    console.log(link);
-    
-    const avatar = document.createElement('img');
-    avatar.className = 'avatar_img';
-    avatar.src = link;
-    avatar_selection.appendChild(avatar);*/
-
-
-    /*const avatars = getAvatars('ff0000');
-    avatars.forEach(a => {
-        const avatar = document.createElement('img');
-        avatar.className = 'avatar_img';
-        avatar.src = a;
-        avatar_selection.appendChild(avatar);
-    });*/
-
     const btn = document.createElement('button');
     btn.type = 'submit';
     btn.className = 'user-button user-input';
-    btn.innerHTML = 'Confirm';
+    btn.innerHTML = 'Next';
+    btn.addEventListener('click', () => {
+        if (password.value != confirm.value) {
+            err.innerHTML = `Passwords don't match`;
+            err.stye.visibility = 'visible';
+        } else {
+            // TODO: connect to backend and check if username already exists
+        }
+    });
     form.appendChild(btn);
+}
+
+// Step 2:
+
+// First name
+// Family name
+// Favourite Colour
+// Birthday
+
+// If everything is valid, clear step 2 and open step 3
+
+function renderSignUpStep2(div) {
+    div.innerHTML = '';
+
+
+}
+
+// Step 3:
+
+// Build avatar
+
+function renderSignUpStep3(div) {
+    div.innerHTML = '';
+
+    
 }
 
 // #endregion
@@ -540,7 +558,7 @@ function renderUserProfile(div, user) {
         username.classList.toggle('user_read');
     });
 
-    const password_div = document.createElement('div');
+    /*const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
     form.appendChild(password_div);
 
@@ -616,7 +634,19 @@ function renderUserProfile(div, user) {
                 updateVersion(true);
             }
         });
-    }
+    }*/
+
+    const other_div = document.createElement('div');
+    other_div.className = 'user_input_section';
+    form.appendChild(other_div);
+    
+    const passwordBtn = header(
+        'button', 'Change Password', '', 'password-btn', 'user-button user-input'
+    );
+    other_div.appendChild(passwordBtn);
+    passwordBtn.addEventListener('click', () => {
+
+    });
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
