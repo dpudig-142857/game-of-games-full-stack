@@ -525,20 +525,22 @@ function renderUserProfile(div, user) {
     username.type = 'username';
     username.id = 'user_username';
     username.placeholder = 'Username...';
-    username.className = 'user-input';
+    username.className = 'user-input user_read';
     username.style.cursor = 'text';
+    username.readOnly = true;
     form.appendChild(username);
-
+    
     const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
     form.appendChild(password_div);
-
+    
     const password = document.createElement('input');
     password.type = 'password';
     password.id = 'user_password';
     password.placeholder = 'Password...';
-    password.className = 'user-input';
+    password.className = 'user-input user_read';
     password.style.cursor = 'text';
+    username.readOnly = false;
     password_div.appendChild(password);
 
     const eye = document.createElement('img');
