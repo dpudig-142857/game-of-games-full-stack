@@ -546,6 +546,8 @@ function renderUserProfile(div, user) {
         } else {
             username.setAttribute('readonly', true);
             usernameBtn.innerHTML = 'Edit Username';
+            // TODO: Update username for this account
+            // tests if new username already exists
         }
         username.classList.toggle('user_read');
     });
@@ -583,6 +585,47 @@ function renderUserProfile(div, user) {
         }
     });
     password_box.appendChild(eye);
+
+    const passwordBtn = header(
+        'button', 'Edit Password', '', 'password-btn', 'user-button user-input'
+    )
+    password_div.appendChild(passwordBtn);
+
+    if (user.role == 'admin' || user.role == 'owner') {
+        const updateVersion = (isPublic) => {
+
+        }
+        
+        const section = document.createElement('div');
+        section.id = 'switch_section';
+        section.className = 'avatar_options_section';
+        div.appendChild(section);
+    
+        section.appendChild(header(
+            'h2', `GoG Version:`, '', '', 'avatar_option_title'
+        ));
+    
+        const options = document.createElement('div');
+        options.id = 'switch_options';
+        options.className = 'avatar_option';
+        section.appendChild(options);
+    
+        const switchHeader = header(
+            'h2', 'Public', '', 'switch_option', 'avatar_option_text'
+        );
+        options.appendChild(switchHeader);
+        updateVersion(true);
+    
+        switchHeader.addEventListener('click', () => {
+            if (switchHeader.innerHTML == 'Public') {
+                switchHeader.innerHTML = 'Private';
+                updateVersion(false);
+            } else {
+                switchHeader.innerHTML = 'Public';
+                updateVersion(true);
+            }
+        });
+    }
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'

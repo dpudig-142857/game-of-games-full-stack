@@ -656,8 +656,7 @@ function setupSwitch(div, key) {
     options.appendChild(switchHeader);
 
     switchHeader.addEventListener('click', () => {
-        const curr = switchHeader.innerHTML;
-        if (curr == 'Normal') {
+        if (switchHeader.innerHTML == 'Normal') {
             switchHeader.innerHTML = 'Flipped';
             updateSetup(true);
         } else {
