@@ -120,6 +120,7 @@ function getCurrSetupFromSeed(seed) {
     const main = no_start.split('/svg?')[1];
     const options = main.split('&');
     let setup = {};
+    console.log(options);
     for (const option in options) {
         if (option == 'backgroundColor[]') {
             curr_setup['background'] = '';
@@ -131,6 +132,7 @@ function getCurrSetupFromSeed(seed) {
     }
     let keys = Object.keys(setup);
     const entries = Object.entries(setup);
+    console.log(setup);
     console.log(entries);
     for (const index of entries) {
         const [key, val] = index;
