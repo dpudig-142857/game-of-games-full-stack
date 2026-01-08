@@ -121,15 +121,17 @@ function getCurrSetupFromSeed(seed) {
     const options = main.split('&');
     let setup = {};
     console.log(options);
-    for (const option in options) {
+    options.forEach(option => {
         if (option == 'backgroundColor[]') {
             curr_setup['background'] = '';
             curr_setup['background2'] = '';
-            continue;
+        } else if (option == 'flip') {
+            
+        } else {
+            const sides = option.split('=');
+            setup[sides[0]] = sides[1];
         }
-        const sides = option.split('=');
-        setup[sides[0]] = sides[1];
-    }
+    });
     let keys = Object.keys(setup);
     const entries = Object.entries(setup);
     console.log(setup);
