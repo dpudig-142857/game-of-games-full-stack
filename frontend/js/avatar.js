@@ -136,15 +136,17 @@ function getCurrSetupFromSeed(seed) {
     const entries = Object.entries(setup);
     console.log(setup);
     console.log(entries);
-    for (const index of entries) {
-        const [key, val] = index;
-        if (key.includes('Probability')) continue;
+    entries
+    .filter(([key]) => !key.includes('Probability'))
+    .forEach(([key, val]) => {
         console.log(key, ' - ', val);
         if (keys.includes(`${key}Probability`)) {
-            const [p_key, p_val] = entries.find(([k]) => k == `${k}Probability`);
-            console.log(p_key, ' - ', p_val);
+            const prob = entries.find(([k]) => k == `${key}Probability`);
+            console.log(prob);
+        } else {
+            
         }
-    }
+    });
 }
 
 export function renderAvatarPage(div, user, type) {
