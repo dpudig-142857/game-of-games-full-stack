@@ -115,35 +115,6 @@ let curr_setup = {
 // 1 - 
 
 function getCurrSetupFromSeed(seed) {
-    
-    options.forEach(option => {
-        if (option == 'backgroundColor[]') {
-            curr_setup['background'] = '';
-            curr_setup['background2'] = '';
-        } else {
-            const sides = option.split('=');
-            setup[sides[0]] = sides[1];
-        }
-    });
-    const entries = Object.entries(setup);
-    entries.forEach(([key, val]) => {
-        if (key == 'backgroundColour') {
-            const colours = val.split(',');
-            if (colours.length >= 2) {
-                curr_setup['background'] = colours[0];
-                curr_setup['background2'] = colours[1];
-            } else {
-                curr_setup['background'] = val;
-                curr_setup['background2'] = val;
-            }
-        } else if (baseProperties.includes(key)) {
-            curr_setup[key] = val;
-        } else {
-            curr_setup['extras'][key];
-        }
-    });
-
-
     const [, rest] = seed.split('api.dicebear.com/9.x/');
     if (!rest) return;
 
