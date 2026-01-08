@@ -224,6 +224,11 @@
     padding: 1rem 0;
 }
 
+.user_input_section {
+    display: flex;
+    gap: 1rem;
+}
+
 #user_eye {
     transform: translateX(-3rem) translateY(1.25rem);
     position: absolute;

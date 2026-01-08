@@ -124,7 +124,7 @@ export async function setupUserModal() {
         renderLoginForm(div);
     } else {
         const user = user_data.user;
-        title.textContent = `${user.username}'s Account`
+        title.textContent = `User Account`
         renderUserProfile(div, user);
         //renderAvatarPage(div, user, 'updating');
     }
@@ -541,6 +541,8 @@ function renderUserProfile(div, user) {
     username_div.appendChild(usernameBtn);
     usernameBtn.addEventListener('click', () => {
         const curr = username.getAttribute('readonly');
+        console.log(curr);
+        console.log(username.readOnly);
         username.setAttribute('readonly', !curr);
         username.classList.toggle('user_read');
     });
@@ -548,6 +550,10 @@ function renderUserProfile(div, user) {
     const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
     form.appendChild(password_div);
+
+    const password_box = document.createElement('div');
+    password_box.className = 'user_input_section';
+    password_div.appendChild(password_box);
     
     const password = document.createElement('input');
     password.type = 'password';
