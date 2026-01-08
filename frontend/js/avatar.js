@@ -529,9 +529,6 @@ function setupGallery(div, key, options, initial, hasProbability) {
     const update = (dir) => {
         const curr = option.innerHTML;
         let i = options.indexOf(curr);
-        console.log(curr);
-        console.log(i);
-        console.log(options);
         if (dir == 'left') i -= 1;
         if (dir == 'right') i += 1;
         if (i == -1) i = options.length - 1;

@@ -95,6 +95,12 @@ export function closeUserModal(modal, modalBox, callback = null) {
     modalBox.style.transform = 'translateY(100vh) scale(0.01)';
 
     setTimeout(() => {
+        const title = document.getElementById('user-profile-title');
+        title.innerHTML = '';
+
+        const div = document.getElementById('user-profile-div');
+        div.innerHTML = '';
+        
         modal.style.display = 'none';
 
         // Reset styles
