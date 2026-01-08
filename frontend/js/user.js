@@ -522,6 +522,10 @@ function renderUserProfile(div, user) {
     form.className = 'form';
     user_div.appendChild(form);
 
+    const username_div = document.createElement('div');
+    username_div.className = 'user_input_section';
+    form.appendChild(username_div);
+
     const username = document.createElement('input');
     username.type = 'username';
     username.id = 'user_username';
@@ -529,7 +533,12 @@ function renderUserProfile(div, user) {
     username.className = 'user-input user_read';
     username.style.cursor = 'text';
     username.setAttribute('readonly', true);
-    form.appendChild(username);
+    username_div.appendChild(username);
+
+    const usernameBtn = header(
+        'button', 'Edit Username', '', 'username-btn', 'user-button user-input'
+    )
+    div.appendChild(usernameBtn);
     
     const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
