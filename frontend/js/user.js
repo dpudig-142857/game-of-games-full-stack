@@ -540,10 +540,11 @@ function renderUserProfile(div, user) {
     )
     username_div.appendChild(usernameBtn);
     usernameBtn.addEventListener('click', () => {
-        const curr = username.getAttribute('readonly');
-        console.log(curr);
-        console.log(username.readOnly);
-        username.setAttribute('readonly', !curr);
+        if (username.hasAttribute('readonly')) {
+            username.removeAttribute('readonly');
+        } else {
+            username.setAttribute('readonly', true);
+        }
         username.classList.toggle('user_read');
     });
 
