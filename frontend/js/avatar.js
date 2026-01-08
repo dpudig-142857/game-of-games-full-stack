@@ -167,6 +167,7 @@ export function renderAvatarPage(div, user, type) {
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
+    /*
     avatar_preview.src = createBaseLink(
         'fun-emoji',
         `${user.player_id}`,
@@ -183,6 +184,33 @@ export function renderAvatarPage(div, user, type) {
         'eyes': 'plain',
         'mouth': 'plain'
     });
+
+    avatar_preview.src = createBaseLink(
+        'fun-emoji',
+        `${user.player_id}`,
+        'false',
+        '0',
+        '100',
+        '#FFFFFF',
+        '',
+        'solid',
+        '0',
+        '0',
+        '0',
+    )*/
+    avatar_preview.src = createBaseLink(
+        curr_setup['theme'],
+        curr_setup['seed'],
+        curr_setup['flip'],
+        curr_setup['rotate'],
+        curr_setup['scale'],
+        curr_setup['background'],
+        curr_setup['background2'],
+        curr_setup['backgroundType'],
+        curr_setup['backgroundRotation'],
+        curr_setup['translateX'],
+        curr_setup['translateY']
+    ) + createExtras(curr_setup['extras']);
     avatar_pb_div.appendChild(avatar_preview);
 
     const avatar_base = document.createElement('div');
@@ -212,26 +240,14 @@ function createBaseLink(
     y_var = '0'
 ) {
     const base = `https://api.dicebear.com/9.x/${theme_var}`;
-    curr_setup['theme'] = theme_var;
-
     const radius = `/svg?radius=50`;
-
     const seed = `&seed=${seed_var}`;
-    curr_setup['seed'] = seed_var;
-
     const flip = `&flip=${flip_var}`;
-    curr_setup['flip'] = flip_var;
-
     const rotate = `&rotate=${rotate_var}`;
-    curr_setup['rotate'] = rotate_var;
-
     const scale = `&scale=${scale_var}`;
-    curr_setup['scale'] = scale_var;
-
-    let colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
+    const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
         colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` :
         colour_var.length == 6 ? `&backgroundColor=${colour_var}` : '';
-    curr_setup['background'] = `${colour_var}`;
 
     let colour2 = '';
     if (backgroundType_var == 'gradientLinear') {
@@ -241,21 +257,12 @@ function createBaseLink(
             colour2 = `,${colour_var_2}`;
         }
     }
-    curr_setup['background2'] = `${colour_var_2}`;
 
     const backgroundType = `&backgroundType=${backgroundType_var}`;
-    curr_setup['backgroundType'] = backgroundType_var;
-
     const backgroundRotation = backgroundType_var == 'gradientLinear' ?
         `&backgroundRotation=${backgroundRotation_var}` : '';
-    curr_setup['backgroundRotation'] = backgroundRotation_var;
-
     const x = `&translateX=${x_var}`;
-    curr_setup['translateX'] = x_var;
-
     const y = `&translateY=${y_var}`;
-    curr_setup['translateY'] = y_var;
-
     return base + radius + seed + flip + rotate + scale + colour +
         colour2 + backgroundType + backgroundRotation + x + y;
 }
