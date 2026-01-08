@@ -498,6 +498,7 @@ function renderSignUpPage(div) {
 
 function renderUserProfile(div, user) {
     div.innerHTML = '';
+    console.log(user);
 
     const section = document.createElement('div');
     section.className = 'user_middle_div';
