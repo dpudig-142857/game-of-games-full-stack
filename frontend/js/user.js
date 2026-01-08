@@ -534,12 +534,17 @@ function renderUserProfile(div, user) {
     username.style.cursor = 'text';
     username.setAttribute('readonly', true);
     username_div.appendChild(username);
-
+    
     const usernameBtn = header(
         'button', 'Edit Username', '', 'username-btn', 'user-button user-input'
     )
     username_div.appendChild(usernameBtn);
-    
+    usernameBtn.addEventListener('click', () => {
+        const curr = username.getAttribute('readonly');
+        username.setAttribute('readonly', !curr);
+        username.classList.toggle('user_read');
+    });
+
     const password_div = document.createElement('div');
     password_div.className = 'user_input_section';
     form.appendChild(password_div);
