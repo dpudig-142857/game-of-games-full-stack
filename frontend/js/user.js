@@ -542,8 +542,10 @@ function renderUserProfile(div, user) {
     usernameBtn.addEventListener('click', () => {
         if (username.hasAttribute('readonly')) {
             username.removeAttribute('readonly');
+            usernameBtn.innerHTML = 'Save Username';
         } else {
             username.setAttribute('readonly', true);
+            usernameBtn.innerHTML = 'Edit Username';
         }
         username.classList.toggle('user_read');
     });
@@ -553,7 +555,7 @@ function renderUserProfile(div, user) {
     form.appendChild(password_div);
 
     const password_box = document.createElement('div');
-    password_box.className = 'user_input_section';
+    password_box.className = 'user_input_div';
     password_div.appendChild(password_box);
     
     const password = document.createElement('input');
@@ -563,7 +565,7 @@ function renderUserProfile(div, user) {
     password.className = 'user-input user_read';
     password.style.cursor = 'text';
     password.setAttribute('readonly', true);
-    password_div.appendChild(password);
+    password_box.appendChild(password);
 
     const eye = document.createElement('img');
     eye.id = 'user_eye';
@@ -580,7 +582,7 @@ function renderUserProfile(div, user) {
             eye.style.textDecoration = 'none';
         }
     });
-    password_div.appendChild(eye);
+    password_box.appendChild(eye);
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
