@@ -798,33 +798,47 @@ function renderAdventurer(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('adventurer');
 
+    const def_earrings = curr['earringsProbability'] == '0' ?
+        'None' : curr['earrings'] ?? 'None';
     let earrings = getItems(props, 'earrings').enum;
     earrings.push('None');
-    setupGallery(div, 'earrings', earrings, 'None', true);
+    setupGallery(div, 'earrings', earrings, def_earrings, true);
     
+    const def_eyebrows = curr['eyebrows'] ?? 'variant01';
     let eyebrows = getItems(props, 'eyebrows').enum;
-    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
+    setupGallery(div, 'eyebrows', eyebrows, def_eyebrows, false);
     
+    const def_eyes = curr['eyes'] ?? 'variant01';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
 
+    const def_features = curr['featuresProbability'] == '0' ?
+        'None' : curr['features'] ?? 'None';
     let features = getItems(props, 'features').enum;
     features.push('None');
-    setupGallery(div, 'features', features, 'None', true);
+    setupGallery(div, 'features', features, def_features, true);
 
+    const def_glasses = curr['glassesProbability'] == '0' ?
+        'None' : curr['glasses'] ?? 'None';
     let glasses = getItems(props, 'glasses').enum;
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, 'None', true);
+    setupGallery(div, 'glasses', glasses, def_glasses, true);
 
+    const def_hair = curr['hairProbability'] == '0' ?
+        'None' : curr['hair'] ?? 'short01';
     let hair = getItems(props, 'hair').enum;
     hair.push('None');
-    setupGallery(div, 'hair', hair, 'short01', true);
-    setupColour(div, 'hairColour', '#724133');
+    setupGallery(div, 'hair', hair, def_hair, true);
 
+    const def_hair_colour = curr['hairColour'] ?? '#724133';
+    setupColour(div, 'hairColour', def_hair_colour);
+
+    const def_mouth = curr['mouth'] ?? 'variant01';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'variant01', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
 
-    setupColour(div, 'skinColour', '#EDB98A');
+    const def_skin = curr['skinColour'] ?? '#EDB98A';
+    setupColour(div, 'skinColour', def_skin);
 }
 
 // #endregion
@@ -843,18 +857,23 @@ function renderAdventurerNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('adventurer-neutral');
 
+    const def_eyebrows = curr['eyebrows'] ?? 'variant01';
     let eyebrows = getItems(props, 'eyebrows').enum;
-    setupGallery(div, 'eyebrows', eyebrows, 'variant01', false);
+    setupGallery(div, 'eyebrows', eyebrows, def_eyebrows, false);
     
+    const def_eyes = curr['eyebrows'] ?? 'variant01';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
 
+    const def_glasses = curr['glassesProbability'] == '0' ?
+        'None' : curr['glasses'] ?? 'None';
     let glasses = getItems(props, 'glasses').enum;
     glasses.push('None');
-    setupGallery(div, 'glasses', glasses, 'None', true);
+    setupGallery(div, 'glasses', glasses, def_glasses, true);
 
+    const def_mouth = curr['eyebrows'] ?? 'variant01';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'variant01', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
 }
 
 // #endregion
@@ -873,37 +892,53 @@ function renderAvataaars(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('avataaars');
 
+    const def_accessories = curr['accessoriesProbability'] == '0' ?
+        'None' : curr['accessories'] ?? 'None';
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
-    setupGallery(div, 'accessories', accessories, 'None', true);
-    setupColour(div, 'accessoriesColour', '#000000');
+    setupGallery(div, 'accessories', accessories, def_accessories, true);
+
+    const def_accessories_colour = curr['accessoriesColour'] ?? '#000000';
+    setupColour(div, 'accessoriesColour', def_accessories_colour);
     
-    setupColour(div, 'clothesColour', '#000000');
+    const def_clothes_colour = curr['clothesColour'] ?? '#000000';
+    setupColour(div, 'clothesColour', def_clothes_colour);
     
+    const def_clothing = curr['clothing'] ?? 'blazerAndShirt';
     let clothing = getItems(props, 'clothing').enum;
-    setupGallery(div, 'clothing', clothing, 'blazerAndShirt', false);
+    setupGallery(div, 'clothing', clothing, def_clothing, false);
     // TODO: add clothingGraphic if clothing is graphic
     
+    const def_eyebrows = curr['eyebrows'] ?? 'default';
     let eyebrows = getItems(props, 'eyebrows').enum;
-    setupGallery(div, 'eyebrows', eyebrows, 'default', false);
+    setupGallery(div, 'eyebrows', eyebrows, def_eyebrows, false);
     
+    const def_eyes = curr['eyes'] ?? 'default';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'default', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
     
+    const def_facialHair = curr['facialHairProbability'] == '0' ?
+        'None' : curr['facialHair'] ?? 'None';
     let facialHair = getItems(props, 'facialHair').enum;
     facialHair.push('None');
-    setupGallery(div, 'facialHair', facialHair, 'None', true);
-    setupColour(div, 'facialHairColour', '#000000');
+    setupGallery(div, 'facialHair', facialHair, def_facialHair, true);
+
+    const def_facialHair_colour = curr['facialHairColour'] ?? '#000000';
+    setupColour(div, 'facialHairColour', def_facialHair_colour);
     
-    setupColour(div, 'hairColour', '#724133');
+    const def_hairColour = curr['hairColour'] ?? '#724133';
+    setupColour(div, 'hairColour', def_hairColour);
     
+    const def_mouth = curr['mouth'] ?? 'default';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'default', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
     
-    setupColour(div, 'skinColour', '#EDB98A');
+    const def_skinColour = curr['skinColour'] ?? '#EDB98A';
+    setupColour(div, 'skinColour', def_skinColour);
     
+    const def_top = curr['top'] ?? 'shortFlat';
     let top = getItems(props, 'top').enum;
-    setupGallery(div, 'top', top, 'shortFlat', false);
+    setupGallery(div, 'top', top, def_top, false);
     // TODO: if top is hat, hijab, turban, winterHat1, winterHat02, winterHat03, winerHat04, add hatColour
 }
 
@@ -923,14 +958,17 @@ function renderAvataaarsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('avataaars-neutral');
 
+    const def_eyebrows = curr['eyebrows'] ?? 'default';
     let eyebrows = getItems(props, 'eyebrows').enum;
-    setupGallery(div, 'eyebrows', eyebrows, 'default', false);
+    setupGallery(div, 'eyebrows', eyebrows, def_eyebrows, false);
     
+    const def_eyes = curr['eyes'] ?? 'default';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'default', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
     
+    const def_mouth = curr['mouth'] ?? 'default';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'default', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
 }
 
 // #endregion
@@ -949,36 +987,49 @@ function renderBigEars(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-ears');
 
+    const def_cheek = curr['cheekProbability'] == '0' ?
+        'None' : curr['cheek'] ?? 'None';
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
-    setupGallery(div, 'cheek', cheek, 'None', true);
+    setupGallery(div, 'cheek', cheek, def_cheek, true);
     
+    const def_ear = curr['ear'] ?? 'variant01';
     let ear = getItems(props, 'ear').enum;
-    setupGallery(div, 'ear', ear, 'variant01', false);
+    setupGallery(div, 'ear', ear, def_ear, false);
     
+    const def_eyes = curr['eyes'] ?? 'variant01';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
 
+    const def_face = curr['face'] ?? 'variant01';
     let face = getItems(props, 'face').enum;
-    setupGallery(div, 'face', face, 'variant01', false);
+    setupGallery(div, 'face', face, def_face, false);
 
+    const def_frontHair = curr['frontHair'] ?? 'variant01';
     let frontHair = getItems(props, 'frontHair').enum;
-    setupGallery(div, 'frontHair', frontHair, 'variant01', false);
+    setupGallery(div, 'frontHair', frontHair, def_frontHair, false);
     
+    const def_hair = curr['hair'] ?? 'short01';
     let hair = getItems(props, 'hair').enum;
-    setupGallery(div, 'hair', hair, 'short01', false);
-    setupColour(div, 'hairColour', '#724133');
-    
-    let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'variant0101', false);
-    
-    let nose = getItems(props, 'nose').enum;
-    setupGallery(div, 'nose', nose, 'variant01', false);
-    
-    let sideburn = getItems(props, 'sideburn').enum;
-    setupGallery(div, 'sideburn', sideburn, 'variant01', false);
+    setupGallery(div, 'hair', hair, def_hair, false);
 
-    setupColour(div, 'skinColour', '#EDB98A');
+    const def_hairColour = curr['hairColour'] ?? '#724133';
+    setupColour(div, 'hairColour', def_hairColour);
+    
+    const def_mouth = curr['mouth'] ?? 'variant0101';
+    let mouth = getItems(props, 'mouth').enum;
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
+    
+    const def_nose = curr['nose'] ?? 'variant01';
+    let nose = getItems(props, 'nose').enum;
+    setupGallery(div, 'nose', nose, def_nose, false);
+    
+    const def_sideburn = curr['sideburn'] ?? 'variant01';
+    let sideburn = getItems(props, 'sideburn').enum;
+    setupGallery(div, 'sideburn', sideburn, def_sideburn, false);
+
+    const def_skinColour = curr['skinColour'] ?? '#EDB98A';
+    setupColour(div, 'skinColour', def_skinColour);
 }
 
 // #endregion
@@ -997,18 +1048,23 @@ function renderBigEarsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-ears-neutral');
 
+    const def_cheek = curr['cheekProbability'] == '0' ?
+        'None' : curr['cheek'] ?? 'None';
     let cheek = getItems(props, 'cheek').enum;
     cheek.push('None');
-    setupGallery(div, 'cheek', cheek, 'None', true);
+    setupGallery(div, 'cheek', cheek, def_cheek, true);
     
+    const def_eyes = curr['eyes'] ?? 'variant01';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'variant01', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
     
+    const def_mouth = curr['mouth'] ?? 'variant0101';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'variant0101', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
     
+    const def_nose = curr['nose'] ?? 'variant01';
     let nose = getItems(props, 'nose').enum;
-    setupGallery(div, 'nose', nose, 'variant01', false);
+    setupGallery(div, 'nose', nose, def_nose, false);
 }
 
 // #endregion
@@ -1027,21 +1083,29 @@ function renderBigSmile(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-smile');
 
+    const def_accessories = curr['accessoriesProbability'] == '0' ?
+        'None' : curr['accessories'] ?? 'None';
     let accessories = getItems(props, 'accessories').enum;
     accessories.push('None');
-    setupGallery(div, 'accessories', accessories, 'None', true);
+    setupGallery(div, 'accessories', accessories, def_accessories, true);
 
+    const def_eyes = curr['eyes'] ?? 'normal';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'normal', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
 
+    const def_hair = curr['hair'] ?? 'shortHair';
     let hair = getItems(props, 'hair').enum;
-    setupGallery(div, 'hair', hair, 'shortHair', false);
-    setupColour(div, 'hairColour', '#724133');
+    setupGallery(div, 'hair', hair, def_hair, false);
+    
+    const def_hairColour = curr['hairColour'] ?? '#724133';
+    setupColour(div, 'hairColour', def_hairColour);
 
+    const def_mouth = curr['mouth'] ?? 'awkwardSmile';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'awkwardSmile', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
 
-    setupColour(div, 'skinColour', '#EDB98A');
+    const def_skinColour = curr['skinColour'] ?? '#EDB98A';
+    setupColour(div, 'skinColour', def_skinColour);
 }
 
 // #endregion
@@ -1059,40 +1123,39 @@ function renderBigSmile(div, props, curr) {
 function renderBottts(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('bottts');
-    console.log(curr);
 
     const def_baseColour = curr['baseColour'] ?? '#EDB98A';
     setupColour(div, 'baseColour', def_baseColour);
     
     const def_eyes = curr['eyes'] ?? 'eva';
-    const eyes = getItems(props, 'eyes').enum;
+    let eyes = getItems(props, 'eyes').enum;
     setupGallery(div, 'eyes', eyes, def_eyes, false);
     
     const def_face = curr['face'] ?? 'round01';
-    const face = getItems(props, 'face').enum;
+    let face = getItems(props, 'face').enum;
     setupGallery(div, 'face', face, def_face, false);
     
     const def_mouth = curr['mouthProbability'] == '0' ?
         'None' : curr['mouth'] ?? 'bite';
-    const mouth = getItems(props, 'mouth').enum;
+    let mouth = getItems(props, 'mouth').enum;
     mouth.push('None');
     setupGallery(div, 'mouth', mouth, def_mouth, true);
     
     const def_sides = curr['sidesProbability'] == '0' ?
         'None' : curr['sides'] ?? 'None';
-    const sides = getItems(props, 'sides').enum;
+    let sides = getItems(props, 'sides').enum;
     sides.push('None');
     setupGallery(div, 'sides', sides, def_sides, true);
 
     const def_texture = curr['textureProbability'] == '0' ?
         'None' : curr['texture'] ?? 'None';
-    const texture = getItems(props, 'texture').enum;
+    let texture = getItems(props, 'texture').enum;
     texture.push('None');
     setupGallery(div, 'texture', texture, def_texture, true);
         
     const def_top = curr['topProbability'] == '0' ?
         'None' : curr['top'] ?? 'None';
-    const top = getItems(props, 'top').enum;
+    let top = getItems(props, 'top').enum;
     top.push('None');
     setupGallery(div, 'top', top, def_top, true);
 }
@@ -1113,11 +1176,13 @@ function renderBotttsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('bottts-neutral');
 
+    const def_eyes = curr['eyes'] ?? 'eva';
     let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'eva', false);
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
     
+    const def_mouth = curr['mouth'] ?? 'bite';
     let mouth = getItems(props, 'mouth').enum;
-    setupGallery(div, 'mouth', mouth, 'bite', false);
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
 }
 
 // #endregion
