@@ -600,8 +600,8 @@ function setupGallery(div, key, options, initial, hasProbability) {
 }
 
 function setupColour(div, key, colour) {
-    const def = colour.startsWith('#') ? `${def.slice(1)}` :
-        colour.length == 6 ? `${def}` : '000000';
+    const def = colour.startsWith('#') ? `${colour.slice(1)}` :
+        colour.length == 6 ? `${colour}` : '000000';
 
     const updateSetup = (val) => {
         const col = val.startsWith('#') ? `${val.slice(1)}` :
