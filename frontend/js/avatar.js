@@ -457,6 +457,8 @@ function renderTheme(key, section, props, curr) {
 }
 
 function renderBaseOptions(div) {
+    console.log('render base');
+
     const def_flip = curr_setup['flip'] ?? 'false';
     setupSwitch(div, 'flip', def_flip);
 
@@ -503,14 +505,18 @@ function renderBaseOptions(div) {
 }
 
 function updateBaseOptions(key) {
-    const colour = key == 'icons' ? '#000000' : '#FFFFFF';
     const div = document.querySelector('.background_colour_div');
     const grad = document.querySelector('.gradient_colour_div');
     const parent = div.parentElement;
     div.remove();
     grad.remove();
-    setupColour(parent, 'backgroundColour', colour);
-    setupColour(parent, 'backgroundColour2', '#FFFFFF');
+    
+    const colour = key == 'icons' ? '#000000' : '#FFFFFF';
+    const def_colour = curr_setup['background'] ?? colour;
+    setupColour(parent, 'backgroundColour', def_colour);
+
+    const def_colour2 = curr_setup['background2'] ?? colour;
+    setupColour(parent, 'backgroundColour2', def_colour2);
 }
 
 // #endregion
