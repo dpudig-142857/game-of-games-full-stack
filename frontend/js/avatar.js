@@ -361,7 +361,7 @@ function updateTheme(section, option, dir) {
     const base = document.getElementById('avatar_base');
     base.innerHTML = '';
     renderBaseOptions(base);
-    renderTheme(key, section, props, curr_setup['extras']);
+    renderTheme(themes[i], section, props, curr_setup['extras']);
     updateAvatar();
 }
 
