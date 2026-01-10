@@ -632,7 +632,8 @@ function setupColour(div, key, colour) {
         section.className = 'avatar_options_section background_colour_div base';
         text = `Background Colour:`
     } else if (key == 'backgroundColour2') {
-        section.style.display = 'none';
+        section.style.display = curr_setup['backgroundType'] == 'gradientLinear' ?
+            'flex' : 'none';
         section.className = 'avatar_options_section gradient_colour_div base';
         text = `Background Colour 2:`
     } else {
@@ -662,6 +663,7 @@ function setupColour(div, key, colour) {
     option.type = 'color';
     option.value = `#${def}`;
     options.appendChild(option);
+    console.log(def);
 
     option.addEventListener('input', (e) => {
         colourHeader.innerHTML = e.target.value;
