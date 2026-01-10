@@ -129,7 +129,6 @@ function getCurrSetupFromSeed(seed) {
             curr_setup['background'] = '';
             curr_setup['background2'] = '';
         } else if (key == 'backgroundColor') {
-            console.log(key, ' - ', val);
             const colours = val.split(',');
             curr_setup['background']  = colours[0] ?? '';
             curr_setup['background2'] = colours[1] ?? colours[0] ?? '';
@@ -486,14 +485,21 @@ function renderBaseOptions(div) {
         div, 'translateY', y.minimum, y.maximum, def_y, 5
     );
 
-    console.log(curr_setup);
-    setupColour(div, 'backgroundColour', '#FFFFFF');
+    const def_bg = curr_setup['background'] ?? '#FFFFFF';
+    setupColour(div, 'backgroundColour', def_bg);
     
+    const def_bg_type = curr_setup['backgroundType'] ?? 'solid';
     const bg_type = ['solid', 'gradientLinear'];
-    setupGallery(div, 'backgroundType', bg_type, 'solid', false);
+    setupGallery(div, 'backgroundType', bg_type, def_bg_type, false);
     
-    setupSlider(div, 'backgroundRotation', 0, 360, 0, 5);
-    setupColour(div, 'backgroundColour2', '#FFFFFF');
+    const def_bg_rot = curr_setup['backgroundRotation'] ?? 0;
+    setupSlider(
+        div, 'backgroundRotation', 0,
+        360, def_bg_rot, 5
+    );
+
+    const def_bg_2 = curr_setup['background2'] ?? '#FFFFFF';
+    setupColour(div, 'backgroundColour2', def_bg_2);
 }
 
 function updateBaseOptions(key) {
