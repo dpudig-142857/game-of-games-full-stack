@@ -1055,29 +1055,40 @@ function renderBottts(div, props, curr) {
     updateBaseOptions('bottts');
     console.log(curr);
 
-    setupColour(div, 'baseColour', '#EDB98A');
+    const def_baseColour = curr['baseColour'] ?? '#EDB98A';
+    setupColour(div, 'baseColour', def_baseColour);
     
-    let eyes = getItems(props, 'eyes').enum;
-    setupGallery(div, 'eyes', eyes, 'eva', false);
+    const def_eyes = curr['eyes'] ?? 'eva';
+    const eyes = getItems(props, 'eyes').enum;
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
     
-    let face = getItems(props, 'face').enum;
-    setupGallery(div, 'face', face, 'round01', false);
+    const def_face = curr['face'] ?? 'round01';
+    const face = getItems(props, 'face').enum;
+    setupGallery(div, 'face', face, def_face, false);
     
-    let mouth = getItems(props, 'mouth').enum;
+    const def_mouth = curr['mouthProbability'] == '0' ?
+        'None' : curr['mouth'] ?? 'bite';
+    const mouth = getItems(props, 'mouth').enum;
     mouth.push('None');
-    setupGallery(div, 'mouth', mouth, 'bite', true);
-
-    let sides = getItems(props, 'sides').enum;
+    setupGallery(div, 'mouth', mouth, def_mouth, true);
+    
+    const def_sides = curr['sidesProbability'] == '0' ?
+        'None' : curr['sides'] ?? 'None';
+    const sides = getItems(props, 'sides').enum;
     sides.push('None');
-    setupGallery(div, 'sides', sides, 'None', true);
+    setupGallery(div, 'sides', sides, def_sides, true);
 
-    let texture = getItems(props, 'texture').enum;
+    const def_texture = curr['textureProbability'] == '0' ?
+        'None' : curr['texture'] ?? 'None';
+    const texture = getItems(props, 'texture').enum;
     texture.push('None');
-    setupGallery(div, 'texture', texture, 'None', true);
-
-    let top = getItems(props, 'top').enum;
+    setupGallery(div, 'texture', texture, def_texture, true);
+        
+    const def_top = curr['topProbability'] == '0' ?
+        'None' : curr['top'] ?? 'None';
+    const top = getItems(props, 'top').enum;
     top.push('None');
-    setupGallery(div, 'top', top, 'None', true);
+    setupGallery(div, 'top', top, def_top, true);
 }
 
 // #endregion
