@@ -134,6 +134,12 @@ function getCurrSetupFromSeed(seed) {
             curr_setup['background2'] = colours[1] ?? colours[0] ?? '';
         } else if (baseProperties.includes(key)) {
             curr_setup[key] = val;
+        } else if (key.includes('Color')) {
+            const start = key.split('Color')[0];
+            curr_setup['extras'][`${start}Colour`] = val;
+        } else if (key.includes('mustache')) {
+            const fixed = key.replace('mustache', 'moustache');
+            curr_setup['extras'][fixed] = val;
         } else {
             curr_setup['extras'][key] = val;
         }
@@ -327,8 +333,11 @@ function setupThemeGallery(div) {
     leftArrow.src = 'assets/arrow.svg';
     options.appendChild(leftArrow);
 
+    const theme = curr_setup['theme'];
+    let words = [];
+    theme.split('-').forEach(w => words.push(startUpper(w)));
     const option = header(
-        'h2', 'Fun Emoji', '', `theme_option`, `avatar_option_text`
+        'h2', words.join(' '), '', `theme_option`, `avatar_option_text`
     );
     options.appendChild(option);
 
@@ -350,7 +359,6 @@ function setupThemeGallery(div) {
         updateTheme(otherOptions, option, 'right');
     });
 
-    const theme = curr_setup['theme'];
     renderTheme(
         theme,
         otherOptions,
@@ -578,12 +586,14 @@ function setupGallery(div, key, options, initial, hasProbability) {
 
 function setupColour(div, key, colour) {
     const updateSetup = (val) => {
+        const col = val.startsWith('#') ? `${val.slice(1)}` :
+            val.length == 6 ? `${val}` : '';
         if (key == 'backgroundColour') {
-            curr_setup['background'] = `${val}`;
+            curr_setup['background'] = col;
         } else if (key == 'backgroundColour2') {
-            curr_setup['background2'] = `${val}`;
+            curr_setup['background2'] = col;
         } else {
-            curr_setup['extras'][key] = `${val}`;
+            curr_setup['extras'][key] = col;
         }
     };
 
