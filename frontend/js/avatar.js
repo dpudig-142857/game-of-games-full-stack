@@ -663,7 +663,7 @@ function setupColour(div, key, colour) {
     option.type = 'color';
     option.value = `#${def}`;
     options.appendChild(option);
-    console.log(def);
+    console.log(key, ' - ', def);
 
     option.addEventListener('input', (e) => {
         colourHeader.innerHTML = e.target.value;
@@ -744,7 +744,8 @@ function setupSlider(div, key, min, max, val, step) {
     section.id = 'slider_section';
     if (key == 'backgroundRotation') {
         section.className = 'avatar_options_section background_rotation base';
-        section.style.display = 'none';
+        section.style.display = curr_setup['backgroundType'] == 'gradientLinear' ?
+            'flex' : 'none';
     } else if (baseProperties.includes(key)) {
         section.className = 'avatar_options_section base';
     } else {
