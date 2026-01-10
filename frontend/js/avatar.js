@@ -149,9 +149,7 @@ export function renderAvatarPage(div, user, type) {
         title.textContent = 'Creating Avatar';
     } else if (type == 'updating') {
         title.textContent = 'Updating Avatar';
-        console.log(curr_setup);
         getCurrSetupFromSeed(user.avatar_seed);
-        console.log(curr_setup);
     } else {
 
     }
@@ -167,37 +165,6 @@ export function renderAvatarPage(div, user, type) {
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
-    /*
-    avatar_preview.src = createBaseLink(
-        'fun-emoji',
-        `${user.player_id}`,
-        'false',
-        '0',
-        '100',
-        '#FFFFFF',
-        '',
-        'solid',
-        '0',
-        '0',
-        '0',
-    ) + createExtras({
-        'eyes': 'plain',
-        'mouth': 'plain'
-    });
-
-    avatar_preview.src = createBaseLink(
-        'fun-emoji',
-        `${user.player_id}`,
-        'false',
-        '0',
-        '100',
-        '#FFFFFF',
-        '',
-        'solid',
-        '0',
-        '0',
-        '0',
-    )*/
     avatar_preview.src = createBaseLink(
         curr_setup['theme'],
         curr_setup['seed'],
@@ -383,11 +350,14 @@ function setupThemeGallery(div) {
         updateTheme(otherOptions, option, 'right');
     });
 
-    renderFunEmoji(
+    const theme = curr_setup['theme'];
+    renderTheme(
+        theme,
         otherOptions,
-        Object.entries(allDiceBearOptions['fun-emoji'])
-        .filter(([key, _]) => !baseProperties.includes(key))
-    );
+        Object.entries(allDiceBearOptions[theme])
+        .filter(([key, _]) => !baseProperties.includes(key)),
+        curr_setup['extras']
+    )
 }
 
 function updateTheme(section, option, dir) {
@@ -412,67 +382,70 @@ function updateTheme(section, option, dir) {
     const base = document.getElementById('avatar_base');
     base.innerHTML = '';
     renderBaseOptions(base);
-
-    if (themes[i] == 'adventurer') {
-        renderAdventurer(section, props);
-    } else if (themes[i] == 'adventurer-neutral') {
-        renderAdventurerNeutral(section, props);
-    } else if (themes[i] == 'avataaars') {
-        renderAvataaars(section, props);
-    } else if (themes[i] == 'avataaars-neutral') {
-        renderAvataaarsNeutral(section, props);
-    } else if (themes[i] == 'big-ears') {
-        renderBigEars(section, props);
-    } else if (themes[i] == 'big-ears-neutral') {
-        renderBigEarsNeutral(section, props);
-    } else if (themes[i] == 'big-smile') {
-        renderBigSmile(section, props);
-    } else if (themes[i] == 'bottts') {
-        renderBottts(section, props);
-    } else if (themes[i] == 'bottts-neutral') {
-        renderBotttsNeutral(section, props);
-    } else if (themes[i] == 'croodles') {
-        renderCroodles(section, props);
-    } else if (themes[i] == 'croodles-neutral') {
-        renderCroodlesNeutral(section, props);
-    } else if (themes[i] == 'dylan') {
-        renderDylan(section, props);
-    } else if (themes[i] == 'fun-emoji') {
-        renderFunEmoji(section, props);
-    } else if (themes[i] == 'glass') {
-        renderGlass(section, props);
-    } else if (themes[i] == 'icons') {
-        renderIcons(section, props);
-    } else if (themes[i] == 'identicon') {
-        renderIdenticon(section, props);
-    } else if (themes[i] == 'lorelei') {
-        renderLorelei(section, props);
-    } else if (themes[i] == 'lorelei-neutral') {
-        renderLoreleiNeutral(section, props);
-    } else if (themes[i] == 'micah') {
-        renderMicah(section, props);
-    } else if (themes[i] == 'miniavs') {
-        renderMiniavs(section, props);
-    } else if (themes[i] == 'notionists') {
-        renderNotionists(section, props);
-    } else if (themes[i] == 'notionists-neutral') {
-        renderNotionistsNeutral(section, props);
-    } else if (themes[i] == 'open-peeps') {
-        renderOpenPeeps(section, props);
-    } else if (themes[i] == 'personas') {
-        renderPersonas(section, props);
-    } else if (themes[i] == 'pixel-art') {
-        renderPixelArt(section, props);
-    } else if (themes[i] == 'pixel-art-neutral') {
-        renderPixelArtNeutral(section, props);
-    } else if (themes[i] == 'rings') {
-        renderRings(section, props);
-    } else if (themes[i] == 'shapes') {
-        renderShapes(section, props);
-    } else if (themes[i] == 'thumbs') {
-        renderThumbs(section, props);
-    }
+    renderTheme(key, section, props, curr_setup['extras']);
     updateAvatar();
+}
+
+function renderTheme(key, section, props, curr) {
+    if (key == 'adventurer') {
+        renderAdventurer(section, props, curr);
+    } else if (key == 'adventurer-neutral') {
+        renderAdventurerNeutral(section, props, curr);
+    } else if (key == 'avataaars') {
+        renderAvataaars(section, props, curr);
+    } else if (key == 'avataaars-neutral') {
+        renderAvataaarsNeutral(section, props, curr);
+    } else if (key == 'big-ears') {
+        renderBigEars(section, props, curr);
+    } else if (key == 'big-ears-neutral') {
+        renderBigEarsNeutral(section, props, curr);
+    } else if (key == 'big-smile') {
+        renderBigSmile(section, props, curr);
+    } else if (key == 'bottts') {
+        renderBottts(section, props, curr);
+    } else if (key == 'bottts-neutral') {
+        renderBotttsNeutral(section, props, curr);
+    } else if (key == 'croodles') {
+        renderCroodles(section, props, curr);
+    } else if (key == 'croodles-neutral') {
+        renderCroodlesNeutral(section, props, curr);
+    } else if (key == 'dylan') {
+        renderDylan(section, props, curr);
+    } else if (key == 'fun-emoji') {
+        renderFunEmoji(section, props, curr);
+    } else if (key == 'glass') {
+        renderGlass(section, props, curr);
+    } else if (key == 'icons') {
+        renderIcons(section, props, curr);
+    } else if (key == 'identicon') {
+        renderIdenticon(section, props, curr);
+    } else if (key == 'lorelei') {
+        renderLorelei(section, props, curr);
+    } else if (key == 'lorelei-neutral') {
+        renderLoreleiNeutral(section, props, curr);
+    } else if (key == 'micah') {
+        renderMicah(section, props, curr);
+    } else if (key == 'miniavs') {
+        renderMiniavs(section, props, curr);
+    } else if (key == 'notionists') {
+        renderNotionists(section, props, curr);
+    } else if (key == 'notionists-neutral') {
+        renderNotionistsNeutral(section, props, curr);
+    } else if (key == 'open-peeps') {
+        renderOpenPeeps(section, props, curr);
+    } else if (key == 'personas') {
+        renderPersonas(section, props, curr);
+    } else if (key == 'pixel-art') {
+        renderPixelArt(section, props, curr);
+    } else if (key == 'pixel-art-neutral') {
+        renderPixelArtNeutral(section, props, curr);
+    } else if (key == 'rings') {
+        renderRings(section, props, curr);
+    } else if (key == 'shapes') {
+        renderShapes(section, props, curr);
+    } else if (key == 'thumbs') {
+        renderThumbs(section, props, curr);
+    }
 }
 
 function renderBaseOptions(div) {
@@ -805,7 +778,7 @@ function getItems(props, item_key) {
 
 // #region
 
-function renderAdventurer(div, props) {
+function renderAdventurer(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('adventurer');
 
@@ -850,7 +823,7 @@ function renderAdventurer(div, props) {
 
 // #region
 
-function renderAdventurerNeutral(div, props) {
+function renderAdventurerNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('adventurer-neutral');
 
@@ -880,7 +853,7 @@ function renderAdventurerNeutral(div, props) {
 
 // #region
 
-function renderAvataaars(div, props) {
+function renderAvataaars(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('avataaars');
 
@@ -930,7 +903,7 @@ function renderAvataaars(div, props) {
 
 // #region
 
-function renderAvataaarsNeutral(div, props) {
+function renderAvataaarsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('avataaars-neutral');
 
@@ -956,7 +929,7 @@ function renderAvataaarsNeutral(div, props) {
 
 // #region
 
-function renderBigEars(div, props) {
+function renderBigEars(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-ears');
 
@@ -1004,7 +977,7 @@ function renderBigEars(div, props) {
 
 // #region
 
-function renderBigEarsNeutral(div, props) {
+function renderBigEarsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-ears-neutral');
 
@@ -1034,7 +1007,7 @@ function renderBigEarsNeutral(div, props) {
 
 // #region
 
-function renderBigSmile(div, props) {
+function renderBigSmile(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('big-smile');
 
@@ -1067,9 +1040,10 @@ function renderBigSmile(div, props) {
 
 // #region
 
-function renderBottts(div, props) {
+function renderBottts(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('bottts');
+    console.log(curr);
 
     setupColour(div, 'baseColour', '#EDB98A');
     
@@ -1108,7 +1082,7 @@ function renderBottts(div, props) {
 
 // #region
 
-function renderBotttsNeutral(div, props) {
+function renderBotttsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('bottts-neutral');
 
@@ -1131,7 +1105,7 @@ function renderBotttsNeutral(div, props) {
 
 // #region
 
-function renderCroodles(div, props) {
+function renderCroodles(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('croodles');
 
@@ -1174,7 +1148,7 @@ function renderCroodles(div, props) {
 
 // #region
 
-function renderCroodlesNeutral(div, props) {
+function renderCroodlesNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('croodles-neutral');
     
@@ -1200,7 +1174,7 @@ function renderCroodlesNeutral(div, props) {
 
 // #region
 
-function renderDylan(div, props) {
+function renderDylan(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('dylan');
 
@@ -1229,7 +1203,7 @@ function renderDylan(div, props) {
 
 // #region
 
-function renderFunEmoji(div, props) {
+function renderFunEmoji(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('fun-emoji');
 
@@ -1252,7 +1226,7 @@ function renderFunEmoji(div, props) {
 
 // #region
 
-function renderGlass(div, props) {
+function renderGlass(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('glass');
 
@@ -1311,7 +1285,7 @@ function renderGlass(div, props) {
 
 // #region
 
-function renderIcons(div, props) {
+function renderIcons(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('icons');
 
@@ -1331,7 +1305,7 @@ function renderIcons(div, props) {
 
 // #region
 
-function renderIdenticon(div, props) {
+function renderIdenticon(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('identicon');
 
@@ -1365,7 +1339,7 @@ function renderIdenticon(div, props) {
 
 // #region
 
-function renderLorelei(div, props) {
+function renderLorelei(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('lorelei');
 
@@ -1431,7 +1405,7 @@ function renderLorelei(div, props) {
 
 // #region
 
-function renderLoreleiNeutral(div, props) {
+function renderLoreleiNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('lorelei-neutral');
 
@@ -1474,7 +1448,7 @@ function renderLoreleiNeutral(div, props) {
 
 // #region
 
-function renderMicah(div, props) {
+function renderMicah(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('micah');
 
@@ -1537,7 +1511,7 @@ function renderMicah(div, props) {
 
 // #region
 
-function renderMiniavs(div, props) {
+function renderMiniavs(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('micah');
     
@@ -1584,7 +1558,7 @@ function renderMiniavs(div, props) {
 
 // #region
 
-function renderNotionists(div, props) {
+function renderNotionists(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('notionists');
     
@@ -1635,7 +1609,7 @@ function renderNotionists(div, props) {
 
 // #region
 
-function renderNotionistsNeutral(div, props) {
+function renderNotionistsNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('notionists-neutral');
     
@@ -1668,7 +1642,7 @@ function renderNotionistsNeutral(div, props) {
 
 // #region
 
-function renderOpenPeeps(div, props) {
+function renderOpenPeeps(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('open-peeps');
 
@@ -1709,7 +1683,7 @@ function renderOpenPeeps(div, props) {
 
 // #region
 
-function renderPersonas(div, props) {
+function renderPersonas(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('personas');
 
@@ -1750,7 +1724,7 @@ function renderPersonas(div, props) {
 
 // #region
 
-function renderPixelArt(div, props) {
+function renderPixelArt(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('pixel-art');
 
@@ -1804,7 +1778,7 @@ function renderPixelArt(div, props) {
 
 // #region
 
-function renderPixelArtNeutral(div, props) {
+function renderPixelArtNeutral(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('pixel-art-neutral');
 
@@ -1834,7 +1808,7 @@ function renderPixelArtNeutral(div, props) {
 
 // #region
 
-function renderRings(div, props) {
+function renderRings(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('rings');
 
@@ -1898,7 +1872,7 @@ function renderRings(div, props) {
 
 // #region
 
-function renderShapes(div, props) {
+function renderShapes(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('shapes');
 
@@ -1981,7 +1955,7 @@ function renderShapes(div, props) {
 
 // #region
 
-function renderThumbs(div, props) {
+function renderThumbs(div, props, curr) {
     div.innerHTML = '';
     updateBaseOptions('thumbs');
 
