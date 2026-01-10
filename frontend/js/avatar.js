@@ -129,6 +129,7 @@ function getCurrSetupFromSeed(seed) {
             curr_setup['background'] = '';
             curr_setup['background2'] = '';
         } else if (key == 'backgroundColor') {
+            console.log(key, ' - ', val);
             const colours = val.split(',');
             curr_setup['background']  = colours[0] ?? '';
             curr_setup['background2'] = colours[1] ?? colours[0] ?? '';
@@ -691,7 +692,7 @@ function setupSwitch(div, key, def) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
-    const text = def ? 'Flipped' : 'Normal';
+    const text = def == 'true' ? 'Flipped' : 'Normal';
     const switchHeader = header(
         'h2', text, '', 'switch_option', 'avatar_option_text'
     );
