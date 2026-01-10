@@ -457,20 +457,35 @@ function renderTheme(key, section, props, curr) {
 }
 
 function renderBaseOptions(div) {
-    setupSwitch(div, 'flip');
+    const def_flip = curr_setup['flip'] ?? 'false';
+    setupSwitch(div, 'flip', def_flip);
 
+    const def_rotate = curr_setup['rotate'] ?? 0;
     const rotate = basicDiceBearOptions['rotate'];
-    setupSlider(div, 'rotate', rotate.minimum, rotate.maximum, 0, 5);
+    setupSlider(
+        div, 'rotate', rotate.minimum,
+        rotate.maximum, def_rotate, 5
+    );
     
+    const def_scale = curr_setup['scale'] ?? 100;
     const scale = basicDiceBearOptions['scale'];
-    setupSlider(div, 'scale', scale.minimum, scale.maximum, 100, 5);
+    setupSlider(
+        div, 'scale', scale.minimum, scale.maximum, def_scale, 5
+    );
     
+    const def_x = curr_setup['translateX'] ?? 0;
     const x = basicDiceBearOptions['translateX'];
-    setupSlider(div, 'translateX', x.minimum, x.maximum, 0, 5);
+    setupSlider(
+        div, 'translateX', x.minimum, x.maximum, def_x, 5
+    );
     
+    const def_y = curr_setup['translateY'] ?? 0;
     const y = basicDiceBearOptions['translateY'];
-    setupSlider(div, 'translateY', y.minimum, y.maximum, 0, 5);
+    setupSlider(
+        div, 'translateY', y.minimum, y.maximum, def_y, 5
+    );
 
+    console.log(curr_setup);
     setupColour(div, 'backgroundColour', '#FFFFFF');
     
     const bg_type = ['solid', 'gradientLinear'];
@@ -585,6 +600,9 @@ function setupGallery(div, key, options, initial, hasProbability) {
 }
 
 function setupColour(div, key, colour) {
+    const def = colour.startsWith('#') ? `${def.slice(1)}` :
+        colour.length == 6 ? `${def}` : '000000';
+
     const updateSetup = (val) => {
         const col = val.startsWith('#') ? `${val.slice(1)}` :
             val.length == 6 ? `${val}` : '';
@@ -626,16 +644,16 @@ function setupColour(div, key, colour) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
-    updateSetup(colour);
+    updateSetup(def);
     const colourHeader = header(
-        'h2', colour, '', 'colour_option', 'avatar_option_text'
+        'h2', `#${def}`, '', 'colour_option', 'avatar_option_text'
     );
     options.appendChild(colourHeader);
     
     const option = document.createElement('input');
     option.id = 'avatar_colour';
     option.type = 'color';
-    option.value = colour;
+    option.value = `#${def}`;
     options.appendChild(option);
 
     option.addEventListener('input', (e) => {
@@ -645,7 +663,7 @@ function setupColour(div, key, colour) {
     });
 }
 
-function setupSwitch(div, key) {
+function setupSwitch(div, key, def) {
     const updateSetup = (val) => {
         if (baseProperties.includes(key)) {
             curr_setup[key] = `${val}`;
@@ -654,7 +672,7 @@ function setupSwitch(div, key) {
         }
     };
     
-    updateSetup('false');
+    updateSetup(def);
     const section = document.createElement('div');
     section.id = 'switch_section';
     if (key == 'flip') {
@@ -673,18 +691,19 @@ function setupSwitch(div, key) {
     options.className = 'avatar_option';
     section.appendChild(options);
 
+    const text = def ? 'Flipped' : 'Normal';
     const switchHeader = header(
-        'h2', 'Normal', '', 'switch_option', 'avatar_option_text'
+        'h2', text, '', 'switch_option', 'avatar_option_text'
     );
     options.appendChild(switchHeader);
 
     switchHeader.addEventListener('click', () => {
         if (switchHeader.innerHTML == 'Normal') {
             switchHeader.innerHTML = 'Flipped';
-            updateSetup(true);
+            updateSetup('true');
         } else {
             switchHeader.innerHTML = 'Normal';
-            updateSetup(false);
+            updateSetup('false');
         }
         updateAvatar();
     });
