@@ -171,19 +171,7 @@ export function renderAvatarPage(div, user, type) {
 
     const avatar_preview = document.createElement('img');
     avatar_preview.id = 'avatar_preview';
-    avatar_preview.src = createBaseLink(
-        curr_setup['theme'],
-        curr_setup['seed'],
-        curr_setup['flip'],
-        curr_setup['rotate'],
-        curr_setup['scale'],
-        curr_setup['background'],
-        curr_setup['background2'],
-        curr_setup['backgroundType'],
-        curr_setup['backgroundRotation'],
-        curr_setup['translateX'],
-        curr_setup['translateY']
-    ) + createExtras(curr_setup['extras']);
+    avatar_preview.src = createLink();
     avatar_pb_div.appendChild(avatar_preview);
 
     const avatar_base = document.createElement('div');
@@ -199,31 +187,21 @@ export function renderAvatarPage(div, user, type) {
     setupThemeGallery(avatar_options);
 }
 
-function createBaseLink(
-    theme_var = 'fun-emoji',
-    seed_var = '0',
-    flip_var = 'false',
-    rotate_var = '0',
-    scale_var = '100',
-    colour_var = '#FFFFFF',
-    colour_var_2 = '',
-    backgroundType_var = 'solid',
-    backgroundRotation_var = '0',
-    x_var = '0',
-    y_var = '0'
-) {
-    const base = `https://api.dicebear.com/9.x/${theme_var}`;
+function createLink() {
+    const base = `https://api.dicebear.com/9.x/${curr_setup['theme']}`;
     const radius = `/svg?radius=50`;
-    const seed = `&seed=${seed_var}`;
-    const flip = `&flip=${flip_var}`;
-    const rotate = `&rotate=${rotate_var}`;
-    const scale = `&scale=${scale_var}`;
-    const colour = colour_var == '' || colour_var == '[]' ? `&backgroundColor[]` : 
-        colour_var.startsWith('#') ? `&backgroundColor=${colour_var.slice(1)}` :
-        colour_var.length == 6 ? `&backgroundColor=${colour_var}` : '';
+    const seed = `&seed=${curr_setup['seed']}`;
+    const flip = `&flip=${curr_setup['flip']}`;
+    const rotate = `&rotate=${curr_setup['rotate']}`;
+    const scale = `&scale=${curr_setup['scale']}`;
+    const curr_colour = curr_setup['background'];
+    const colour = curr_colour == '' || curr_colour == '[]' ? `&backgroundColor[]` : 
+        curr_colour.startsWith('#') ? `&backgroundColor=${curr_colour.slice(1)}` :
+        curr_colour.length == 6 ? `&backgroundColor=${curr_colour}` : '';
 
     let colour2 = '';
-    if (backgroundType_var == 'gradientLinear') {
+    if (curr_setup['backgroundType'] == 'gradientLinear') {
+        const colour_var_2 = curr_setup['background2'];
         if (colour_var_2.startsWith('#')) {
             colour2 = `,${colour_var_2.slice(1)}`;
         } else if (colour_var_2.length == 6) {
@@ -231,19 +209,14 @@ function createBaseLink(
         }
     }
 
-    const backgroundType = `&backgroundType=${backgroundType_var}`;
-    const backgroundRotation = backgroundType_var == 'gradientLinear' ?
-        `&backgroundRotation=${backgroundRotation_var}` : '';
-    const x = `&translateX=${x_var}`;
-    const y = `&translateY=${y_var}`;
-    return base + radius + seed + flip + rotate + scale + colour +
-        colour2 + backgroundType + backgroundRotation + x + y;
-}
+    const backgroundType = `&backgroundType=${curr_setup['backgroundType']}`;
+    const backgroundRotation = curr_setup['backgroundRotation'] == 'gradientLinear' ?
+        `&backgroundRotation=${curr_setup['backgroundRotation']}` : '';
+    const x = `&translateX=${curr_setup['translateX']}`;
+    const y = `&translateY=${curr_setup['translateY']}`;
 
-function createExtras(extras) {
-    //console.log(extras);
     let options = [];
-    Object.entries(extras).forEach(([key_var, val_var]) => {
+    Object.entries(curr_setup['extras']).forEach(([key_var, val_var]) => {
         const key = `${key_var}`;
         const val = `${val_var}`;
         const left =
@@ -254,25 +227,15 @@ function createExtras(extras) {
             val.includes('moustache') ? val.replace('moustache', 'mustache') : val;
         options.push(`&${left}=${right}`);
     });
-    console.log(options.join(''));
-    return options.join('');
+
+    return base + radius + seed + flip + rotate +
+        scale + colour + colour2 + backgroundType +
+        backgroundRotation + x + y + options.join('');
 }
 
 function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
-    preview.src = createBaseLink(
-        curr_setup['theme'],
-        curr_setup['seed'],
-        curr_setup['flip'],
-        curr_setup['rotate'],
-        curr_setup['scale'],
-        curr_setup['background'],
-        curr_setup['background2'],
-        curr_setup['backgroundType'],
-        curr_setup['backgroundRotation'],
-        curr_setup['translateX'],
-        curr_setup['translateY']
-    ) + createExtras(curr_setup['extras']);
+    preview.src = createLink();
     console.log(curr_setup);
 }
 
@@ -350,6 +313,14 @@ function setupThemeGallery(div) {
     const otherOptions = document.createElement('div');
     otherOptions.className = 'avatar_options';
     div.appendChild(otherOptions);
+
+    const saveBtn = header(
+        'button', 'Save Avatar', '', 'avatar-btn', 'user-button user-input'
+    )
+    div.appendChild(saveBtn);
+    saveBtn.addEventListener('click', () => {
+        
+    });
 
     leftArrow.addEventListener('click', () => {
         updateTheme(otherOptions, option, 'left');
