@@ -526,6 +526,7 @@ function setupGallery(div, key, options, initial, hasProbability) {
         if (i == -1) i = options.length - 1;
         if (i == options.length) i = 0;
         console.log(i);
+        console.log(options);
         option.innerHTML = options[i];
         if (key == 'backgroundType') {
             const rot = document.querySelector('.background_rotation');
