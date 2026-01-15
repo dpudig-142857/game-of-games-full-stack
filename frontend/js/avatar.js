@@ -1459,7 +1459,9 @@ function renderLorelei(div, props, curr) {
     updateBaseOptions('lorelei');
 
     let beard = getItems(props, 'beard').enum;
+    console.log(beard);
     beard.push('None');
+    console.log(beard);
     const def_beard = curr['beardProbability'] == '0' ?
         'None' : curr['beard'] ?? 'None';
     setupGallery(div, 'beard', beard, def_beard, true);
