@@ -42,6 +42,9 @@ import { rings } from './themes/rings.js';
 import { shapes } from './themes/shapes.js';
 import { thumbs } from './themes/thumbs.js';
 import { toonHead } from './themes/toon_head.js';
+import { BASE_ROUTE } from './config.js';
+
+let route = `${BASE_ROUTE}/api/auth`;
 
 const basicDiceBearOptions = basic.properties;
 let baseProperties = Object.keys(basic.properties);
@@ -330,8 +333,19 @@ function setupThemeGallery(div) {
         'button', 'Save Avatar', '', 'avatar-btn', 'user-button user-input'
     )
     div.appendChild(saveBtn);
-    saveBtn.addEventListener('click', () => {
-        
+    const preview = document.getElementById('avatar_preview');
+    saveBtn.addEventListener('click', async () => {
+        const res = await fetch(`${route}/save_avatar`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                player_id: curr_setup['seed'],
+                avatar: preview.src
+            })
+        });
+        const data = await res.json();
+        console.log(data);
     });
 
     leftArrow.addEventListener('click', () => {
