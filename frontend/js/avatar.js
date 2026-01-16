@@ -940,7 +940,7 @@ function renderAvataaars(div, props, curr) {
         'None' : curr['facialHair'] ?? 'None';
     setupGallery(div, 'facialHair', facialHair, def_facialHair, true);
 
-    const def_facialHair_colour = curr['facialHairColour'] ?? '#000000';
+    const def_facialHair_colour = curr['facialHairColour'] ?? '#724133';
     setupColour(div, 'facialHairColour', def_facialHair_colour);
     
     const def_hairColour = curr['hairColour'] ?? '#724133';
@@ -1676,7 +1676,7 @@ function renderMicah(div, props, curr) {
         'None' : curr['facialHair'] ?? 'None';
     setupGallery(div, 'facialHair', facialHair, def_facialHair, true);
     
-    const def_facialHairColour = curr['facialHairColour'] ?? '#000000';
+    const def_facialHairColour = curr['facialHairColour'] ?? '#724133';
     setupColour(div, 'facialHairColour', def_facialHairColour);
 
     let glasses = getItems(props, 'glasses').enum;
