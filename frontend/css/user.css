@@ -216,6 +216,7 @@
     height: 100%;
     display: flex;
     gap: 4rem;
+    padding: 5% 0;
 }
 
 .user_avatar_option {

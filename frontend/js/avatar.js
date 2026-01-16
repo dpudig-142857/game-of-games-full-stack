@@ -172,6 +172,19 @@ export function renderSwapAvatarPage(div, user) {
         avatar.className = 'user_avatar_option';
         avatar.src = option;
         avatars.appendChild(avatar);
+        avatar.addEventListener('click', async () => {
+            const res = await fetch(`${route}/save_avatar`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    player_id: user.player_id,
+                    avatar: option
+                })
+            });
+            const data = await res.json();
+            console.log(data);
+        });
     });
 }
 
