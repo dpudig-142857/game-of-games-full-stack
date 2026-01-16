@@ -2166,8 +2166,8 @@ export async function logout(sessionId, res) {
 
 export async function saveAvatar(player_id, avatar) {
     const old = await pool.query(`
-        SELECT avatar_seed FROM accounts WHERE player_id = $1;
-    `, [player_id]).rows[0];
+        SELECT avatar_seed FROM accounts WHERE player_id = $1
+    `, [player_id]);
 
-    return { avatar: old };
+    return { avatar: old.rows[0] };
 }
