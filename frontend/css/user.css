@@ -202,16 +202,6 @@
 
 #user_avatar {
     width: 90%;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-#user_avatar:hover {
-    transform: scale(1.05);
-}
-
-#user_avatar:active {
-    transform: scale(0.95);
 }
 
 .user_div {

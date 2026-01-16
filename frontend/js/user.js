@@ -519,6 +519,26 @@ function renderUserProfile(div, user) {
     });
     avatar_div.appendChild(avatar);
 
+    const avatar_btns_div = document.createElement('div');
+    avatar_btns_div.id = 'avatar_btns_div';
+    avatar_div.appendChild(avatar_btns_div);
+
+    const swapBtn = header(
+        'button', 'Swap Avatar', '', 'swap-avatar-btn', 'user-button user-input'
+    )
+    avatar_btns_div.appendChild(swapBtn);
+    swapBtn.addEventListener('click', () => {
+        
+    });
+
+    const editBtn = header(
+        'button', 'Edit Avatar', '', 'edit-avatar-btn', 'user-button user-input'
+    )
+    avatar_btns_div.appendChild(editBtn);
+    editBtn.addEventListener('click', () => {
+        
+    });
+
     const user_div = document.createElement('div');
     user_div.className = 'user_div';
     section.appendChild(user_div);
