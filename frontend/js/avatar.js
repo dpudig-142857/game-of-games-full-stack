@@ -166,7 +166,9 @@ export function renderSwapAvatarPage(div, user) {
     avatar_div.appendChild(avatars);
 
     let options = user.previous_avatar_seeds ?? [];
-    options.unshift(user.avatar_seed);
+    if (!options.includes(user.avatar_seed)) {    
+        options.unshift(user.avatar_seed);
+    }
     options.forEach(option => {
         const avatar = document.createElement('img');
         avatar.className = 'user_avatar_option';
