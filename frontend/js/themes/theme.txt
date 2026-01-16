@@ -438,7 +438,22 @@ thumbs
     - shapeRotation - slider
 
 
+toonHead
 
+- beard - gallery
+- beardProbability - switch
+- body - ignore
+- clothes - gallery
+- clothesColour - colour
+- eyebrows - gallery
+- eyes - gallery
+- hair - gallery
+- hairColour - colour
+- hairProbability - switch
+- head - ignore
+- mouth - gallery
+- rearHair - gallery
+- skinColour - colour
 
 
 

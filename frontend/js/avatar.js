@@ -41,6 +41,7 @@ import { pixelArtNeutral } from './themes/pixel_art_neutral.js';
 import { rings } from './themes/rings.js';
 import { shapes } from './themes/shapes.js';
 import { thumbs } from './themes/thumbs.js';
+import { toonHead } from './themes/toon_head.js';
 
 const basicDiceBearOptions = basic.properties;
 let baseProperties = Object.keys(basic.properties);
@@ -74,7 +75,8 @@ const allDiceBearOptions = {
     'pixel-art-neutral': pixelArtNeutral.properties,
     'rings':  rings.properties,
     'shapes': shapes.properties,
-    'thumbs': thumbs.properties
+    'thumbs': thumbs.properties,
+    'toon-head': toonHead.properties
 };
 
 function splitCapitals(str) {
@@ -224,7 +226,7 @@ function createLink() {
             key.includes('moustache') ? key.replace('moustache', 'mustache') : key;
         const right =
             val.startsWith('#') ? val.slice(1) :
-            val.includes('moustache') ? val.replace('moustache', 'mustache') : val;
+            val == 'moustache' ? val.replace('moustache', 'mustache') : val;
         options.push(`&${left}=${right}`);
     });
 
@@ -272,7 +274,9 @@ const ignore = [
     'micah.base',
     'miniavs.blushes',
     'notionists.base',
-    'rings.ring'
+    'rings.ring',
+    'toon-head.body',
+    'toon-head.head'
 ];
 
 function setupThemeGallery(div) {
@@ -424,6 +428,8 @@ function renderTheme(key, section, props, curr) {
         renderShapes(section, props, curr);
     } else if (key == 'thumbs') {
         renderThumbs(section, props, curr);
+    } else if (key == 'toon-head') {
+        renderToonHead(section, props, curr);
     }
 }
 
@@ -1905,7 +1911,7 @@ function renderOpenPeeps(div, props, curr) {
     setupGallery(div, 'facialHair', facialHair, def_facialHair, true);
     
     let head = getItems(props, 'head').enum;
-    const def_head = curr['head'] ?? 'short01';
+    const def_head = curr['head'] ?? 'short1';
     setupGallery(div, 'head', head, def_head, false);
 
     const def_headContrastColour = curr['headContrastColour'] ?? '#724133';
@@ -2288,6 +2294,64 @@ function renderThumbs(div, props, curr) {
     const sR = getItems(props, 'shapeRotation');
     const def_sR = curr['shapeRotation'] ?? sR?.default ?? null;
     setupSlider(div, 'shapeRotation', sR.minimum, sR.maximum, def_sR, 5);
+}
+
+// #endregion
+
+
+// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+// 
+//                          Toon Head
+// 
+
+
+// #region
+
+function renderToonHead(div, props, curr) {
+    div.innerHTML = '';
+    updateBaseOptions('toon-head');
+    
+    let beard = getItems(props, 'beard').enum;
+    beard.push('None');
+    const def_beard = curr['beardProbability'] == '0' ?
+        'None' : curr['beard'] ?? 'None';
+    setupGallery(div, 'beard', beard, def_beard, true);
+    
+    let clothes = getItems(props, 'clothes').enum;
+    const def_clothes = curr['clothes'] ?? 'tShirt';
+    setupGallery(div, 'clothes', clothes, def_clothes, false);
+    
+    const def_clothesColour = curr['clothesColour'] ?? '#000000';
+    setupColour(div, 'clothesColour', def_clothesColour);
+    
+    let eyebrows = getItems(props, 'eyebrows').enum;
+    const def_eyebrows = curr['eyebrows'] ?? 'neutral';
+    setupGallery(div, 'eyebrows', eyebrows, def_eyebrows, false);
+    
+    let eyes = getItems(props, 'eyes').enum;
+    const def_eyes = curr['eyes'] ?? 'happy';
+    setupGallery(div, 'eyes', eyes, def_eyes, false);
+    
+    let hair = getItems(props, 'hair').enum;
+    hair.push('None');
+    const def_hair = curr['hairProbability'] == '0' ?
+        'None' : curr['hair'] ?? 'spiky';
+    setupGallery(div, 'hair', hair, def_hair, true);
+    
+    const def_hairColour = curr['hairColour'] ?? '#000000';
+    setupColour(div, 'hairColour', def_hairColour);
+    
+    let mouth = getItems(props, 'mouth').enum;
+    const def_mouth = curr['mouth'] ?? 'smile';
+    setupGallery(div, 'mouth', mouth, def_mouth, false);
+
+    let rearHair = getItems(props, 'rearHair').enum;
+    const def_rearHair = curr['rearHair'] ?? 'neckHigh';
+    setupGallery(div, 'rearHair', rearHair, def_rearHair, false);
+    
+    const def_skin = curr['skinColour'] ?? '#EDB98A';
+    setupColour(div, 'skinColour', def_skin);
 }
 
 // #endregion
