@@ -190,7 +190,8 @@ export function renderAvatarPage(div, user, type) {
 }
 
 function createLink() {
-    const base = `https://api.dicebear.com/9.x/${curr_setup['theme']}`;
+    const base = `https://api.dicebear.com/9.x/`;
+    const theme = `${curr_setup['theme']}`;
     const radius = `/svg?radius=50`;
     const seed = `&seed=${curr_setup['seed']}`;
     const flip = `&flip=${curr_setup['flip']}`;
@@ -226,11 +227,11 @@ function createLink() {
             key.includes('moustache') ? key.replace('moustache', 'mustache') : key;
         const right =
             val.startsWith('#') ? val.slice(1) :
-            val == 'moustache' ? val.replace('moustache', 'mustache') : val;
+            toOOrNotToO(theme, val) ? val.replace('oustache', 'ustache') : val;
         options.push(`&${left}=${right}`);
     });
 
-    return base + radius + seed + flip + rotate +
+    return base + theme + radius + seed + flip + rotate +
         scale + colour + colour2 + backgroundType +
         backgroundRotation + x + y + options.join('');
 }
@@ -239,6 +240,13 @@ function updateAvatar() {
     const preview = document.getElementById('avatar_preview');
     preview.src = createLink();
     console.log(curr_setup);
+}
+
+function toOOrNotToO(key, val) {
+    if (key == 'adventurer') return val == 'moustache';
+    if (key == 'big-smile') return val == 'moustache';
+    if (key == 'personas') return val == 'beardMoustache';
+    return false;
 }
 
 // #endregion
@@ -2339,6 +2347,10 @@ function renderToonHead(div, props, curr) {
         'None' : curr['hair'] ?? 'spiky';
     setupGallery(div, 'hair', hair, def_hair, true);
     
+    let rearHair = getItems(props, 'rearHair').enum;
+    const def_rearHair = curr['rearHair'] ?? 'neckHigh';
+    setupGallery(div, 'rearHair', rearHair, def_rearHair, false);
+    
     const def_hairColour = curr['hairColour'] ?? '#000000';
     setupColour(div, 'hairColour', def_hairColour);
     
@@ -2346,10 +2358,6 @@ function renderToonHead(div, props, curr) {
     const def_mouth = curr['mouth'] ?? 'smile';
     setupGallery(div, 'mouth', mouth, def_mouth, false);
 
-    let rearHair = getItems(props, 'rearHair').enum;
-    const def_rearHair = curr['rearHair'] ?? 'neckHigh';
-    setupGallery(div, 'rearHair', rearHair, def_rearHair, false);
-    
     const def_skin = curr['skinColour'] ?? '#EDB98A';
     setupColour(div, 'skinColour', def_skin);
 }
