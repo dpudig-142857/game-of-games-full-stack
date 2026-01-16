@@ -211,6 +211,28 @@
     padding: 1rem;
 }
 
+#user_avatar_options {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 4rem;
+}
+
+.user_avatar_option {
+    width: 15rem;
+    height: 15rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.user_avatar_option:hover {
+    transform: scale(1.1);
+}
+
+.user_avatar_option:active {
+    transform: scale(0.9);
+}
+
 .user_div {
     width: 60%;
     height: 100%;
