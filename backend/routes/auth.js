@@ -1,5 +1,5 @@
 import express from 'express';
-import { requireAuth, login, logout } from '../db/queries.js';
+import { requireAuth, login, logout, saveAvatar } from '../db/queries.js';
 
 const router = express.Router();
 
@@ -65,6 +65,18 @@ router.post('/logout', async (req, res) => {
   } catch (error) {
     console.error('Error fetching authenticate:', error);
     res.status(500).json({ error: 'Failed to fetch authenticate' });
+  }
+});
+
+router.post('/save_avatar', async (req, res) => {
+  const { player_id, avatar } = req.body;
+
+  try {
+    const result = await saveAvatar(player_id, avatar);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: 'Failed to login' });
   }
 });
 

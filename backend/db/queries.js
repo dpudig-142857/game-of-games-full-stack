@@ -2163,3 +2163,11 @@ export async function logout(sessionId, res) {
 
     return { ok: true };
 }
+
+export async function saveAvatar(player_id, avatar) {
+    const old = await pool.query(`
+        SELECT avatar_seed FROM accounts WHERE player_id = $1;
+    `, [player_id]);
+
+    return { avatar: old };
+}
