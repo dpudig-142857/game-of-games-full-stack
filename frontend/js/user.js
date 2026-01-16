@@ -514,9 +514,6 @@ function renderUserProfile(div, user) {
     const avatar = document.createElement('img');
     avatar.id = 'user_avatar';
     avatar.src = user.avatar_seed;
-    avatar.addEventListener('click', () => {
-        renderAvatarPage(div, user, 'updating');
-    });
     avatar_div.appendChild(avatar);
 
     const avatar_btns_div = document.createElement('div');
@@ -528,7 +525,7 @@ function renderUserProfile(div, user) {
     )
     avatar_btns_div.appendChild(swapBtn);
     swapBtn.addEventListener('click', () => {
-        
+        renderSwapAvatarPage(div, user);
     });
 
     const editBtn = header(
@@ -536,7 +533,7 @@ function renderUserProfile(div, user) {
     )
     avatar_btns_div.appendChild(editBtn);
     editBtn.addEventListener('click', () => {
-        
+        renderAvatarPage(div, user, 'updating');
     });
 
     const user_div = document.createElement('div');

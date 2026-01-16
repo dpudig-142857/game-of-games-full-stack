@@ -204,6 +204,13 @@
     width: 90%;
 }
 
+#avatar_btns_div {
+    display: flex;
+    width: 100%;
+    gap: 10%;
+    padding: 1rem;
+}
+
 .user_div {
     width: 60%;
     height: 100%;

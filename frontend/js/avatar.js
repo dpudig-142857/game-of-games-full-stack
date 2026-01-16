@@ -151,6 +151,18 @@ function getCurrSetupFromSeed(seed) {
     }
 }
 
+export function renderSwapAvatarPage(div, user) {
+    div.innerHTML = '';
+    const title = document.getElementById('user-profile-title');
+    title.textContent = 'Swap Avatar';
+
+    const avatar_div = document.createElement('div');
+    avatar_div.id = 'avatar_div';
+    div.appendChild(avatar_div);
+
+    console.log(user);
+}
+
 export function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
