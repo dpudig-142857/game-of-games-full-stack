@@ -2165,13 +2165,23 @@ export async function logout(sessionId, res) {
 }
 
 export async function saveAvatar(player_id, avatar) {
-    const oldRes = await pool.query(`
-        SELECT avatar_seed, previous_avatar_seeds
-        FROM accounts WHERE player_id = $1
-    `, [player_id]);
-    const oldRow = oldRes.rows[0];
-    const old = oldRow.avatar_seed;
-    const others = oldRow.previous_avatar_seeds;
+    const res = await pool.query(`
+        UPDATE accounts
+        SET 
+            previous_avatar_seeds =
+                CASE
+                    WHEN avatar_seed IS NULL THEN previous_avatar_seeds
+                    WHEN previous_avatar_seeds IS NULL THEN ARRAY[avatar_seed]
+                    WHEN NOT (avatar_seed = ANY(previous_avatar_seeds)) THEN
+                        array_prepend(avatar_seed, previous_avatar_seeds)
+                    ELSE previous_avatar_seeds
+                END,
+            avatar_seed = $1
+        WHERE player_id = $2
+        RETURNING avatar_seed;
+    `, [avatar, player_id]);
 
-    return { old, avatar, others };
+    return {
+        avatar: res.rows[0].avatar_seed
+    };
 }
