@@ -2168,6 +2168,7 @@ export async function saveAvatar(player_id, avatar) {
     const old = await pool.query(`
         SELECT avatar_seed FROM accounts WHERE player_id = $1
     `, [player_id]);
+    const old_seed = old.rows[0].avatar_seed;
 
-    return { avatar: old.rows[0] };
+    return { avatar: old_seed };
 }
