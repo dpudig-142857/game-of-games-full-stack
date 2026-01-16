@@ -75,8 +75,8 @@ router.post('/save_avatar', async (req, res) => {
     const result = await saveAvatar(player_id, avatar);
     res.status(200).json(result);
   } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).json({ error: 'Failed to login' });
+    console.error('Error saving avatar:', error);
+    res.status(500).json({ error: 'Failed to save avatar' });
   }
 });
 
