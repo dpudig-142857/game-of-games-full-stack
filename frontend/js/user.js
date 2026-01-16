@@ -3,7 +3,7 @@ import {
     styleBox
 } from './utils.js';
 import { BASE_ROUTE } from './config.js';
-import { renderAvatarPage } from './avatar.js';
+import { renderSwapAvatarPage, renderAvatarPage } from './avatar.js';
 
 let route = `${BASE_ROUTE}/api/auth`;
 
