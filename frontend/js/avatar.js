@@ -216,7 +216,6 @@ export function renderAvatarPage(div, user, type) {
 
     }
 
-    //console.log(user);
     const avatar_div = document.createElement('div');
     avatar_div.id = 'avatar_div';
     div.appendChild(avatar_div);
@@ -257,6 +256,7 @@ function createLink() {
         curr_colour.length == 6 ? `&backgroundColor=${curr_colour}` : '';
 
     let colour2 = '';
+    let bgRot = '';
     if (curr_setup['backgroundType'] == 'gradientLinear') {
         const colour_var_2 = curr_setup['background2'];
         if (colour_var_2.startsWith('#')) {
@@ -264,11 +264,10 @@ function createLink() {
         } else if (colour_var_2.length == 6) {
             colour2 = `,${colour_var_2}`;
         }
+        bgRot = `&backgroundRotation=${curr_setup['backgroundRotation']}`;
     }
 
-    const backgroundType = `&backgroundType=${curr_setup['backgroundType']}`;
-    const backgroundRotation = curr_setup['backgroundRotation'] == 'gradientLinear' ?
-        `&backgroundRotation=${curr_setup['backgroundRotation']}` : '';
+    const bgType = `&backgroundType=${curr_setup['backgroundType']}`;
     const x = `&translateX=${curr_setup['translateX']}`;
     const y = `&translateY=${curr_setup['translateY']}`;
 
@@ -285,9 +284,9 @@ function createLink() {
         options.push(`&${left}=${right}`);
     });
 
-    return base + theme + radius + seed + flip + rotate +
-        scale + colour + colour2 + backgroundType +
-        backgroundRotation + x + y + options.join('');
+    return base + theme + radius + seed + flip +
+        rotate + scale + colour + colour2 +
+        bgRot + bgType + x + y + options.join('');
 }
 
 function updateAvatar() {
