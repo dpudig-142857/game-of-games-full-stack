@@ -234,6 +234,11 @@
     transform: scale(0.9);
 }
 
+.user_avatar_option_selected {
+    border: 0.5rem solid black;
+    border-radius: 50%;
+}
+
 .user_div {
     width: 60%;
     height: 100%;

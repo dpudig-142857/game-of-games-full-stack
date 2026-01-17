@@ -166,16 +166,24 @@ export function renderSwapAvatarPage(div, user) {
     avatars.id = 'user_avatar_options';
     avatar_div.appendChild(avatars);
 
+    const curr = user.avatar_seed;
     let options = user.previous_avatar_seeds ?? [];
-    if (!options.includes(user.avatar_seed)) {    
-        options.unshift(user.avatar_seed);
-    }
+    if (!options.includes(curr)) options.unshift(curr);
     options.sort().forEach(option => {
         const avatar = document.createElement('img');
-        avatar.className = 'user_avatar_option';
+        if (option == curr) {
+            avatar.className = 'user_avatar_option user_avatar_option_selected';
+        } else {
+            avatar.className = 'user_avatar_option';
+        }
         avatar.src = option;
         avatars.appendChild(avatar);
         avatar.addEventListener('click', async () => {
+            if (option == curr) {
+                avatar.className = 'user_avatar_option user_avatar_option_selected';
+            } else {
+                avatar.className = 'user_avatar_option';
+            }
             const res = await fetch(`${route}/save_avatar`, {
                 method: 'POST',
                 credentials: 'include',
