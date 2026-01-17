@@ -388,8 +388,8 @@ function setupThemeGallery(div) {
             })
         });
         const data = await res.json();
-        if (data.avatar == option) {
-            user.avatar_seed = option;
+        if (data.avatar == preview.src) {
+            user.avatar_seed = preview.src;
             renderUserProfile(div, user);
         }
     });
