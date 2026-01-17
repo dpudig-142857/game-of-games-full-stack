@@ -11,7 +11,7 @@ import {
     header,
     startUpper
 } from './utils.js';
-import { renderUserProfile } from './user.js';
+import { renderUserProfile, setupUserModal } from './user.js';
 import { adventurer } from './themes/adventurer.js';
 import { adventurerNeutral } from './themes/adventurer_neutral.js';
 import { avatars } from './themes/avatars.js';
