@@ -988,7 +988,10 @@ function renderAvataaars(div, props, curr) {
     let clothing = getItems(props, 'clothing').enum;
     const def_clothing = curr['clothing'] ?? 'blazerAndShirt';
     setupGallery(div, 'clothing', clothing, def_clothing, false);
-    // TODO: add clothingGraphic if clothing is graphic
+    
+    let clothingGraphic = getItems(props, 'clothingGraphic').enum;
+    const def_clothingGraphic = curr['clothingGraphic'] ?? 'diamond';
+    setupGallery(div, 'clothingGraphic', clothingGraphic, def_clothingGraphic, false);
     
     let eyebrows = getItems(props, 'eyebrows').enum;
     const def_eyebrows = curr['eyebrows'] ?? 'default';
