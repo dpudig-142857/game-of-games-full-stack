@@ -499,7 +499,7 @@ function renderSignUpStep3(div) {
 
 // #region
 
-function renderUserProfile(div, user) {
+export function renderUserProfile(div, user) {
     div.innerHTML = '';
     console.log(user);
 

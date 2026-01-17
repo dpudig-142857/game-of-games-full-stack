@@ -11,6 +11,7 @@ import {
     header,
     startUpper
 } from './utils.js';
+import { renderUserProfile } from './user.js';
 import { adventurer } from './themes/adventurer.js';
 import { adventurerNeutral } from './themes/adventurer_neutral.js';
 import { avatars } from './themes/avatars.js';
@@ -169,7 +170,7 @@ export function renderSwapAvatarPage(div, user) {
     if (!options.includes(user.avatar_seed)) {    
         options.unshift(user.avatar_seed);
     }
-    options.forEach(option => {
+    options.sort().forEach(option => {
         const avatar = document.createElement('img');
         avatar.className = 'user_avatar_option';
         avatar.src = option;
@@ -185,7 +186,10 @@ export function renderSwapAvatarPage(div, user) {
                 })
             });
             const data = await res.json();
-            console.log(data);
+            if (data.avatar == option) {
+                user.avatar_seed = option;
+                renderUserProfile(div, user);
+            }
         });
     });
 }
