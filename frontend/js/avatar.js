@@ -388,10 +388,7 @@ function setupThemeGallery(div) {
             })
         });
         const data = await res.json();
-        if (data.avatar == preview.src) {
-            user.avatar_seed = preview.src;
-            renderUserProfile(div, user);
-        }
+        if (data.avatar == preview.src) await setupUserModal();
     });
 
     leftArrow.addEventListener('click', () => {
