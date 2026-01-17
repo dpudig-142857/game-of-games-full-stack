@@ -120,18 +120,13 @@ export function closeUserModal(modal, modalBox, callback = null) {
 
 export async function setupUserModal() {
     const user_data = await loadUser();
-    
-    const title = document.getElementById('user-profile-title');
     const div = document.getElementById('user-profile-div');
-
+    
     if (!user_data.authenticated) {
-        title.textContent = 'Sign in';
         //renderSignUpPage(div);
         renderLoginForm(div);
     } else {
-        const user = user_data.user;
-        title.textContent = `User Account`
-        renderUserProfile(div, user);
+        renderUserProfile(div, user_data.user);
         //renderAvatarPage(div, user, 'updating');
     }
 }
@@ -208,6 +203,9 @@ export async function loadUserOption() {
 
 function renderLoginForm(div) {
     div.innerHTML = '';
+
+    const title = document.getElementById('user-profile-title');
+    title.textContent = 'Sign in';
 
     const container = document.createElement('div');
     container.id = 'login_form_container';
@@ -502,6 +500,9 @@ function renderSignUpStep3(div) {
 export function renderUserProfile(div, user) {
     div.innerHTML = '';
     console.log(user);
+
+    const title = document.getElementById('user-profile-title');
+    title.textContent = `User Account`;
 
     const section = document.createElement('div');
     section.className = 'user_middle_div';

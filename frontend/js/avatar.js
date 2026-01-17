@@ -388,7 +388,10 @@ function setupThemeGallery(div) {
             })
         });
         const data = await res.json();
-        console.log(data);
+        if (data.avatar == option) {
+            user.avatar_seed = option;
+            renderUserProfile(div, user);
+        }
     });
 
     leftArrow.addEventListener('click', () => {
