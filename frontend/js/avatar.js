@@ -198,6 +198,9 @@ export function renderSwapAvatarPage(div, user) {
                 user.avatar_seed = option;
                 renderUserProfile(div, user);
             }
+            const pfp = document.getElementById('profile-pic');
+            pfp.src = option;
+
         });
     });
 }
@@ -329,9 +332,6 @@ const ignore = [
     'avataaars-neutral.nose',
     'big-smile.face',
     'dylan.facialHair',
-    'lorelei.freckles',
-    'lorelei.hairAccessories',
-    'lorelei-neutral.freckles',
     'micah.base',
     'miniavs.blushes',
     'notionists.base',
@@ -396,6 +396,8 @@ function setupThemeGallery(div) {
         });
         const data = await res.json();
         if (data.avatar == preview.src) await setupUserModal();
+        const pfp = document.getElementById('profile-pic');
+        pfp.src = preview.src;
     });
 
     leftArrow.addEventListener('click', () => {
