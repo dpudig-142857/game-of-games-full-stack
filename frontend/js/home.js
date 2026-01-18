@@ -12,7 +12,9 @@ import {
     openUserModal,
     closeUserModal,
     setupUserModal,
-    loadUserOption
+    loadUserOption,
+    renderUserProfile,
+    goBackUserProfile
 } from './user.js';
 
 import {
@@ -95,6 +97,9 @@ async function initialise() {
     pfp.addEventListener('click', () => openUserModal(
         modal, userBox, curr_colour, setupUserModal
     ));
+
+    const back = document.getElementById('user-profile-back');
+    back.addEventListener('click', () => goBackUserProfile('home'));
 
     const close = document.getElementById('user-profile-close');
     close.addEventListener('click', () => closeUserModal(modal, userBox));

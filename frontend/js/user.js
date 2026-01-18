@@ -51,6 +51,10 @@ export function updateProfilePic(user_data) {
     }
 }
 
+export async function goBackUserProfile(to) {
+    if (to == 'home') await setupUserModal();
+}
+
 // ----------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
 //
@@ -452,7 +456,7 @@ function renderSignUpStep1(div) {
     btn.addEventListener('click', () => {
         if (password.value != confirm.value) {
             err.innerHTML = `Passwords don't match`;
-            err.stye.visibility = 'visible';
+            err.style.visibility = 'visible';
         } else {
             // TODO: connect to backend and check if username already exists
         }
