@@ -160,6 +160,10 @@
     color: #33eaff;
 }
 
+#user-profile-back {
+    display: none;
+}
+
 #user-profile-title {
     color: black;
     text-shadow: none;

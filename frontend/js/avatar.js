@@ -157,6 +157,8 @@ export function renderSwapAvatarPage(div, user) {
     const title = document.getElementById('user-profile-title');
     title.textContent = 'Swap Avatar';
 
+    backArrow('show');
+
     const avatar_div = document.createElement('div');
     avatar_div.id = 'avatar_div';
     div.appendChild(avatar_div);
@@ -200,7 +202,6 @@ export function renderSwapAvatarPage(div, user) {
             }
             const pfp = document.getElementById('profile-pic');
             pfp.src = option;
-
         });
     });
 }
@@ -209,6 +210,7 @@ export function renderAvatarPage(div, user, type) {
     div.innerHTML = '';
 
     const title = document.getElementById('user-profile-title');
+    backArrow('show');
 
     if (type == 'creating') {
         title.textContent = 'Creating Avatar';

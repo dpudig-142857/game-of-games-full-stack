@@ -51,6 +51,17 @@ export function updateProfilePic(user_data) {
     }
 }
 
+export function backArrow(action) {
+    const arrow = document.getElementById('user-profile-back');
+    if (action == 'hide') {
+        arrow.style.display = 'none';
+        arrow.parentElement.style.justifyContent = 'flex-end';
+    } else if (action == 'show') {
+        arrow.style.display = 'flex';
+        arrow.parentElement.style.justifyContent = 'space-between';
+    }
+}
+
 export async function goBackUserProfile(to) {
     if (to == 'home') await setupUserModal();
 }
@@ -504,6 +515,7 @@ function renderSignUpStep3(div) {
 export function renderUserProfile(div, user) {
     div.innerHTML = '';
     console.log(user);
+    backArrow('hide');
 
     const title = document.getElementById('user-profile-title');
     title.textContent = `User Account`;
