@@ -7,7 +7,7 @@ import { renderSwapAvatarPage, renderAvatarPage } from './avatar.js';
 
 let route = `${BASE_ROUTE}/api/auth`;
 
-const default_pfp = 'assets/default_pfp.svg';
+const default_pfp = 'https://api.iconify.design/mdi/account-circle.svg';
 
 let user_data = null;
 

@@ -93,6 +93,8 @@
 .profile-pic {
     width: 4rem;
     transition: transform 0.3s ease;
+    background: white;
+    border-radius: 50%;
 }
 
 .profile-pic:hover {
