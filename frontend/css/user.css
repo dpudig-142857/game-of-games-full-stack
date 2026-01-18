@@ -136,7 +136,7 @@
     align-items: center;
 }
 
-.middle-close-div {
+.user-profile-corner-div {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -146,7 +146,7 @@
     margin: -2rem;
 }
 
-#user-profile-close {
+.user-profile-corner-icons {
     font-size: 2rem;
     font-weight: bold;
     color: #555;
@@ -155,7 +155,7 @@
     padding: 0 0.75rem;
 }
 
-#user-profile-close:hover {
+.user-profile-corner-icons:hover {
     transform: scale(1.3);
     color: #33eaff;
 }
