@@ -14,7 +14,7 @@ import {
     closeUserModal,
     setupUserModal,
     loadUserOption,
-    initialiseUserButtons
+    initialiseUser
 } from './user.js';
 
 import {
@@ -399,17 +399,12 @@ async function initialise() {
         updateTimeDisplays();
         loadMenuBurger();
 
-        user_data = await loadUserOption();
-        const pfp = document.getElementById('profile-pic');
-        pfp.addEventListener('click', () => openUserModal(
-            userModal, userBox, curr_colour, setupUserModal
-        ));
-
-        initialiseUserButtons(userModal, userBox);
+        user_data = await initialiseUser(userModal, userBox, curr_colour);
 
         console.log(user_data);
         headerTitle.innerHTML = '';
-        if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {
+        const role = user_data?.user?.role;
+        if (!user_data.authenticated || (role != 'admin' && role != 'owner')) {
             headerTitle.appendChild(header('h1', `Access Denied`));
             return;
         }

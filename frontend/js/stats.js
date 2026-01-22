@@ -14,7 +14,7 @@ import {
     closeUserModal,
     setupUserModal,
     loadUserOption,
-    initialiseUserButtons
+    initialiseUser
 } from './user.js';
 
 import {
@@ -886,13 +886,7 @@ async function initialise() {
     updateTimeDisplays();
     loadMenuBurger();
     
-    user_data = await loadUserOption();
-    const pfp = document.getElementById('profile-pic');
-    pfp.addEventListener('click', () => openUserModal(
-        userModal, userBox, curr_colour, setupUserModal
-    ));
-
-    initialiseUserButtons(userModal, userBox);
+    user_data = await initialiseUser(userModal, userBox, curr_colour);
 
     console.log(user_data);
     headerTitle.innerHTML = '';

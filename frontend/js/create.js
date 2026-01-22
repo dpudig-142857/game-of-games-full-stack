@@ -1167,13 +1167,7 @@ async function initialize() {
     updateTimeDisplays();
     loadMenuBurger();
 
-    user_data = await loadUserOption();
-    const pfp = document.getElementById('profile-pic');
-    pfp.addEventListener('click', () => openUserModal(
-        modal, userBox, curr_colour, setupUserModal
-    ));
-
-    initialiseUserButtons(modal, userBox);
+    user_data = await initialiseUser(modal, userBox, curr_colour);
     
     console.log(user_data);
     if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {

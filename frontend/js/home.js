@@ -15,7 +15,7 @@ import {
     loadUserOption,
     renderUserProfile,
     goBackUserProfile,
-    initialiseUserButtons
+    initialiseUser
 } from './user.js';
 
 import {
@@ -92,14 +92,7 @@ async function initialise() {
     const res = await fetch(`${BASE_ROUTE}/api/sessions/home`);
     next = await res.json();
 
-    user_data = await loadUserOption();
-    console.log(user_data);
-    const pfp = document.getElementById('profile-pic');
-    pfp.addEventListener('click', () => openUserModal(
-        modal, userBox, curr_colour, setupUserModal
-    ));
-
-    initialiseUserButtons();
+    user_data = await initialiseUser(modal, userBox, curr_colour);
 
     gog_version = user_data.user?.version ?? 'public';
 

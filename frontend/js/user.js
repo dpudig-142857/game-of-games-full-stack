@@ -161,8 +161,7 @@ export function closeUserModal(modal, modalBox, callback = null) {
     }, 400);
 }
 
-export async function setupUserModal() {
-    const user_data = await loadUser();
+export async function setupUserModal(user_data) {
     const div = document.getElementById('user-profile-div');
     
     if (!user_data.authenticated) {
@@ -717,10 +716,20 @@ export function renderUserProfile(div, user) {
     logoutBtn.addEventListener('click', logout);
 }
 
-export function initialiseUserButtons(modal, box) {
+export async function initialiseUser(modal, box, curr_colour) {
+    user_data = await loadUserOption();
+    console.log(user_data);
+    const pfp = document.getElementById('profile-pic');
+    pfp.addEventListener('click', () => openUserModal(
+        modal, box, curr_colour,
+        () => setupUserModal(user_data)
+    ));
+    
     const back = document.getElementById('user-profile-back');
     back.addEventListener('click', () => goBackUserProfile('home'));
     
     const close = document.getElementById('user-profile-close');
     close.addEventListener('click', () => closeUserModal(modal, box));
+
+    return user_data;
 }
