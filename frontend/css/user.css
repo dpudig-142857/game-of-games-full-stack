@@ -92,9 +92,19 @@
     gap: 1rem;
 }
 
+.menu-option {
+    color: black;
+    text-shadow: none;
+}
+
 .menu-option:hover {
     transform: scale(1.1);
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.menu-option:active {
+    transform: scale(0.9);
 }
 
 .profile-pic {
