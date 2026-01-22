@@ -13,7 +13,8 @@ import {
     openUserModal,
     closeUserModal,
     setupUserModal,
-    loadUserOption
+    loadUserOption,
+    initialiseUserButtons
 } from './user.js';
 
 import {
