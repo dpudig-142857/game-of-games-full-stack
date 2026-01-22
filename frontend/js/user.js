@@ -38,6 +38,36 @@ export function loadMenuBurger() {
             menu.classList.remove('open');
         }
     });
+
+    const home = document.getElementById('menu-home');
+    home.addEventListener('click', () => {
+        window.location.href = '/';
+    });
+
+    const start = document.getElementById('menu-start');
+    if (start) start.addEventListener('click', () => {
+
+    });
+
+    const cont = document.getElementById('menu-continue');
+    if (cont) cont.addEventListener('click', () => {
+        window.location.href = 'continue.html';
+    });
+    
+    const stats = document.getElementById('menu-stats');
+    if (stats) stats.addEventListener('click', () => {
+        window.location.href = 'stats.html';
+    });
+
+    const currLog = document.getElementById('menu-curr-log');
+    if (currLog) currLog.addEventListener('click', () => {
+
+    });
+
+    const logs = document.getElementById('menu-logs');
+    if (logs) logs.addEventListener('click', () => {
+        window.location.href = 'logs.html';
+    });
 }
 
 export function updateProfilePic(user_data) {
