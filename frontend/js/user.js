@@ -708,6 +708,14 @@ export function renderUserProfile(div, user) {
     passwordBtn.addEventListener('click', () => {
 
     });
+    
+    const versionBtn = header(
+        'button', 'Change Version', '', 'password-btn', 'user-button user-input'
+    );
+    other_div.appendChild(versionBtn);
+    versionBtn.addEventListener('click', () => {
+        
+    });
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
