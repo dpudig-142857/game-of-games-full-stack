@@ -13,7 +13,8 @@ import {
     openUserModal,
     closeUserModal,
     setupUserModal,
-    loadUserOption
+    loadUserOption,
+    initialiseUserButtons
 } from './user.js';
 
 import {
@@ -938,8 +939,7 @@ async function initialise() {
         userModal, userBox, curr_colour, setupUserModal
     ));
 
-    const close = document.getElementById('user-profile-close');
-    close.addEventListener('click', () => closeUserModal(userModal, userBox));
+    initialiseUserButtons(userModal, userBox);
 
     console.log(user_data);
     headerTitle.innerHTML = '';

@@ -688,3 +688,11 @@ export function renderUserProfile(div, user) {
     div.appendChild(logoutBtn);
     logoutBtn.addEventListener('click', logout);
 }
+
+export function initialiseUserButtons(modal, box) {
+    const back = document.getElementById('user-profile-back');
+    back.addEventListener('click', () => goBackUserProfile('home'));
+    
+    const close = document.getElementById('user-profile-close');
+    close.addEventListener('click', () => closeUserModal(modal, box));
+}

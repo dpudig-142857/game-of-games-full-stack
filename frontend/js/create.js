@@ -1172,8 +1172,7 @@ async function initialize() {
         modal, userBox, curr_colour, setupUserModal
     ));
 
-    const close = document.getElementById('user-profile-close');
-    close.addEventListener('click', () => closeUserModal(modal, userBox));
+    initialiseUserButtons(modal, userBox);
     
     console.log(user_data);
     if (!user_data.authenticated || (user_data.user.role != 'admin' && user_data.user.role != 'owner')) {

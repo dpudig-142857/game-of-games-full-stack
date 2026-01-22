@@ -14,7 +14,8 @@ import {
     setupUserModal,
     loadUserOption,
     renderUserProfile,
-    goBackUserProfile
+    goBackUserProfile,
+    initialiseUserButtons
 } from './user.js';
 
 import {
@@ -98,11 +99,7 @@ async function initialise() {
         modal, userBox, curr_colour, setupUserModal
     ));
 
-    const back = document.getElementById('user-profile-back');
-    back.addEventListener('click', () => goBackUserProfile('home'));
-
-    const close = document.getElementById('user-profile-close');
-    close.addEventListener('click', () => closeUserModal(modal, userBox));
+    initialiseUserButtons();
 
     gog_version = user_data.user?.version ?? 'public';
 

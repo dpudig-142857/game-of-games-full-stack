@@ -29,7 +29,8 @@ import {
     openUserModal,
     closeUserModal,
     setupUserModal,
-    loadUserOption
+    loadUserOption,
+    initialiseUserButtons
 } from './user.js';
 
 import { BASE_ROUTE } from './config.js';
@@ -7481,9 +7482,8 @@ async function initialise(sessionId) {
         pfp.addEventListener('click', () => openUserModal(
             userModal, userBox, curr_colour, setupUserModal
         ));
-    
-        const close = document.getElementById('user-profile-close');
-        close.addEventListener('click', () => closeUserModal(userModal, userBox));
+
+        initialiseUserButtons(userModal, userBox);
 
         console.log(user_data);
         headerTitle.innerHTML = '';
