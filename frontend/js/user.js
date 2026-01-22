@@ -23,7 +23,6 @@ export function loadMenuBurger() {
         menu.classList.toggle('open', burgerInput.checked);
     });
 
-    // Close when clicking outside
     document.addEventListener('click', (e) => {
         const headerRight = document.querySelector('.header-right');
 
@@ -33,7 +32,6 @@ export function loadMenuBurger() {
         }
     });
 
-    // Optional: close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             burgerInput.checked = false;
