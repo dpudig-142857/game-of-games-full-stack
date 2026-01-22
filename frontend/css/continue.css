@@ -61,7 +61,7 @@ header {
 .header-right {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     width: 10%;
     height: 100%;
     text-align: center;
