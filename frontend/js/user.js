@@ -614,15 +614,28 @@ export function renderUserProfile(div, user) {
         'button', 'Edit Username', '', 'username-btn', 'user-button user-input'
     )
     username_div.appendChild(usernameBtn);
-    usernameBtn.addEventListener('click', () => {
+    usernameBtn.addEventListener('click', async () => {
         if (username.hasAttribute('readonly')) {
             username.removeAttribute('readonly');
             usernameBtn.innerHTML = 'Save Username';
         } else {
             username.setAttribute('readonly', true);
             usernameBtn.innerHTML = 'Edit Username';
+
+            const res = await fetch(`${route}/change/username`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    player_id: user.player_id,
+                    version: curr_version
+                })
+            });
+            const data = await res.json();
+            if (data) change_header(curr_version);
             // TODO: Update username for this account
             // tests if new username already exists
+            
         }
         username.classList.toggle('user_read');
     });
@@ -835,7 +848,7 @@ export function renderUserProfile(div, user) {
             curr_version = curr_version == 'public' ?
                 'private' : 'public'
 
-            const res = await fetch(`${route}/version`, {
+            const res = await fetch(`${route}/change/version`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },

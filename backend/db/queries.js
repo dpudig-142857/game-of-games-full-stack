@@ -2155,6 +2155,31 @@ export async function logout(sessionId, res) {
     return { ok: true };
 }
 
+export async function switchUsername(player_id, username) {
+    const { rowCount } = await pool.query(
+        `SELECT 1 FROM accounts WHERE username = $1;`,
+        [username]
+    );
+
+    if (rowCount > 0) return {
+        ok: false,
+        error: "USERNAME_ALREADY_EXISTS"
+    };
+
+    const result = await pool.query(`
+        UPDATE accounts
+        SET username = $1
+        WHERE player_id = $2;
+    `, [username, player_id]);
+
+    if (result.rowCount == 0) return {
+        ok: false,
+        error: "Player not found"
+    };
+
+    return { ok: true };
+}
+
 export async function saveAvatar(player_id, avatar) {
     const res = await pool.query(`
         UPDATE accounts

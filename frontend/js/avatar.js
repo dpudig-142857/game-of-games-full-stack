@@ -186,7 +186,7 @@ export function renderSwapAvatarPage(div, user) {
             } else {
                 avatar.className = 'user_avatar_option';
             }
-            const res = await fetch(`${route}/save_avatar`, {
+            const res = await fetch(`${route}/change/avatar`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -387,7 +387,7 @@ function setupThemeGallery(div) {
     div.appendChild(saveBtn);
     const preview = document.getElementById('avatar_preview');
     saveBtn.addEventListener('click', async () => {
-        const res = await fetch(`${route}/save_avatar`, {
+        const res = await fetch(`${route}/change/avatar`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

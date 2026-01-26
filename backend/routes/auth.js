@@ -74,7 +74,19 @@ router.post('/logout', async (req, res) => {
   }
 });
 
-router.post('/save_avatar', async (req, res) => {
+router.post('/change/username', async (req, res) => {
+  const { player_id, username } = req.body;
+
+  try {
+    const result = await switchUsername(player_id, username);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error switching username:', error);
+    res.status(500).json({ error: 'Failed to switch username' });
+  }
+});
+
+router.post('/change/avatar', async (req, res) => {
   const { player_id, avatar } = req.body;
 
   try {
@@ -86,7 +98,7 @@ router.post('/save_avatar', async (req, res) => {
   }
 });
 
-router.post('/version', async (req, res) => {
+router.post('/change/version', async (req, res) => {
   const { player_id, version } = req.body;
 
   try {
