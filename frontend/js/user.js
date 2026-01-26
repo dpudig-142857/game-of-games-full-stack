@@ -731,7 +731,7 @@ export function renderUserProfile(div, user) {
 
     const confirm_div = document.createElement('div');
     confirm_div.className = 'user_input_div';
-    password_div.appendChild(confirm_div);
+    password_section.appendChild(confirm_div);
     
     const confirm = document.createElement('input');
     confirm.type = 'password';
@@ -760,7 +760,7 @@ export function renderUserProfile(div, user) {
         'user-profile-error', 'middle-title'
     );
     err.style.visibility = 'hidden';
-    password_div.appendChild(err);
+    password_section.appendChild(err);
 
     const btn = document.createElement('button');
     btn.type = 'submit';
@@ -774,12 +774,12 @@ export function renderUserProfile(div, user) {
             // TODO: connect to backend and check if username already exists
         }
     });
-    password_div.appendChild(btn);
+    password_section.appendChild(btn);
     
     const passwordBtn = header(
         'button', 'Change Password', '', 'password-btn', 'user-button user-input'
     );
-    password_div.appendChild(passwordBtn);
+    password_section.appendChild(passwordBtn);
     passwordBtn.addEventListener('click', () => {
 
     });
