@@ -773,9 +773,10 @@ export function renderUserProfile(div, user) {
     password_section.appendChild(passwordBtn);
     passwordBtn.addEventListener('click', () => {
         if (passwordBtn.innerHTML == 'Change Password') {
-            password_div.style.display = 'flex';
-            confirm_div.style.display = 'flex';
             
+            change_password.style.visibility = 'visible';
+            err.innerHTML = '';
+            err.style.visibility = 'hidden';
             passwordBtn.innerHTML = 'Save Password';
         } else if (passwordBtn.innerHTML == 'Save Password') {
             if (password.value != confirm.value) {
@@ -784,9 +785,8 @@ export function renderUserProfile(div, user) {
             } else {
                 // TODO: connect to backend and check if username already exists
             }
-            password_div.style.display = 'none';
-            confirm_div.style.display = 'none';
-
+            
+            change_password.style.visibility = 'hidden';
             passwordBtn.innerHTML = 'Change Password';
         }
     });
