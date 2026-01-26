@@ -775,7 +775,6 @@ export function renderUserProfile(div, user) {
         if (passwordBtn.innerHTML == 'Change Password') {
             
             change_password.style.visibility = 'visible';
-            err.innerHTML = '';
             err.style.visibility = 'hidden';
             passwordBtn.innerHTML = 'Save Password';
         } else if (passwordBtn.innerHTML == 'Save Password') {
@@ -784,10 +783,11 @@ export function renderUserProfile(div, user) {
                 err.style.visibility = 'visible';
             } else {
                 // TODO: connect to backend and check if username already exists
+                err.style.visibility = 'hidden';
+                change_password.style.visibility = 'hidden';
+                passwordBtn.innerHTML = 'Change Password';
             }
             
-            change_password.style.visibility = 'hidden';
-            passwordBtn.innerHTML = 'Change Password';
         }
     });
     
