@@ -4,7 +4,8 @@ import {
   login,
   logout,
   saveAvatar,
-  switchVersion
+  switchVersion,
+  switchPassword
 } from '../db/queries.js';
 
 const router = express.Router();
@@ -83,6 +84,18 @@ router.post('/change/username', async (req, res) => {
   } catch (error) {
     console.error('Error switching username:', error);
     res.status(500).json({ error: 'Failed to switch username' });
+  }
+});
+
+router.post('/change/password', async (req, res) => {
+  const { player_id, old_password, new_password } = req.body;
+
+  try {
+    const result = await switchPassword(player_id, old_password, new_password);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error switching password:', error);
+    res.status(500).json({ error: 'Failed to switch password' });
   }
 });
 

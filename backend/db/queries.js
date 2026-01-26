@@ -2180,6 +2180,14 @@ export async function switchUsername(player_id, username) {
     return { ok: true };
 }
 
+export async function switchPassword(player_id, old_password, new_password) {
+    console.log(player_id);
+    console.log(old_password);
+    console.log(new_password);
+
+    return { ok: true };
+}
+
 export async function saveAvatar(player_id, avatar) {
     const res = await pool.query(`
         UPDATE accounts
