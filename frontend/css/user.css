@@ -277,6 +277,7 @@
 .user_input_section {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .user_input_div {
@@ -300,6 +301,7 @@
 
 #username-btn, #password-btn {
     width: 15rem;
+    height: 5rem;
 }
 
 #logout-btn {

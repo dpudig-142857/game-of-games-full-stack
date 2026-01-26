@@ -161,7 +161,8 @@ export function closeUserModal(modal, modalBox, callback = null) {
     }, 400);
 }
 
-export async function setupUserModal(user_data) {
+export async function setupUserModal() {
+    const user_data = await loadUserOption();
     const div = document.getElementById('user-profile-div');
     
     if (!user_data.authenticated) {
@@ -836,8 +837,7 @@ export async function initialiseUser(modal, box, curr_colour) {
     console.log(user_data);
     const pfp = document.getElementById('profile-pic');
     pfp.addEventListener('click', () => openUserModal(
-        modal, box, curr_colour,
-        () => setupUserModal(user_data)
+        modal, box, curr_colour, setupUserModal
     ));
     
     const back = document.getElementById('user-profile-back');
