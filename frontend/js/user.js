@@ -716,18 +716,18 @@ export function renderUserProfile(div, user) {
     old_password.placeholder = 'Old Password...';
     old_password.className = 'user-input';
     old_password.style.cursor = 'text';
-    password_div.appendChild(old_password);
+    old_div.appendChild(old_password);
 
     const old_eye = document.createElement('img');
     old_eye.className = 'password_eye';
     old_eye.src = 'assets/eye_on.svg';
-    password_div.appendChild(old_eye);
+    old_div.appendChild(old_eye);
     old_eye.addEventListener('click', () => {
-        if (password.type == 'password') {
-            password.type = 'text';
+        if (old_password.type == 'password') {
+            old_password.type = 'text';
             old_eye.src = 'assets/eye_off.svg';
         } else {
-            password.type = 'password';
+            old_password.type = 'password';
             old_eye.src = 'assets/eye_on.svg';
         }
     });
