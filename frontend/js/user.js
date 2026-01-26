@@ -594,6 +594,13 @@ export function renderUserProfile(div, user) {
     username_div.className = 'user_input_section';
     form.appendChild(username_div);
 
+    const err = header(
+        'h3', 'ERROR', 'red',
+        'user-profile-error', 'middle-title'
+    );
+    err.style.visibility = 'hidden';
+    form.appendChild(err);
+
     const username = document.createElement('input');
     username.type = 'username';
     username.id = 'user_username';
@@ -784,13 +791,6 @@ export function renderUserProfile(div, user) {
         }
     });
 
-    const err = header(
-        'h3', 'ERROR', 'red',
-        'user-profile-error', 'middle-title'
-    );
-    err.style.visibility = 'hidden';
-    change_password.appendChild(err);
-    
     const passwordBtn = header(
         'button', 'Change Password', '', 'password-btn', 'user-button user-input'
     );
