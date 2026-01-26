@@ -697,9 +697,13 @@ export function renderUserProfile(div, user) {
         });
     }*/
 
+    const password_section = document.createElement('div');
+    password_section.className = 'user_input_section';
+    form.appendChild(password_section);
+
     const password_div = document.createElement('div');
-    password_div.className = 'user_input_section';
-    form.appendChild(password_div);
+    password_div.className = 'user_input_div';
+    password_section.appendChild(password_div);
 
     const password = document.createElement('input');
     password.type = 'password';
@@ -780,7 +784,7 @@ export function renderUserProfile(div, user) {
 
     });
     
-    if (user.role == 'admin') {
+    if (user.role == 'admin' || user.role == 'owner') {
         const other_div = document.createElement('div');
         other_div.className = 'user_input_section';
         form.appendChild(other_div);
