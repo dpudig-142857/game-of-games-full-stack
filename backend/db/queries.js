@@ -2176,3 +2176,15 @@ export async function saveAvatar(player_id, avatar) {
         avatar: res.rows[0].avatar_seed
     };
 }
+
+export async function switchVersion(player_id, version) {
+    await pool.query(`
+        UPDATE accounts
+        SET version = $1
+        WHERE player_id = $2;
+    `, [version, player_id]);
+
+    return {
+        ok: true
+    };
+}

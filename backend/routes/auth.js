@@ -1,5 +1,11 @@
 import express from 'express';
-import { requireAuth, login, logout, saveAvatar } from '../db/queries.js';
+import {
+  requireAuth,
+  login,
+  logout,
+  saveAvatar,
+  switchVersion
+} from '../db/queries.js';
 
 const router = express.Router();
 
@@ -77,6 +83,18 @@ router.post('/save_avatar', async (req, res) => {
   } catch (error) {
     console.error('Error saving avatar:', error);
     res.status(500).json({ error: 'Failed to save avatar' });
+  }
+});
+
+router.post('/version', async (req, res) => {
+  const { player_id, version } = req.body;
+
+  try {
+    const result = await switchVersion(player_id, version);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error switching version:', error);
+    res.status(500).json({ error: 'Failed to switch version' });
   }
 });
 

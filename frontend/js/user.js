@@ -697,25 +697,122 @@ export function renderUserProfile(div, user) {
         });
     }*/
 
-    const other_div = document.createElement('div');
-    other_div.className = 'user_input_section';
-    form.appendChild(other_div);
+    const password_div = document.createElement('div');
+    password_div.className = 'user_input_section';
+    form.appendChild(password_div);
+
+    const password = document.createElement('input');
+    password.type = 'password';
+    password.id = 'password';
+    password.placeholder = 'Password...';
+    password.className = 'user-input';
+    password.style.cursor = 'text';
+    password_div.appendChild(password);
+
+    const eye = document.createElement('img');
+    eye.className = 'password_eye';
+    eye.src = 'assets/eye_on.svg';
+    password_div.appendChild(eye);
+    eye.addEventListener('click', () => {
+        if (password.type == 'password') {
+            password.type = 'text';
+            eye.src = 'assets/eye_off.svg';
+            eye.style.textDecoration = 'line-through';
+        } else {
+            password.type = 'password';
+            eye.src = 'assets/eye_on.svg';
+            eye.style.textDecoration = 'none';
+        }
+    });
+
+    const confirm_div = document.createElement('div');
+    confirm_div.className = 'user_input_div';
+    password_div.appendChild(confirm_div);
+    
+    const confirm = document.createElement('input');
+    confirm.type = 'password';
+    confirm.id = 'password';
+    confirm.placeholder = 'Confirm Password...';
+    confirm.className = 'user-input';
+    confirm.style.cursor = 'text';
+    confirm_div.appendChild(confirm);
+
+    const confirm_eye = document.createElement('img');
+    confirm_eye.className = 'password_eye';
+    confirm_eye.src = 'assets/eye_on.svg';
+    confirm_div.appendChild(confirm_eye);
+    confirm_eye.addEventListener('click', () => {
+        if (confirm.type == 'password') {
+            confirm.type = 'text';
+            confirm_eye.src = 'assets/eye_off.svg';
+        } else {
+            confirm.type = 'password';
+            confirm_eye.src = 'assets/eye_on.svg';
+        }
+    });
+
+    const err = header(
+        'h3', 'ERROR', 'red',
+        'user-profile-error', 'middle-title'
+    );
+    err.style.visibility = 'hidden';
+    password_div.appendChild(err);
+
+    const btn = document.createElement('button');
+    btn.type = 'submit';
+    btn.className = 'user-button user-input';
+    btn.innerHTML = 'Next';
+    btn.addEventListener('click', () => {
+        if (password.value != confirm.value) {
+            err.innerHTML = `Passwords don't match`;
+            err.style.visibility = 'visible';
+        } else {
+            // TODO: connect to backend and check if username already exists
+        }
+    });
+    password_div.appendChild(btn);
     
     const passwordBtn = header(
         'button', 'Change Password', '', 'password-btn', 'user-button user-input'
     );
-    other_div.appendChild(passwordBtn);
+    password_div.appendChild(passwordBtn);
     passwordBtn.addEventListener('click', () => {
 
     });
     
-    const versionBtn = header(
-        'button', 'Change Version', '', 'password-btn', 'user-button user-input'
-    );
-    other_div.appendChild(versionBtn);
-    versionBtn.addEventListener('click', () => {
+    if (user.role == 'admin') {
+        const other_div = document.createElement('div');
+        other_div.className = 'user_input_section';
+        form.appendChild(other_div);
         
-    });
+        let curr_version = user.version;
+        const versionBtn = header(
+            'button', '', '', 'password-btn', 'user-button user-input'
+        );
+        other_div.appendChild(versionBtn);
+        let change_header = (ver) => {
+            versionBtn.innerHTML = ver == 'private' ?
+                'Switch to Public' : 'Switch to Private'
+        }
+        change_header(curr_version);
+
+        versionBtn.addEventListener('click', async () => {
+            curr_version = curr_version == 'public' ?
+                'private' : 'public'
+
+            const res = await fetch(`${route}/version`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    player_id: user.player_id,
+                    version: curr_version
+                })
+            });
+            const data = await res.json();
+            if (data) change_header(curr_version);
+        });
+    }
 
     const logoutBtn = header(
         'button', 'Log out', '', 'logout-btn', 'user-button user-input'
