@@ -701,9 +701,13 @@ export function renderUserProfile(div, user) {
     password_section.className = 'user_input_section';
     form.appendChild(password_section);
 
+    const change_password = document.createElement('div');
+    change_password.id = 'user_change_password';
+    password_section.appendChild(change_password);
+
     const password_div = document.createElement('div');
     password_div.className = 'user_input_div';
-    password_section.appendChild(password_div);
+    change_password.appendChild(password_div);
 
     const password = document.createElement('input');
     password.type = 'password';
@@ -731,7 +735,7 @@ export function renderUserProfile(div, user) {
 
     const confirm_div = document.createElement('div');
     confirm_div.className = 'user_input_div';
-    password_section.appendChild(confirm_div);
+    change_password.appendChild(confirm_div);
     
     const confirm = document.createElement('input');
     confirm.type = 'password';
@@ -760,28 +764,30 @@ export function renderUserProfile(div, user) {
         'user-profile-error', 'middle-title'
     );
     err.style.visibility = 'hidden';
-    password_section.appendChild(err);
-
-    const btn = document.createElement('button');
-    btn.type = 'submit';
-    btn.className = 'user-button user-input';
-    btn.innerHTML = 'Next';
-    btn.addEventListener('click', () => {
-        if (password.value != confirm.value) {
-            err.innerHTML = `Passwords don't match`;
-            err.style.visibility = 'visible';
-        } else {
-            // TODO: connect to backend and check if username already exists
-        }
-    });
-    password_section.appendChild(btn);
+    change_password.appendChild(err);
     
     const passwordBtn = header(
         'button', 'Change Password', '', 'password-btn', 'user-button user-input'
     );
     password_section.appendChild(passwordBtn);
     passwordBtn.addEventListener('click', () => {
+        if (passwordBtn.innerHTML == 'Change Password') {
+            password_div.style.display = 'flex';
+            confirm_div.style.display = 'flex';
+            
+            passwordBtn.innerHTML = 'Save Password';
+        } else if (passwordBtn.innerHTML == 'Save Password') {
+            if (password.value != confirm.value) {
+                err.innerHTML = `Passwords don't match`;
+                err.style.visibility = 'visible';
+            } else {
+                // TODO: connect to backend and check if username already exists
+            }
+            password_div.style.display = 'none';
+            confirm_div.style.display = 'none';
 
+            passwordBtn.innerHTML = 'Change Password';
+        }
     });
     
     if (user.role == 'admin' || user.role == 'owner') {
