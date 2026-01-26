@@ -706,6 +706,32 @@ export function renderUserProfile(div, user) {
     change_password.id = 'user_change_password';
     password_section.appendChild(change_password);
 
+    const old_div = document.createElement('div');
+    old_div.className = 'user_input_div';
+    change_password.appendChild(old_div);
+
+    const old_password = document.createElement('input');
+    old_password.type = 'password';
+    old_password.id = 'old_password';
+    old_password.placeholder = 'Old Password...';
+    old_password.className = 'user-input';
+    old_password.style.cursor = 'text';
+    password_div.appendChild(old_password);
+
+    const old_eye = document.createElement('img');
+    old_eye.className = 'password_eye';
+    old_eye.src = 'assets/eye_on.svg';
+    password_div.appendChild(old_eye);
+    old_eye.addEventListener('click', () => {
+        if (password.type == 'password') {
+            password.type = 'text';
+            old_eye.src = 'assets/eye_off.svg';
+        } else {
+            password.type = 'password';
+            old_eye.src = 'assets/eye_on.svg';
+        }
+    });
+
     const password_div = document.createElement('div');
     password_div.className = 'user_input_div';
     change_password.appendChild(password_div);
@@ -713,7 +739,7 @@ export function renderUserProfile(div, user) {
     const password = document.createElement('input');
     password.type = 'password';
     password.id = 'password';
-    password.placeholder = 'Password...';
+    password.placeholder = 'New Password...';
     password.className = 'user-input';
     password.style.cursor = 'text';
     password_div.appendChild(password);
@@ -726,11 +752,9 @@ export function renderUserProfile(div, user) {
         if (password.type == 'password') {
             password.type = 'text';
             eye.src = 'assets/eye_off.svg';
-            eye.style.textDecoration = 'line-through';
         } else {
             password.type = 'password';
             eye.src = 'assets/eye_on.svg';
-            eye.style.textDecoration = 'none';
         }
     });
 
@@ -787,7 +811,7 @@ export function renderUserProfile(div, user) {
                 change_password.style.visibility = 'hidden';
                 passwordBtn.innerHTML = 'Change Password';
             }
-            
+
         }
     });
     
