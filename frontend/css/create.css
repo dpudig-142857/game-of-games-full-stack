@@ -314,6 +314,10 @@ header {
     transform: scale(1);
 }
 
+.player-box-pfp {
+    
+}
+
 @keyframes playerSelect {
     0% {
         transform: scale(1);

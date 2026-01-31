@@ -419,20 +419,18 @@ function createPlayers() {
     names.sort((a, b) => a.name.localeCompare(b.name))
     .forEach(player => {
         const info = allPlayers.find(p => p.player_id == player.player_id);
-        const all_info = thePlayers.find(p => p.player_id == player.player_id);
         const box = document.createElement('div');
         box.id = `${player.player_id}-box`;
         box.className = 'player-box';
         box.appendChild(header('h4', player.name));
 
+        console.log(info);
         const pfp = document.createElement('img');
         pfp.className = 'player-box-pfp';
         pfp.id = `${player.player_id}-box`;
-        pfp.src = all_info.avatar_seed;
+        pfp.src = info.avatar_seed;
         box.appendChild(pfp);
-        console.log(info);
-        console.log(all_info);
-        
+
         box.addEventListener('click', () => {
             if (thePlayers.find(p => p.player_id == player.player_id)) {
                 thePlayers = thePlayers.filter(p => p.player_id != player.player_id);
