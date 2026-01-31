@@ -526,3 +526,8 @@
 .user-button:active {
     transform: scale(0.9);
 }
+
+#current-time h3 {
+    font-family: 'Audiowide', sans-serif;
+    font-weight: normal;
+}

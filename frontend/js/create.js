@@ -1257,7 +1257,7 @@ async function initialize() {
                 });
             } else if (sessionType == 'create') {
                 btn.innerHTML = 'Start';
-                btn.addEventListener('click', () => startGame());
+                btn.addEventListener('click', () => possiblyStarting());
             }
         } else {
             btn.addEventListener('click', () => {
@@ -1270,6 +1270,11 @@ async function initialize() {
             });
         }
     });
+}
+
+function possiblyStarting() {
+    // TODO: open modal for whether the user knows the rules or not
+    startGame();
 }
 
 async function startGame() {
