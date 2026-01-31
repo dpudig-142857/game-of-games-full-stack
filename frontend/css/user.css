@@ -527,7 +527,22 @@
     transform: scale(0.9);
 }
 
-#current-time h3 {
+.header-left h3 {
     font-family: 'Audiowide', sans-serif;
     font-weight: normal;
+    color: #33eaff;
+    text-shadow: #0ff 0.1rem 0.1rem 0.5rem;
+}
+
+.header-left {
+    width: 10%;
+}
+
+.header-right {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 10%;
+    height: 100%;
+    text-align: center;
 }

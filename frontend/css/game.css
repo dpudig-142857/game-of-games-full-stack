@@ -50,14 +50,10 @@ header {
 }
 
 .header-left {
-    /*font-size: 0.8rem;
-    color: #33eaff;
-    text-shadow: none;
-    text-align: center;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;*/
-    width: 10%;
+    gap: 0.4rem;
 }
 
 .logo {
