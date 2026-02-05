@@ -110,9 +110,8 @@
     transform: scale(0.9);
 }
 
-.menu-option:hover .menu-option-div {
+.menu-option-div:hover {
     filter: brightness(80%);
-    transform: scale(1.5);
 }
 
 .profile-pic {
