@@ -7311,8 +7311,8 @@ async function nextGame(from = '') {
     document.getElementById(`${currGame.tag}`).innerHTML = '';
 
     updateHeaderButtons('show');
-    intrudeBtn.style.display = 'flex';
-    abandonBtn.style.display = 'flex';
+    intrudeBtn.style.display = 'block';
+    abandonBtn.style.display = 'block';
     breakConeBtn.style.display = 'flex';
     victoryConeBtn.style.display = 'flex';
 
@@ -7649,8 +7649,8 @@ function startGoG(newGame) {
     welcome.style.display = newGame ? 'flex' : 'none';
     otherWelcome.innerHTML = newGame ? '' : `Game ${gameNumber}`;
 
-    intrudeBtn.style.display = newGame ? 'none': 'flex';
-    abandonBtn.style.display = newGame ? 'none': 'flex';
+    intrudeBtn.style.display = newGame ? 'none': 'block';
+    abandonBtn.style.display = newGame ? 'none': 'block';
     breakConeBtn.style.display = newGame ? 'none' : 'flex';
     victoryConeBtn.style.display = newGame ? 'none' : 'flex';
     const breakTitle = breakConeBtn.querySelector('h3');

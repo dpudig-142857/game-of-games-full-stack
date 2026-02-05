@@ -90,10 +90,12 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
 }
 
 .menu-option-div {
     background: white;
+    padding: 0.5rem 0;
 }
 
 .menu-option {
@@ -102,13 +104,15 @@
 }
 
 .menu-option:hover {
-    transform: scale(1.1);
     cursor: pointer;
-    text-decoration: underline;
 }
 
 .menu-option:active {
     transform: scale(0.9);
+}
+
+.menu-option:hover .menu-option-div {
+    filter: brightness(80%)
 }
 
 .profile-pic {
