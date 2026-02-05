@@ -94,7 +94,12 @@
 }
 
 .menu-option-div {
-    background: white;
+    background: linear-gradient(
+        135deg,
+        rgba(51, 234, 255, 0.9) 0%,
+        rgba(51, 234, 255, 0.75) 50%,
+        rgba(51, 234, 255, 0.9) 100%
+    );
     padding: 0.5rem 0;
 }
 
