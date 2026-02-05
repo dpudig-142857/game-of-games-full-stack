@@ -2288,7 +2288,7 @@ footer {
 .footer-left {
     display: flex;
     justify-content: space-around;
-    width: 70px;
+    width: 6%;
     height: 100%;
     text-align: center;
 }
@@ -2336,6 +2336,7 @@ footer {
     justify-content: center;
     position: relative;
     align-items: center;
+    width: 6%;
 }
 
 #intrude, #abandon, #break_cone, #victory_cone {

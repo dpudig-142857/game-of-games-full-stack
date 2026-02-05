@@ -1547,7 +1547,7 @@ function startTimer(mins = 0, secs = 0) {
 
 // #region
 
-const intrudeBtn = document.getElementById('intrude');
+const intrudeBtn = document.getElementById('menu-intrude');
 const intrudeModal = document.getElementById('intrudeModal');
 const intrudeBox = document.getElementById('intrude-game-box');
 const intrudeGameGamesDiv = document.getElementById('intrude-game-games');
@@ -1947,7 +1947,7 @@ function closeIntrude() {
 
 // #region
 
-const abandonBtn = document.getElementById('abandon');
+const abandonBtn = document.getElementById('menu-abandon');
 const abandonModal = document.getElementById('abandonModal');
 const abandonBox = document.getElementById('abandon-game-box');
 const abandonGameGamesDiv = document.getElementById('abandon-game-games');
@@ -7301,8 +7301,9 @@ function refreshGames() {
     refreshCount = ++theGame.refresh_count;
 }
 
-async function nextGame(from) {
+async function nextGame(from = '') {
     gameNumber++;
+    await saveGameState(false);
     otherWelcome.innerHTML = `Game ${gameNumber}`;
     otherWelcome.style.display = 'flex';
     document.getElementById('end').style.display = 'none';
@@ -7333,7 +7334,6 @@ async function nextGame(from) {
         } else if (gameSelection == 'Vote') {
             openVote();
         }
-        await saveGameState(false);
         closeGameBox('end');
         return;
     }
@@ -7358,7 +7358,6 @@ async function nextGame(from) {
     wheelCone.style.display = 'none';
     askNeigh.style.display = 'none';
     
-    await saveGameState(false);
     closeGameBox('end');
     
     gameTitle.innerText = `Game ${gameNumber}`;
@@ -7383,12 +7382,13 @@ function noSession() {
     headerTitle.style.textDecoration = 'none';
     headerTitle.appendChild(header('h1', `Session ${sessionId} Not Found`));
 
-    document.getElementById('finish').style.display = 'none';
-
     const homeBtn = document.getElementById('home-button');
     homeBtn.addEventListener('click', () => {
         window.location.href = '/';
     });
+
+    document.getElementById('menu-curr-log').style.display = 'none';
+    document.getElementById('menu-finish').style.display = 'none';
     
     intrudeBtn.style.display = 'none';
     abandonBtn.style.display = 'none';
@@ -7400,9 +7400,8 @@ function initialiseButtons() {
     //const homeBtn = document.getElementById('home-button');
     //homeBtn.addEventListener('click', () => saveGoG());
 
-    const finishBtn = document.getElementById('finish');
-    finishBtn.style.display = 'flex';
-    finishBtn.addEventListener('click', () => finishGoG());
+    const finishBtn = document.getElementById('menu-finish');
+    finishBtn.addEventListener('click', finishGoG);
 
     const neighBtns = document.querySelectorAll('.neigh-button');
     neighBtns.forEach(btn => {
@@ -7456,8 +7455,6 @@ function initialiseButtons() {
     const bottomBtns = document.querySelectorAll('.bottom-button');
     bottomBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            if (btn.id == 'intrude') openIntrude();
-            if (btn.id == 'abandon') openAbandon();
             if (btn.id == 'vote') submitVotes();
             if (btn.id == 'break-cone') openBreakCone();
             if (btn.id == 'victory-cone') openVictoryCone();
@@ -7468,6 +7465,9 @@ function initialiseButtons() {
     if (spin) spin.addEventListener('click', () => spinWheel('games'));
     const spin2 = document.getElementById('spin2');
     if (spin2) spin2.addEventListener('click', () => spinWheel('cone'));
+
+    intrudeBtn.addEventListener('click', openIntrude);
+    abandonBtn.addEventListener('click', openAbandon);
 }
 
 async function initialise(sessionId) {
