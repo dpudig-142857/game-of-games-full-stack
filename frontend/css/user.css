@@ -95,11 +95,11 @@
 
 .menu-option-div {
     padding: 0.5rem 0;
-    transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .menu-option-div:hover {
     background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
 
 .menu-option-div:active .menu-option {
@@ -109,10 +109,6 @@
 .menu-option {
     color: black;
     text-shadow: none;
-}
-
-.menu-option:hover {
-    cursor: pointer;
 }
 
 .profile-pic {
