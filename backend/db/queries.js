@@ -2136,7 +2136,7 @@ export function requireAuth() {
     }
 
     const result = await pool.query(`
-        SELECT *
+        SELECT seed, selected, custom_order, created_at
         FROM avatars
         WHERE player_id = $1
         ORDER BY custom_order

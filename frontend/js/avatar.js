@@ -169,19 +169,18 @@ export function renderSwapAvatarPage(div, user) {
     avatar_div.appendChild(avatars);
 
     const curr = user.avatar_seed;
-    let options = user.previous_avatar_seeds ?? [];
-    if (!options.includes(curr)) options.unshift(curr);
-    options.sort().forEach(option => {
+    let options = user.avatars.filter(a => a.seed != curr) ?? [];
+    options.forEach(o => {
         const avatar = document.createElement('img');
-        if (option == curr) {
+        if (o.seed == curr) {
             avatar.className = 'user_avatar_option user_avatar_option_selected';
         } else {
             avatar.className = 'user_avatar_option';
         }
-        avatar.src = option;
+        avatar.src = o.seed;
         avatars.appendChild(avatar);
         avatar.addEventListener('click', async () => {
-            if (option == curr) {
+            if (o.seed == curr) {
                 avatar.className = 'user_avatar_option user_avatar_option_selected';
             } else {
                 avatar.className = 'user_avatar_option';
@@ -192,16 +191,16 @@ export function renderSwapAvatarPage(div, user) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     player_id: user.player_id,
-                    avatar: option
+                    avatar: o.seed
                 })
             });
             const data = await res.json();
-            if (data.avatar == option) {
-                user.avatar_seed = option;
+            if (data.avatar == o.seed) {
+                user.avatar_seed = o.seed;
                 renderUserProfile(div, user);
             }
             const pfp = document.getElementById('profile-pic');
-            pfp.src = option;
+            pfp.src = o.seed;
         });
     });
 }
