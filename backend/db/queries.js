@@ -2135,6 +2135,14 @@ export function requireAuth() {
         });
     }
 
+    const result = await pool.query(`
+        SELECT *
+        FROM avatars
+        WHERE player_id = $1
+        ORDER BY custom_order
+    `, [user.player_id]);
+
+    user['avatars'] = result.rows;
     req.user = user;
     next();
   };
