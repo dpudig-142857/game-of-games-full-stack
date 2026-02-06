@@ -56,12 +56,12 @@ export function loadMenuBurger() {
     
     const stats = document.getElementById('menu-stats');
     if (stats) stats.addEventListener('click', () => {
-        window.location.href = 'stats.html';
+        window.open(`stats.html`);
     });
 
     const logs = document.getElementById('menu-logs');
     if (logs) logs.addEventListener('click', () => {
-        window.location.href = 'logs.html';
+        window.open(`logs.html`);
     });
 }
 
