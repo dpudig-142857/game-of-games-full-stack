@@ -7268,6 +7268,7 @@ async function submitGame() {
     if (starting) starting.style.display = 'none';
     document.getElementById(`${currGame.tag}_header`).style.display = 'none';
     document.getElementById('submit').style.display = 'none';
+    await saveGameState(false);
 }
 
 function refreshGames() {
@@ -7303,7 +7304,7 @@ function refreshGames() {
 
 async function nextGame(from = '') {
     gameNumber++;
-    await saveGameState(false);
+    //await saveGameState(false);
     otherWelcome.innerHTML = `Game ${gameNumber}`;
     otherWelcome.style.display = 'flex';
     document.getElementById('end').style.display = 'none';
