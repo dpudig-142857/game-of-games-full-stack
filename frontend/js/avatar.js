@@ -152,12 +152,16 @@ function getCurrSetupFromSeed(seed) {
     }
 }
 
-export function renderSwapAvatarPage(div, user) {
+/*export function renderSwapAvatarPage(div, user) {
     div.innerHTML = '';
     const title = document.getElementById('user-profile-title');
     title.textContent = 'Swap Avatar';
 
     backArrow('show');
+
+    /*const filters_div = document.createElement('div');
+    filters_div.id = 'user_avatar_filters';
+    div.appendChild(filters_div);* /
 
     const avatar_div = document.createElement('div');
     avatar_div.id = 'avatar_div';
@@ -168,9 +172,15 @@ export function renderSwapAvatarPage(div, user) {
     avatars.id = 'user_avatar_options';
     avatar_div.appendChild(avatars);
 
+    let sorting = 'custom';
     const curr = user.avatar_seed;
-    let options = user.avatars.filter(a => a.seed != curr) ?? [];
-    options.forEach(o => {
+    let options = user.avatars ?? [];
+    options.sort((a, b) => {
+        if (sorting == 'custom') return a.custom_order - b.custom_order;
+        if (sorting == 'seed') return a.seed.localeCompare(b.seed);
+        if (sorting == 'time') return b.created_at - a.created_at;
+        return true;
+    }).forEach(o => {
         const avatar = document.createElement('img');
         if (o.seed == curr) {
             avatar.className = 'user_avatar_option user_avatar_option_selected';
@@ -203,6 +213,177 @@ export function renderSwapAvatarPage(div, user) {
             pfp.src = o.seed;
         });
     });
+}*/
+
+export function renderSwapAvatarPage(div, user) {
+    div.innerHTML = '';
+    const title = document.getElementById('user-profile-title');
+    title.textContent = 'Swap Avatar';
+
+    backArrow('show');
+
+    const avatar_div = document.createElement('div');
+    avatar_div.id = 'avatar_div';
+    div.appendChild(avatar_div);
+
+    /* ---------- STATE ---------- */
+    let sorting = 'custom';
+    let isEditingOrder = false;
+
+    const curr = user.avatar_seed;
+    let options = [...(user.avatars ?? [])];
+
+    /* ---------- SORT CONTROLS ---------- */
+    const controls = document.createElement('div');
+    controls.id = 'avatar_controls';
+
+    const sortSelect = document.createElement('select');
+    ['custom', 'seed', 'time'].forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = v.charAt(0).toUpperCase() + v.slice(1);
+        sortSelect.appendChild(opt);
+    });
+
+    sortSelect.value = sorting;
+    sortSelect.addEventListener('change', () => {
+        sorting = sortSelect.value;
+        isEditingOrder = false;
+        renderAvatars();
+    });
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit Order';
+    editBtn.style.display = sorting === 'custom' ? 'block' : 'none';
+
+    editBtn.addEventListener('click', async () => {
+        if (!isEditingOrder) {
+            isEditingOrder = true;
+            editBtn.textContent = 'Save Order';
+            enableDrag();
+        } else {
+            isEditingOrder = false;
+            editBtn.textContent = 'Edit Order';
+            saveCustomOrder();
+            disableDrag();
+        }
+    });
+
+    controls.appendChild(sortSelect);
+    controls.appendChild(editBtn);
+    avatar_div.appendChild(controls);
+
+    /* ---------- AVATAR CONTAINER ---------- */
+    const avatars = document.createElement('div');
+    avatars.id = 'user_avatar_options';
+    avatar_div.appendChild(avatars);
+
+    /* ---------- RENDER ---------- */
+    function renderAvatars() {
+        avatars.innerHTML = '';
+
+        editBtn.style.display = sorting === 'custom' ? 'block' : 'none';
+
+        options
+            .sort((a, b) => {
+                if (sorting === 'custom') return a.custom_order - b.custom_order;
+                if (sorting === 'seed') return a.seed.localeCompare(b.seed);
+                if (sorting === 'time') return b.created_at - a.created_at;
+                return 0;
+            })
+            .forEach(o => {
+                const avatar = document.createElement('img');
+                avatar.src = o.seed;
+                avatar.dataset.seed = o.seed;
+                avatar.className =
+                    o.seed === curr
+                        ? 'user_avatar_option user_avatar_option_selected'
+                        : 'user_avatar_option';
+
+                avatar.addEventListener('click', async () => {
+                    if (isEditingOrder) return;
+
+                    const res = await fetch(`${route}/change/avatar`, {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            player_id: user.player_id,
+                            avatar: o.seed
+                        })
+                    });
+
+                    const data = await res.json();
+                    if (data.avatar === o.seed) {
+                        user.avatar_seed = o.seed;
+                        renderUserProfile(div, user);
+                    }
+
+                    document.getElementById('profile-pic').src = o.seed;
+                });
+
+                avatars.appendChild(avatar);
+            });
+
+        if (isEditingOrder) enableDrag();
+    }
+
+    /* ---------- DRAG & DROP ---------- */
+    function enableDrag() {
+        [...avatars.children].forEach(el => {
+            el.draggable = true;
+
+            el.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text/plain', el.dataset.seed);
+                el.classList.add('dragging');
+            });
+
+            el.addEventListener('dragend', () => {
+                el.classList.remove('dragging');
+            });
+
+            el.addEventListener('dragover', e => {
+                e.preventDefault();
+                const dragging = avatars.querySelector('.dragging');
+                if (dragging && el !== dragging) {
+                    avatars.insertBefore(dragging, el);
+                }
+            });
+        });
+    }
+
+    function disableDrag() {
+        [...avatars.children].forEach(el => {
+            el.draggable = false;
+        });
+    }
+
+    /* ---------- SAVE ORDER ---------- */
+    async function saveCustomOrder() {
+        const seedsInOrder = [...avatars.children].map((el, i) => {
+            const avatar = options.find(o => o.seed === el.dataset.seed);
+            avatar.custom_order = i;
+            return avatar;
+        });
+
+        options = seedsInOrder;
+
+        // Optional: persist to backend
+        await fetch(`${route}/avatars/order`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                player_id: user.player_id,
+                order: options.map(o => ({
+                    seed: o.seed,
+                    custom_order: o.custom_order
+                }))
+            })
+        });
+    }
+
+    renderAvatars();
 }
 
 export function renderAvatarPage(div, user, type) {
