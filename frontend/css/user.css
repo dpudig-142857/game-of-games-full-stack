@@ -115,14 +115,6 @@
     cursor: pointer;
 }
 
-.menu-option:active {
-    transform: scale(0.9);
-}
-
-.menu-option-div:hover {
-    filter: brightness(80%);
-}
-
 .profile-pic {
     width: 4rem;
     transition: transform 0.3s ease;
