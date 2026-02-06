@@ -59,11 +59,6 @@ export function loadMenuBurger() {
         window.location.href = 'stats.html';
     });
 
-    const currLog = document.getElementById('menu-curr-log');
-    if (currLog) currLog.addEventListener('click', () => {
-
-    });
-
     const logs = document.getElementById('menu-logs');
     if (logs) logs.addEventListener('click', () => {
         window.location.href = 'logs.html';

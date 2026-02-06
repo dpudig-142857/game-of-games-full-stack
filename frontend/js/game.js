@@ -7466,6 +7466,11 @@ function initialiseButtons() {
     const spin2 = document.getElementById('spin2');
     if (spin2) spin2.addEventListener('click', () => spinWheel('cone'));
 
+    const currLog = document.getElementById('menu-curr-log');
+    if (currLog) currLog.addEventListener('click', () => {
+        window.open(`results.html?sessionId=${theGame.num}`);
+    });
+
     intrudeBtn.addEventListener('click', openIntrude);
     abandonBtn.addEventListener('click', openAbandon);
 }
@@ -7538,6 +7543,7 @@ async function initialise(sessionId) {
         console.log('Not played: ', other.map(p => p.name));
         
         theGame = {
+            num: session.session_id,
             gog_id: session.name,
             status: session.status,
             start_time: session.start_time,
