@@ -2039,7 +2039,6 @@ body.modal-active {
     flex-direction: column;
     gap: 2rem;
     align-items: center;
-    padding: 2.5rem 1rem 1rem;
     position: relative;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);

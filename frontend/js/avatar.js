@@ -255,7 +255,7 @@ export function renderSwapAvatarPage(div, user) {
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit Order';
-    editBtn.className = 'user-input';
+    editBtn.className = 'user-button user-input';
     editBtn.style.display = sorting === 'custom' ? 'block' : 'none';
 
     editBtn.addEventListener('click', async () => {
