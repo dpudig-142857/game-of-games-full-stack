@@ -596,6 +596,7 @@ export function renderUserProfile(div, user) {
     err.style.visibility = 'hidden';
     form.appendChild(err);
 
+    const og_username = user.username;
     const username = document.createElement('input');
     username.type = 'username';
     username.id = 'user_username';
@@ -609,12 +610,20 @@ export function renderUserProfile(div, user) {
         'button', 'Edit Username', '', 'username-btn', 'user-button user-input'
     )
     username_div.appendChild(usernameBtn);
+
+    const updateUsername = (type) => {
+        if (type == 'Save') username.removeAttribute('readonly');
+        if (type == 'Edit') username.setAttribute('readonly', true);
+        username.classList.toggle('user_read');
+        usernameBtn.innerHTML = `${type} Username`;
+        err.style.visibility = 'hidden';
+    }
+
     usernameBtn.addEventListener('click', async () => {
         if (username.hasAttribute('readonly')) {
-            username.removeAttribute('readonly');
-            username.classList.toggle('user_read');
-            usernameBtn.innerHTML = 'Save Username';
-            err.style.visibility = 'hidden';
+            updateUsername('Save');
+        } else if (username.value == og_username) {
+            updateUsername('Edit');
         } else {
             const res = await fetch(`${route}/change/username`, {
                 method: 'POST',
@@ -627,94 +636,13 @@ export function renderUserProfile(div, user) {
             });
             const data = await res.json();
             if (data.ok) {
-                username.setAttribute('readonly', true);
-                username.classList.toggle('user_read');
-                usernameBtn.innerHTML = 'Edit Username';
-                err.style.visibility = 'hidden';
+                updateUsername('Edit');
             } else {
                 err.innerHTML = data.error;
                 err.style.visibility = 'visible';
             }
         }
     });
-
-    /*const password_div = document.createElement('div');
-    password_div.className = 'user_input_section';
-    form.appendChild(password_div);
-
-    const password_box = document.createElement('div');
-    password_box.className = 'user_input_div';
-    password_div.appendChild(password_box);
-    
-    const password = document.createElement('input');
-    password.type = 'password';
-    password.id = 'user_password';
-    password.placeholder = 'Password...';
-    password.className = 'user-input user_read';
-    password.style.cursor = 'text';
-    password.setAttribute('readonly', true);
-    password_box.appendChild(password);
-
-    const eye = document.createElement('img');
-    eye.id = 'user_eye';
-    eye.className = 'password_eye';
-    eye.src = 'assets/eye_on.svg';
-    eye.addEventListener('click', () => {
-        if (password.type == 'password') {
-            password.type = 'text';
-            eye.src = 'assets/eye_off.svg';
-            eye.style.textDecoration = 'line-through';
-        } else {
-            password.type = 'password';
-            eye.src = 'assets/eye_on.svg';
-            eye.style.textDecoration = 'none';
-        }
-    });
-    password_box.appendChild(eye);
-
-    const passwordBtn = header(
-        'button', 'Edit Password', '', 'password-btn', 'user-button user-input'
-    )
-    password_div.appendChild(passwordBtn);
-    passwordBtn.addEventListener('click', () => {
-
-    });
-
-    if (user.role == 'admin' || user.role == 'owner') {
-        const updateVersion = (isPublic) => {
-
-        }
-        
-        const section = document.createElement('div');
-        section.id = 'switch_section';
-        section.className = 'avatar_options_section';
-        form.appendChild(section);
-    
-        section.appendChild(header(
-            'h2', `GoG Version:`, '', '', 'avatar_option_title'
-        ));
-    
-        const options = document.createElement('div');
-        options.id = 'switch_options';
-        options.className = 'avatar_option';
-        section.appendChild(options);
-    
-        const switchHeader = header(
-            'h2', 'Public', '', 'switch_option', 'avatar_option_text'
-        );
-        options.appendChild(switchHeader);
-        updateVersion(true);
-    
-        switchHeader.addEventListener('click', () => {
-            if (switchHeader.innerHTML == 'Public') {
-                switchHeader.innerHTML = 'Private';
-                updateVersion(false);
-            } else {
-                switchHeader.innerHTML = 'Public';
-                updateVersion(true);
-            }
-        });
-    }*/
 
     const password_section = document.createElement('div');
     password_section.className = 'user_input_section';
