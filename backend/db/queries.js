@@ -2262,6 +2262,15 @@ export async function saveAvatar(player_id, avatar) {
             ]);
         }
 
+        await pool.query(`
+            UPDATE accounts
+            SET avatar_seed = $2
+            WHERE player_id = $1
+        `, [
+            player_id,
+            avatar
+        ]);
+
         await pool.query('COMMIT');
     } catch (err) {
         await pool.query('ROLLBACK');
