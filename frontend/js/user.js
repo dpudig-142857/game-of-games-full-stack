@@ -623,7 +623,7 @@ export function renderUserProfile(div, user) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     player_id: user.player_id,
-                    version: curr_version
+                    username: username.value
                 })
             });
             const data = await res.json();

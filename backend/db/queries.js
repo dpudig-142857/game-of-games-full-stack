@@ -2201,7 +2201,7 @@ export async function switchPassword(player_id, old_password, new_password) {
 
     // Verify old password
     const ok = await bcrypt.compare(old_password, password_hash);
-    if (!ok) return { ok: false, error: 'Incorrect old password' };
+    if (!ok) return { ok: false, error: 'Old password incorrect' };
 
     const newHash = await bcrypt.hash(new_password, 12);
 
