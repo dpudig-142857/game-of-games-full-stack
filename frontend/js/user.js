@@ -613,9 +613,9 @@ export function renderUserProfile(div, user) {
         if (username.hasAttribute('readonly')) {
             username.removeAttribute('readonly');
             usernameBtn.innerHTML = 'Save Username';
+            err.style.visibility = 'hidden';
         } else {
             username.setAttribute('readonly', true);
-            usernameBtn.innerHTML = 'Edit Username';
 
             const res = await fetch(`${route}/change/username`, {
                 method: 'POST',
@@ -633,6 +633,8 @@ export function renderUserProfile(div, user) {
                 err.innerHTML = data.error;
                 err.style.visibility = 'visible';
             }
+
+            usernameBtn.innerHTML = 'Edit Username';
         }
         username.classList.toggle('user_read');
     });
