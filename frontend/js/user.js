@@ -808,7 +808,10 @@ export function renderUserProfile(div, user) {
                 })
             });
             const data = await res.json();
-            if (data) change_header(curr_version);
+            if (data.ok) {
+                change_header(curr_version);
+                location.reload();
+            }
         });
     }
 
