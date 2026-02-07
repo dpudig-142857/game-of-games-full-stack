@@ -238,6 +238,7 @@ export function renderSwapAvatarPage(div, user) {
     controls.id = 'avatar_controls';
 
     const sortSelect = document.createElement('select');
+    sortSelect.className = 'user-input';
     ['custom', 'seed', 'time'].forEach(v => {
         const opt = document.createElement('option');
         opt.value = v;
@@ -254,6 +255,7 @@ export function renderSwapAvatarPage(div, user) {
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit Order';
+    editBtn.className = 'user-input';
     editBtn.style.display = sorting === 'custom' ? 'block' : 'none';
 
     editBtn.addEventListener('click', async () => {
