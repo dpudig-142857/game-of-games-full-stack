@@ -616,8 +616,6 @@ export function renderUserProfile(div, user) {
             usernameBtn.innerHTML = 'Save Username';
             err.style.visibility = 'hidden';
         } else {
-            username.setAttribute('readonly', true);
-
             const res = await fetch(`${route}/change/username`, {
                 method: 'POST',
                 credentials: 'include',
@@ -629,9 +627,10 @@ export function renderUserProfile(div, user) {
             });
             const data = await res.json();
             if (data.ok) {
-                err.style.visibility = 'hidden';
+                username.setAttribute('readonly', true);
                 username.classList.toggle('user_read');
                 usernameBtn.innerHTML = 'Edit Username';
+                err.style.visibility = 'hidden';
             } else {
                 err.innerHTML = data.error;
                 err.style.visibility = 'visible';
