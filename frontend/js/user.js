@@ -541,7 +541,7 @@ export function renderUserProfile(div, user) {
     backArrow('hide');
 
     const title = document.getElementById('user-profile-title');
-    title.textContent = `User Account`;
+    title.textContent = ``;
 
     const section = document.createElement('div');
     section.className = 'user_middle_div';
