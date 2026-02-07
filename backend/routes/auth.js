@@ -6,6 +6,7 @@ import {
   saveAvatar,
   saveAvatarOrder,
   switchVersion,
+  switchUsername,
   switchPassword
 } from '../db/queries.js';
 
