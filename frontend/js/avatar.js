@@ -318,7 +318,10 @@ export function renderSwapAvatarPage(div, user) {
                     const data = await res.json();
                     if (data.avatar === o.seed) {
                         user.avatar_seed = o.seed;
-                        renderAvatars();
+                        const selected = document.querySelector('.user_avatar_option_selected');
+                        if (selected) selected.className = 'user_avatar_option';
+                        avatar.className = 'user_avatar_option user_avatar_option_selected';
+                        //renderAvatars();
                         //renderUserProfile(div, user);
                     }
 
