@@ -2239,7 +2239,7 @@ export async function saveAvatarOrder(player_id, order) {
     });
 
     return {
-        avatar: res.rows[0].avatar_seed
+        ok: true
     };
 }
 
