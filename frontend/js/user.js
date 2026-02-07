@@ -612,6 +612,7 @@ export function renderUserProfile(div, user) {
     usernameBtn.addEventListener('click', async () => {
         if (username.hasAttribute('readonly')) {
             username.removeAttribute('readonly');
+            username.classList.toggle('user_read');
             usernameBtn.innerHTML = 'Save Username';
             err.style.visibility = 'hidden';
         } else {
@@ -629,14 +630,13 @@ export function renderUserProfile(div, user) {
             const data = await res.json();
             if (data.ok) {
                 err.style.visibility = 'hidden';
+                username.classList.toggle('user_read');
+                usernameBtn.innerHTML = 'Edit Username';
             } else {
                 err.innerHTML = data.error;
                 err.style.visibility = 'visible';
             }
-
-            usernameBtn.innerHTML = 'Edit Username';
         }
-        username.classList.toggle('user_read');
     });
 
     /*const password_div = document.createElement('div');
