@@ -4,6 +4,7 @@ import {
   login,
   logout,
   saveAvatar,
+  saveAvatarOrder,
   switchVersion,
   switchPassword
 } from '../db/queries.js';
@@ -108,6 +109,18 @@ router.post('/change/avatar', async (req, res) => {
   } catch (error) {
     console.error('Error saving avatar:', error);
     res.status(500).json({ error: 'Failed to save avatar' });
+  }
+});
+
+router.post('/change/avatar_order', async (req, res) => {
+  const { player_id, order } = req.body;
+
+  try {
+    const result = await saveAvatarOrder(player_id, order);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error saving avatar order:', error);
+    res.status(500).json({ error: 'Failed to save avatar order' });
   }
 });
 

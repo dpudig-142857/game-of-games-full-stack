@@ -2197,21 +2197,46 @@ export async function switchPassword(player_id, old_password, new_password) {
 }
 
 export async function saveAvatar(player_id, avatar) {
-    const res = await pool.query(`
-        UPDATE accounts
-        SET 
-            previous_avatar_seeds =
-                CASE
-                    WHEN avatar_seed IS NULL THEN previous_avatar_seeds
-                    WHEN previous_avatar_seeds IS NULL THEN ARRAY[avatar_seed]
-                    WHEN NOT (avatar_seed = ANY(previous_avatar_seeds)) THEN
-                        array_prepend(avatar_seed, previous_avatar_seeds)
-                    ELSE previous_avatar_seeds
-                END,
-            avatar_seed = $1
-        WHERE player_id = $2
-        RETURNING avatar_seed;
-    `, [avatar, player_id]);
+    await pool.query('BEGIN');
+
+    try {
+        await pool.query(`
+            UPDATE avatars
+            SET custom_order = custom_order + 1
+            WHERE player_id = $1;
+        `, [
+            player_id
+        ]);
+
+        await pool.query(`
+            INSERT INTO avatars (player_id, seed, custom_order, selected)
+            VALUES ($1, $2, 1, true);
+        `, [
+            player_id,
+            avatar
+        ]);
+
+        await pool.query('COMMIT');
+    } catch (err) {
+        await pool.query('ROLLBACK');
+        throw err;
+    }
+    
+    return { avatar: avatar };
+}
+
+export async function saveAvatarOrder(player_id, order) {
+    order.forEach(async o => {
+        await pool.query(`
+            UPDATE avatars
+            SET custom_order = $3
+            WHERE player_id = $1 AND seed = $2;
+        `, [
+            player_id,
+            o.seed,
+            o.custom_order
+        ]);
+    });
 
     return {
         avatar: res.rows[0].avatar_seed

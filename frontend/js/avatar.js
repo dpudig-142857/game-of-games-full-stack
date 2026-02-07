@@ -164,7 +164,7 @@ function getCurrSetupFromSeed(seed) {
     div.appendChild(filters_div);* /
 
     const avatar_div = document.createElement('div');
-    avatar_div.id = 'avatar_div';
+    avatar_div.id = 'swap_avatar_div';
     div.appendChild(avatar_div);
 
     console.log(user);
@@ -223,7 +223,7 @@ export function renderSwapAvatarPage(div, user) {
     backArrow('show');
 
     const avatar_div = document.createElement('div');
-    avatar_div.id = 'avatar_div';
+    avatar_div.id = 'swap_avatar_div';
     div.appendChild(avatar_div);
 
     /* ---------- STATE ---------- */
@@ -271,7 +271,7 @@ export function renderSwapAvatarPage(div, user) {
 
     controls.appendChild(sortSelect);
     controls.appendChild(editBtn);
-    avatar_div.appendChild(controls);
+    div.appendChild(controls);
 
     /* ---------- AVATAR CONTAINER ---------- */
     const avatars = document.createElement('div');
@@ -360,16 +360,13 @@ export function renderSwapAvatarPage(div, user) {
 
     /* ---------- SAVE ORDER ---------- */
     async function saveCustomOrder() {
-        const seedsInOrder = [...avatars.children].map((el, i) => {
+        options = [...avatars.children].map((el, i) => {
             const avatar = options.find(o => o.seed === el.dataset.seed);
             avatar.custom_order = i;
             return avatar;
         });
 
-        options = seedsInOrder;
-
-        // Optional: persist to backend
-        await fetch(`${route}/avatars/order`, {
+        await fetch(`${route}/change/avatar_order`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
