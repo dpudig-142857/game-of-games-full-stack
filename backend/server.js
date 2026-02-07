@@ -15,7 +15,7 @@ import { router as playersRoutes } from './routes/players.js';
 import { router as gamesRoutes } from './routes/games.js';
 import { router as pointsRoutes } from './routes/points.js';
 import { router as tournamentRoutes } from './routes/tournament.js';
-import { router as authRoutes } from './routes/auth.js';
+import { router as userRoutes } from './routes/user.js';
 import { router as debugRoutes } from './routes/debug.js';
 
 import { pool } from './db/pool.js';
@@ -60,7 +60,7 @@ app.use('/api/players', playersRoutes);
 app.use('/api/games', gamesRoutes);
 app.use('/api/points', pointsRoutes);
 app.use('/api/tournament', tournamentRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 app.use('/debug', debugRoutes);
 
 export default app;

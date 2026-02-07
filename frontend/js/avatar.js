@@ -45,7 +45,7 @@ import { thumbs } from './themes/thumbs.js';
 import { toonHead } from './themes/toon_head.js';
 import { BASE_ROUTE } from './config.js';
 
-let route = `${BASE_ROUTE}/api/auth`;
+let route = `${BASE_ROUTE}/api/user`;
 
 const basicDiceBearOptions = basic.properties;
 let baseProperties = Object.keys(basic.properties);

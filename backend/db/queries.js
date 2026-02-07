@@ -1935,7 +1935,7 @@ export async function getStats() {
     return { players, games, total }
 }
 
-// --- Auth ---
+// --- User ---
 /*export async function authenticate(req) {
     if (!req.session || !req.session.userId) {
         return { authenticated: false };
