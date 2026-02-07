@@ -239,7 +239,7 @@ export function renderSwapAvatarPage(div, user) {
 
     const sortSelect = document.createElement('select');
     sortSelect.className = 'user-input';
-    ['custom', 'seed', 'time'].forEach(v => {
+    ['custom', 'theme', 'time'].forEach(v => {
         const opt = document.createElement('option');
         opt.value = v;
         opt.textContent = v.charAt(0).toUpperCase() + v.slice(1);
@@ -289,7 +289,7 @@ export function renderSwapAvatarPage(div, user) {
         options
             .sort((a, b) => {
                 if (sorting === 'custom') return a.custom_order - b.custom_order;
-                if (sorting === 'seed') return a.seed.localeCompare(b.seed);
+                if (sorting === 'theme') return a.seed.localeCompare(b.seed);
                 if (sorting === 'time') return b.created_at - a.created_at;
                 return 0;
             })
@@ -318,7 +318,7 @@ export function renderSwapAvatarPage(div, user) {
                     const data = await res.json();
                     if (data.avatar === o.seed) {
                         user.avatar_seed = o.seed;
-                        renderUserProfile(div, user);
+                        //renderUserProfile(div, user);
                     }
 
                     document.getElementById('profile-pic').src = o.seed;
