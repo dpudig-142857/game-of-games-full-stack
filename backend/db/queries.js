@@ -2171,7 +2171,7 @@ export async function switchUsername(player_id, username) {
 
     if (rowCount > 0) return {
         ok: false,
-        error: "USERNAME_ALREADY_EXISTS"
+        error: "Username already exists"
     };
 
     const result = await pool.query(`
@@ -2189,9 +2189,27 @@ export async function switchUsername(player_id, username) {
 }
 
 export async function switchPassword(player_id, old_password, new_password) {
-    console.log(player_id);
-    console.log(old_password);
-    console.log(new_password);
+    const result = await pool.query(`
+        SELECT password_hash
+        FROM accounts
+        WHERE player_id = $1
+    `, [player_id]);
+
+    if (result.rowCount === 0) return { ok: false, error: 'User not found' };
+
+    const { password_hash } = result.rows[0];
+
+    // Verify old password
+    const ok = await bcrypt.compare(old_password, password_hash);
+    if (!ok) return { ok: false, error: 'Incorrect old password' };
+
+    const newHash = await bcrypt.hash(new_password, 12);
+
+    await pool.query(`
+        UPDATE accounts
+        SET password_hash = $1
+        WHERE player_id = $2
+    `, [newHash, player_id]);
 
     return { ok: true };
 }

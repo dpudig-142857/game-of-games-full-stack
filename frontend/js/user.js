@@ -627,10 +627,12 @@ export function renderUserProfile(div, user) {
                 })
             });
             const data = await res.json();
-            if (data) change_header(curr_version);
-            // TODO: Update username for this account
-            // tests if new username already exists
-            
+            if (data.ok) {
+                err.style.visibility = 'hidden';
+            } else {
+                err.innerHTML = data.error;
+                err.style.visibility = 'visible';
+            }
         }
         username.classList.toggle('user_read');
     });
@@ -803,21 +805,45 @@ export function renderUserProfile(div, user) {
         'button', 'Change Password', '', 'password-btn', 'user-button user-input'
     );
     password_section.appendChild(passwordBtn);
-    passwordBtn.addEventListener('click', () => {
+    passwordBtn.addEventListener('click', async () => {
         if (passwordBtn.innerHTML == 'Change Password') {
             
             change_password.style.visibility = 'visible';
             err.style.visibility = 'hidden';
             passwordBtn.innerHTML = 'Save Password';
         } else if (passwordBtn.innerHTML == 'Save Password') {
-            if (password.value != confirm.value) {
+            if (old_password.value == '') {
+                err.innerHTML = `Old Password Required`;
+                err.style.visibility = 'visible';
+            } else if (password.value == '') {
+                err.innerHTML = `New Password Required`;
+                err.style.visibility = 'visible';
+            } else if (confirm.value == '') {
+                err.innerHTML = `Confirm Password Required`;
+                err.style.visibility = 'visible';
+            } else if (password.value != confirm.value) {
                 err.innerHTML = `Passwords don't match`;
                 err.style.visibility = 'visible';
             } else {
-                // TODO: connect to backend and check if username already exists
-                err.style.visibility = 'hidden';
-                change_password.style.visibility = 'hidden';
-                passwordBtn.innerHTML = 'Change Password';
+                const res = await fetch(`${route}/change/password`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        player_id: user.player_id,
+                        old_password: old_password.value,
+                        new_password: password.value
+                    })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    err.style.visibility = 'hidden';
+                    change_password.style.visibility = 'hidden';
+                    passwordBtn.innerHTML = 'Change Password';
+                } else {
+                    err.innerHTML = data.error;
+                    err.style.visibility = 'visible';
+                }
             }
 
         }
