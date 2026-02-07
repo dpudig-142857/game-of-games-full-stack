@@ -318,6 +318,7 @@ export function renderSwapAvatarPage(div, user) {
                     const data = await res.json();
                     if (data.avatar === o.seed) {
                         user.avatar_seed = o.seed;
+                        renderAvatars();
                         //renderUserProfile(div, user);
                     }
 

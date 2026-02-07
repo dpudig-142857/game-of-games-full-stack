@@ -2218,29 +2218,57 @@ export async function saveAvatar(player_id, avatar) {
     await pool.query('BEGIN');
 
     try {
-        await pool.query(`
-            UPDATE avatars
-            SET custom_order = custom_order + 1
-            WHERE player_id = $1;
-        `, [
-            player_id
-        ]);
-
-        await pool.query(`
-            INSERT INTO avatars (player_id, seed, custom_order, selected)
-            VALUES ($1, $2, 1, true);
+        const existing = await pool.query(`
+            SELECT id
+            FROM avatars
+            WHERE player_id = $1 AND seed = $2
         `, [
             player_id,
             avatar
         ]);
+
+        await pool.query(`
+            UPDATE avatars
+            SET selected = false
+            WHERE player_id = $1
+        `, [
+            player_id
+        ]);
+
+        if (existing.rowCount > 0) {
+            await pool.query(`
+                UPDATE avatars
+                SET selected = true
+                WHERE player_id = $1 AND seed = $2
+            `, [
+                player_id,
+                avatar
+            ]);
+        } else {
+            await pool.query(`
+                UPDATE avatars
+                SET custom_order = custom_order + 1
+                WHERE player_id = $1
+            `, [
+                player_id
+            ]);
+
+            await pool.query(`
+                INSERT INTO avatars (player_id, seed, custom_order, selected)
+                VALUES ($1, $2, 1, true)
+            `, [
+                player_id,
+                avatar
+            ]);
+        }
 
         await pool.query('COMMIT');
     } catch (err) {
         await pool.query('ROLLBACK');
         throw err;
     }
-    
-    return { avatar: avatar };
+
+    return { avatar };
 }
 
 export async function saveAvatarOrder(player_id, order) {
