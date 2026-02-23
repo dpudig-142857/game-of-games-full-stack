@@ -7323,8 +7323,8 @@ async function nextGame(from = '') {
     updateHeaderButtons('show');
     intrudeBtn.style.display = 'block';
     abandonBtn.style.display = 'block';
-    breakConeBtn.style.display = 'flex';
-    victoryConeBtn.style.display = 'flex';
+    breakConeBtn.style.display = 'block';
+    victoryConeBtn.style.display = 'block';
 
     if (currGame.name == '4:20 Game') {
         four20game.style.display = 'none';
@@ -7670,14 +7670,14 @@ function startGoG(newGame) {
 
     intrudeBtn.style.display = newGame ? 'none': 'block';
     abandonBtn.style.display = newGame ? 'none': 'block';
-    breakConeBtn.style.display = newGame ? 'none' : 'flex';
-    victoryConeBtn.style.display = newGame ? 'none' : 'flex';
+    breakConeBtn.style.display = newGame ? 'none' : 'block';
+    victoryConeBtn.style.display = newGame ? 'none' : 'block';
     if (gog_version == 'private') {
-        breakConeBtn.innerHTML = 'Break<br>Cone';
-        victoryConeBtn.innerHTML = 'Victory<br>Cone';
+        breakConeBtn.innerHTML = 'Break Cone';
+        victoryConeBtn.innerHTML = 'Victory Cone';
     } else if (gog_version == 'public') {
-        breakConeBtn.innerHTML = 'Break<br>Shot';
-        victoryConeBtn.innerHTML = 'Victory<br>Shot';
+        breakConeBtn.innerHTML = 'Break Shot';
+        victoryConeBtn.innerHTML = 'Victory Shot';
     }
 
     const result = document.getElementById('pre-game-result');
