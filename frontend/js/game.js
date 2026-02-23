@@ -7672,14 +7672,12 @@ function startGoG(newGame) {
     abandonBtn.style.display = newGame ? 'none': 'block';
     breakConeBtn.style.display = newGame ? 'none' : 'flex';
     victoryConeBtn.style.display = newGame ? 'none' : 'flex';
-    const breakTitle = breakConeBtn.querySelector('h3');
-    const victoryTitle = victoryConeBtn.querySelector('h3');
     if (gog_version == 'private') {
-        breakTitle.innerHTML = 'Break<br>Cone';
-        victoryTitle.innerHTML = 'Victory<br>Cone';
+        breakConeBtn.innerHTML = 'Break<br>Cone';
+        victoryConeBtn.innerHTML = 'Victory<br>Cone';
     } else if (gog_version == 'public') {
-        breakTitle.innerHTML = 'Break<br>Shot';
-        victoryTitle.innerHTML = 'Victory<br>Shot';
+        breakConeBtn.innerHTML = 'Break<br>Shot';
+        victoryConeBtn.innerHTML = 'Victory<br>Shot';
     }
 
     const result = document.getElementById('pre-game-result');
