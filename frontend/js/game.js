@@ -73,6 +73,7 @@ let refreshCount = 0;
 let currSystem = '';
 let pointsSystem = [];
 let gameSelection = '';
+let gameInSession = false;
 
 let capturedImage = null;
 
@@ -298,10 +299,12 @@ function openGameBox(from) {
         curr_colour.rgba = hexToRgba(curr_colour.hex, 0.95);
         curr_colour.text = hexToTextColour(curr_colour.hex);
     }
+    gameInSession = true;
     openModal(modal, gameModal, from, curr_colour);
 }
 
 function closeGameBox(to) {
+    gameInSession = false;
     closeModal(modal, gameModal, 'down', to, () => {
         if (to == 'end') return;
         if (to == 'wheel') {
@@ -2554,8 +2557,10 @@ function openModal(modal, modalBox, from, colour = null) {
 }*/
 function closeModal(modal, modalBox, direction, to, callback = null) {
     if (to != 'wheel') updateGameModeUI(gameSelection);
-    const headerBtns = document.querySelectorAll('.header-button-box');
-    headerBtns.forEach(btn => btn.style.visibility = 'visible');
+    if (!gameInSession) {
+        const headerBtns = document.querySelectorAll('.header-button-box');
+        headerBtns.forEach(btn => btn.style.visibility = 'visible');
+    }
     modal.style.transition = 'opacity 0.4s ease';
     modalBox.style.transition = 'transform 0.4s ease';
 
