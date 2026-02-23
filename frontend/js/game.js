@@ -2483,6 +2483,8 @@ function closeVictoryCone() {
 
 function openModal(modal, modalBox, from, colour = null) {
     hideAllGameModes(true);
+    const headerBtns = document.querySelectorAll('.header-button-box');
+    headerBtns.forEach(btn => btn.style.visibility = 'hidden');
     modal.classList.add('active');
     modal.style.display = 'flex';
 
@@ -2552,6 +2554,8 @@ function openModal(modal, modalBox, from, colour = null) {
 }*/
 function closeModal(modal, modalBox, direction, to, callback = null) {
     if (to != 'wheel') updateGameModeUI(gameSelection);
+    const headerBtns = document.querySelectorAll('.header-button-box');
+    headerBtns.forEach(btn => btn.style.visibility = 'visible');
     modal.style.transition = 'opacity 0.4s ease';
     modalBox.style.transition = 'transform 0.4s ease';
 
@@ -7474,6 +7478,9 @@ function initialiseButtons() {
 
     intrudeBtn.addEventListener('click', openIntrude);
     abandonBtn.addEventListener('click', openAbandon);
+
+    const refresh = document.getElementById('menu-refresh');
+    if (refresh) refresh.addEventListener('click', refreshGames);
 }
 
 async function initialise(sessionId) {
