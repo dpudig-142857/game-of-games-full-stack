@@ -2236,7 +2236,7 @@ function closeAbandon() {
 
 // #region
 
-const breakConeBtn = document.getElementById('break-cone');
+const breakConeBtn = document.getElementById('menu-break');
 const breakConeModal = document.getElementById('breakConeModal');
 const breakConeBox = document.getElementById('break-cone-box');
 const breakConeResultDiv = document.getElementById('break-cone-result');
@@ -2351,7 +2351,7 @@ function closeBreakCone() {
 
 // #region
 
-const victoryConeBtn = document.getElementById('victory-cone');
+const victoryConeBtn = document.getElementById('menu-victory');
 const victoryConeModal = document.getElementById('victoryConeModal');
 const victoryConeBox = document.getElementById('victory-cone-box');
 const victoryConeResultDiv = document.getElementById('victory-cone-result');
@@ -2556,8 +2556,8 @@ function openModal(modal, modalBox, from, colour = null) {
     }, 400); // Match transition duration (400ms)
 }*/
 function closeModal(modal, modalBox, direction, to, callback = null) {
-    if (to != 'wheel') updateGameModeUI(gameSelection);
     if (!gameInSession) {
+        if (to != 'wheel') updateGameModeUI(gameSelection);
         const headerBtns = document.querySelectorAll('.header-button-box');
         headerBtns.forEach(btn => btn.style.visibility = 'visible');
     }
