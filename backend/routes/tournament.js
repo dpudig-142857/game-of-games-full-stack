@@ -1,8 +1,7 @@
 import express from 'express';
+import BracketsManager from 'brackets-manager';
+import InMemoryStorage from 'brackets-memory-db';
 import { pool } from '../db/pool.js';
-
-const { BracketsManager } = require('brackets-manager');
-const { InMemoryStorage } = require('brackets-memory-db')
 
 const router = express.Router();
 
