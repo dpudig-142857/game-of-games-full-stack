@@ -1,12 +1,13 @@
 import express from 'express';
-import InMemoryDatabase from 'brackets-json-db';
-import BracketsManager from 'brackets-manager';
 import { pool } from '../db/pool.js';
+
+const { BracketsManager } = require('brackets-manager');
+const { InMemoryStorage } = require('brackets-memory-db')
 
 const router = express.Router();
 
 function createManager(bracketData = null) {
-    const storage = new InMemoryDatabase();
+    const storage = new InMemoryStorage();
 
     if (bracketData) {
         storage.import(bracketData);
