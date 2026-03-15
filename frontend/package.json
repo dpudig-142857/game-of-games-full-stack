@@ -2,6 +2,7 @@
   "dependencies": {
     "@dicebear/collection": "^9.3.0",
     "@dicebear/core": "^9.3.0",
+    "brackets-manager": "^1.9.1",
     "brackets-viewer": "^1.6.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
