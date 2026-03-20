@@ -6804,7 +6804,7 @@ function submitMultipleGame(results) {
 
 // #region
 
-function generateResults() {
+async function generateResults() {
     switch (currGame.name) {
         case 'Alphabetix': return generateAlphabetixResults();
         case 'Mario Party': return generateMarioPartyResults();
