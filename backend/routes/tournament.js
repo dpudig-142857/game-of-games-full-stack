@@ -72,7 +72,6 @@ router.post('/create', async (req, res) => {
 router.get('/:id/results', async (req, res) => {
     try {
         const id = Number(req.params.id);
-        console.log(id);
 
         const { rows } = await pool.query(
             `SELECT bracket FROM tournaments WHERE id = $1`,
@@ -84,6 +83,7 @@ router.get('/:id/results', async (req, res) => {
             return res.status(404).json({ error: 'Tournament not found' });
         }
 
+        console.log(JSON.stringify(rows[0].bracket));
         const manager = createManager(rows[0].bracket);
         const stageId = manager.storage.select('stage')[0].id;
         const standings = await manager.get.finalStandings(stageId);
