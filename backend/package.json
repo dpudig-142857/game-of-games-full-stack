@@ -16,6 +16,7 @@
     "bcrypt": "^6.0.0",
     "brackets-json-db": "^1.0.2",
     "brackets-manager": "^1.9.1",
+    "brackets-memory-db": "^1.0.5",
     "brackets-viewer": "^1.6.2",
     "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.7",
