@@ -48,7 +48,7 @@ router.post('/create', async (req, res) => {
             settings: { grandFinal: 'double' },
         });
 
-        const bracketData = manager.storage.export();
+        const bracketData = manager.storage.data;
 
         await pool.query(`
             INSERT INTO tournaments (id, game, session_id, bracket)
@@ -131,7 +131,7 @@ router.post('/:id/update', async (req, res) => {
             },
         });
 
-        const updatedBracket = manager.storage.export();
+        const updatedBracket = manager.storage.data;
 
         await pool.query(
             `UPDATE tournaments SET bracket = $1, updated_at = NOW() WHERE id = $2`,
