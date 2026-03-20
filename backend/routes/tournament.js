@@ -46,8 +46,6 @@ router.post('/create', async (req, res) => {
             settings: { grandFinal: 'double' },
         });
 
-        const bracketData = manager.storage.data;
-
         await pool.query(`
             INSERT INTO tournaments (id, game, session_id, bracket)
             VALUES ($1, $2, $3, $4)
@@ -56,7 +54,7 @@ router.post('/create', async (req, res) => {
               bracket = EXCLUDED.bracket,
               updated_at = NOW()
         `, [
-            id, game, sessionId, bracketData
+            id, game, sessionId, JSON.stringify(manager.storage.data)
         ]);
 
         res.json({ success: true, tournamentId: id, tournament });
@@ -81,8 +79,9 @@ router.get('/:id/results', async (req, res) => {
             return res.status(404).json({ error: 'Tournament not found' });
         }
 
-        console.log(JSON.stringify(rows[0].bracket));
         const manager = createManager(rows[0].bracket);
+        console.log('storage data:', JSON.stringify(manager.storage.data));
+        console.log('stage select:', manager.storage.select('stage'));
         const stageId = manager.storage.select('stage')[0].id;
         const standings = await manager.get.finalStandings(stageId);
 
@@ -132,11 +131,9 @@ router.post('/:id/update', async (req, res) => {
             },
         });
 
-        const updatedBracket = manager.storage.data;
-
         await pool.query(
             `UPDATE tournaments SET bracket = $1, updated_at = NOW() WHERE id = $2`,
-            [updatedBracket, tournamentId]
+            [JSON.stringify(manager.storage.data), tournamentId]
         );
 
         res.json({ success: true });
