@@ -26,7 +26,7 @@ function padToPowerOfTwo(players) {
 
 // POST /api/tournament/create
 router.post('/create', async (req, res) => {
-    const { players, sessionId, game, id } = req.body;
+    const { players, sessionId, game } = req.body;
 
     let paddedPlayers = players[0]?.name
         ? padToPowerOfTwo(players.map(p => p.name))
@@ -37,6 +37,15 @@ router.post('/create', async (req, res) => {
 
     try {
         const manager = createManager();
+        const allIds = await pool.query(`SELECT id FROM tournaments;`)
+        const sessionIds = await pool.query(`
+            SELECT id FROM tournaments WHERE game = $1 AND session_id = $2;
+        `, [
+            game,
+            sessionId
+        ]);
+        const ids = sessionIds.rows;
+        const id = ids.length == 0 ? allIds.rows.length + 1 : ids.at(-1);
 
         const tournament = await manager.create.stage({
             tournamentId: id,

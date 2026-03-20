@@ -6341,7 +6341,6 @@ function submitTeamPointsGame(results) {
 
 // #region
 
-let numTournaments = 0;
 let currTournamentId = 0;
 
 async function createTournament(curr) {
@@ -6357,8 +6356,7 @@ async function createTournament(curr) {
         body: JSON.stringify({
             players,
             sessionId,
-            game: currGame.name,
-            id: ++numTournaments
+            game: currGame.name
         })
     });
 
