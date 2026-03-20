@@ -80,10 +80,8 @@ router.get('/:id/results', async (req, res) => {
         }
 
         const manager = createManager(rows[0].bracket);
-        console.log('storage data:', JSON.stringify(manager.storage.data));
-        console.log('stage select:', manager.storage.select('stage'));
-        const stageId = manager.storage.select('stage')[0].id;
-        const standings = await manager.get.finalStandings(stageId);
+        const stages = await manager.storage.select('stage');
+        const standings = await manager.get.finalStandings(stages[0].id);
 
         res.json(standings);
     } catch (err) {
