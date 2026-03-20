@@ -7262,6 +7262,7 @@ function startGame() {
 async function submitGame() {
     document.getElementById(`${currGame.tag}_game`).style.display = 'none';
     const results = generateResults();
+    console.log(results);
     
     let box = document.getElementById('coin_box');
     if (!box) {
