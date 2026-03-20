@@ -72,6 +72,7 @@ router.post('/create', async (req, res) => {
 router.get('/:id/results', async (req, res) => {
     try {
         const id = Number(req.params.id);
+        console.log(id);
 
         const { rows } = await pool.query(
             `SELECT bracket FROM tournaments WHERE id = $1`,

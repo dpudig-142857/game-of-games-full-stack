@@ -6636,6 +6636,7 @@ async function checkIfFinalMatch(tournamentId) {
 async function generateTournamentResults() {
     const res = await fetch(`${route}/tournament/${currTournamentId}/results`);
     const finalResults = await res.json();
+    console.log(finalResults);
 
     const filtered = finalResults
         .filter(fr => !fr.name.includes('BYE'))
@@ -6669,6 +6670,7 @@ async function generateTournamentResults() {
         i = j;
     }
 
+    console.log(results);
     return results;
 }
 
