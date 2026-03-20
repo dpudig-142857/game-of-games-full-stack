@@ -7,9 +7,7 @@ const router = express.Router();
 
 function createManager(bracketData = null) {
     const storage = new InMemoryDatabase();
-    if (bracketData) {
-        storage.setData(bracketData);
-    }
+    if (bracketData) storage.data = bracketData;
     return new BracketsManager(storage);
 }
 
