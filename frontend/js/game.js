@@ -6819,7 +6819,7 @@ async function generateResults() {
             case 'single': return generateSingleResults();
             case 'team': return generateTeamResults();
             case 'team_points': return generateTeamPointsResults();
-            case 'tournament': return generateTournamentResults();
+            case 'tournament': return await generateTournamentResults();
             case 'counter': return generateCounterResults();
             //case 'counter_rounds': return generateCounterRoundsResults();
             case 'multiple': return generateMultipleResults();

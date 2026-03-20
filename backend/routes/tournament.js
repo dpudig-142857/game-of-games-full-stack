@@ -78,6 +78,7 @@ router.get('/:id/results', async (req, res) => {
             `SELECT bracket FROM tournaments WHERE id = $1`,
             [id]
         );
+        console.log(rows)
 
         if (!rows.length) {
             return res.status(404).json({ error: 'Tournament not found' });
@@ -90,6 +91,7 @@ router.get('/:id/results', async (req, res) => {
         res.json(standings);
     } catch (err) {
         console.error(`Error retrieving tournament results: ${err}`);
+        console.error(`${err.stack}`);
         res.status(500).json({ error: 'Failed to retrieve tournament results' });
     }
 });
