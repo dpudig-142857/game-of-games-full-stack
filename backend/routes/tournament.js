@@ -1,6 +1,6 @@
 import express from 'express';
 import BracketsManager from 'brackets-manager';
-import JsonDatabase from 'brackets-json-db';
+import { JsonDatabase } from 'brackets-json-db';
 import { pool } from '../db/pool.js';
 
 const router = express.Router();
