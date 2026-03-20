@@ -1,5 +1,5 @@
 import express from 'express';
-import BracketsManager from 'brackets-manager';
+import { BracketsManager } from 'brackets-manager';
 import { InMemoryDatabase } from 'brackets-memory-db';
 import { pool } from '../db/pool.js';
 
