@@ -1083,6 +1083,12 @@ function createVote(player) {
     votingPlayer.style.fontSize = '1.8rem';
     box.appendChild(votingPlayer);
 
+    const pfp = document.createElement('img');
+    pfp.className = 'player-box-pfp';
+    pfp.id = `${player.player_id}-box`;
+    pfp.src = info.avatar_seed;
+    box.appendChild(pfp);
+
     box.appendChild(createCustomDropdown(
         gamesLeft, info.colour, true, 'vote', player
     ));
