@@ -610,19 +610,15 @@ export async function saveSession(sessionId, sessionData) {
                 currentGame.extras,
                 currentGame.after
             ]);
-
-            const voteRes = await pool.query(`SELECT MAX(vote_id) FROM gog_game_votes;`);
-            const voteId = voteRes.rows[0] + 1;
             const gameId = gameRes.rows[0];
 
             for (const v of currentGame.votes) {
                 await pool.query(`
                     INSERT INTO gog_game_votes (
-                        vote_id, game_instance_id, player_id, game_name
+                        game_instance_id, player_id, game_name
                     )
-                    VALUES ($1, $2, $3, $4)
+                    VALUES ($1, $2, $3)
                 `, [
-                    voteId,
                     gameId,
                     v.player_id,
                     v.vote
