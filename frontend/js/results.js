@@ -591,7 +591,7 @@ async function fillGameInfo(game, info) {
         const bracketDiv = document.createElement('div');
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
-        right.appendChild(bracketDiv);
+        gamePhotoDiv.appendChild(bracketDiv);
         
         const res = await fetch(`${BASE_ROUTE}/api/tournament/1`);
         const data = await res.json();
@@ -604,7 +604,7 @@ async function fillGameInfo(game, info) {
             matchGames: data.bracket.match_game,
             participants: data.bracket.participant,
         }, {
-            selector: '#modal-game-photo',
+            selector: '#tournament_bracket',
             clear: true,
         });
 
