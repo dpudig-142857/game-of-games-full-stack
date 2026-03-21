@@ -752,6 +752,76 @@ footer {
     font-weight: normal;
 }
 
+.brackets-viewer {
+    --primary-color: #007BFF;
+    --text-color: #333;
+    --background-color: #f9f9f9;
+    --border-color: #007BFF40;
+}
+
+/* Match block styling *
+.brackets-viewer .match {
+    background: white;
+    border-radius: 10px;
+    padding: 6px;
+    margin: 5px 0;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.1);
+}
+
+.brackets-viewer .participant {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 6px;
+}*/
+
+.brackets-viewer .participant {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 6px;
+}
+
+.brackets-viewer .participant:hover {
+    cursor: pointer;
+}
+
+.brackets-viewer .participant.win {
+    color: #28a745;
+}
+
+.brackets-viewer .participant.loss {
+    color: #aaa;
+}
+
+.brackets-viewer .participant span {
+    display: none;
+}
+
+.brackets-viewer .participant {
+    text-align: center;
+}
+
+/*.brackets-viewer .match {
+    margin: 2px 0;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.brackets-viewer .participant {
+    padding: 2px 4px;
+    font-size: 13px;
+}
+
+.brackets-viewer .match .result {
+    font-weight: bold;
+}*/
+
 
 ::-webkit-scrollbar {
     width: 20px;

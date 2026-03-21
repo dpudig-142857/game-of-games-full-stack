@@ -533,7 +533,7 @@ async function fillGameInfo(game, info) {
     }
     gameSelectedDiv.appendChild(header('h3', selected));
 
-    game.results.forEach(r => {
+    game.results.sort((a, b) => a.place - b.place).forEach(r => {
         const player = allPlayers.find(p => p.player_id == r.player_id);
         
         const box = document.createElement('div');
