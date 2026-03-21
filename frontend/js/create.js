@@ -1257,7 +1257,11 @@ async function initialize() {
                 });
             } else if (sessionType == 'create') {
                 btn.innerHTML = 'Start';
-                btn.addEventListener('click', () => possiblyStarting());
+                btn.addEventListener('click', () => {
+                    btn.innerHTML = 'Starting...';
+                    startBtnAnimation('stop');
+                    possiblyStarting();
+                });
             }
         } else {
             btn.addEventListener('click', () => {
