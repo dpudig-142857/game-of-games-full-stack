@@ -115,7 +115,7 @@ function NOTbackgroundColour(label, notChecked) {
         )`;
 }
 
-function startBtnAnimation(type) {
+function btnAnimation(type) {
     if (type == 'start') {
         startBtn.classList.remove('pulse-animation');
         startBtn.classList.add('pulse-animation');
@@ -124,6 +124,10 @@ function startBtnAnimation(type) {
     } else if (type == 'stop') {
         startBtn.style.display = 'none';
         nextBtn.style.display = 'flex';
+    } else if (type == 'starting') {
+        startBtn.classList.remove('pulse-animation');
+        startBtn.style.display = 'flex';
+        nextBtn.style.display = 'none';
     }
 }
 
@@ -163,7 +167,7 @@ function createCheckbox(id, type, text) {
 
     input.addEventListener('click', () => {
         const result = input.checked ? text : '';
-        startBtnAnimation('stop');
+        btnAnimation('stop');
         if (type == 'points') thePoints = result;
         if (type == 'speciality') {
             if (result == '') {
@@ -448,7 +452,7 @@ function createPlayers() {
                     games: []
                 })
             }
-            startBtnAnimation('stop');
+            btnAnimation('stop');
         });
         
         const selected = thePlayers.find(p => {
@@ -730,7 +734,7 @@ function dropdown(speciality, text, player, colour, games) {
                 btn.dataset.value = game.tag;
                 content.style.display = 'none';
             }
-            startBtnAnimation('stop');
+            btnAnimation('stop');
         });
         option.addEventListener('mouseenter', () => {
             let curr = theSpecialities.find(p => p.player_id == player.player_id);
@@ -815,7 +819,7 @@ function showConfirmationStep() {
             right.appendChild(createConfirmationGames());
             rightSection.appendChild(right);
 
-            startBtnAnimation('start');
+            btnAnimation('start');
         }
     }
     div.style.display = show ? 'flex' : 'none';
@@ -1259,7 +1263,7 @@ async function initialize() {
                 btn.innerHTML = 'Start';
                 btn.addEventListener('click', () => {
                     btn.innerHTML = 'Starting...';
-                    startBtnAnimation('stop');
+                    btnAnimation('starting');
                     possiblyStarting();
                 });
             }
