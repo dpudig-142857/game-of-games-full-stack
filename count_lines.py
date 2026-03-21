@@ -39,7 +39,9 @@ def count_lines_of_code():
     'backend/routes/sessions.js',
     'backend/routes/stats.js',
     'backend/routes/tournament.js',
-    'backend/routes/user.js'
+    'backend/routes/user.js',
+    'backend/db/pool.js',
+    'backend/db/queries.js'
   ]
   filtered_files = [file for file in files if file in include_files]
 
