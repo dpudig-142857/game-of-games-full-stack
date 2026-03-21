@@ -610,7 +610,7 @@ export async function saveSession(sessionId, sessionData) {
                 currentGame.extras,
                 currentGame.after
             ]);
-            const gameId = gameRes.rows[0];
+            const gameId = gameRes.rows[0].game_instance_id;
 
             for (const v of currentGame.votes) {
                 await pool.query(`
