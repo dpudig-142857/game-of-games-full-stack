@@ -588,6 +588,7 @@ async function fillGameInfo(game, info) {
     });
 
     if (info.results_type == 'tournament') {
+        gamePhotoDiv.innerHTML = '';
         const bracketDiv = document.createElement('div');
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
@@ -596,7 +597,6 @@ async function fillGameInfo(game, info) {
         const res = await fetch(`${BASE_ROUTE}/api/tournament/1`);
         const data = await res.json();
         console.log(data);
-        gamePhotoDiv.innerHTML = '';
 
         window.bracketsViewer.render({
             stages: data.bracket.stage,
