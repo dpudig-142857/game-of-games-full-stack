@@ -588,8 +588,15 @@ async function fillGameInfo(game, info) {
     });
 
     if (info.results_type == 'tournament') {
+        const bracketDiv = document.createElement('div');
+        bracketDiv.id = 'tournament_bracket';
+        bracketDiv.className = 'brackets-viewer';
+        right.appendChild(bracketDiv);
+        
         const res = await fetch(`${BASE_ROUTE}/api/tournament/1`);
         const data = await res.json();
+        console.log(data);
+        gamePhotoDiv.innerHTML = '';
 
         window.bracketsViewer.render({
             stages: data.bracket.stage,
@@ -597,11 +604,11 @@ async function fillGameInfo(game, info) {
             matchGames: data.bracket.match_game,
             participants: data.bracket.participant,
         }, {
-            selector: '#tournament_bracket',
+            selector: '#modal-game-photo',
             clear: true,
         });
 
-
+        gamePhotoDiv.style.display = 'flex';
     }
 
     if (game.name == '4:20 Game') {
