@@ -596,10 +596,9 @@ export async function saveSession(sessionId, sessionData) {
         }
 
         if (currentGame) {
-            const gameRes = await pool.query(`
+            await pool.query(`
                 INSERT INTO gog_games (session_id, game_id, game_number, name, status, selected_by, extras, after)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-                RETURNING game_instance_id
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
             `, [
                 sessionId, 
                 currGameInfo.game_id,
@@ -610,7 +609,16 @@ export async function saveSession(sessionId, sessionData) {
                 currentGame.extras,
                 currentGame.after
             ]);
-            const gameId = gameRes.rows[0].game_instance_id;
+
+            const gameRes = await pool.query(`
+                SELECT game_instance_id
+                FROM gog_games
+                WHERE session_id = $1 AND game_number = $2;
+            `, [
+                sessionId,
+                currentGame.game_id.split('_')[1]
+            ]);
+            const gameId = gameRes.rows[0];
 
             for (const v of currentGame.votes) {
                 await pool.query(`
