@@ -588,7 +588,7 @@ async function fillGameInfo(game, info) {
     });
 
     if (info.results_type == 'tournament') {
-        const res = await fetch(`${BASE_ROUTE}/tournament/1`);
+        const res = await fetch(`${BASE_ROUTE}/api/tournament/1`);
         const data = await res.json();
 
         window.bracketsViewer.render({
