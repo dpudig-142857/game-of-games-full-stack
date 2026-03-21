@@ -397,7 +397,7 @@ function showLog() {
             };
             growFromBoxToModal(
                 div, gameModal, gameModalBox,
-                colour, () => fillGameInfo(g, info)
+                colour, async () => await fillGameInfo(g, info)
             );
         });
 
@@ -481,7 +481,8 @@ function showLog() {
     });*/
 }
 
-function fillGameInfo(game, info) {
+async function fillGameInfo(game, info) {
+    console.log(game);
     console.log(info);
     resetGame();
     gameNameDiv.appendChild(header('h1', `${game.name}'s Results`));
@@ -585,6 +586,23 @@ function fillGameInfo(game, info) {
         
         gameResultsDiv.appendChild(box);
     });
+
+    if (info.results_type == 'tournament') {
+        const res = await fetch(`${BASE_ROUTE}/tournament/1`);
+        const data = await res.json();
+
+        window.bracketsViewer.render({
+            stages: data.bracket.stage,
+            matches: data.bracket.match,
+            matchGames: data.bracket.match_game,
+            participants: data.bracket.participant,
+        }, {
+            selector: '#tournament_bracket',
+            clear: true,
+        });
+
+
+    }
 
     if (game.name == '4:20 Game') {
         let filename = game.extras[0];
