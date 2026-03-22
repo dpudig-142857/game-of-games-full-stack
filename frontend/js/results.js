@@ -592,26 +592,26 @@ async function fillGameInfo(game, info) {
 
     if (info.results_type == 'tournament') {
         const tournament = tournaments.find(t => t.game_number == game.number);
-        console.log(tournaments);
-        console.log(tournament);
-        
-        /*gameTournamentDiv.innerHTML = '';
-        const bracketDiv = document.createElement('div');
-        bracketDiv.id = 'tournament_bracket';
-        bracketDiv.className = 'brackets-viewer';
-        gameTournamentDiv.appendChild(bracketDiv);
-        
-        window.bracketsViewer.render({
-            stages: data.bracket.stage,
-            matches: data.bracket.match,
-            matchGames: data.bracket.match_game,
-            participants: data.bracket.participant,
-        }, {
-            selector: '#tournament_bracket',
-            clear: true,
-        });
-
-        gameTournamentDiv.style.display = 'flex';*/
+        const data = tournament?.bracket ?? null;
+        if (data) {
+            gameTournamentDiv.innerHTML = '';
+            const bracketDiv = document.createElement('div');
+            bracketDiv.id = 'tournament_bracket';
+            bracketDiv.className = 'brackets-viewer';
+            gameTournamentDiv.appendChild(bracketDiv);
+            
+            window.bracketsViewer.render({
+                stages: data.stage,
+                matches: data.match,
+                matchGames: data.match_game,
+                participants: data.participant,
+            }, {
+                selector: '#tournament_bracket',
+                clear: true,
+            });
+    
+            gameTournamentDiv.style.display = 'flex';
+        }
     }
 
     if (game.name == '4:20 Game') {
