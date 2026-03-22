@@ -863,7 +863,7 @@ export async function victoryCone(sessionId, data) {
 
 
 // --- Stats ---
-export async function getPlayerStats() {
+/*export async function getPlayerStats() {
     let playerStats = [];
     const playersRes = await pool.query('SELECT * FROM accounts ORDER BY name, family');
     const players = playersRes.rows;
@@ -1409,6 +1409,465 @@ export async function getGameStats() {
         });
     }
     return gameStats;
+}*/
+export async function getPlayerStats() {
+    const playersRes = await pool.query('SELECT * FROM accounts ORDER BY name, family');
+    const players = playersRes.rows;
+    const displayNames = getDisplayNames(players);
+    const playerIds = players.map(p => p.player_id);
+ 
+    // Run all per-player batch queries in parallel
+    const [
+        playedRes,
+        winPercRes,
+        placesRes,
+        conesRes,
+        pointsRes,
+        cardsRes,
+        intrudedRes,
+        abandonedRes,
+        gamePlacesRes,
+        gamesRes
+    ] = await Promise.all([
+ 
+        // Played count per player
+        pool.query(`
+            SELECT player_id, COUNT(*) AS num
+            FROM gog_players
+            WHERE player_id = ANY($1)
+            GROUP BY player_id
+        `, [playerIds]),
+ 
+        // Win percentage per player
+        pool.query(`
+            SELECT
+                player_id,
+                ROUND(100.0 * COUNT(*) FILTER (WHERE place = 1) / NULLIF(COUNT(*), 0), 2) AS win_perc
+            FROM gog_final_results
+            WHERE player_id = ANY($1)
+            GROUP BY player_id
+        `, [playerIds]),
+ 
+        // Place distribution per player
+        pool.query(`
+            SELECT player_id, place AS num, COUNT(*) AS total
+            FROM gog_final_results
+            WHERE player_id = ANY($1)
+            GROUP BY player_id, place
+            ORDER BY player_id, place
+        `, [playerIds]),
+ 
+        // Cone stats per player
+        pool.query(`
+            WITH cone_data AS (
+                SELECT
+                    player_id,
+                    session_id,
+                    pg_cone, f20g_cone, l_cone, c_cone, w_cone, v_cone,
+                    (pg_cone + f20g_cone + l_cone + c_cone + w_cone + v_cone) AS overall_cone
+                FROM gog_players
+                WHERE player_id = ANY($1)
+            )
+            SELECT
+                player_id,
+                'overall_cone' AS type,
+                SUM(overall_cone) AS total,
+                ROUND(AVG(overall_cone), 2) AS avg,
+                MAX(overall_cone) AS highest,
+                STRING_AGG(session_id::text, ', ') FILTER (
+                    WHERE overall_cone = MAX(overall_cone) OVER (PARTITION BY player_id)
+                ) AS highest_session
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'pg_cone', SUM(pg_cone), ROUND(AVG(pg_cone),2), MAX(pg_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE pg_cone = MAX(pg_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'f20g_cone', SUM(f20g_cone), ROUND(AVG(f20g_cone),2), MAX(f20g_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE f20g_cone = MAX(f20g_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'l_cone', SUM(l_cone), ROUND(AVG(l_cone),2), MAX(l_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE l_cone = MAX(l_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'c_cone', SUM(c_cone), ROUND(AVG(c_cone),2), MAX(c_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE c_cone = MAX(c_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'w_cone', SUM(w_cone), ROUND(AVG(w_cone),2), MAX(w_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE w_cone = MAX(w_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'v_cone', SUM(v_cone), ROUND(AVG(v_cone),2), MAX(v_cone),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE v_cone = MAX(v_cone) OVER (PARTITION BY player_id))
+            FROM cone_data GROUP BY player_id
+        `, [playerIds]),
+ 
+        // Point stats per player
+        pool.query(`
+            WITH point_data AS (
+                SELECT
+                    player_id,
+                    session_id,
+                    g_point, c_point, special_w_point, special_l_point,
+                    (g_point + c_point + special_w_point + special_l_point) AS overall_point
+                FROM gog_players
+                WHERE player_id = ANY($1)
+            )
+            SELECT
+                player_id,
+                'overall_point' AS type,
+                SUM(overall_point) AS total,
+                ROUND(AVG(overall_point), 2) AS avg,
+                MAX(overall_point) AS highest,
+                STRING_AGG(session_id::text, ', ') FILTER (
+                    WHERE overall_point = MAX(overall_point) OVER (PARTITION BY player_id)
+                ) AS highest_session
+            FROM point_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'g_point', SUM(g_point), ROUND(AVG(g_point),2), MAX(g_point),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE g_point = MAX(g_point) OVER (PARTITION BY player_id))
+            FROM point_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'c_point', SUM(c_point), ROUND(AVG(c_point),2), MAX(c_point),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE c_point = MAX(c_point) OVER (PARTITION BY player_id))
+            FROM point_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'special_w_point', SUM(special_w_point), ROUND(AVG(special_w_point),2), MAX(special_w_point),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE special_w_point = MAX(special_w_point) OVER (PARTITION BY player_id))
+            FROM point_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'special_l_point', SUM(special_l_point), ROUND(AVG(special_l_point),2), MIN(special_l_point),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE special_l_point = MIN(special_l_point) OVER (PARTITION BY player_id))
+            FROM point_data GROUP BY player_id
+        `, [playerIds]),
+ 
+        // Card stats per player
+        pool.query(`
+            WITH card_data AS (
+                SELECT
+                    player_id,
+                    session_id,
+                    (2 - neigh) AS neigh,
+                    (2 - super_neigh) AS super_neigh,
+                    gooc_total,
+                    gooc_used
+                FROM gog_players
+                WHERE player_id = ANY($1)
+            )
+            SELECT
+                player_id,
+                'neigh' AS type,
+                SUM(neigh) AS total,
+                ROUND(AVG(neigh), 2) AS avg,
+                MAX(neigh) AS highest,
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE neigh = MAX(neigh) OVER (PARTITION BY player_id)) AS highest_session
+            FROM card_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'super_neigh', SUM(super_neigh), ROUND(AVG(super_neigh),2), MAX(super_neigh),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE super_neigh = MAX(super_neigh) OVER (PARTITION BY player_id))
+            FROM card_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'gooc_total', SUM(gooc_total), ROUND(AVG(gooc_total),2), MAX(gooc_total),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE gooc_total = MAX(gooc_total) OVER (PARTITION BY player_id))
+            FROM card_data GROUP BY player_id
+ 
+            UNION ALL
+            SELECT player_id, 'gooc_used', SUM(gooc_used), ROUND(AVG(gooc_used),2), MAX(gooc_used),
+                STRING_AGG(session_id::text, ', ') FILTER (WHERE gooc_used = MAX(gooc_used) OVER (PARTITION BY player_id))
+            FROM card_data GROUP BY player_id
+        `, [playerIds]),
+ 
+        // Intruded count per player
+        pool.query(`
+            SELECT p.player_id, COUNT(s.session_id) AS intruded
+            FROM accounts p
+            LEFT JOIN gog_sessions s ON p.player_id = ANY(s.intruded)
+            WHERE p.player_id = ANY($1)
+            GROUP BY p.player_id
+        `, [playerIds]),
+ 
+        // Abandoned count per player
+        pool.query(`
+            SELECT p.player_id, COUNT(s.session_id) AS abandoned
+            FROM accounts p
+            LEFT JOIN gog_sessions s ON p.player_id = ANY(s.abandoned)
+            WHERE p.player_id = ANY($1)
+            GROUP BY p.player_id
+        `, [playerIds]),
+ 
+        // Game place distribution per player
+        pool.query(`
+            SELECT player_id, place AS num, COUNT(*) AS total
+            FROM gog_game_players
+            WHERE player_id = ANY($1)
+            GROUP BY player_id, place
+            ORDER BY player_id, place
+        `, [playerIds]),
+ 
+        // Full game stats per player
+        pool.query(`
+            WITH player_specialities AS (
+                SELECT player_id, UNNEST(speciality) AS game_name
+                FROM gog_players
+                WHERE player_id = ANY($1)
+            ), speciality_count AS (
+                SELECT ps.player_id, gi.name AS game_name, COUNT(*) AS count
+                FROM games_info gi
+                JOIN player_specialities ps ON gi.name = ps.game_name
+                GROUP BY ps.player_id, gi.name
+            ), game_stats AS (
+                SELECT
+                    ggp.player_id,
+                    gi.name AS game_name,
+                    COUNT(*) AS played,
+                    COUNT(*) FILTER (WHERE ggp.place = 1) AS won,
+                    COUNT(*) FILTER (WHERE ggp.place <> 1) AS lost,
+                    ROUND(100.0 * COUNT(*) FILTER (WHERE ggp.place = 1) / NULLIF(COUNT(*), 0), 2) AS win_perc,
+                    COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place = 1) AS speciality_won,
+                    COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place <> 1) AS speciality_lost
+                FROM gog_game_players ggp
+                JOIN gog_games gg USING (game_instance_id)
+                JOIN games_info gi USING (game_id)
+                WHERE ggp.player_id = ANY($1)
+                GROUP BY ggp.player_id, gi.name
+            ), neigh_stats AS (
+                SELECT
+                    ggn.player_id,
+                    gi.name AS game_name,
+                    COUNT(*) FILTER (WHERE ggn.type = 'Neigh') AS neighed,
+                    COUNT(*) FILTER (WHERE ggn.type = 'Super Neigh') AS super_neighed
+                FROM gog_games_neighed ggn
+                JOIN games_info gi USING (game_id)
+                WHERE ggn.player_id = ANY($1)
+                GROUP BY ggn.player_id, gi.name
+            ), vote_stats AS (
+                SELECT
+                    ggv.player_id,
+                    ggv.game_name,
+                    COUNT(*) AS vote_chosen,
+                    COUNT(*) FILTER (WHERE ggv.game_name IS NOT NULL AND ggv.game_name <> '' AND gi.name = ggv.game_name) AS vote_won,
+                    COUNT(*) FILTER (WHERE ggv.game_name IS NOT NULL AND ggv.game_name <> '' AND gi.name <> ggv.game_name) AS vote_lost
+                FROM gog_game_votes ggv
+                JOIN gog_games gg USING (game_instance_id)
+                JOIN games_info gi USING (game_id)
+                WHERE ggv.player_id = ANY($1)
+                GROUP BY ggv.player_id, ggv.game_name
+            ), combined_stats AS (
+                SELECT
+                    COALESCE(gs.player_id, sc.player_id, ns.player_id, vs.player_id) AS player_id,
+                    COALESCE(gs.game_name, sc.game_name, ns.game_name, vs.game_name) AS game_name,
+                    COALESCE(gs.played, 0) AS played,
+                    COALESCE(gs.won, 0) AS won,
+                    COALESCE(gs.lost, 0) AS lost,
+                    COALESCE(gs.win_perc, 0) AS win_perc,
+                    COALESCE(ns.neighed, 0) AS neighed,
+                    COALESCE(ns.super_neighed, 0) AS super_neighed,
+                    COALESCE(sc.count, 0) AS speciality_chosen,
+                    COALESCE(gs.speciality_won, 0) AS speciality_won,
+                    COALESCE(gs.speciality_lost, 0) AS speciality_lost,
+                    COALESCE(vs.vote_chosen, 0) AS vote_chosen,
+                    COALESCE(vs.vote_won, 0) AS vote_won,
+                    COALESCE(vs.vote_lost, 0) AS vote_lost
+                FROM game_stats gs
+                FULL OUTER JOIN speciality_count sc USING (player_id, game_name)
+                FULL OUTER JOIN neigh_stats ns USING (player_id, game_name)
+                FULL OUTER JOIN vote_stats vs USING (player_id, game_name)
+            )
+            SELECT
+                p.player_id,
+                gi.name AS game_name,
+                COALESCE(cs.played, 0) AS played,
+                COALESCE(cs.won, 0) AS won,
+                COALESCE(cs.lost, 0) AS lost,
+                COALESCE(cs.win_perc, 0) AS win_perc,
+                COALESCE(cs.neighed, 0) AS neighed,
+                COALESCE(cs.super_neighed, 0) AS super_neighed,
+                COALESCE(cs.speciality_chosen, 0) AS speciality_chosen,
+                COALESCE(cs.speciality_won, 0) AS speciality_won,
+                COALESCE(cs.speciality_lost, 0) AS speciality_lost,
+                COALESCE(cs.vote_chosen, 0) AS vote_chosen,
+                COALESCE(cs.vote_won, 0) AS vote_won,
+                COALESCE(cs.vote_lost, 0) AS vote_lost
+            FROM accounts p
+            CROSS JOIN games_info gi
+            LEFT JOIN combined_stats cs ON cs.player_id = p.player_id AND cs.game_name = gi.name
+            WHERE p.player_id = ANY($1)
+            ORDER BY p.player_id, gi.name
+        `, [playerIds])
+    ]);
+ 
+    // Index results by player_id for O(1) lookup
+    const byPlayer = (rows, key = 'player_id') =>
+        rows.reduce((acc, row) => {
+            (acc[row[key]] ??= []).push(row);
+            return acc;
+        }, {});
+ 
+    const playedMap      = Object.fromEntries(playedRes.rows.map(r => [r.player_id, r.num]));
+    const winPercMap     = Object.fromEntries(winPercRes.rows.map(r => [r.player_id, r.win_perc]));
+    const intrudedMap    = Object.fromEntries(intrudedRes.rows.map(r => [r.player_id, parseInt(r.intruded)]));
+    const abandonedMap   = Object.fromEntries(abandonedRes.rows.map(r => [r.player_id, parseInt(r.abandoned)]));
+    const placesMap      = byPlayer(placesRes.rows);
+    const conesMap       = byPlayer(conesRes.rows);
+    const pointsMap      = byPlayer(pointsRes.rows);
+    const cardsMap       = byPlayer(cardsRes.rows);
+    const gamePlacesMap  = byPlayer(gamePlacesRes.rows);
+    const gamesMap       = byPlayer(gamesRes.rows);
+ 
+    return players.map(p => ({
+        id: p.player_id,
+        name: displayNames.find(d => d.player_id == p.player_id).name,
+        colour: p.colour,
+        played:    playedMap[p.player_id]   ?? 0,
+        win_perc:  winPercMap[p.player_id]  ?? null,
+        places:    placesMap[p.player_id]   ?? [],
+        intruded:  intrudedMap[p.player_id] ?? 0,
+        abandoned: abandonedMap[p.player_id]?? 0,
+        cones:     conesMap[p.player_id]    ?? [],
+        points:    pointsMap[p.player_id]   ?? [],
+        cards:     cardsMap[p.player_id]    ?? [],
+        game_places: gamePlacesMap[p.player_id] ?? [],
+        games:     gamesMap[p.player_id]    ?? []
+    }));
+}
+ 
+export async function getGameStats() {
+    const gamesRes = await pool.query('SELECT * FROM games_info ORDER BY name;');
+    const games = gamesRes.rows;
+    const gameIds = games.map(g => g.game_id);
+ 
+    const [overallRes, playersRes] = await Promise.all([
+ 
+        // Overall stats for all games in one query
+        pool.query(`
+            SELECT
+                g.game_id,
+                COALESCE((SELECT COUNT(*) FROM gog_games gg WHERE gg.game_id = g.game_id), 0) AS played,
+                COALESCE(ROUND(
+                    (SELECT COUNT(DISTINCT gg.session_id)::numeric FROM gog_games gg WHERE gg.game_id = g.game_id)
+                    / NULLIF((SELECT COUNT(*) FROM gog_sessions)::numeric, 0),
+                    4
+                ), 0) AS chance,
+                COALESCE((SELECT COUNT(*) FROM gog_games_neighed gn WHERE gn.game_id = g.game_id AND gn.type = 'Neigh'), 0) AS neighed,
+                COALESCE((SELECT COUNT(*) FROM gog_games_neighed gn WHERE gn.game_id = g.game_id AND gn.type = 'Super Neigh'), 0) AS super_neighed,
+                COALESCE((SELECT COUNT(*) FROM gog_games gg WHERE gg.game_id = g.game_id AND gg.selected_by = 'Vote'), 0) AS selected_vote,
+                COALESCE((SELECT COUNT(*) FROM gog_games gg WHERE gg.game_id = g.game_id AND gg.selected_by = 'Choose'), 0) AS selected_choose,
+                COALESCE((SELECT COUNT(*) FROM gog_games gg WHERE gg.game_id = g.game_id AND gg.selected_by = 'Wheel'), 0) AS selected_wheel
+            FROM games_info g
+            WHERE g.game_id = ANY($1)
+        `, [gameIds]),
+ 
+        // Per-player stats for all games in one query
+        pool.query(`
+            WITH game_stats AS (
+                SELECT
+                    gg.game_id,
+                    ggp.player_id,
+                    COUNT(*) AS played,
+                    COUNT(*) FILTER (WHERE ggp.place = 1) AS won,
+                    COUNT(*) FILTER (WHERE ggp.place <> 1) AS lost,
+                    ROUND(100.0 * COUNT(*) FILTER (WHERE ggp.place = 1) / NULLIF(COUNT(*), 0), 2) AS win_perc,
+                    COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place = 1) AS speciality_won,
+                    COUNT(*) FILTER (WHERE ggp.speciality IS TRUE AND ggp.place <> 1) AS speciality_lost
+                FROM gog_game_players ggp
+                JOIN gog_games gg USING (game_instance_id)
+                WHERE gg.game_id = ANY($1)
+                GROUP BY gg.game_id, ggp.player_id
+            ), neigh_stats AS (
+                SELECT
+                    ggn.game_id,
+                    ggn.player_id,
+                    COUNT(*) FILTER (WHERE ggn.type = 'Neigh') AS neighed,
+                    COUNT(*) FILTER (WHERE ggn.type = 'Super Neigh') AS super_neighed
+                FROM gog_games_neighed ggn
+                WHERE ggn.game_id = ANY($1)
+                GROUP BY ggn.game_id, ggn.player_id
+            ), vote_stats AS (
+                SELECT
+                    gi.game_id,
+                    ggv.player_id,
+                    COUNT(*) AS vote_chosen,
+                    COUNT(*) FILTER (WHERE gi.game_id = gg.game_id AND ggv.game_name IS NOT NULL AND ggv.game_name <> '') AS vote_won,
+                    COUNT(*) FILTER (WHERE gi.game_id <> gg.game_id AND ggv.game_name IS NOT NULL AND ggv.game_name <> '') AS vote_lost
+                FROM gog_game_votes ggv
+                JOIN gog_games gg USING (game_instance_id)
+                JOIN games_info gi ON gi.name = ggv.game_name
+                WHERE gi.game_id = ANY($1)
+                GROUP BY gi.game_id, ggv.player_id
+            ), speciality_count AS (
+                SELECT
+                    gi.game_id,
+                    gp.player_id,
+                    COUNT(*) AS speciality_chosen
+                FROM gog_players gp
+                JOIN games_info gi ON gi.name = ANY(gp.speciality)
+                WHERE gi.game_id = ANY($1)
+                GROUP BY gi.game_id, gp.player_id
+            )
+            SELECT
+                g.game_id,
+                p.player_id,
+                p.name,
+                p.family,
+                COALESCE(gs.played, 0) AS played,
+                COALESCE(gs.won, 0) AS won,
+                COALESCE(gs.lost, 0) AS lost,
+                COALESCE(gs.win_perc, 0) AS win_perc,
+                COALESCE(ns.neighed, 0) AS neighed,
+                COALESCE(ns.super_neighed, 0) AS super_neighed,
+                COALESCE(sc.speciality_chosen, 0) AS speciality_chosen,
+                COALESCE(gs.speciality_won, 0) AS speciality_won,
+                COALESCE(gs.speciality_lost, 0) AS speciality_lost,
+                COALESCE(vs.vote_chosen, 0) AS vote_chosen,
+                COALESCE(vs.vote_won, 0) AS vote_won,
+                COALESCE(vs.vote_lost, 0) AS vote_lost
+            FROM games_info g
+            CROSS JOIN accounts p
+            LEFT JOIN game_stats gs ON gs.game_id = g.game_id AND gs.player_id = p.player_id
+            LEFT JOIN neigh_stats ns ON ns.game_id = g.game_id AND ns.player_id = p.player_id
+            LEFT JOIN speciality_count sc ON sc.game_id = g.game_id AND sc.player_id = p.player_id
+            LEFT JOIN vote_stats vs ON vs.game_id = g.game_id AND vs.player_id = p.player_id
+            WHERE g.game_id = ANY($1)
+            ORDER BY g.game_id, p.name
+        `, [gameIds])
+    ]);
+ 
+    const overallMap = Object.fromEntries(overallRes.rows.map(r => [r.game_id, r]));
+ 
+    const playersByGame = playersRes.rows.reduce((acc, row) => {
+        (acc[row.game_id] ??= []).push(row);
+        return acc;
+    }, {});
+ 
+    return games.map(g => {
+        const o = overallMap[g.game_id] ?? {};
+        return {
+            id: g.game_id,
+            name: g.name,
+            played:          parseInt(o.played ?? 0),
+            chance:          parseFloat(o.chance ?? 0),
+            neighed:         parseInt(o.neighed ?? 0),
+            super_neighed:   parseInt(o.super_neighed ?? 0),
+            selected_vote:   parseInt(o.selected_vote ?? 0),
+            selected_choose: parseInt(o.selected_choose ?? 0),
+            selected_wheel:  parseInt(o.selected_wheel ?? 0),
+            players:         playersByGame[g.game_id] ?? []
+        };
+    });
 }
 
 export async function getTotalStats() {
@@ -1940,10 +2399,12 @@ export async function getTotalStats() {
 }
 
 export async function getStats() {
-    let players = await getPlayerStats();
-    let games = await getGameStats();
-    let total = await getTotalStats();
-    return { players, games, total }
+    const [players, games, total] = await Promise.all([
+        getPlayerStats(),
+        getGameStats(),
+        getTotalStats()
+    ]);
+    return { players, games, total };
 }
 
 // --- User ---
