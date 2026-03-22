@@ -24,7 +24,14 @@ dotenv.config();
 
 const PgSession = pgSession(session);
 
-const photosPath = path.join(process.cwd(), 'photos');
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const photosPath = path.join(__dirname, 'photos');
+console.log('Photos path:', photosPath);
+//const photosPath = path.join(process.cwd(), 'photos');
 
 const app = express();
 
