@@ -26,7 +26,7 @@ function padToPowerOfTwo(players) {
 
 // POST /api/tournament/create
 router.post('/create', async (req, res) => {
-    const { players, sessionId, game } = req.body;
+    const { players, sessionId, game, num } = req.body;
 
     let paddedPlayers = players[0]?.name
         ? padToPowerOfTwo(players.map(p => p.name))
@@ -56,14 +56,14 @@ router.post('/create', async (req, res) => {
         });
 
         await pool.query(`
-            INSERT INTO tournaments (id, game, session_id, bracket)
-            VALUES ($1, $2, $3, $4)
+            INSERT INTO tournaments (id, game, session_id, bracket, game_number)
+            VALUES ($1, $2, $3, $4, $5)
             ON CONFLICT (id)
             DO UPDATE SET
               bracket = EXCLUDED.bracket,
               updated_at = NOW()
         `, [
-            id, game, sessionId, JSON.stringify(manager.storage.data)
+            id, game, sessionId, JSON.stringify(manager.storage.data), num
         ]);
 
         res.json({ success: true, tournamentId: id, tournament });
@@ -105,7 +105,7 @@ router.get('/session/:id', async (req, res) => {
     try {
         const sessionId = Number(req.params.id);
         const { rows } = await pool.query(`
-            SELECT id, game_instance_id, bracket
+            SELECT game_number, game_instance_id, bracket
             FROM tournaments
             WHERE session_id = $1;
         `, [

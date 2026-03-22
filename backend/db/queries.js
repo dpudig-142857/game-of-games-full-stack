@@ -645,6 +645,17 @@ export async function saveSession(sessionId, sessionData) {
                     player.speciality.includes(currentGame.name)
                 ]);
             }
+
+            await pool.query(`
+                UPDATE tournaments
+                SET game_instance_id = $1
+                WHERE session_id = $2 AND game_number = $3 AND game = $4;
+            `, [
+                gameId,
+                sessionId,
+                currentGame.game_id.split('_')[1],
+                currentGame.name
+            ])
         }
 
         return { success: true };

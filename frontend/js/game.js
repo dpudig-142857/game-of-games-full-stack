@@ -6362,7 +6362,8 @@ async function createTournament(curr) {
         body: JSON.stringify({
             players,
             sessionId,
-            game: currGame.name
+            game: currGame.name,
+            num: gameNumber
         })
     });
 
