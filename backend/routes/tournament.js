@@ -105,7 +105,7 @@ router.get('/session/:id', async (req, res) => {
     try {
         const sessionId = Number(req.params.id);
         const { rows } = await pool.query(`
-            SELECT game_number, game_instance_id, bracket
+            SELECT game_instance_id, game_number, game, bracket
             FROM tournaments
             WHERE session_id = $1;
         `, [

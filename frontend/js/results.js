@@ -59,6 +59,7 @@ let displayNames = [];
 let possibleGames = [];
 let playedGames = [];
 let finalResults = [];
+let tournaments = [];
 
 let playerModal = document.getElementById('player-modal');
 let playerModalBox = document.getElementById('player-modal-box');
@@ -590,12 +591,15 @@ async function fillGameInfo(game, info) {
     });
 
     if (info.results_type == 'tournament') {
+        const tournament = tournaments.find(t => t.game_number == game.number);
+        console.log(tournaments);
+        console.log(tournament);
+        
         /*gameTournamentDiv.innerHTML = '';
         const bracketDiv = document.createElement('div');
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
         gameTournamentDiv.appendChild(bracketDiv);
-        
         
         window.bracketsViewer.render({
             stages: data.bracket.stage,
@@ -975,8 +979,8 @@ async function initialise() {
     const resultsRes = await fetch (`${BASE_ROUTE}/api/sessions/${sessionId}/results`);
     const results = await resultsRes.json();
 
-    const tournamentRes = await fetch(`${BASE_ROUTE}/api/tournament/session/${sessionId}`);
-    const tournament = await tournamentRes.json();
+    const tournamentsRes = await fetch(`${BASE_ROUTE}/api/tournament/session/${sessionId}`);
+    tournaments = await tournamentsRes.json();
 
     headerTitle.innerHTML = '';
     headerTitle.appendChild(header('h1', `Game of Games Results`));
