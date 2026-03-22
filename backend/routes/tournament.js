@@ -100,6 +100,29 @@ router.get('/:id/results', async (req, res) => {
     }
 });
 
+// GET /api/tournament/session/:id
+router.get('/session/:id', async (req, res) => {
+    try {
+        const sessionId = Number(req.params.id);
+        const { rows } = await pool.query(`
+            SELECT id, game_instance_id, bracket
+            FROM tournaments
+            WHERE session_id = $1;
+        `, [
+            sessionId
+        ]);
+
+        if (!rows.length) {
+            return res.status(404).json({ error: 'No tournaments found' });
+        }
+
+        res.json(rows);
+    } catch (err) {
+        console.error(`Error retrieving tournament results: ${err}`);
+        res.status(500).json({ error: 'Failed to retrieve tournament results' });
+    }
+});
+
 // POST /api/tournament/:id/update
 router.post('/:id/update', async (req, res) => {
     try {

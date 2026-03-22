@@ -329,6 +329,7 @@ const gameExtrasDiv = document.getElementById('modal-game-extras');
 const gameSelectedDiv = document.getElementById('modal-game-selected');
 const gameResultsDiv = document.getElementById('modal-game-results');
 const gamePhotoDiv = document.getElementById('modal-game-photo');
+const gameTournamentDiv = document.getElementById('modal-game-tournament');
 
 function resetGame() {
     gameNameDiv.innerHTML = '';
@@ -337,6 +338,7 @@ function resetGame() {
     gameSelectedDiv.innerHTML = '';
     gameResultsDiv.innerHTML = '';
     gamePhotoDiv.innerHTML = '';
+    gameTournamentDiv.innerHTML = '';
 }
 
 function showLog() {
@@ -588,16 +590,13 @@ async function fillGameInfo(game, info) {
     });
 
     if (info.results_type == 'tournament') {
-        gamePhotoDiv.innerHTML = '';
+        /*gameTournamentDiv.innerHTML = '';
         const bracketDiv = document.createElement('div');
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
-        gamePhotoDiv.appendChild(bracketDiv);
+        gameTournamentDiv.appendChild(bracketDiv);
         
-        const res = await fetch(`${BASE_ROUTE}/api/tournament/1`);
-        const data = await res.json();
-        console.log(data);
-
+        
         window.bracketsViewer.render({
             stages: data.bracket.stage,
             matches: data.bracket.match,
@@ -608,7 +607,7 @@ async function fillGameInfo(game, info) {
             clear: true,
         });
 
-        gamePhotoDiv.style.display = 'flex';
+        gameTournamentDiv.style.display = 'flex';*/
     }
 
     if (game.name == '4:20 Game') {
@@ -975,6 +974,9 @@ async function initialise() {
 
     const resultsRes = await fetch (`${BASE_ROUTE}/api/sessions/${sessionId}/results`);
     const results = await resultsRes.json();
+
+    const tournamentRes = await fetch(`${BASE_ROUTE}/api/tournament/session/${sessionId}`);
+    const tournament = await tournamentRes.json();
 
     headerTitle.innerHTML = '';
     headerTitle.appendChild(header('h1', `Game of Games Results`));

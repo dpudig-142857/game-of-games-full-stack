@@ -428,6 +428,11 @@ body.modal-active {
     height: 50%;
 }
 
+#modal-game-tournament {
+    display: none;
+    height: 60%;
+}
+
 /*.left, .middle, .right {
     display: flex;
     flex-direction: column;
@@ -750,6 +755,10 @@ footer {
 .button-text {
     font-size: 1.2rem;
     font-weight: normal;
+}
+
+.elimination h1/*, .elimination h2*/ {
+    display: none;
 }
 
 .brackets-viewer {
