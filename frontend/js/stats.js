@@ -101,7 +101,7 @@ function times(num) {
     return `${num} times`;
 }
 
-function add(div, label, value, br = false, colon = ':') {
+function stat(div, label, value, br = false, colon = ':') {
     if (br) div.appendChild(document.createElement('br'));
     div.appendChild(header('h4', `${label}${colon} ${span(value)}`));
 }
@@ -327,23 +327,23 @@ function fillPlayerInfo(p) {
     playerNameDiv.appendChild(header('h1', `${p.name}'s Stats`));
 
     playerPlayedDiv.appendChild(header('h2', `Played:`));
-    add(playerPlayedDiv, '', times(p.played), true, '');
+    stat(playerPlayedDiv, '', times(p.played), true, '');
 
     playerChanceDiv.appendChild(header('h2', `Win Percentage:`));
-    add(playerChanceDiv, '', `${p.win_perc}%`, true, '');
+    stat(playerChanceDiv, '', `${p.win_perc}%`, true, '');
 
     playerIntrudedDiv.appendChild(header('h2', `Intruded:`));
-    add(playerIntrudedDiv, '', times(p.intruded), true, '');
+    stat(playerIntrudedDiv, '', times(p.intruded), true, '');
 
     playerAbandonedDiv.appendChild(header('h2', `Abandoned:`));
-    add(playerAbandonedDiv, '', times(p.abandoned), true, '');
+    stat(playerAbandonedDiv, '', times(p.abandoned), true, '');
 
     playerPlacesDiv.style.justifyContent = p.places.length < 3 ? 'center' : 'flex-start';
     p.places.forEach(pl => {
         const div = document.createElement('div');
         div.className = 'modal-box';
         div.appendChild(header('h2', `Earned ${place(pl.num)}:`));
-        add(div, '', times(pl.total), true, '');
+        stat(div, '', times(pl.total), true, '');
         playerPlacesDiv.appendChild(div);
     });
 
@@ -352,15 +352,15 @@ function fillPlayerInfo(p) {
             const stat = document.createElement('div');
             stat.className = 'modal-box';
             stat.appendChild(header('h2', typeText(gog_version, s.type)));
-            add(stat, 'Total', s.total, true);
+            stat(stat, 'Total', s.total, true);
             if (s.total != 0) {
-                add(stat, 'Average', s.avg);
+                stat(stat, 'Average', s.avg);
                 if (s.highest != 0) {
                     const g = s.highest_session.split(', ');
                     if (g.length == 1) {
-                        add(stat, 'Highest', `${s.highest} in GoG ${s.highest_session}`);
+                        stat(stat, 'Highest', `${s.highest} in GoG ${s.highest_session}`);
                     } else {
-                        add(stat, 'Highest', `${s.highest} in GoGs ${s.highest_session}`);
+                        stat(stat, 'Highest', `${s.highest} in GoGs ${s.highest_session}`);
                     }
                 }
             }
@@ -387,21 +387,21 @@ function fillPlayerInfo(p) {
         const infoDiv = document.createElement('div');
         infoDiv.id = 'game-player-info';
         infoDiv.className = 'modal-info';
-        add(infoDiv, 'Played', times(g.played));
-        add(infoDiv, 'Won', times(g.won));
-        add(infoDiv, 'Lost', times(g.lost));
-        add(infoDiv, 'Win Percentage', `${g.win_perc}%`);
+        stat(infoDiv, 'Played', times(g.played));
+        stat(infoDiv, 'Won', times(g.won));
+        stat(infoDiv, 'Lost', times(g.lost));
+        stat(infoDiv, 'Win Percentage', `${g.win_perc}%`);
 
-        add(infoDiv, 'Voted', times(g.vote_chosen), true);
-        add(infoDiv, 'Won Vote', times(g.vote_won));
-        add(infoDiv, 'Lost Vote', times(g.vote_lost));
+        stat(infoDiv, 'Voted', times(g.vote_chosen), true);
+        stat(infoDiv, 'Won Vote', times(g.vote_won));
+        stat(infoDiv, 'Lost Vote', times(g.vote_lost));
         
         if (g.game_name != '4:20 Game') {
-            add(infoDiv, 'Neighed', times(g.neighed), true);
-            add(infoDiv, 'Super Neighed', times(g.super_neighed));
-            add(infoDiv, `Chosen a${i == 0 ? '' : 's'} Speciality`, times(g.speciality_chosen), true);
-            add(infoDiv, 'Won Speciality', times(g.speciality_won));
-            add(infoDiv, 'Lost Speciality', times(g.speciality_lost));
+            stat(infoDiv, 'Neighed', times(g.neighed), true);
+            stat(infoDiv, 'Super Neighed', times(g.super_neighed));
+            stat(infoDiv, `Chosen a${i == 0 ? '' : 's'} Speciality`, times(g.speciality_chosen), true);
+            stat(infoDiv, 'Won Speciality', times(g.speciality_won));
+            stat(infoDiv, 'Lost Speciality', times(g.speciality_lost));
         }
 
         game.appendChild(infoDiv);
@@ -504,7 +504,7 @@ function showGames() {
             curr_colour.text = hexToTextColour(colour);
             growFromBoxToModal(
                 div, gameModal, gameModalBox, curr_colour,
-                () => { fillGameInfo(g, colour); }
+                () => fillGameInfo(g, colour)
             );
         });
 
@@ -519,24 +519,24 @@ function fillGameInfo(g, colour) {
     gameNameDiv.appendChild(header('h1', `${g.name}'s Stats`));
 
     /*gamePlayedDiv.appendChild(header('h2', 'Played:'));
-    add(gamePlayedDiv, '', times(g.played), true, '');
+    stat(gamePlayedDiv, '', times(g.played), true, '');
 
     gameChanceDiv.appendChild(header('h2', 'Chance:'));
-    add(gameChanceDiv, '', `${g.chance}%`, true, '');
+    stat(gameChanceDiv, '', `${g.chance}%`, true, '');
 
     gameNeighDiv.appendChild(header('h2', 'Neighed:'));
-    add(gameNeighDiv, '', times(g.neighed), true, '');
+    stat(gameNeighDiv, '', times(g.neighed), true, '');
 
     gameSuperDiv.appendChild(header('h2', 'Super Neighed:'));
-    add(gameSuperDiv, '', times(g.super_neighed), true, '');
+    stat(gameSuperDiv, '', times(g.super_neighed), true, '');
 
     gameSelectedDiv.appendChild(header('h2', 'Selected by:'));
     gameSelectedDiv.appendChild(document.createElement('br'));
     const div = document.createElement('div');
     div.id = 'modal-game-selected-section';
-    add(div, 'Voting system', times(g.selected_vote));
-    add(div, 'Unanimously', times(g.selected_choose));
-    add(div, 'Spinner wheel', times(g.selected_wheel));
+    stat(div, 'Voting system', times(g.selected_vote));
+    stat(div, 'Unanimously', times(g.selected_choose));
+    stat(div, 'Spinner wheel', times(g.selected_wheel));
     gameSelectedDiv.appendChild(div);*/
 
     const overall = document.createElement('div');
@@ -548,10 +548,10 @@ function fillGameInfo(g, colour) {
     const div = document.createElement('div');
     div.id = 'player-games-info';
     div.className = 'modal-info';
-    add(div, 'Played', times(g.played), true);
-    add(div, 'Chance', `${g.chance}%`);
-    add(div, 'Neighed', times(g.neighed), true);
-    add(div, 'Super Neighed', times(g.super_neighed));
+    stat(div, 'Played', times(g.played), true);
+    stat(div, 'Chance', `${g.chance}%`);
+    stat(div, 'Neighed', times(g.neighed), true);
+    stat(div, 'Super Neighed', times(g.super_neighed));
     overall.appendChild(div);
 
     const selected = document.createElement('div');
@@ -563,9 +563,9 @@ function fillGameInfo(g, colour) {
 
     const info = document.createElement('div');
     info.className = 'modal-info';
-    add(info, 'Voting system', times(g.selected_vote), true);
-    add(info, 'Unanimously', times(g.selected_choose));
-    add(info, 'Spinner wheel', times(g.selected_wheel));
+    stat(info, 'Voting system', times(g.selected_vote), true);
+    stat(info, 'Unanimously', times(g.selected_choose));
+    stat(info, 'Spinner wheel', times(g.selected_wheel));
     selected.appendChild(info);
     
 
@@ -580,26 +580,36 @@ function fillGameInfo(g, colour) {
         const infoDiv = document.createElement('div');
         infoDiv.id = 'player-games-info';
         infoDiv.className = 'modal-info';
-        add(infoDiv, 'Played', times(p.played), true);
-        add(infoDiv, 'Won', times(p.won));
-        add(infoDiv, 'Lost', times(p.lost));
-        add(infoDiv, 'Win Percentage', `${p.win_perc}%`);
+        stat(infoDiv, 'Played', times(p.played), true);
+        stat(infoDiv, 'Won', times(p.won));
+        stat(infoDiv, 'Lost', times(p.lost));
+        stat(infoDiv, 'Win Percentage', `${p.win_perc}%`);
         
         if (g.game_name != '4:20 Game') {
-            add(infoDiv, 'Neighed', times(p.neighed), true);
-            add(infoDiv, 'Super Neighed', times(p.super_neighed));
-            add(infoDiv, 'Chosen as Speciality', times(p.speciality_chosen), true);
-            add(infoDiv, 'Won Speciality', times(p.speciality_won));
-            add(infoDiv, 'Lost Speciality', times(p.speciality_lost));
+            stat(infoDiv, 'Neighed', times(p.neighed), true);
+            stat(infoDiv, 'Super Neighed', times(p.super_neighed));
+            stat(infoDiv, 'Chosen as Speciality', times(p.speciality_chosen), true);
+            stat(infoDiv, 'Won Speciality', times(p.speciality_won));
+            stat(infoDiv, 'Lost Speciality', times(p.speciality_lost));
         }
 
-        add(infoDiv, 'Voted', times(p.vote_chosen), true);
-        add(infoDiv, 'Won Vote', times(p.vote_won));
-        add(infoDiv, 'Lost Vote', times(p.vote_lost));
+        stat(infoDiv, 'Voted', times(p.vote_chosen), true);
+        stat(infoDiv, 'Won Vote', times(p.vote_won));
+        stat(infoDiv, 'Lost Vote', times(p.vote_lost));
 
         player.appendChild(infoDiv);
         gamePlayersDiv.appendChild(player); 
     });
+
+    if (g.game_name == '4:20 Game') {
+        const parent = gamePlayersDiv.parentElement;
+        const div = document.createElement('div');
+        div.className = 'modal-scrollable-div';
+        parent.appendChild(div);
+
+        console.log(g);
+
+    }
 
     const boxes = gameModalBox.querySelectorAll('.modal-box');
     boxes.forEach(box => {
@@ -772,56 +782,56 @@ function setupTotal() {
             const winners = log.winner.map(w => w.name);
             const w = log.winner[0];
             if (winners.length == 1) {
-                add(div, 'Winner', `${winners[0]}`, true);
+                stat(div, 'Winner', `${winners[0]}`, true);
             } else {
                 const start = winners.slice(0, -1).join(', ');
                 const last = winners[winners.length - 1]
-                add(div, 'Winners', `${start} and ${last}`, true);
+                stat(div, 'Winners', `${start} and ${last}`, true);
             }
     
-            add(div, 'Winning Points', toSOrNotToS(w.points, 'point'));
+            stat(div, 'Winning Points', toSOrNotToS(w.points, 'point'));
             if (cones) {
-                add(div, 'Winning Cones', toSOrNotToS(w.cones, 'cone'));
+                stat(div, 'Winning Cones', toSOrNotToS(w.cones, 'cone'));
             } else if (shots) {
-                add(div, 'Winning Shots', toSOrNotToS(w.cones, 'shot'));
+                stat(div, 'Winning Shots', toSOrNotToS(w.cones, 'shot'));
             }
         } else if (log.status == 'active') {
-            add(div, '', 'ACTIVE GAME', true, '');
+            stat(div, '', 'ACTIVE GAME', true, '');
         } else if (log.status == 'incomplete') {
-            add(div, '', 'INCOMPLETE GAME', true, '');
+            stat(div, '', 'INCOMPLETE GAME', true, '');
         }
     
-        add(div, 'Total Players', log.num_players, true);
-        add(div, 'Total Games', log.played_games);
-        add(div, 'Total Points', log.overall_point);
-        if (cones) add(div, 'Total Cones', log.overall_cone);
-        if (shots) add(div, 'Total Shots', log.overall_cone);
-        add(div, 'Game Points', log.g_point, true);
-        if (coin) add(div, 'Coin Flip Points', log.c_point);
+        stat(div, 'Total Players', log.num_players, true);
+        stat(div, 'Total Games', log.played_games);
+        stat(div, 'Total Points', log.overall_point);
+        if (cones) stat(div, 'Total Cones', log.overall_cone);
+        if (shots) stat(div, 'Total Shots', log.overall_cone);
+        stat(div, 'Game Points', log.g_point, true);
+        if (coin) stat(div, 'Coin Flip Points', log.c_point);
         if (log.speciality_count > 0) {
-            add(div, 'Speciality Points Won', log.special_w_point);
-            add(div, 'Speciality Points Lost', -log.special_l_point);
+            stat(div, 'Speciality Points Won', log.special_w_point);
+            stat(div, 'Speciality Points Lost', -log.special_l_point);
         }
     
         if (cones) {
-            add(div, 'Pre-Game/Break Cones', log.pg_cone, true);
-            add(div, '4:20 Game Cones', log.f20g_cone);
-            add(div, 'Losing Cones', log.l_cone);
-            if (coin) add(div, 'Coin Flip Cones', log.c_cone);
-            add(div, 'Wheel Cones', log.w_cone);
-            add(div, 'Victory Cones', log.v_cone);
+            stat(div, 'Pre-Game/Break Cones', log.pg_cone, true);
+            stat(div, '4:20 Game Cones', log.f20g_cone);
+            stat(div, 'Losing Cones', log.l_cone);
+            if (coin) stat(div, 'Coin Flip Cones', log.c_cone);
+            stat(div, 'Wheel Cones', log.w_cone);
+            stat(div, 'Victory Cones', log.v_cone);
         } else if (shots) {
-            add(div, 'Pre-Game/Break Shots', log.pg_cone, true);
-            add(div, 'Losing Shots', log.l_cone);
-            if (coin) add(div, 'Coin Flip Shots', log.c_cone);
-            add(div, 'Wheel Shots', log.w_cone);
-            add(div, 'Victory Shots', log.v_cone);
+            stat(div, 'Pre-Game/Break Shots', log.pg_cone, true);
+            stat(div, 'Losing Shots', log.l_cone);
+            if (coin) stat(div, 'Coin Flip Shots', log.c_cone);
+            stat(div, 'Wheel Shots', log.w_cone);
+            stat(div, 'Victory Shots', log.v_cone);
         }
     
-        add(div, 'Neighs', log.neigh, true);
-        add(div, 'Super Neighs', log.super_neigh);
-        add(div, 'GooC Acquired', log.gooc_total);
-        add(div, 'GooC Used', log.gooc_used);
+        stat(div, 'Neighs', log.neigh, true);
+        stat(div, 'Super Neighs', log.super_neigh);
+        stat(div, 'GooC Acquired', log.gooc_total);
+        stat(div, 'GooC Used', log.gooc_used);
 
         const vote = toSOrNotToS(log.selected_vote, 'game');
         const choose = toSOrNotToS(log.selected_choose, 'game');
@@ -833,7 +843,7 @@ function setupTotal() {
         if (wheel != '0 games') decided.push(`${wheel} selected by spinner wheel`);
 
         if (decided.length > 0) div.appendChild(document.createElement('br'));
-        decided.forEach(d => add(div, '', d, false, ''));
+        decided.forEach(d => stat(div, '', d, false, ''));
 
         totalLogsDiv.appendChild(div);
     });

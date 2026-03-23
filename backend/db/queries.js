@@ -1789,7 +1789,7 @@ export async function getGameStats() {
     const games = gamesRes.rows;
     const gameIds = games.map(g => g.game_id);
  
-    const [overallRes, playersRes] = await Promise.all([
+    const [overallRes, playersRes, four20Res] = await Promise.all([
  
         pool.query(`
             SELECT
@@ -1870,7 +1870,15 @@ export async function getGameStats() {
             LEFT JOIN vote_stats vs ON vs.game_id = g.game_id AND vs.player_id = p.player_id
             WHERE g.game_id = ANY($1)
             ORDER BY g.game_id, p.name
-        `, [gameIds])
+        `, [gameIds]),
+
+        pool.query(`
+            SELECT extras
+            FROM gog_games
+            WHERE name = $1;
+        `, [
+            '4:20 Game'
+        ])
     ]);
  
     const overallMap = Object.fromEntries(overallRes.rows.map(r => [r.game_id, r]));
@@ -1891,7 +1899,8 @@ export async function getGameStats() {
             selected_vote:   parseInt(o.selected_vote ?? 0),
             selected_choose: parseInt(o.selected_choose ?? 0),
             selected_wheel:  parseInt(o.selected_wheel ?? 0),
-            players:         playersByGame[g.game_id] ?? []
+            players:         playersByGame[g.game_id] ?? [],
+            extras:          g.name == '4:20 Game' ? four20Res.rows : []
         };
     });
 }
