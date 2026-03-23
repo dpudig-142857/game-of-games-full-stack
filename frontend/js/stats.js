@@ -608,7 +608,11 @@ function fillGameInfo(g, colour) {
         parent.appendChild(div);
 
         console.log(g);
-
+        g.extras.forEach(e => {
+            const img = document.createElement('img');
+            img.src = `${BASE_ROUTE}/photos/${e}`;
+            div.appendChild(img);
+        });
     }
 
     const boxes = gameModalBox.querySelectorAll('.modal-box');
