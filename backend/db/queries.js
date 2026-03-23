@@ -1789,7 +1789,7 @@ export async function getGameStats() {
     const games = gamesRes.rows;
     const gameIds = games.map(g => g.game_id);
  
-    const [overallRes, playersRes, four20Res] = await Promise.all([
+    const [overallRes, playersRes] = await Promise.all([
  
         pool.query(`
             SELECT
@@ -1872,15 +1872,12 @@ export async function getGameStats() {
             ORDER BY g.game_id, p.name
         `, [gameIds]),
 
-        pool.query(`
-            SELECT extras
-            FROM gog_games
-            WHERE name = $1;
-        `, [
-            '4:20 Game'
-        ])
     ]);
- 
+
+    const four20Res = pool.query(`
+        SELECT extras FROM gog_games WHERE name = $1;
+    `, ['4:20 Game'])
+    
     const overallMap = Object.fromEntries(overallRes.rows.map(r => [r.game_id, r]));
     const playersByGame = playersRes.rows.reduce((acc, row) => {
         (acc[row.game_id] ??= []).push(row);
