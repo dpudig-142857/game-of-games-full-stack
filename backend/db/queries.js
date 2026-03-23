@@ -1886,6 +1886,7 @@ export async function getGameStats() {
         (acc[row.game_id] ??= []).push(row);
         return acc;
     }, {});
+    const four20Games = four20Res.rows.filter(g => g.extras.length != 0).map(g => g.extras[0]);
  
     return games.map(g => {
         const o = overallMap[g.game_id] ?? {};
@@ -1900,7 +1901,7 @@ export async function getGameStats() {
             selected_choose: parseInt(o.selected_choose ?? 0),
             selected_wheel:  parseInt(o.selected_wheel ?? 0),
             players:         playersByGame[g.game_id] ?? [],
-            extras:          g.name == '4:20 Game' ? four20Res.rows : []
+            extras:          g.name == '4:20 Game' ? four20Games : []
         };
     });
 }
