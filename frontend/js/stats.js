@@ -602,7 +602,7 @@ function fillGameInfo(g, colour) {
     });
 
     if (g.game_name == '4:20 Game') {
-        const parent = gamePlayersDiv.parentElement;
+        const parent = gamePlayersDiv.parentNode;
         const div = document.createElement('div');
         div.className = 'modal-scrollable-div';
         parent.appendChild(div);
