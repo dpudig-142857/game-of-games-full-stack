@@ -1790,7 +1790,6 @@ export async function getGameStats() {
     const gameIds = games.map(g => g.game_id);
  
     const [overallRes, playersRes] = await Promise.all([
- 
         pool.query(`
             SELECT
                 g.game_id,
@@ -1874,7 +1873,7 @@ export async function getGameStats() {
 
     ]);
 
-    const four20Res = pool.query(`
+    const four20Res = await pool.query(`
         SELECT extras FROM gog_games WHERE name = $1;
     `, ['4:20 Game'])
     
@@ -1904,520 +1903,523 @@ export async function getGameStats() {
 }
 
 export async function getTotalStats() {
-    const total = await pool.query('SELECT COUNT(*) AS total FROM gog_sessions;');
-    const total_players = await pool.query(`
-        WITH player_counts AS (
-            SELECT session_id, COUNT(*) AS num_players
-            FROM gog_players
-            GROUP BY session_id
-        ),
-        max_players AS (
-            SELECT MAX(num_players) AS max_num_players
-            FROM player_counts
-        ),
-        sessions_with_max_players AS (
-            SELECT pc.session_id
-            FROM player_counts pc
-            JOIN max_players mp ON pc.num_players = mp.max_num_players
-        )
-
-        SELECT
-            (SELECT SUM(num_players) FROM player_counts) AS total_players,
-            (SELECT ROUND(AVG(num_players), 2) FROM player_counts) AS avg_players,
-            (SELECT max_num_players FROM max_players) AS max_players,
-            ARRAY(
-                SELECT session_id FROM sessions_with_max_players ORDER BY session_id
-            ) AS max_players_sessions;
-    `);
-    const total_games = await pool.query(`
-        WITH game_counts AS (
-            SELECT session_id, COUNT(*) AS num_games
-            FROM gog_games
-            GROUP BY session_id
-        ), max_games AS (
-            SELECT MAX(num_games) AS max_num_games
-            FROM game_counts
-        ), sessions_with_max_games AS (
-            SELECT gc.session_id
-            FROM game_counts gc
-            JOIN max_games mg ON gc.num_games = mg.max_num_games
-        ), game_selected_by AS (
-            SELECT
-                selected_by,
-                COUNT(*) AS num
-            FROM gog_games
-            GROUP BY selected_by
-        )
-
-        SELECT
-            (SELECT SUM(num_games) FROM game_counts) AS total_games,
-            (SELECT ROUND(AVG(num_games), 2) FROM game_counts) AS avg_games,
-            (SELECT max_num_games FROM max_games) AS max_games,
-            ARRAY(
-                SELECT session_id FROM sessions_with_max_games ORDER BY session_id
-            ) AS max_games_sessions,
-            (SELECT num FROM game_selected_by WHERE selected_by = 'Vote') AS total_vote,
-            (SELECT num FROM game_selected_by WHERE selected_by = 'Choose') AS total_choose,
-            (SELECT num FROM game_selected_by WHERE selected_by = 'Wheel') AS total_wheel;
-    `);
-    const players = await pool.query(`
-        SELECT
-            p.player_id AS player_id,
-            p.name AS name,
-            p.family AS family,
-            COUNT(*) FILTER (WHERE gfr.place = 1) AS wins
-        FROM accounts p
-        LEFT JOIN gog_final_results gfr USING (player_id)
-        GROUP BY p.player_id, p.name, p.family
-        ORDER BY wins DESC, p.name;
-    `);
-    const points = await pool.query(`
-        WITH session_totals AS (
-            SELECT
-                session_id,
-                SUM(g_point) AS g_point,
-                SUM(c_point) AS c_point,
-                SUM(special_w_point) AS special_w_point,
-                SUM(special_l_point) AS special_l_point,
-                SUM(g_point + c_point + special_w_point + special_l_point) AS overall_point
-            FROM gog_players
-            GROUP BY session_id
-        ),
-        overall_point_max AS (
-            SELECT MAX(overall_point) AS highest FROM session_totals
-        ),
-        g_point_max AS (
-            SELECT MAX(g_point) AS highest FROM session_totals
-        ),
-        c_point_max AS (
-            SELECT MAX(c_point) AS highest FROM session_totals
-        ),
-        special_w_point_max AS (
-            SELECT MAX(special_w_point) AS highest FROM session_totals
-        ),
-        special_l_point_max AS (
-            SELECT MAX(-special_l_point) AS highest FROM session_totals
-        )
-
-        SELECT
-            'overall_point' AS type,
-            SUM(overall_point) AS total,
-            ROUND(AVG(overall_point), 2) AS avg,
-            (SELECT highest FROM overall_point_max) AS highest,
-            STRING_AGG(session_id::text, ', ')
-                FILTER (WHERE overall_point = (SELECT highest FROM overall_point_max)) AS highest_session
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'g_point',
-            SUM(g_point),
-            ROUND(AVG(g_point), 2),
-            (SELECT highest FROM g_point_max),
-            (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE g_point = (SELECT highest FROM g_point_max))
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'c_point',
-            SUM(c_point),
-            ROUND(AVG(c_point), 2),
-            (SELECT highest FROM c_point_max),
-            (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE c_point = (SELECT highest FROM c_point_max))
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'special_w_point',
-            SUM(special_w_point),
-            ROUND(AVG(special_w_point), 2),
-            (SELECT highest FROM special_w_point_max),
-            (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE special_w_point = (SELECT highest FROM special_w_point_max))
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'special_l_point',
-            SUM(special_l_point),
-            ROUND(AVG(special_l_point), 2),
-            (SELECT -highest FROM special_l_point_max),
-            (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE -special_l_point = (SELECT highest FROM special_l_point_max))
-        FROM session_totals;
-    `);
-    const cones = await pool.query(`
-        WITH session_totals AS (
-            SELECT
-                session_id,
-                SUM(pg_cone) AS pg_cone,
-                SUM(f20g_cone) AS f20g_cone,
-                SUM(l_cone) AS l_cone,
-                SUM(c_cone) AS c_cone,
-                SUM(w_cone) AS w_cone,
-                SUM(v_cone) AS v_cone,
-                SUM(pg_cone + f20g_cone + l_cone + c_cone + w_cone + v_cone) AS overall_cone
-            FROM gog_players
-            GROUP BY session_id
-        ),
-        overall_cone_max AS (
-            SELECT MAX(overall_cone) AS highest FROM session_totals
-        ),
-        pg_cone_max AS (
-            SELECT MAX(pg_cone) AS highest FROM session_totals
-        ),
-        f20g_cone_max AS (
-            SELECT MAX(f20g_cone) AS highest FROM session_totals
-        ),
-        l_cone_max AS (
-            SELECT MAX(l_cone) AS highest FROM session_totals
-        ),
-        c_cone_max AS (
-            SELECT MAX(c_cone) AS highest FROM session_totals
-        ),
-        w_cone_max AS (
-            SELECT MAX(w_cone) AS highest FROM session_totals
-        ),
-        v_cone_max AS (
-            SELECT MAX(v_cone) AS highest FROM session_totals
-        )
-
-        SELECT
-            'overall_cone' AS type,
-            SUM(overall_cone) AS total,
-            ROUND(AVG(overall_cone), 2) AS avg,
-            (SELECT highest FROM overall_cone_max) AS highest,
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE overall_cone = (SELECT highest FROM overall_cone_max)
-                    ORDER BY session_id
-                ) sub
-            ) AS highest_session
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'pg_cone',
-            SUM(pg_cone),
-            ROUND(AVG(pg_cone), 2),
-            (SELECT highest FROM pg_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE pg_cone = (SELECT highest FROM pg_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'f20g_cone',
-            SUM(f20g_cone),
-            ROUND(AVG(f20g_cone), 2),
-            (SELECT highest FROM f20g_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE f20g_cone = (SELECT highest FROM f20g_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'l_cone',
-            SUM(l_cone),
-            ROUND(AVG(l_cone), 2),
-            (SELECT highest FROM l_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE l_cone = (SELECT highest FROM l_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'c_cone',
-            SUM(c_cone),
-            ROUND(AVG(c_cone), 2),
-            (SELECT highest FROM c_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE c_cone = (SELECT highest FROM c_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'w_cone',
-            SUM(w_cone),
-            ROUND(AVG(w_cone), 2),
-            (SELECT highest FROM w_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE w_cone = (SELECT highest FROM w_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'v_cone',
-            SUM(v_cone),
-            ROUND(AVG(v_cone), 2),
-            (SELECT highest FROM v_cone_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE v_cone = (SELECT highest FROM v_cone_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals;
-    `);
-    const cards = await pool.query(`
-        WITH session_totals AS (
-            SELECT
-                session_id,
-                SUM(2 - neigh) AS neigh,
-                SUM(2 - super_neigh) AS super_neigh,
-                SUM(gooc_total) AS gooc_total,
-                SUM(gooc_used) AS gooc_used
-            FROM gog_players
-            GROUP BY session_id
-        ),
-        neigh_max AS (
-            SELECT MAX(neigh) AS highest FROM session_totals
-        ),
-        super_neigh_max AS (
-            SELECT MAX(super_neigh) AS highest FROM session_totals
-        ),
-        gooc_total_max AS (
-            SELECT MAX(gooc_total) AS highest FROM session_totals
-        ),
-        gooc_used_max AS (
-            SELECT MAX(gooc_used) AS highest FROM session_totals
-        )
-
-        SELECT
-            'neigh' AS type,
-            SUM(neigh) AS total,
-            ROUND(AVG(neigh), 2) AS avg,
-            (SELECT highest FROM neigh_max) AS highest,
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE neigh = (SELECT highest FROM neigh_max)
-                    ORDER BY session_id
-                ) sub
-            ) AS highest_session
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'super_neigh',
-            SUM(super_neigh),
-            ROUND(AVG(super_neigh), 2),
-            (SELECT highest FROM super_neigh_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE super_neigh = (SELECT highest FROM super_neigh_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'gooc_total',
-            SUM(gooc_total),
-            ROUND(AVG(gooc_total), 2),
-            (SELECT highest FROM gooc_total_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE gooc_total = (SELECT highest FROM gooc_total_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals
-
-        UNION ALL
-
-        SELECT
-            'gooc_used',
-            SUM(gooc_used),
-            ROUND(AVG(gooc_used), 2),
-            (SELECT highest FROM gooc_used_max),
-            (
-                SELECT STRING_AGG(session_id::text, ', ')
-                FROM (
-                    SELECT session_id
-                    FROM session_totals
-                    WHERE gooc_used = (SELECT highest FROM gooc_used_max)
-                    ORDER BY session_id
-                ) sub
-            )
-        FROM session_totals;
-    `);
-    const logs = await pool.query(`
-        WITH accounts_per_session AS (
-            SELECT session_id, COUNT(*) AS num_players
-            FROM gog_players
-            GROUP BY session_id
-        ), games_per_session AS (
-            SELECT session_id, COUNT(*) AS played_games
-            FROM gog_games
-            GROUP BY session_id
-        ), points_per_session AS (
-            SELECT
-                session_id,
-                SUM(g_point + c_point + special_w_point + special_l_point) AS overall_point,
-                SUM(g_point) AS g_point,
-                SUM(c_point) AS c_point,
-                SUM(special_w_point) AS special_w_point,
-                SUM(special_l_point) AS special_l_point
-            FROM gog_players
-            GROUP BY session_id
-        ), cones_per_session AS (
-            SELECT
-                session_id,
-                SUM(pg_cone + f20g_cone + l_cone + c_cone + w_cone + v_cone) AS overall_cone,
-                SUM(pg_cone) AS pg_cone,
-                SUM(f20g_cone) AS f20g_cone,
-                SUM(l_cone) AS l_cone,
-                SUM(c_cone) AS c_cone,
-                SUM(w_cone) AS w_cone,
-                SUM(v_cone) AS v_cone
-            FROM gog_players
-            GROUP BY session_id
-        ), cards_per_session AS (
-            SELECT
-                session_id,
-                SUM(2 - neigh) AS neigh,
-                SUM(2 - super_neigh) AS super_neigh,
-                SUM(gooc_total) AS gooc_total,
-                SUM(gooc_used) AS gooc_used
-            FROM gog_players
-            GROUP BY session_id
-        ), winner_per_session AS (
-            SELECT
-                gp.session_id,
-                p.name,
-                (gp.g_point + gp.c_point + gp.special_w_point + gp.special_l_point) AS points,
-                (gp.pg_cone + gp.f20g_cone + gp.l_cone + gp.c_cone + gp.w_cone + gp.v_cone) AS cones,
-                RANK() OVER (PARTITION BY gp.session_id ORDER BY
-                    (gp.g_point + gp.c_point + gp.special_w_point + gp.special_l_point) DESC,
-                    (gp.pg_cone + gp.f20g_cone + gp.l_cone + gp.c_cone + gp.w_cone + gp.v_cone) ASC
-                ) AS rnk
-            FROM gog_players gp
-            JOIN accounts p ON gp.player_id = p.player_id
-        ), top_winners AS (
-            SELECT session_id, name, points, cones
-            FROM winner_per_session
-            WHERE rnk = 1
-        ), selection_method_counts AS (
-            SELECT
-                session_id,
-                COUNT(*) FILTER (WHERE selected_by = 'Vote') AS vote_count,
-                COUNT(*) FILTER (WHERE selected_by = 'Choose') AS choose_count,
-                COUNT(*) FILTER (WHERE selected_by = 'Wheel') AS wheel_count
-            FROM gog_games
-            GROUP BY session_id
-        )
-
-        SELECT
-            s.status AS status,
-            s.session_id AS gog_id,
-            s.name AS gog_name,
-            s.points_system AS points_system,
-            s.speciality_count AS speciality_count,
-            COALESCE(plps.num_players, 0) AS num_players,
-            COALESCE(gps.played_games, 0) AS played_games,
-            COALESCE(pps.overall_point, 0) AS overall_point,
-            COALESCE(pps.g_point, 0) AS g_point,
-            COALESCE(pps.c_point, 0) AS c_point,
-            COALESCE(pps.special_w_point, 0) AS special_w_point,
-            COALESCE(pps.special_l_point, 0) AS special_l_point,
-            COALESCE(cps.overall_cone, 0) AS overall_cone,
-            COALESCE(cps.pg_cone, 0) AS pg_cone,
-            COALESCE(cps.f20g_cone, 0) AS f20g_cone,
-            COALESCE(cps.l_cone, 0) AS l_cone,
-            COALESCE(cps.c_cone, 0) AS c_cone,
-            COALESCE(cps.w_cone, 0) AS w_cone,
-            COALESCE(cps.v_cone, 0) AS v_cone,
-            COALESCE(cards.neigh, 0) AS neigh,
-            COALESCE(cards.super_neigh, 0) AS super_neigh,
-            COALESCE(cards.gooc_total, 0) AS gooc_total,
-            COALESCE(cards.gooc_used, 0) AS gooc_used,
-            COALESCE(smc.vote_count, 0) AS selected_vote,
-            COALESCE(smc.choose_count, 0) AS selected_choose,
-            COALESCE(smc.wheel_count, 0) AS selected_wheel,
-            JSON_AGG(
-                JSON_BUILD_OBJECT(
-                    'name', tw.name,
-                    'points', tw.points,
-                    'cones', tw.cones
+    const [total, total_players, total_games, players, points, cones, cards, logs] =
+        await Promise.all([
+            pool.query(`SELECT COUNT(*) AS total FROM gog_sessions;`),
+            pool.query(`
+                WITH player_counts AS (
+                    SELECT session_id, COUNT(*) AS num_players
+                    FROM gog_players
+                    GROUP BY session_id
+                ),
+                max_players AS (
+                    SELECT MAX(num_players) AS max_num_players
+                    FROM player_counts
+                ),
+                sessions_with_max_players AS (
+                    SELECT pc.session_id
+                    FROM player_counts pc
+                    JOIN max_players mp ON pc.num_players = mp.max_num_players
                 )
-            ) FILTER (WHERE tw.name IS NOT NULL) AS winner
-        FROM gog_sessions s
-        LEFT JOIN accounts_per_session plps USING (session_id)
-        LEFT JOIN games_per_session gps USING (session_id)
-        LEFT JOIN points_per_session pps USING (session_id)
-        LEFT JOIN cones_per_session cps USING (session_id)
-        LEFT JOIN cards_per_session cards USING (session_id)
-        LEFT JOIN top_winners tw ON tw.session_id = s.session_id
-        LEFT JOIN selection_method_counts smc ON smc.session_id = s.session_id
-        GROUP BY s.session_id, plps.num_players, gps.played_games,
-                pps.overall_point, pps.g_point, pps.c_point, pps.special_w_point,
-                pps.special_l_point, cps.overall_cone, cps.pg_cone, cps.f20g_cone,
-                cps.l_cone, cps.c_cone, cps.w_cone, cps.v_cone, cards.neigh,
-                cards.super_neigh, cards.gooc_total, cards.gooc_used,
-                smc.vote_count, smc.choose_count, smc.wheel_count
-        ORDER BY s.session_id;
-    `);
+
+                SELECT
+                    (SELECT SUM(num_players) FROM player_counts) AS total_players,
+                    (SELECT ROUND(AVG(num_players), 2) FROM player_counts) AS avg_players,
+                    (SELECT max_num_players FROM max_players) AS max_players,
+                    ARRAY(
+                        SELECT session_id FROM sessions_with_max_players ORDER BY session_id
+                    ) AS max_players_sessions;
+            `),
+            pool.query(`
+                WITH game_counts AS (
+                    SELECT session_id, COUNT(*) AS num_games
+                    FROM gog_games
+                    GROUP BY session_id
+                ), max_games AS (
+                    SELECT MAX(num_games) AS max_num_games
+                    FROM game_counts
+                ), sessions_with_max_games AS (
+                    SELECT gc.session_id
+                    FROM game_counts gc
+                    JOIN max_games mg ON gc.num_games = mg.max_num_games
+                ), game_selected_by AS (
+                    SELECT
+                        selected_by,
+                        COUNT(*) AS num
+                    FROM gog_games
+                    GROUP BY selected_by
+                )
+
+                SELECT
+                    (SELECT SUM(num_games) FROM game_counts) AS total_games,
+                    (SELECT ROUND(AVG(num_games), 2) FROM game_counts) AS avg_games,
+                    (SELECT max_num_games FROM max_games) AS max_games,
+                    ARRAY(
+                        SELECT session_id FROM sessions_with_max_games ORDER BY session_id
+                    ) AS max_games_sessions,
+                    (SELECT num FROM game_selected_by WHERE selected_by = 'Vote') AS total_vote,
+                    (SELECT num FROM game_selected_by WHERE selected_by = 'Choose') AS total_choose,
+                    (SELECT num FROM game_selected_by WHERE selected_by = 'Wheel') AS total_wheel;
+            `),
+            pool.query(`
+                SELECT
+                    p.player_id AS player_id,
+                    p.name AS name,
+                    p.family AS family,
+                    COUNT(*) FILTER (WHERE gfr.place = 1) AS wins
+                FROM accounts p
+                LEFT JOIN gog_final_results gfr USING (player_id)
+                GROUP BY p.player_id, p.name, p.family
+                ORDER BY wins DESC, p.name;
+            `),
+            pool.query(`
+                WITH session_totals AS (
+                    SELECT
+                        session_id,
+                        SUM(g_point) AS g_point,
+                        SUM(c_point) AS c_point,
+                        SUM(special_w_point) AS special_w_point,
+                        SUM(special_l_point) AS special_l_point,
+                        SUM(g_point + c_point + special_w_point + special_l_point) AS overall_point
+                    FROM gog_players
+                    GROUP BY session_id
+                ),
+                overall_point_max AS (
+                    SELECT MAX(overall_point) AS highest FROM session_totals
+                ),
+                g_point_max AS (
+                    SELECT MAX(g_point) AS highest FROM session_totals
+                ),
+                c_point_max AS (
+                    SELECT MAX(c_point) AS highest FROM session_totals
+                ),
+                special_w_point_max AS (
+                    SELECT MAX(special_w_point) AS highest FROM session_totals
+                ),
+                special_l_point_max AS (
+                    SELECT MAX(-special_l_point) AS highest FROM session_totals
+                )
+
+                SELECT
+                    'overall_point' AS type,
+                    SUM(overall_point) AS total,
+                    ROUND(AVG(overall_point), 2) AS avg,
+                    (SELECT highest FROM overall_point_max) AS highest,
+                    STRING_AGG(session_id::text, ', ')
+                        FILTER (WHERE overall_point = (SELECT highest FROM overall_point_max)) AS highest_session
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'g_point',
+                    SUM(g_point),
+                    ROUND(AVG(g_point), 2),
+                    (SELECT highest FROM g_point_max),
+                    (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE g_point = (SELECT highest FROM g_point_max))
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'c_point',
+                    SUM(c_point),
+                    ROUND(AVG(c_point), 2),
+                    (SELECT highest FROM c_point_max),
+                    (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE c_point = (SELECT highest FROM c_point_max))
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'special_w_point',
+                    SUM(special_w_point),
+                    ROUND(AVG(special_w_point), 2),
+                    (SELECT highest FROM special_w_point_max),
+                    (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE special_w_point = (SELECT highest FROM special_w_point_max))
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'special_l_point',
+                    SUM(special_l_point),
+                    ROUND(AVG(special_l_point), 2),
+                    (SELECT -highest FROM special_l_point_max),
+                    (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE -special_l_point = (SELECT highest FROM special_l_point_max))
+                FROM session_totals;
+            `),
+            pool.query(`
+                WITH session_totals AS (
+                    SELECT
+                        session_id,
+                        SUM(pg_cone) AS pg_cone,
+                        SUM(f20g_cone) AS f20g_cone,
+                        SUM(l_cone) AS l_cone,
+                        SUM(c_cone) AS c_cone,
+                        SUM(w_cone) AS w_cone,
+                        SUM(v_cone) AS v_cone,
+                        SUM(pg_cone + f20g_cone + l_cone + c_cone + w_cone + v_cone) AS overall_cone
+                    FROM gog_players
+                    GROUP BY session_id
+                ),
+                overall_cone_max AS (
+                    SELECT MAX(overall_cone) AS highest FROM session_totals
+                ),
+                pg_cone_max AS (
+                    SELECT MAX(pg_cone) AS highest FROM session_totals
+                ),
+                f20g_cone_max AS (
+                    SELECT MAX(f20g_cone) AS highest FROM session_totals
+                ),
+                l_cone_max AS (
+                    SELECT MAX(l_cone) AS highest FROM session_totals
+                ),
+                c_cone_max AS (
+                    SELECT MAX(c_cone) AS highest FROM session_totals
+                ),
+                w_cone_max AS (
+                    SELECT MAX(w_cone) AS highest FROM session_totals
+                ),
+                v_cone_max AS (
+                    SELECT MAX(v_cone) AS highest FROM session_totals
+                )
+
+                SELECT
+                    'overall_cone' AS type,
+                    SUM(overall_cone) AS total,
+                    ROUND(AVG(overall_cone), 2) AS avg,
+                    (SELECT highest FROM overall_cone_max) AS highest,
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE overall_cone = (SELECT highest FROM overall_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    ) AS highest_session
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'pg_cone',
+                    SUM(pg_cone),
+                    ROUND(AVG(pg_cone), 2),
+                    (SELECT highest FROM pg_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE pg_cone = (SELECT highest FROM pg_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'f20g_cone',
+                    SUM(f20g_cone),
+                    ROUND(AVG(f20g_cone), 2),
+                    (SELECT highest FROM f20g_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE f20g_cone = (SELECT highest FROM f20g_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'l_cone',
+                    SUM(l_cone),
+                    ROUND(AVG(l_cone), 2),
+                    (SELECT highest FROM l_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE l_cone = (SELECT highest FROM l_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'c_cone',
+                    SUM(c_cone),
+                    ROUND(AVG(c_cone), 2),
+                    (SELECT highest FROM c_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE c_cone = (SELECT highest FROM c_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'w_cone',
+                    SUM(w_cone),
+                    ROUND(AVG(w_cone), 2),
+                    (SELECT highest FROM w_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE w_cone = (SELECT highest FROM w_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'v_cone',
+                    SUM(v_cone),
+                    ROUND(AVG(v_cone), 2),
+                    (SELECT highest FROM v_cone_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE v_cone = (SELECT highest FROM v_cone_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals;
+            `),
+            pool.query(`
+                WITH session_totals AS (
+                    SELECT
+                        session_id,
+                        SUM(2 - neigh) AS neigh,
+                        SUM(2 - super_neigh) AS super_neigh,
+                        SUM(gooc_total) AS gooc_total,
+                        SUM(gooc_used) AS gooc_used
+                    FROM gog_players
+                    GROUP BY session_id
+                ),
+                neigh_max AS (
+                    SELECT MAX(neigh) AS highest FROM session_totals
+                ),
+                super_neigh_max AS (
+                    SELECT MAX(super_neigh) AS highest FROM session_totals
+                ),
+                gooc_total_max AS (
+                    SELECT MAX(gooc_total) AS highest FROM session_totals
+                ),
+                gooc_used_max AS (
+                    SELECT MAX(gooc_used) AS highest FROM session_totals
+                )
+
+                SELECT
+                    'neigh' AS type,
+                    SUM(neigh) AS total,
+                    ROUND(AVG(neigh), 2) AS avg,
+                    (SELECT highest FROM neigh_max) AS highest,
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE neigh = (SELECT highest FROM neigh_max)
+                            ORDER BY session_id
+                        ) sub
+                    ) AS highest_session
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'super_neigh',
+                    SUM(super_neigh),
+                    ROUND(AVG(super_neigh), 2),
+                    (SELECT highest FROM super_neigh_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE super_neigh = (SELECT highest FROM super_neigh_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'gooc_total',
+                    SUM(gooc_total),
+                    ROUND(AVG(gooc_total), 2),
+                    (SELECT highest FROM gooc_total_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE gooc_total = (SELECT highest FROM gooc_total_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals
+
+                UNION ALL
+
+                SELECT
+                    'gooc_used',
+                    SUM(gooc_used),
+                    ROUND(AVG(gooc_used), 2),
+                    (SELECT highest FROM gooc_used_max),
+                    (
+                        SELECT STRING_AGG(session_id::text, ', ')
+                        FROM (
+                            SELECT session_id
+                            FROM session_totals
+                            WHERE gooc_used = (SELECT highest FROM gooc_used_max)
+                            ORDER BY session_id
+                        ) sub
+                    )
+                FROM session_totals;
+            `),
+            pool.query(`
+                WITH accounts_per_session AS (
+                    SELECT session_id, COUNT(*) AS num_players
+                    FROM gog_players
+                    GROUP BY session_id
+                ), games_per_session AS (
+                    SELECT session_id, COUNT(*) AS played_games
+                    FROM gog_games
+                    GROUP BY session_id
+                ), points_per_session AS (
+                    SELECT
+                        session_id,
+                        SUM(g_point + c_point + special_w_point + special_l_point) AS overall_point,
+                        SUM(g_point) AS g_point,
+                        SUM(c_point) AS c_point,
+                        SUM(special_w_point) AS special_w_point,
+                        SUM(special_l_point) AS special_l_point
+                    FROM gog_players
+                    GROUP BY session_id
+                ), cones_per_session AS (
+                    SELECT
+                        session_id,
+                        SUM(pg_cone + f20g_cone + l_cone + c_cone + w_cone + v_cone) AS overall_cone,
+                        SUM(pg_cone) AS pg_cone,
+                        SUM(f20g_cone) AS f20g_cone,
+                        SUM(l_cone) AS l_cone,
+                        SUM(c_cone) AS c_cone,
+                        SUM(w_cone) AS w_cone,
+                        SUM(v_cone) AS v_cone
+                    FROM gog_players
+                    GROUP BY session_id
+                ), cards_per_session AS (
+                    SELECT
+                        session_id,
+                        SUM(2 - neigh) AS neigh,
+                        SUM(2 - super_neigh) AS super_neigh,
+                        SUM(gooc_total) AS gooc_total,
+                        SUM(gooc_used) AS gooc_used
+                    FROM gog_players
+                    GROUP BY session_id
+                ), winner_per_session AS (
+                    SELECT
+                        gp.session_id,
+                        p.name,
+                        (gp.g_point + gp.c_point + gp.special_w_point + gp.special_l_point) AS points,
+                        (gp.pg_cone + gp.f20g_cone + gp.l_cone + gp.c_cone + gp.w_cone + gp.v_cone) AS cones,
+                        RANK() OVER (PARTITION BY gp.session_id ORDER BY
+                            (gp.g_point + gp.c_point + gp.special_w_point + gp.special_l_point) DESC,
+                            (gp.pg_cone + gp.f20g_cone + gp.l_cone + gp.c_cone + gp.w_cone + gp.v_cone) ASC
+                        ) AS rnk
+                    FROM gog_players gp
+                    JOIN accounts p ON gp.player_id = p.player_id
+                ), top_winners AS (
+                    SELECT session_id, name, points, cones
+                    FROM winner_per_session
+                    WHERE rnk = 1
+                ), selection_method_counts AS (
+                    SELECT
+                        session_id,
+                        COUNT(*) FILTER (WHERE selected_by = 'Vote') AS vote_count,
+                        COUNT(*) FILTER (WHERE selected_by = 'Choose') AS choose_count,
+                        COUNT(*) FILTER (WHERE selected_by = 'Wheel') AS wheel_count
+                    FROM gog_games
+                    GROUP BY session_id
+                )
+
+                SELECT
+                    s.status AS status,
+                    s.session_id AS gog_id,
+                    s.name AS gog_name,
+                    s.points_system AS points_system,
+                    s.speciality_count AS speciality_count,
+                    COALESCE(plps.num_players, 0) AS num_players,
+                    COALESCE(gps.played_games, 0) AS played_games,
+                    COALESCE(pps.overall_point, 0) AS overall_point,
+                    COALESCE(pps.g_point, 0) AS g_point,
+                    COALESCE(pps.c_point, 0) AS c_point,
+                    COALESCE(pps.special_w_point, 0) AS special_w_point,
+                    COALESCE(pps.special_l_point, 0) AS special_l_point,
+                    COALESCE(cps.overall_cone, 0) AS overall_cone,
+                    COALESCE(cps.pg_cone, 0) AS pg_cone,
+                    COALESCE(cps.f20g_cone, 0) AS f20g_cone,
+                    COALESCE(cps.l_cone, 0) AS l_cone,
+                    COALESCE(cps.c_cone, 0) AS c_cone,
+                    COALESCE(cps.w_cone, 0) AS w_cone,
+                    COALESCE(cps.v_cone, 0) AS v_cone,
+                    COALESCE(cards.neigh, 0) AS neigh,
+                    COALESCE(cards.super_neigh, 0) AS super_neigh,
+                    COALESCE(cards.gooc_total, 0) AS gooc_total,
+                    COALESCE(cards.gooc_used, 0) AS gooc_used,
+                    COALESCE(smc.vote_count, 0) AS selected_vote,
+                    COALESCE(smc.choose_count, 0) AS selected_choose,
+                    COALESCE(smc.wheel_count, 0) AS selected_wheel,
+                    JSON_AGG(
+                        JSON_BUILD_OBJECT(
+                            'name', tw.name,
+                            'points', tw.points,
+                            'cones', tw.cones
+                        )
+                    ) FILTER (WHERE tw.name IS NOT NULL) AS winner
+                FROM gog_sessions s
+                LEFT JOIN accounts_per_session plps USING (session_id)
+                LEFT JOIN games_per_session gps USING (session_id)
+                LEFT JOIN points_per_session pps USING (session_id)
+                LEFT JOIN cones_per_session cps USING (session_id)
+                LEFT JOIN cards_per_session cards USING (session_id)
+                LEFT JOIN top_winners tw ON tw.session_id = s.session_id
+                LEFT JOIN selection_method_counts smc ON smc.session_id = s.session_id
+                GROUP BY s.session_id, plps.num_players, gps.played_games,
+                        pps.overall_point, pps.g_point, pps.c_point, pps.special_w_point,
+                        pps.special_l_point, cps.overall_cone, cps.pg_cone, cps.f20g_cone,
+                        cps.l_cone, cps.c_cone, cps.w_cone, cps.v_cone, cards.neigh,
+                        cards.super_neigh, cards.gooc_total, cards.gooc_used,
+                        smc.vote_count, smc.choose_count, smc.wheel_count
+                ORDER BY s.session_id;
+            `),
+        ]);
     
     return {
         total_gog: total.rows[0].total,
