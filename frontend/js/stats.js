@@ -349,22 +349,22 @@ function fillPlayerInfo(p) {
 
     const statSection = (div, statsArr) => {
         statsArr.forEach(s => {
-            const stat = document.createElement('div');
-            stat.className = 'modal-box';
-            stat.appendChild(header('h2', typeText(gog_version, s.type)));
-            stat(stat, 'Total', s.total, true);
+            const statDiv = document.createElement('div');
+            statDiv.className = 'modal-box';
+            statDiv.appendChild(header('h2', typeText(gog_version, s.type)));
+            stat(statDiv, 'Total', s.total, true);
             if (s.total != 0) {
-                stat(stat, 'Average', s.avg);
+                stat(statDiv, 'Average', s.avg);
                 if (s.highest != 0) {
                     const g = s.highest_session.split(', ');
                     if (g.length == 1) {
-                        stat(stat, 'Highest', `${s.highest} in GoG ${s.highest_session}`);
+                        stat(statDiv, 'Highest', `${s.highest} in GoG ${s.highest_session}`);
                     } else {
-                        stat(stat, 'Highest', `${s.highest} in GoGs ${s.highest_session}`);
+                        stat(statDiv, 'Highest', `${s.highest} in GoGs ${s.highest_session}`);
                     }
                 }
             }
-            div.appendChild(stat);
+            div.appendChild(statDiv);
         });
     };
 
