@@ -309,10 +309,10 @@ function closeGameBox(to) {
         if (to == 'end') return;
         if (to == 'wheel') {
             updateHeaderButtons('hide');
-            intrudeBtn.style.display = 'none';
-            abandonBtn.style.display = 'none';
-            breakConeBtn.style.display = 'none';
-            victoryConeBtn.style.display = 'none';
+            intrudeBtn.parentElement.style.display = 'none';
+            abandonBtn.parentElement.style.display = 'none';
+            breakConeBtn.parentElement.style.display = 'none';
+            victoryConeBtn.parentElement.style.display = 'none';
 
             if (gameSelection == 'Choose') {
                 choose.parentElement.style.display = 'none';
@@ -7329,10 +7329,10 @@ async function nextGame(from = '') {
     document.getElementById(`${currGame.tag}`).innerHTML = '';
 
     updateHeaderButtons('show');
-    intrudeBtn.style.display = 'block';
-    abandonBtn.style.display = 'block';
-    breakConeBtn.style.display = 'block';
-    victoryConeBtn.style.display = 'block';
+    intrudeBtn.parentElement.style.display = 'block';
+    abandonBtn.parentElement.style.display = 'block';
+    breakConeBtn.parentElement.style.display = 'block';
+    victoryConeBtn.parentElement.style.display = 'block';
 
     if (currGame.name == '4:20 Game') {
         four20game.style.display = 'none';
@@ -7408,10 +7408,10 @@ function noSession() {
     document.getElementById('menu-curr-log').style.display = 'none';
     document.getElementById('menu-finish').style.display = 'none';
     
-    intrudeBtn.style.display = 'none';
-    abandonBtn.style.display = 'none';
-    breakConeBtn.style.display = 'none';
-    victoryConeBtn.style.display = 'none';
+    intrudeBtn.parentElement.style.display = 'none';
+    abandonBtn.parentElement.style.display = 'none';
+    breakConeBtn.parentElement.style.display = 'none';
+    victoryConeBtn.parentElement.style.display = 'none';
 }
 
 function initialiseButtons() {
@@ -7676,10 +7676,10 @@ function startGoG(newGame) {
     welcome.style.display = newGame ? 'flex' : 'none';
     otherWelcome.innerHTML = newGame ? '' : `Game ${gameNumber}`;
 
-    intrudeBtn.style.display = newGame ? 'none': 'block';
-    abandonBtn.style.display = newGame ? 'none': 'block';
-    breakConeBtn.style.display = newGame ? 'none' : 'block';
-    victoryConeBtn.style.display = newGame ? 'none' : 'block';
+    intrudeBtn.parentElement.style.display = newGame ? 'none': 'block';
+    abandonBtn.parentElement.style.display = newGame ? 'none': 'block';
+    breakConeBtn.parentElement.style.display = newGame ? 'none' : 'block';
+    victoryConeBtn.parentElement.style.display = newGame ? 'none' : 'block';
     if (gog_version == 'private') {
         breakConeBtn.innerHTML = 'Break Cone';
         victoryConeBtn.innerHTML = 'Victory Cone';
@@ -7689,7 +7689,6 @@ function startGoG(newGame) {
     }
 
     const result = document.getElementById('pre-game-result');
-    /*
     if (newGame && currSystem == 'Points & Cones') {
         const div = document.getElementById('pre-game');
         const header = document.getElementById('pre-game-header');
@@ -7740,10 +7739,10 @@ function startGoG(newGame) {
             result.style.display = 'flex';
             i = i == options.length - 1 ? 0 : i + 1;
         });
-    } else {*/
+    } else {
         result.style.display = 'none';
         start();
-    //}
+    }
 }
 
 async function saveGameState(incomplete) {

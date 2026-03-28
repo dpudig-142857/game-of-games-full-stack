@@ -124,10 +124,6 @@ function btnAnimation(type) {
     } else if (type == 'stop') {
         startBtn.style.display = 'none';
         nextBtn.style.display = 'flex';
-    } else if (type == 'starting') {
-        startBtn.classList.remove('pulse-animation');
-        startBtn.style.display = 'flex';
-        nextBtn.style.display = 'none';
     }
 }
 
@@ -1261,10 +1257,13 @@ async function initialize() {
                 });
             } else if (sessionType == 'create') {
                 btn.innerHTML = 'Start';
+                starting = false;
                 btn.addEventListener('click', () => {
-                    btn.innerHTML = 'Starting...';
-                    btnAnimation('starting');
-                    possiblyStarting();
+                    if (!starting) {
+                        starting = true;
+                        btn.innerHTML = 'Starting...';
+                        possiblyStarting();
+                    }
                 });
             }
         } else {
