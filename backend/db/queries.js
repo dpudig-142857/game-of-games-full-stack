@@ -2440,7 +2440,7 @@ export async function getTotalStats() {
                 )
                 SELECT
                     SUM(intruded_count) AS total_intruded,
-                    AVG(intruded_count) AS avg_intruded,
+                    ROUND(AVG(intruded_count), 2) AS avg_intruded,
                     MAX(intruded_count) AS max_intruded,
                     (
                         SELECT ARRAY_AGG(session_id ORDER BY session_id)
@@ -2452,7 +2452,7 @@ export async function getTotalStats() {
                     ) AS max_intruded_sessions,
 
                     SUM(abandoned_count) AS total_abandoned,
-                    AVG(abandoned_count) AS avg_abandoned,
+                    ROUND(AVG(abandoned_count), 2) AS avg_abandoned,
                     MAX(abandoned_count) AS max_abandoned,
                     (
                         SELECT ARRAY_AGG(session_id ORDER BY session_id)
