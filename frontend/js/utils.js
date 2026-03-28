@@ -218,6 +218,8 @@ export function typeText(ver, type) {
         case 'gooc_used': return 'GooC Cards Used:';
         case 'overall_game': return 'Games:';
         case 'overall_player': return 'Players:';
+        case 'intruded': return 'Intruded:';
+        case 'abandoned': return 'Abandoned:';
         default: return '';
     }
 }

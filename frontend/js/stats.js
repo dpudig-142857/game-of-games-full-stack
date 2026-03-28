@@ -649,6 +649,8 @@ const totalTitleDiv = document.getElementById('modal-total-title');
 const totalGoGDiv = document.getElementById('modal-total-gog');
 const totalGamesDiv = document.getElementById('modal-total-games');
 const totalPlayerDiv = document.getElementById('modal-total-player');
+const totalIntrudedDiv = document.getElementById('modal-total-intruded');
+const totalAbandonedDiv = document.getElementById('modal-total-abandoned');
 const totalPlayersDiv = document.getElementById('modal-total-players-div');
 const totalPointsDiv = document.getElementById('modal-total-points-div');
 const totalConesDiv = document.getElementById('modal-total-cones-div');
@@ -701,12 +703,26 @@ function setupTotal() {
         tg.avg_games, tg.max_games, tg.max_games_sessions
     )
 
-    // Total Players
+    // Total Players Played
     const tp = totalStats.total_players;
     create(
         totalPlayerDiv, 'overall_player', tp.total_players,
         tp.avg_players, tp.max_players, tp.max_players_sessions
     );
+
+    // Intruded
+    const ti = totalStats.intruded;
+    create(
+        totalIntrudedDiv, 'intruded', ti.total_players,
+        ti.avg_players, ti.max_players, ti.max_players_sessions
+    )
+
+    // Abandoned
+    const ta = totalStats.abandoned;
+    create(
+        totalAbandonedDiv, 'abandoned', ta.total_players,
+        ta.avg_players, ta.max_players, ta.max_players_sessions
+    )
 
     // Player victories
     totalStats.players.sort((a, b) => {

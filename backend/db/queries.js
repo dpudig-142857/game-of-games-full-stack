@@ -1903,7 +1903,17 @@ export async function getGameStats() {
 }
 
 export async function getTotalStats() {
-    const [total, total_players, total_games, players, points, cones, cards, logs] =
+    const [
+        total,
+        total_players,
+        total_games,
+        players,
+        points,
+        cones, 
+        cards,
+        logs,
+        in_n_out
+    ] =
         await Promise.all([
             pool.query(`SELECT COUNT(*) AS total FROM gog_sessions;`),
             pool.query(`
@@ -2419,6 +2429,42 @@ export async function getTotalStats() {
                         smc.vote_count, smc.choose_count, smc.wheel_count
                 ORDER BY s.session_id;
             `),
+            pool.query(`
+                WITH session_cardinalities AS (
+                    SELECT
+                        session_id,
+                        CARDINALITY(intruded) AS intruded_count,
+                        CARDINALITY(abandoned) AS abandoned_count
+                    FROM
+                        gog_sessions
+                )
+                SELECT
+                    SUM(intruded_count) AS total_intruded,
+                    AVG(intruded_count) AS avg_intruded,
+                    MAX(intruded_count) AS max_intruded,
+                    (
+                        SELECT ARRAY_AGG(session_id ORDER BY session_id)
+                        FROM session_cardinalities
+                        WHERE intruded_count = (
+                            SELECT MAX(intruded_count)
+                            FROM session_cardinalities
+                        )
+                    ) AS max_intruded_sessions,
+
+                    SUM(abandoned_count) AS total_abandoned,
+                    AVG(abandoned_count) AS avg_abandoned,
+                    MAX(abandoned_count) AS max_abandoned,
+                    (
+                        SELECT ARRAY_AGG(session_id ORDER BY session_id)
+                        FROM session_cardinalities
+                        WHERE abandoned_count = (
+                            SELECT MAX(abandoned_count)
+                            FROM session_cardinalities
+                        )
+                    ) AS max_abandoned_sessions
+                FROM
+                    session_cardinalities;
+            `)
         ]);
     
     return {
@@ -2429,7 +2475,19 @@ export async function getTotalStats() {
         points: points.rows,
         cones: cones.rows,
         cards: cards.rows,
-        logs: logs.rows
+        logs: logs.rows,
+        intruded: {
+            total_players: in_n_out.rows[0].total_intruded,
+            avg_players: in_n_out.rows[0].avg_intruded,
+            max_players: in_n_out.rows[0].max_intruded,
+            max_players_sessions: in_n_out.rows[0].max_intruded_sessions
+        },
+        abandoned: {
+            total_players: in_n_out.rows[0].total_abandoned,
+            avg_players: in_n_out.rows[0].avg_abandoned,
+            max_players: in_n_out.rows[0].max_abandoned,
+            max_players_sessions: in_n_out.rows[0].max_abandoned_sessions
+        }
     };
 }
 
