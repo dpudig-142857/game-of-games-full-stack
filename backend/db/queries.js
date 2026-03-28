@@ -1903,18 +1903,19 @@ export async function getGameStats() {
 }
 
 export async function getTotalStats() {
-    const [
-        total,
-        total_players,
-        total_games,
-        players,
-        points,
-        cones, 
-        cards,
-        logs
-    ] =
-        await Promise.all([
-            pool.query(`
+    const client = await pool.connect();
+    try {
+        const [
+            total,
+            total_players,
+            total_games,
+            players,
+            points,
+            cones, 
+            cards,
+            logs
+        ] = await Promise.all([
+            client.query(`
                 WITH session_cardinalities AS (
                     SELECT
                         session_id,
@@ -1937,7 +1938,7 @@ export async function getTotalStats() {
                             FROM session_cardinalities
                         )
                     ) AS max_intruded_sessions,
-
+    
                     SUM(abandoned_count) AS total_abandoned,
                     ROUND(AVG(abandoned_count), 2) AS avg_abandoned,
                     MAX(abandoned_count) AS max_abandoned,
@@ -1952,7 +1953,7 @@ export async function getTotalStats() {
                 FROM
                     session_cardinalities;
             `),
-            pool.query(`
+            client.query(`
                 WITH player_counts AS (
                     SELECT session_id, COUNT(*) AS num_players
                     FROM gog_players
@@ -1967,7 +1968,7 @@ export async function getTotalStats() {
                     FROM player_counts pc
                     JOIN max_players mp ON pc.num_players = mp.max_num_players
                 )
-
+    
                 SELECT
                     (SELECT SUM(num_players) FROM player_counts) AS total_players,
                     (SELECT ROUND(AVG(num_players), 2) FROM player_counts) AS avg_players,
@@ -1976,7 +1977,7 @@ export async function getTotalStats() {
                         SELECT session_id FROM sessions_with_max_players ORDER BY session_id
                     ) AS max_players_sessions;
             `),
-            pool.query(`
+            client.query(`
                 WITH game_counts AS (
                     SELECT session_id, COUNT(*) AS num_games
                     FROM gog_games
@@ -1995,7 +1996,7 @@ export async function getTotalStats() {
                     FROM gog_games
                     GROUP BY selected_by
                 )
-
+    
                 SELECT
                     (SELECT SUM(num_games) FROM game_counts) AS total_games,
                     (SELECT ROUND(AVG(num_games), 2) FROM game_counts) AS avg_games,
@@ -2007,7 +2008,7 @@ export async function getTotalStats() {
                     (SELECT num FROM game_selected_by WHERE selected_by = 'Choose') AS total_choose,
                     (SELECT num FROM game_selected_by WHERE selected_by = 'Wheel') AS total_wheel;
             `),
-            pool.query(`
+            client.query(`
                 SELECT
                     p.player_id AS player_id,
                     p.name AS name,
@@ -2018,7 +2019,7 @@ export async function getTotalStats() {
                 GROUP BY p.player_id, p.name, p.family
                 ORDER BY wins DESC, p.name;
             `),
-            pool.query(`
+            client.query(`
                 WITH session_totals AS (
                     SELECT
                         session_id,
@@ -2045,7 +2046,7 @@ export async function getTotalStats() {
                 special_l_point_max AS (
                     SELECT MAX(-special_l_point) AS highest FROM session_totals
                 )
-
+    
                 SELECT
                     'overall_point' AS type,
                     SUM(overall_point) AS total,
@@ -2054,9 +2055,9 @@ export async function getTotalStats() {
                     STRING_AGG(session_id::text, ', ')
                         FILTER (WHERE overall_point = (SELECT highest FROM overall_point_max)) AS highest_session
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'g_point',
                     SUM(g_point),
@@ -2064,9 +2065,9 @@ export async function getTotalStats() {
                     (SELECT highest FROM g_point_max),
                     (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE g_point = (SELECT highest FROM g_point_max))
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'c_point',
                     SUM(c_point),
@@ -2074,9 +2075,9 @@ export async function getTotalStats() {
                     (SELECT highest FROM c_point_max),
                     (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE c_point = (SELECT highest FROM c_point_max))
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'special_w_point',
                     SUM(special_w_point),
@@ -2084,9 +2085,9 @@ export async function getTotalStats() {
                     (SELECT highest FROM special_w_point_max),
                     (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE special_w_point = (SELECT highest FROM special_w_point_max))
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'special_l_point',
                     SUM(special_l_point),
@@ -2095,7 +2096,7 @@ export async function getTotalStats() {
                     (SELECT STRING_AGG(session_id::text, ', ') FROM session_totals WHERE -special_l_point = (SELECT highest FROM special_l_point_max))
                 FROM session_totals;
             `),
-            pool.query(`
+            client.query(`
                 WITH session_totals AS (
                     SELECT
                         session_id,
@@ -2130,7 +2131,7 @@ export async function getTotalStats() {
                 v_cone_max AS (
                     SELECT MAX(v_cone) AS highest FROM session_totals
                 )
-
+    
                 SELECT
                     'overall_cone' AS type,
                     SUM(overall_cone) AS total,
@@ -2146,9 +2147,9 @@ export async function getTotalStats() {
                         ) sub
                     ) AS highest_session
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'pg_cone',
                     SUM(pg_cone),
@@ -2164,9 +2165,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'f20g_cone',
                     SUM(f20g_cone),
@@ -2182,9 +2183,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'l_cone',
                     SUM(l_cone),
@@ -2200,9 +2201,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'c_cone',
                     SUM(c_cone),
@@ -2218,9 +2219,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'w_cone',
                     SUM(w_cone),
@@ -2236,9 +2237,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'v_cone',
                     SUM(v_cone),
@@ -2255,7 +2256,7 @@ export async function getTotalStats() {
                     )
                 FROM session_totals;
             `),
-            pool.query(`
+            client.query(`
                 WITH session_totals AS (
                     SELECT
                         session_id,
@@ -2278,7 +2279,7 @@ export async function getTotalStats() {
                 gooc_used_max AS (
                     SELECT MAX(gooc_used) AS highest FROM session_totals
                 )
-
+    
                 SELECT
                     'neigh' AS type,
                     SUM(neigh) AS total,
@@ -2294,9 +2295,9 @@ export async function getTotalStats() {
                         ) sub
                     ) AS highest_session
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'super_neigh',
                     SUM(super_neigh),
@@ -2312,9 +2313,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'gooc_total',
                     SUM(gooc_total),
@@ -2330,9 +2331,9 @@ export async function getTotalStats() {
                         ) sub
                     )
                 FROM session_totals
-
+    
                 UNION ALL
-
+    
                 SELECT
                     'gooc_used',
                     SUM(gooc_used),
@@ -2349,7 +2350,7 @@ export async function getTotalStats() {
                     )
                 FROM session_totals;
             `),
-            pool.query(`
+            client.query(`
                 WITH accounts_per_session AS (
                     SELECT session_id, COUNT(*) AS num_players
                     FROM gog_players
@@ -2414,7 +2415,7 @@ export async function getTotalStats() {
                     FROM gog_games
                     GROUP BY session_id
                 )
-
+    
                 SELECT
                     s.status AS status,
                     s.session_id AS gog_id,
@@ -2466,29 +2467,33 @@ export async function getTotalStats() {
                 ORDER BY s.session_id;
             `)
         ]);
+        
+        return {
+            total_gog: total.rows[0].total,
+            total_players: total_players.rows[0],
+            total_games: total_games.rows[0],
+            players: players.rows,
+            points: points.rows,
+            cones: cones.rows,
+            cards: cards.rows,
+            logs: logs.rows,
+            intruded: {
+                total_players: total.rows[0].total_intruded,
+                avg_players: total.rows[0].avg_intruded,
+                max_players: total.rows[0].max_intruded,
+                max_players_sessions: total.rows[0].max_intruded_sessions
+            },
+            abandoned: {
+                total_players: total.rows[0].total_abandoned,
+                avg_players: total.rows[0].avg_abandoned,
+                max_players: total.rows[0].max_abandoned,
+                max_players_sessions: total.rows[0].max_abandoned_sessions
+            }
+        };
+    } finally {
+        client.release();
+    }
     
-    return {
-        total_gog: total.rows[0].total,
-        total_players: total_players.rows[0],
-        total_games: total_games.rows[0],
-        players: players.rows,
-        points: points.rows,
-        cones: cones.rows,
-        cards: cards.rows,
-        logs: logs.rows,
-        intruded: {
-            total_players: total.rows[0].total_intruded,
-            avg_players: total.rows[0].avg_intruded,
-            max_players: total.rows[0].max_intruded,
-            max_players_sessions: total.rows[0].max_intruded_sessions
-        },
-        abandoned: {
-            total_players: total.rows[0].total_abandoned,
-            avg_players: total.rows[0].avg_abandoned,
-            max_players: total.rows[0].max_abandoned,
-            max_players_sessions: total.rows[0].max_abandoned_sessions
-        }
-    };
 }
 
 export async function getStats() {

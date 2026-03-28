@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
     const stats = await getStats();
     res.json(stats);
   } catch (error) {
-    console.error('Error fetching all player stats:', error);
-    res.status(500).json({ error: 'Failed to fetch player stats' });
+    console.error('Error fetching all stats:', error);
+    res.status(500).json({ error: 'Failed to fetch stats' });
   }
 });
 
