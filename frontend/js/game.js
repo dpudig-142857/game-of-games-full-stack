@@ -6713,7 +6713,7 @@ function setupSuperSmashBros(setup) {
     const type = document.createElement('select');
     type.id = 'smash_type';
     type.className = 'game_select';
-    type.appendChild(createOption('', 'Tournament or Knockout...'))
+    type.appendChild(createOption('', 'Version...'))
     type.appendChild(createOption('Tournament', ''));
     type.appendChild(createOption('Knockout', ''));
     type.appendChild(createOption('Table', ''));
@@ -6722,11 +6722,22 @@ function setupSuperSmashBros(setup) {
 
 function setupSwitchBasketball(setup) {
     const type = document.createElement('select');
-    type.id = 's_basketball_type';
+    type.id = 'basketball_type';
     type.className = 'game_select';
-    type.appendChild(createOption('', 'Teams or Table...'))
+    type.appendChild(createOption('', 'Version...'))
     type.appendChild(createOption('Teams', ''));
     type.appendChild(createOption('Table', ''));
+    setup.appendChild(type);
+}
+
+function setupPool(setup) {
+    const type = document.createElement('select');
+    type.id = 'pool_type';
+    type.className = 'game_select';
+    type.appendChild(createOption('', 'Version...'))
+    type.appendChild(createOption('Teams', ''));
+    type.appendChild(createOption('Kelly', ''));
+    type.appendChild(createOption('Tournament', ''));
     setup.appendChild(type);
 }
 
@@ -6748,12 +6759,12 @@ function createMultiple() {
             createTable();
         }
     } else if (currGame.name == 'Switch Basketball') {
-        const type = document.getElementById('s_basketball_type').value;
+        const type = document.getElementById('basketball_type').value;
         if (!type) return;
         if (type == 'Teams') {
             currGame.results_type = 'team';
             currGame.winner_criteria = 'winner';
-            createTeam(document.getElementById('s_basketball_game'), 2);
+            createTeam(document.getElementById('basketball_game'), 2);
         } else if (type == 'Table') {
             currGame.results_type = 'table';
             currGame.winner_criteria = 'highest';
@@ -6763,21 +6774,44 @@ function createMultiple() {
         currGame.results_type = 'table';
         currGame.winner_criteria = 'lowest';
         createTable();
+    } else if (currGame.name == 'Pool') {
+        const type = document.getElementById('pool_type').value;
+        if (!type) return;
+        if (type == 'Teams') {
+            currGame.results_type = 'team';
+            currGame.winner_criteria = 'winner';
+            const half = Math.ceil(currPlayers.length / 2);
+            createTeam(document.getElementById('pool_game'), half, 2);
+        } else if (type == 'Kelly') {
+            currGame.results_type = 'knockout';
+            currGame.winner_criteria = 'last';
+            createKnockout();
+        } else if (type == 'Tournament') {
+            currGame.results_type = 'tournament';
+            currGame.winner_criteria = 'winner';
+            createTournament(shuffle(currPlayers));
+        }
     }
 }
 
-function generateMultipleResults() {
+async function generateMultipleResults() {
     if (currGame.name == 'Super Smash Bros') {
         const type = document.getElementById('smash_type').value;
         if (!type) return [];
-        if (type == 'Tournament') return generateTournamentResults();
+        if (type == 'Tournament') return await generateTournamentResults();
         if (type == 'Knockout') return generateKnockoutResults();
         if (type == 'Table') return generateTableResults();
     } else if (currGame.name == 'Switch Basketball') {
-        const type = document.getElementById('s_basketball_type').value;
+        const type = document.getElementById('basketball_type').value;
         if (!type) return [];
         if (type == 'Teams') return generateTeamResults();
         if (type == 'Table') return generateTableResults();
+    } else if (currGame.name == 'Pool') {
+        const type = document.getElementById('pool_type').value;
+        if (!type) return [];
+        if (type == 'Teams') return generateTeamResults();
+        if (type == 'Kelly') return generateKnockoutResults();
+        if (type == 'Tournament') return await generateTournamentResults();
     }
     return [];
 }
@@ -6786,14 +6820,20 @@ function submitMultipleGame(results) {
     if (currGame.name == 'Super Smash Bros') {
         const type = document.getElementById('smash_type').value;
         if (!type) return;
-        if (type == 'Tournament') submitTournamentGame(results);
-        if (type == 'Knockout') submitKnockoutGame(results);
-        if (type == 'Table') submitTableGame(results);
+        if (type == 'Tournament') return submitTournamentGame(results);
+        if (type == 'Knockout') return submitKnockoutGame(results);
+        if (type == 'Table') return submitTableGame(results);
     } else if (currGame.name == 'Switch Basketball') {
-        const type = document.getElementById('s_basketball_type').value;
+        const type = document.getElementById('basketball_type').value;
         if (!type) return [];
         if (type == 'Teams') return submitTeamGame(results);
         if (type == 'Table') return submitTableGame(results);
+    } else if (currGame.name == 'Pool') {
+        const type = document.getElementById('pool_type').value;
+        if (!type) return;
+        if (type == 'Teams') return submitTeamGame(results);
+        if (type == 'Kelly') return submitKnockoutGame(results);
+        if (type == 'Tournament') return submitTournamentGame(results);
     }
 }
 
@@ -6827,7 +6867,7 @@ async function generateResults() {
             case 'tournament': return await generateTournamentResults();
             case 'counter': return generateCounterResults();
             //case 'counter_rounds': return generateCounterRoundsResults();
-            case 'multiple': return generateMultipleResults();
+            case 'multiple': return await generateMultipleResults();
             default: return [];
         }
     }
@@ -7107,6 +7147,7 @@ function createGame() {
     if (currGame.name == 'Jenga') setupJenga(setup);
     if (currGame.name == 'Super Smash Bros') setupSuperSmashBros(setup);
     if (currGame.name == 'Switch Basketball') setupSwitchBasketball(setup);
+    if (currGame.name == 'Pool') setupPool(setup);
     
     if (!isTeams(currGame) && currGame.name != 'Alphabetix') {
         const btn = createButton(`${currGame.tag}_start`, 'button', 'Start');
