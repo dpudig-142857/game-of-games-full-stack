@@ -546,10 +546,10 @@ export async function upload420Photo(sessionId, sessionData) {
 
 export async function saveSession(sessionId, sessionData) {
     const { theGame, currentGame, currGameInfo, incomplete } = sessionData;
-    //console.log(theGame);
-    //console.log(currentGame);
-    //console.log(currGameInfo);
-    //console.log(incomplete);
+    console.log(theGame);
+    console.log(currentGame);
+    console.log(currGameInfo);
+    console.log(incomplete);
     try {
         if (incomplete) {
             await pool.query(`

@@ -6200,7 +6200,7 @@ function renderMatchTeamPoints(team1, team2, win_score, win_margin) {
         rightSymbol.className = 'hover-symbol';
         rightHover.appendChild(rightSymbol);
         
-        box.addEventListener('click', (e) => {
+        box.addEventListener('click', async (e) => {
             const rect = box.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
 
@@ -6224,7 +6224,7 @@ function renderMatchTeamPoints(team1, team2, win_score, win_margin) {
                     winning_score: scores[team.id],
                     losing_score: scores[opp.id]
                 });
-                submitGame();
+                await submitGame();
             }
         });
 
@@ -7458,10 +7458,10 @@ function initialiseButtons() {
 
     const gameBtns = document.querySelectorAll('.game-action-button');
     gameBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             if (btn.id == 'complete') complete420Game(true);
             if (btn.id == 'round') nextRound();
-            if (btn.id == 'submit') submitGame();
+            if (btn.id == 'submit') await submitGame();
             if (btn.id == 'end') nextGame();
             if (btn.id == 'refresh') {
                 refreshGames();
