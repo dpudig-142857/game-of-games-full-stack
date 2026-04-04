@@ -6874,6 +6874,10 @@ async function generateResults() {
 }
 
 async function submitResults(results) {
+    console.log(`Submitting results`);
+    for (const result of results) {
+        console.log(result);
+    }
     switch (currGame.name) {
         case 'Alphabetix': submitAlphabetix(results); break;
         case 'Mario Party': submitMarioParty(results); break;
@@ -7051,8 +7055,10 @@ function logResults(results) {
     });
 
     let game = theGame.games.find(g => g.name == currGame.name && g.num == gameNumber);
+    console.log(game);
     game.status = 'complete';
     game.results = results;
+    console.log(game);
 }
 
 function logCone(id, type) {
