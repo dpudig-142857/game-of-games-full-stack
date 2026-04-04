@@ -1435,10 +1435,10 @@ function createCoin(size, results, coins, box, result) {
     
             coinsClicked.push(currCoin);
             if (coinsClicked.length == size) {
-                setTimeout(() => {
+                setTimeout(async () => {
                     const coinBox = document.getElementById('coin_box');
                     coinBox.innerHTML = '';
-                    submitResults(results);
+                    await submitResults(results);
                 }, 2000);
             }
         });
@@ -6833,7 +6833,7 @@ async function generateResults() {
     }
 }
 
-function submitResults(results) {
+async function submitResults(results) {
     switch (currGame.name) {
         case 'Alphabetix': submitAlphabetix(results); break;
         case 'Mario Party': submitMarioParty(results); break;
@@ -6859,7 +6859,7 @@ function submitResults(results) {
     if (gamesLeft.length != 0) document.getElementById('end').style.display = 'flex';
     if (gamesLeft.length == 0) document.getElementById('refresh').style.display = 'flex';
 
-    showOverallResults();
+    await showOverallResults();
 }
 
 function showResults(div) {
@@ -6872,7 +6872,7 @@ function showResults(div) {
     console.log(specialityPlayers);
 }
 
-function showOverallResults() {
+async function showOverallResults() {
     const div = document.getElementById(`${currGame.tag}_results_div`);
     div.style.display = 'flex';
     
@@ -6938,6 +6938,7 @@ function showOverallResults() {
     });
 
     overall.style.display = 'flex';
+    await saveGameState(false);
 }
 
 // #endregion
@@ -7279,13 +7280,12 @@ async function submitGame() {
     const resultCoins = results.filter(r => r.base == 'pn' || r.base == 'pc' || r.base == 'nc');
     resultCoins.forEach(r => coins.push(createCoin(resultCoins.length, results, coins, box, r)));
 
-    if (coins.length == 0) submitResults(results);
+    if (coins.length == 0) await submitResults(results);
     document.getElementById(`${currGame.tag}`).appendChild(box);
     const starting = document.getElementById('starting-player')
     if (starting) starting.style.display = 'none';
     document.getElementById(`${currGame.tag}_header`).style.display = 'none';
     document.getElementById('submit').style.display = 'none';
-    await saveGameState(false);
 }
 
 function refreshGames() {
