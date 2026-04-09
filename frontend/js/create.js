@@ -1257,7 +1257,7 @@ async function initialize() {
                 });
             } else if (sessionType == 'create') {
                 btn.innerHTML = 'Start';
-                starting = false;
+                let starting = false;
                 btn.addEventListener('click', () => {
                     if (!starting) {
                         starting = true;
