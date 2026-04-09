@@ -648,12 +648,14 @@ export async function saveSession(sessionId, sessionData) {
 
             await pool.query(`
                 UPDATE tournaments
-                SET game_instance_id = $1
-                WHERE session_id = $2 AND game_number = $3 AND game = $4;
+                SET game_instance_id = $1, game_number = $2
+                WHERE session_id = $3 AND game = $4
+                ORDER BY id DESC
+                LIMIT 1;
             `, [
                 gameId,
-                sessionId,
                 currentGame.game_id.split('_')[1],
+                sessionId,
                 currentGame.name
             ])
         }

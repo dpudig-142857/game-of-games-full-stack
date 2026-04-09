@@ -6422,9 +6422,7 @@ async function loadBracket(id) {
         clear: true,
     });
 
-    setTimeout(async () => {
-        attachMatchClickHandlers(id);
-    }, 100);
+    setTimeout(async () => attachMatchClickHandlers(id), 100);
 }
 
 async function attachMatchClickHandlers(tournamentId) {

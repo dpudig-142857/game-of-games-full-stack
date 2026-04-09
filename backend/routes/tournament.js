@@ -37,15 +37,8 @@ router.post('/create', async (req, res) => {
 
     try {
         const manager = createManager();
-        const allIds = await pool.query(`SELECT id FROM tournaments;`)
-        const sessionIds = await pool.query(`
-            SELECT id FROM tournaments WHERE game = $1 AND session_id = $2;
-        `, [
-            game,
-            sessionId
-        ]);
-        const ids = sessionIds.rows;
-        const id = ids.length == 0 ? allIds.rows.length + 1 : ids.at(-1);
+        const idsRes = await pool.query(`SELECT id FROM tournaments;`)
+        const id = idsRes.rows.length + 1;
 
         const tournament = await manager.create.stage({
             tournamentId: id,
@@ -56,14 +49,14 @@ router.post('/create', async (req, res) => {
         });
 
         await pool.query(`
-            INSERT INTO tournaments (id, game, session_id, bracket, game_number)
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO tournaments (id, game, session_id, bracket)
+            VALUES ($1, $2, $3, $4)
             ON CONFLICT (id)
             DO UPDATE SET
               bracket = EXCLUDED.bracket,
               updated_at = NOW()
         `, [
-            id, game, sessionId, JSON.stringify(manager.storage.data), num
+            id, game, sessionId, JSON.stringify(manager.storage.data)
         ]);
 
         res.json({ success: true, tournamentId: id, tournament });
