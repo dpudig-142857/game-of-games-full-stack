@@ -6734,7 +6734,6 @@ function setupPool(setup) {
     type.className = 'game_select';
     type.appendChild(createOption('', 'Version...'))
     type.appendChild(createOption('Teams', ''));
-    type.appendChild(createOption('Kelly', ''));
     type.appendChild(createOption('Tournament', ''));
     setup.appendChild(type);
 }
@@ -6780,10 +6779,6 @@ function createMultiple() {
             currGame.winner_criteria = 'winner';
             const half = Math.ceil(currPlayers.length / 2);
             createTeam(document.getElementById('pool_game'), half, 2);
-        } else if (type == 'Kelly') {
-            currGame.results_type = 'knockout';
-            currGame.winner_criteria = 'last';
-            createKnockout();
         } else if (type == 'Tournament') {
             currGame.results_type = 'tournament';
             currGame.winner_criteria = 'winner';

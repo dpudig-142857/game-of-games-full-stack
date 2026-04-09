@@ -344,6 +344,7 @@ function createNumSpeciality() {
     specialityCheckboxes.appendChild(createCheckbox(1, 'speciality', '1'));
     specialityCheckboxes.appendChild(createCheckbox(2, 'speciality', '2'));
     specialityCheckboxes.appendChild(createCheckbox(3, 'speciality', '3'));
+    specialityCheckboxes.appendChild(createCheckbox(4, 'speciality', '4'));
     // ???? IMPLEMENT NUM INPUT BOX ????
     // ???? MAYYYYBBBBBEEEEEE ????
     // 
