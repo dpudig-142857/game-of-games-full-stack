@@ -6900,10 +6900,9 @@ async function submitResults(results) {
     }
     
     logResults(results);
+    await showOverallResults();
     if (gamesLeft.length != 0) document.getElementById('end').style.display = 'flex';
     if (gamesLeft.length == 0) document.getElementById('refresh').style.display = 'flex';
-
-    await showOverallResults();
 }
 
 function showResults(div) {
@@ -7328,7 +7327,7 @@ async function submitGame() {
     resultCoins.forEach(r => coins.push(createCoin(resultCoins.length, results, coins, box, r)));
 
     document.getElementById(`${currGame.tag}`).appendChild(box);
-    const starting = document.getElementById('starting-player')
+    const starting = document.getElementById('starting-player');
     if (starting) starting.style.display = 'none';
     document.getElementById(`${currGame.tag}_header`).style.display = 'none';
     document.getElementById('submit').style.display = 'none';
