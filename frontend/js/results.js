@@ -419,7 +419,7 @@ function showLog() {
             afterDiv.style.textShadow = '#0ff 0.1rem 0.1rem 0.5rem';
 
             const after = document.createElement('div');
-            after.className = a == 'DINNER BREAK' || a == 'LUNCH BREAK'
+            after.className = a == 'DINNER BREAK' || a == 'LUNCH BREAK' || a == 'SLEEP BREAK'
                 ? 'cell large' : 'cell small';
             if (a.includes('cone') && gog_version == 'public') {
                 const safe = a.replace('cone', 'shot');
