@@ -292,9 +292,9 @@ export async function getSessionById(id) {
     const gameResultsRes = await pool.query(`
         SELECT
             game_instance_id, game_id, game_number, gog_games.name, player_id,
-            accounts.name, speciality, place, reward, points, stars, coins, rounds
-        FROM gog_games JOIN gog_game_players USING (game_instance_id) JOIN accounts USING (player_id)
-        WHERE session_id = $1;
+            a.name, speciality, place, reward, points, stars, coins, rounds
+        FROM gog_games gg JOIN gog_game_players ggp USING (game_instance_id) JOIN accounts a USING (player_id)
+        WHERE gg.session_id = $1;
     `, [id]);
     const gameResults = gameResultsRes.rows;
 
