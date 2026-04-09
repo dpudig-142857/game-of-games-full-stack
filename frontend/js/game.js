@@ -7327,12 +7327,12 @@ async function submitGame() {
     const resultCoins = results.filter(r => r.base == 'pn' || r.base == 'pc' || r.base == 'nc');
     resultCoins.forEach(r => coins.push(createCoin(resultCoins.length, results, coins, box, r)));
 
-    if (coins.length == 0) await submitResults(results);
     document.getElementById(`${currGame.tag}`).appendChild(box);
     const starting = document.getElementById('starting-player')
     if (starting) starting.style.display = 'none';
     document.getElementById(`${currGame.tag}_header`).style.display = 'none';
     document.getElementById('submit').style.display = 'none';
+    if (coins.length == 0) await submitResults(results);
 }
 
 function refreshGames() {
