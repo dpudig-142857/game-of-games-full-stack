@@ -575,6 +575,12 @@ header {
     display: none;
 }
 
+.vote_status {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .brackets-viewer {
     --primary-color: #007BFF;
     --text-color: #333;

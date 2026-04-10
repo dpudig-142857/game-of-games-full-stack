@@ -1064,14 +1064,51 @@ function openVote() {
     const div = document.getElementById('voting');
     div.innerHTML = '';
 
-    currPlayers
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(player => div.appendChild(createVote(player)));
+    let results = [];
+
+    currPlayers.forEach(p => {
+        const i = theGame.players.find(p2 => p2.player_id = p.player_id);
+        
+        const points = i.g_point + i.c_point + i.special_w_point + i.special_l_point;
+        const cones =
+            gog_version == 'private' ? 
+            i.pg_cone + i.f20g_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone :
+            gog_version == 'public' ?
+            i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
+
+        results.push({ name: p.name, points, cones });
+    });
+
+    results.sort((a, b) => {
+        const comparePoints = b.points - a.points;
+        const compareCones = a.cones - b.cones;
+        return comparePoints != 0 ? comparePoints :
+                compareCones != 0 ? compareCones : a.name.localeCompare(b.name);
+    });
+
+    let currentPlace = 1;
+    let extraPlaces = 0;
+    results.forEach((result, index) => {
+        if (index != 0) {
+            if (result.points == results[index - 1].points && result.cones == results[index - 1].cones) {
+                extraPlaces++;
+            } else {
+                currentPlace += extraPlaces + 1;
+                extraPlaces = 0;
+            }
+        }
+        result.place = currentPlace;
+    });
+
+    results.forEach(result => {
+        const player = currPlayers.find(p => p.player_id == result.player_id);
+        div.appendChild(createVote(player, result));
+    });
 
     voteDiv.style.display = 'flex';
 }
 
-function createVote(player) {
+function createVote(player, result) {
     const info = allPlayers.find(p => p.player_id == player.player_id);
     const box = document.createElement('div');
     box.className = 'playerBox';
@@ -1092,6 +1129,15 @@ function createVote(player) {
     box.appendChild(createCustomDropdown(
         gamesLeft, info.colour, true, 'vote', player
     ));
+
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'vote-status';
+    statusDiv.id = `${player.player_id}-vote-status`;
+    box.appendChild(statusDiv);
+
+    statusDiv.appendChild(header('h2', `Place: ${place(result.place)}`));
+    statusDiv.appendChild(header('h2', `Points: ${result.points}`));
+    statusDiv.appendChild(header('h2', `Cones: ${result.cones}`));
     
     return box;
 }
