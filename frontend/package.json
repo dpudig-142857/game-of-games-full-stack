@@ -4,10 +4,12 @@
     "@dicebear/core": "^9.3.0",
     "brackets-manager": "^1.9.1",
     "brackets-viewer": "^1.6.2",
+    "brew": "^0.0.8",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "vite": "^7.3.0"

@@ -7624,7 +7624,7 @@ async function initialise(sessionId) {
         headerTitle.appendChild(header('h1', `${theGame.gog_id}`));
         updateHeaderButtons('start');
 
-        gameSelection = 'Choose';
+        gameSelection = 'Vote';
         startTime = new Date(session.start_time);
     
         overallPlayers = theGame.players;
