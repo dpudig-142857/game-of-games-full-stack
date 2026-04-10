@@ -1068,7 +1068,6 @@ function openVote() {
 
     currPlayers.forEach(p => {
         const i = theGame.players.find(p2 => p2.player_id = p.player_id);
-        
         const points = i.g_point + i.c_point + i.special_w_point + i.special_l_point;
         const cones =
             gog_version == 'private' ? 
@@ -1076,7 +1075,7 @@ function openVote() {
             gog_version == 'public' ?
             i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
 
-        results.push({ name: p.name, points, cones });
+        results.push({ player_id: p.player_id, name: p.name, points, cones });
     });
 
     results.sort((a, b) => {
@@ -1100,15 +1099,12 @@ function openVote() {
         result.place = currentPlace;
     });
 
-    results.forEach(result => {
-        const player = currPlayers.find(p => p.player_id == result.player_id);
-        div.appendChild(createVote(player, result));
-    });
+    results.forEach(p => div.appendChild(createVote(p)));
 
     voteDiv.style.display = 'flex';
 }
 
-function createVote(player, result) {
+function createVote(player) {
     const info = allPlayers.find(p => p.player_id == player.player_id);
     const box = document.createElement('div');
     box.className = 'playerBox';
@@ -1135,9 +1131,9 @@ function createVote(player, result) {
     statusDiv.id = `${player.player_id}-vote-status`;
     box.appendChild(statusDiv);
 
-    statusDiv.appendChild(header('h2', `Place: ${place(result.place)}`));
-    statusDiv.appendChild(header('h2', `Points: ${result.points}`));
-    statusDiv.appendChild(header('h2', `Cones: ${result.cones}`));
+    statusDiv.appendChild(header('h2', `Place: ${place(player.place)}`));
+    statusDiv.appendChild(header('h2', `Points: ${player.points}`));
+    statusDiv.appendChild(header('h2', `Cones: ${player.cones}`));
     
     return box;
 }
