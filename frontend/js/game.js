@@ -1136,8 +1136,12 @@ function createVote(player) {
     placeHeader.style.textDecoration = 'underline double';
     statusDiv.appendChild(placeHeader);
 
-    statusDiv.appendChild(header('h3', `Points: ${player.points}`));
-    statusDiv.appendChild(header('h3', `Cones: ${player.cones}`));
+    const statsDiv = document.createElement('div');
+    statsDiv.className = 'vote_stat';
+    box.appendChild(statsDiv);
+
+    statsDiv.appendChild(header('h3', `Points: ${player.points}`));
+    statsDiv.appendChild(header('h3', `Cones: ${player.cones}`));
     
     return box;
 }
