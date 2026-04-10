@@ -1075,7 +1075,8 @@ function openVote() {
             gog_version == 'public' ?
             i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
 
-        results.push({ player_id: p.player_id, name: p.name, points, cones });
+        
+            results.push({ player_id: p.player_id, name: p.name, points, cones });
     });
 
     results.sort((a, b) => {
@@ -1115,25 +1116,28 @@ function createVote(player) {
     votingPlayer.style.textDecoration = 'underline';
     votingPlayer.style.fontSize = '1.8rem';
     box.appendChild(votingPlayer);
-
+    
     const pfp = document.createElement('img');
     pfp.className = 'player-box-pfp';
     pfp.id = `${player.player_id}-box`;
     pfp.src = info.avatar_seed;
     box.appendChild(pfp);
-
+    
     box.appendChild(createCustomDropdown(
         gamesLeft, info.colour, true, 'vote', player
     ));
-
+    
     const statusDiv = document.createElement('div');
-    statusDiv.className = 'vote-status';
-    statusDiv.id = `${player.player_id}-vote-status`;
+    statusDiv.className = 'vote_status';
+    statusDiv.id = `${player.player_id}_vote_status`;
     box.appendChild(statusDiv);
+    
+    const placeHeader = header('h2', `${place(player.place)}`);
+    placeHeader.style.textDecoration = 'underline double';
+    statusDiv.appendChild(placeHeader);
 
-    statusDiv.appendChild(header('h2', `Place: ${place(player.place)}`));
-    statusDiv.appendChild(header('h2', `Points: ${player.points}`));
-    statusDiv.appendChild(header('h2', `Cones: ${player.cones}`));
+    statusDiv.appendChild(header('h3', `Points: ${player.points}`));
+    statusDiv.appendChild(header('h3', `Cones: ${player.cones}`));
     
     return box;
 }
