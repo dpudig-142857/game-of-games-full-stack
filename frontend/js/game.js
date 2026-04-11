@@ -1173,7 +1173,9 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
     dropdown.addEventListener('input', (e) => {
-        options = options.filter(o => o.name.includes(e.target.value));
+        const val = e.target.value;
+        console.log(val);
+        options = val != '' ? options.filter(o => o.name.includes(val)) : options;
     });
 
     const btn = createButton('dropbtn', 'dropbtn', 'Vote');
