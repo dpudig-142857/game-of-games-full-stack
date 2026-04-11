@@ -615,10 +615,11 @@ export async function saveSession(sessionId, sessionData) {
             for (const v of currentGame.votes) {
                 await pool.query(`
                     INSERT INTO gog_game_votes (
-                        game_instance_id, player_id, game_name
+                        session_id, game_instance_id, player_id, game_name
                     )
-                    VALUES ($1, $2, $3)
+                    VALUES ($1, $2, $3, $4)
                 `, [
+                    sessionId,
                     gameId,
                     v.player_id,
                     v.vote
@@ -629,11 +630,12 @@ export async function saveSession(sessionId, sessionData) {
                 const player = theGame.players.find(pI => pI.player_id == p.player_id);
                 await pool.query(`
                     INSERT INTO gog_game_players (
-                        game_instance_id, player_id, place, reward,
-                        points, stars, coins, rounds, speciality
+                        session_id, game_instance_id, player_id, place,
+                        reward, points, stars, coins, rounds, speciality
                     )
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                 `, [
+                    sessionId,
                     gameId,
                     player.player_id,
                     p.place,

@@ -1157,8 +1157,9 @@ function createVote(player) {
     statsDiv.className = 'vote_stats';
     box.appendChild(statsDiv);
 
-    statsDiv.appendChild(header('h3', `Points: ${player.points}`));
-    statsDiv.appendChild(header('h3', `Cones: ${player.cones}`));
+    statsDiv.appendChild(header('h3', `${player.points} points`));
+    const txt = gog_version == 'private' ? 'cones' : gog_version == 'public' ? 'shots' : '';
+    statsDiv.appendChild(header('h3', `${player.cones} ${txt}`));
     
     box.appendChild(createCustomDropdown(
         gamesLeft, info.colour, true, 'vote', player
