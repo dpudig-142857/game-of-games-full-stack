@@ -1069,6 +1069,8 @@ function openVote() {
     currPlayers.forEach(p => {
         const i = theGame.players.find(p2 => p2.player_id == p.player_id);
         const points = i.g_point + i.c_point + i.special_w_point + i.special_l_point;
+        const goodPoints = i.g_point + i.special_w_point;
+        const badPoints = i.c_point + i.special_l_point;
         const cones =
             gog_version == 'private' ? 
             i.pg_cone + i.f20g_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone :
@@ -1083,6 +1085,8 @@ function openVote() {
             player_id: p.player_id,
             name: p.name,
             points,
+            goodPoints,
+            badPoints,
             cones,
             badCones,
             goodCones
@@ -1091,18 +1095,27 @@ function openVote() {
 
     results.sort((a, b) => {
         const comparePoints = b.points - a.points;
+        const compareGoodPoints = b.goodPoints - a.goodPoints;
+        const compareBadPoints = a.badPoints - b.badPoints;
         const compareBadCones = a.badCones - b.badCones;
         const compareGoodCones = b.goodCones - a.goodCones;
         return comparePoints != 0 ? comparePoints :
-                compareBadCones != 0 ? compareBadCones :
-                compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
+            compareGoodPoints != 0 ? compareGoodPoints :
+            compareBadPoints != 0 ? compareBadPoints :
+            compareBadCones != 0 ? compareBadCones :
+            compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let currentPlace = 1;
     let extraPlaces = 0;
     results.forEach((result, index) => {
         if (index != 0) {
-            if (result.points == results[index - 1].points && result.cones == results[index - 1].cones) {
+            const prev = results[index - 1];
+            if (
+                result.points == prev.points && result.cones == prev.cones &&
+                result.goodPoints == prev.goodPoints && result.goodCones == prev.goodCones &&
+                result.badPoints == prev.badPoints && result.badCones == prev.badCones
+            ) {
                 extraPlaces++;
             } else {
                 currentPlace += extraPlaces + 1;
@@ -6980,6 +6993,8 @@ async function showOverallResults() {
 
     theGame.players.forEach(p => {
         const points = p.g_point + p.c_point + p.special_w_point + p.special_l_point;
+        const goodPoints = p.g_point + p.special_w_point;
+        const badPoints = p.c_point + p.special_l_point;
         const cones =
             gog_version == 'private' ? 
             p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone :
@@ -6994,6 +7009,8 @@ async function showOverallResults() {
             player_id: p.player_id,
             name: p.name,
             points,
+            goodPoints,
+            badPoints,
             cones,
             badCones,
             goodCones
@@ -7002,18 +7019,27 @@ async function showOverallResults() {
 
     results.sort((a, b) => {
         const comparePoints = b.points - a.points;
+        const compareGoodPoints = b.goodPoints - a.goodPoints;
+        const compareBadPoints = a.badPoints - b.badPoints;
         const compareBadCones = a.badCones - b.badCones;
         const compareGoodCones = b.goodCones - a.goodCones;
         return comparePoints != 0 ? comparePoints :
-                compareBadCones != 0 ? compareBadCones :
-                compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
+            compareGoodPoints != 0 ? compareGoodPoints :
+            compareBadPoints != 0 ? compareBadPoints :
+            compareBadCones != 0 ? compareBadCones :
+            compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let currentPlace = 1;
     let extraPlaces = 0;
     results.forEach((result, index) => {
         if (index != 0) {
-            if (result.points == results[index - 1].points && result.cones == results[index - 1].cones) {
+            const prev = results[index - 1];
+            if (
+                result.points == prev.points && result.cones == prev.cones &&
+                result.goodPoints == prev.goodPoints && result.goodCones == prev.goodCones &&
+                result.badPoints == prev.badPoints && result.badCones == prev.badCones
+            ) {
                 extraPlaces++;
             } else {
                 currentPlace += extraPlaces + 1;
@@ -7895,19 +7921,31 @@ async function finishGoG() {
             player_id: p.player_id,
             name: p.name,
             points: p.g_point + p.c_point + p.special_w_point + p.special_l_point,
+            goodPoints: p.g_point + p.special_w_point,
+            badPoints: p.c_point + p.special_l_point,
             cones:
                 gog_version == 'private' ?
                 p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone :
                 gog_version == 'public' ?
-                p.pg_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone : 0
+                p.pg_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone : 0,
+            goodCones:
+                gog_version == 'private' ? p.pg_cone + p.f20g_cone + p.v_cone :
+                gog_version == 'public' ? p.pg_cone + p.v_cone : 0,
+            badCones: p.l_cone + p.c_cone + p.w_cone
         });
     });
     
     theGame.final_results.sort((a, b) => {
-        const points = b.points - a.points;
-        const cones = a.cones - b.cones;
-        const names = a.name.localeCompare(b.name);
-        return points != 0 ? points : cones != 0 ? cones : names;
+        const comparePoints = b.points - a.points;
+        const compareGoodPoints = b.goodPoints - a.goodPoints;
+        const compareBadPoints = a.badPoints - b.badPoints;
+        const compareBadCones = a.badCones - b.badCones;
+        const compareGoodCones = b.goodCones - a.goodCones;
+        return comparePoints != 0 ? comparePoints :
+            compareGoodPoints != 0 ? compareGoodPoints :
+            compareBadPoints != 0 ? compareBadPoints :
+            compareBadCones != 0 ? compareBadCones :
+            compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let place = 1;
@@ -7915,7 +7953,11 @@ async function finishGoG() {
     theGame.final_results.forEach((r, i) => {
         if (i != 0) {
             const prev = theGame.final_results[i - 1];
-            if (r.points == prev.points && r.cones == prev.cones) {
+            if (
+                r.points == prev.points && r.cones == prev.cones &&
+                r.goodPoints == prev.goodPoints && r.goodCones == prev.goodCones &&
+                r.badPoints == prev.badPoints && r.badCones == prev.badCones
+            ) {
                 extras++;
             } else {
                 place += extras + 1;

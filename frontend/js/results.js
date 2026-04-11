@@ -227,36 +227,54 @@ function generateResults() {
 
     allPlayers.forEach(p => {
         const stat = Object.entries(p);
-        const player_id = p.player_id;
-        const name = p.name;
-        const points = stat.reduce((s, [o, k]) => o.includes('_point') ? s + k : s, 0);
-        let cones = stat.reduce((s, [o, k]) => o.includes('_cone') ? s + k : s, 0);
-        if (gog_version == 'public') cones -= p.f20g_cone;
-
-        if (pointsSystem == 'Points & Cones') {
-            results.push({ player_id, name, points, cones });
-        } else {
-            results.push({ player_id, name, points });
-        }
+        const points = stat.g_point + stat.c_point + stat.special_w_point + stat.special_l_point;
+        const goodPoints = stat.g_point + stat.special_w_point;
+        const badPoints = stat.c_point + stat.special_l_point;
+        const cones =
+            gog_version == 'private' ? 
+            stat.pg_cone + stat.f20g_cone + stat.l_cone + stat.c_cone + stat.w_cone + stat.v_cone :
+            gog_version == 'public' ?
+            stat.pg_cone + stat.l_cone + stat.c_cone + stat.w_cone + stat.v_cone : 0;
+        const badCones = p.l_cone + p.c_cone + p.w_cone;
+        const goodCones =
+            gog_version == 'private' ?  stat.pg_cone + stat.f20g_cone + stat.v_cone :
+            gog_version == 'public' ? stat.pg_cone + stat.v_cone : 0;
+        results.push({
+            player_id: p.player_id,
+            name: p.name,
+            points,
+            goodPoints,
+            badPoints,
+            cones: pointsSystem == 'Points & Cones' ? cones : 0,
+            goodCones: pointsSystem == 'Points & Cones' ? goodCones : 0,
+            badCones: pointsSystem == 'Points & Cones' ? badCones : 0,
+        });
     });
 
     results.sort((a, b) => {
-        const points = b.points - a.points;
-        const cones = a.cones - b.cones;
-        return points != 0 ? points : cones != 0 ? cones : a.name.localeCompare(b.name);
+        const comparePoints = b.points - a.points;
+        const compareGoodPoints = b.goodPoints - a.goodPoints;
+        const compareBadPoints = a.badPoints - b.badPoints;
+        const compareBadCones = a.badCones - b.badCones;
+        const compareGoodCones = b.goodCones - a.goodCones;
+        return comparePoints != 0 ? comparePoints :
+            compareGoodPoints != 0 ? compareGoodPoints :
+            compareBadPoints != 0 ? compareBadPoints :
+            compareBadCones != 0 ? compareBadCones :
+            compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let currentPlace = 1;
     let extraPlaces = 0;
     results.forEach((result, index) => {
         if (index != 0) {
-            if (result.points == results[index - 1].points) {
-                if (result.cones == results[index - 1].cones) {
-                    extraPlaces++;
-                } else {
-                    currentPlace += extraPlaces + 1;
-                    extraPlaces = 0;
-                }
+            const prev = results[index - 1];
+            if (
+                result.points == prev.points && result.cones == prev.cones &&
+                result.goodPoints == prev.goodPoints && result.goodCones == prev.goodCones &&
+                result.badPoints == prev.badPoints && result.badCones == prev.badCones
+            ) {
+                extraPlaces++;
             } else {
                 currentPlace += extraPlaces + 1;
                 extraPlaces = 0;

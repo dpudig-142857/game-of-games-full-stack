@@ -219,15 +219,25 @@ async function completeGame(log) {
             player_id: p.player_id,
             name: p.name,
             points: p.g_point + p.c_point + p.special_w_point + p.special_l_point,
-            cones: p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone
+            goodPoints: p.g_point + p.special_w_point,
+            badPoints: p.c_point + p.special_l_point,
+            cones: p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone,
+            goodCones: p.pg_cone + p.f20g_cone + p.v_cone,
+            badCones: p.l_cone + p.c_cone + p.w_cone,
         });
     });
     
     results.sort((a, b) => {
-        const points = b.points - a.points;
-        const cones = a.cones - b.cones;
-        const names = a.name.localeCompare(b.name);
-        return points != 0 ? points : cones != 0 ? cones : names;
+        const comparePoints = b.points - a.points;
+        const compareGoodPoints = b.goodPoints - a.goodPoints;
+        const compareBadPoints = a.badPoints - b.badPoints;
+        const compareBadCones = a.badCones - b.badCones;
+        const compareGoodCones = b.goodCones - a.goodCones;
+        return comparePoints != 0 ? comparePoints :
+            compareGoodPoints != 0 ? compareGoodPoints :
+            compareBadPoints != 0 ? compareBadPoints :
+            compareBadCones != 0 ? compareBadCones :
+            compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let place = 1;
@@ -235,7 +245,11 @@ async function completeGame(log) {
     results.forEach((r, i) => {
         if (i != 0) {
             const prev = results[i - 1];
-            if (r.points == prev.points && r.cones == prev.cones) {
+            if (
+                r.points == prev.points && r.cones == prev.cones &&
+                r.goodPoints == prev.goodPoints && r.goodCones == prev.goodCones &&
+                r.badPoints == prev.badPoints && r.badCones == prev.badCones
+            ) {
                 extras++;
             } else {
                 place += extras + 1;
