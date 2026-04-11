@@ -1067,7 +1067,7 @@ function openVote() {
     let results = [];
 
     currPlayers.forEach(p => {
-        const i = theGame.players.find(p2 => p2.player_id = p.player_id);
+        const i = theGame.players.find(p2 => p2.player_id == p.player_id);
         const points = i.g_point + i.c_point + i.special_w_point + i.special_l_point;
         const cones =
             gog_version == 'private' ? 
@@ -1076,10 +1076,6 @@ function openVote() {
             i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
 
         
-        console.log(p);
-        console.log(i);
-        console.log(points);
-        console.log(cones);
         results.push({ player_id: p.player_id, name: p.name, points, cones });
     });
 
@@ -1118,10 +1114,6 @@ function createVote(player) {
     box.id = `${player.name}_vote`;
     styleBox(box, info.colour);
     
-    const placeHeader = header('h2', `${place(player.place)}`);
-    placeHeader.style.textDecoration = 'underline double';
-    box.appendChild(placeHeader);
-
     const votingPlayer = header('h1', player.name);
     votingPlayer.style.textDecoration = 'underline';
     votingPlayer.style.fontSize = '1.8rem';
