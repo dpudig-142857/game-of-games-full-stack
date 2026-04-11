@@ -126,12 +126,12 @@ let blue = 'linear-gradient(45deg, rgb(180, 216, 255) 5%, rgb(224, 244, 255) 15%
 
 function getAllGamesSinceLastReset() {
     if (refreshCount != 0) {
-        const lastIndex = theGame.games.sort((a,b) => a.number - b.number).findLastIndex(g => {
-            console.log(g);
+        const lastIndex = theGame.games.sort((a,b) => {
+            return a.number - b.number;
+        }).findLastIndex(g => {
             if (!g.after || g.after.length == 0) return false; 
             return g.after.includes('Refreshed games');
         });
-        console.log(lastIndex);
         if (lastIndex >= 0) return theGame.games.slice(lastIndex + 1);
     }
     return [...theGame.games];
@@ -1168,9 +1168,13 @@ function createVote(player) {
 }
 
 function createCustomDropdown(options, colour, random, type = '', player = null) {
-    const dropdown = document.createElement('div');
+    const dropdown = document.createElement('input');
+    dropdown.type = 'text';
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
+    dropdown.addEventListener('input', (e) => {
+        options = options.filter(o => o.name.includes(e.target.value));
+    });
 
     const btn = createButton('dropbtn', 'dropbtn', 'Vote');
     styleButton(btn, hexToTextColour(colour), colour);
