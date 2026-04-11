@@ -1211,6 +1211,8 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
 
             }
         });
+        option.addEventListener('mouseenter', () => option.style.filter = 'brightness(90%)');
+        option.addEventListener('mouseleave', () => option.style.filter = 'brightness(100%)');
         return option;
     }
 
