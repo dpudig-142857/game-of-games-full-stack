@@ -1074,16 +1074,28 @@ function openVote() {
             i.pg_cone + i.f20g_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone :
             gog_version == 'public' ?
             i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
-
+        const badCones = i.l_cone + i.c_cone + i.w_cone;
+        const goodCones =
+            gog_version == 'private' ?  i.pg_cone + i.f20g_cone + i.v_cone :
+            gog_version == 'public' ? i.pg_cone + i.v_cone : 0;
         
-        results.push({ player_id: p.player_id, name: p.name, points, cones });
+        results.push({
+            player_id: p.player_id,
+            name: p.name,
+            points,
+            cones,
+            badCones,
+            goodCones
+        });
     });
 
     results.sort((a, b) => {
         const comparePoints = b.points - a.points;
-        const compareCones = a.cones - b.cones;
+        const compareBadCones = a.badCones - b.badCones;
+        const compareGoodCones = b.goodCones - a.goodCones;
         return comparePoints != 0 ? comparePoints :
-                compareCones != 0 ? compareCones : a.name.localeCompare(b.name);
+                compareBadCones != 0 ? compareBadCones :
+                compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let currentPlace = 1;
@@ -6506,7 +6518,7 @@ async function attachMatchClickHandlers(tournamentId) {
 }
 
 function renderMatchPoints(matchId, tournamentId, opp1, opp2) {
-    const WINNING_SCORE = 9;
+    const WINNING_SCORE = 11;
 
     let container = document.getElementById('left_tournament');
     container.innerHTML = '';
@@ -6973,15 +6985,28 @@ async function showOverallResults() {
             p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone :
             gog_version == 'public' ?
             p.pg_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone : 0;
-
-        results.push({ name: p.name, points, cones });
+        const badCones = p.l_cone + p.c_cone + p.w_cone;
+        const goodCones =
+            gog_version == 'private' ?  p.pg_cone + p.f20g_cone + p.v_cone :
+            gog_version == 'public' ? p.pg_cone + p.v_cone : 0;
+        
+        results.push({
+            player_id: p.player_id,
+            name: p.name,
+            points,
+            cones,
+            badCones,
+            goodCones
+        });
     });
 
     results.sort((a, b) => {
         const comparePoints = b.points - a.points;
-        const compareCones = a.cones - b.cones;
+        const compareBadCones = a.badCones - b.badCones;
+        const compareGoodCones = b.goodCones - a.goodCones;
         return comparePoints != 0 ? comparePoints :
-                compareCones != 0 ? compareCones : a.name.localeCompare(b.name);
+                compareBadCones != 0 ? compareBadCones :
+                compareGoodCones != 0 ? compareGoodCones : a.name.localeCompare(b.name);
     });
 
     let currentPlace = 1;
