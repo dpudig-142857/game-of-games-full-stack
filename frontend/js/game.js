@@ -1167,7 +1167,7 @@ function createVote(player) {
     return box;
 }
 
-/*function createCustomDropdown(options, colour, random, type = '', player = null) {
+function createCustomDropdown(options, colour, random, type = '', player = null) {
     const dropdown = document.createElement('div');
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
@@ -1228,9 +1228,9 @@ function createVote(player) {
     dropdown.appendChild(content);
 
     return dropdown;
-}*/
+}
 
-function createCustomDropdown(options, colour, random, type = '', player = null) {
+function createCustomDropdown2(options, colour, random, type = '', player = null) {
     /*
     <form action="/action_page.php" method="get">
         <input list="browsers" name="browser">
@@ -1277,7 +1277,6 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
             e.preventDefault();
             box.textContent = value;
             box.dataset.value = value;
-            box.value = value;
             content.style.display = 'none';
 
             let game = value;
@@ -1285,7 +1284,6 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
                 const index = Math.floor(Math.random() * options.length);
                 game = options[index].name;
                 box.textContent = game;
-                box.value = game;
             }
 
             if (type == 'vote') {
