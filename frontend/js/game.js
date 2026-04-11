@@ -362,7 +362,7 @@ function timeDisplay() {
             elapsedTime = `⏱️ ${hours}h ${pad(mins % 60)}m`;
         } else {
             const days = Math.floor(hours / 24);
-            elapsedTime = `⏱️ ${days} days ${hours % 24}h ${pad((mins / 24) % 60)}m`;
+            elapsedTime = `⏱️ ${days} days ${hours % 24}h ${pad(mins % 60)}m`;
         }
 
         const div = document.getElementById('elapsed-time');
