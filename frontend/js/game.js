@@ -7740,6 +7740,7 @@ async function initialise(sessionId) {
         });
         gameNumber = theGame.games.length + 1;
         games = gamesInfo.map(g => g.name);
+        console.log('gamesLeft = ', gamesLeft);
         
         initialiseButtons();
         if (gamesLeft.length == 0) {
