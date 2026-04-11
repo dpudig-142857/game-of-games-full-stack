@@ -1099,6 +1099,8 @@ function openVote() {
         }
         result.place = currentPlace;
     });
+    console.log(results);
+    console.log(currPlayers);
 
     results.forEach(p => div.appendChild(createVote(p)));
 
@@ -1123,10 +1125,6 @@ function createVote(player) {
     pfp.src = info.avatar_seed;
     box.appendChild(pfp);
     
-    box.appendChild(createCustomDropdown(
-        gamesLeft, info.colour, true, 'vote', player
-    ));
-    
     const statusDiv = document.createElement('div');
     statusDiv.className = 'vote_status';
     statusDiv.id = `${player.player_id}_vote_status`;
@@ -1142,6 +1140,10 @@ function createVote(player) {
 
     statsDiv.appendChild(header('h3', `Points: ${player.points}`));
     statsDiv.appendChild(header('h3', `Cones: ${player.cones}`));
+    
+    box.appendChild(createCustomDropdown(
+        gamesLeft, info.colour, true, 'vote', player
+    ));
     
     return box;
 }
