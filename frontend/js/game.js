@@ -1260,9 +1260,6 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     box.type = 'text';
     box.placeholder = 'Vote';
     styleBox(box, colour);
-    box.addEventListener('input', (e) => {
-        options = options.filter(o => o.name == e.target.value);
-    });
     dropdown.appendChild(box);
 
     const content = document.createElement('div');
@@ -1280,6 +1277,7 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
             e.preventDefault();
             box.textContent = value;
             box.dataset.value = value;
+            box.value = value;
             content.style.display = 'none';
 
             let game = value;
@@ -1287,6 +1285,7 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
                 const index = Math.floor(Math.random() * options.length);
                 game = options[index].name;
                 box.textContent = game;
+                box.value = game;
             }
 
             if (type == 'vote') {
