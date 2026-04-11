@@ -1260,6 +1260,9 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     box.type = 'text';
     box.placeholder = 'Vote';
     styleBox(box, colour);
+    box.addEventListener('input', (e) => {
+        options = options.filter(o => o.name == e.target.value);
+    });
     dropdown.appendChild(box);
 
     const content = document.createElement('div');
