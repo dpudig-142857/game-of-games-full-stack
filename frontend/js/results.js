@@ -226,19 +226,19 @@ function generateResults() {
     let results = [];
 
     allPlayers.forEach(p => {
-        const stat = Object.entries(p);
-        const points = stat.g_point + stat.c_point + stat.special_w_point + stat.special_l_point;
-        const goodPoints = stat.g_point + stat.special_w_point;
-        const badPoints = stat.c_point + stat.special_l_point;
+        console.log(p);
+        const points = p.g_point + p.c_point + p.special_w_point + p.special_l_point;
+        const goodPoints = p.g_point + p.special_w_point;
+        const badPoints = p.c_point + p.special_l_point;
         const cones =
             gog_version == 'private' ? 
-            stat.pg_cone + stat.f20g_cone + stat.l_cone + stat.c_cone + stat.w_cone + stat.v_cone :
+            p.pg_cone + p.f20g_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone :
             gog_version == 'public' ?
-            stat.pg_cone + stat.l_cone + stat.c_cone + stat.w_cone + stat.v_cone : 0;
+            p.pg_cone + p.l_cone + p.c_cone + p.w_cone + p.v_cone : 0;
         const badCones = p.l_cone + p.c_cone + p.w_cone;
         const goodCones =
-            gog_version == 'private' ?  stat.pg_cone + stat.f20g_cone + stat.v_cone :
-            gog_version == 'public' ? stat.pg_cone + stat.v_cone : 0;
+            gog_version == 'private' ?  p.pg_cone + p.f20g_cone + p.v_cone :
+            gog_version == 'public' ? p.pg_cone + p.v_cone : 0;
         results.push({
             player_id: p.player_id,
             name: p.name,
