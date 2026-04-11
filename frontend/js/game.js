@@ -1167,16 +1167,10 @@ function createVote(player) {
     return box;
 }
 
-function createCustomDropdown(options, colour, random, type = '', player = null) {
-    const dropdown = document.createElement('input');
-    dropdown.type = 'text';
+/*function createCustomDropdown(options, colour, random, type = '', player = null) {
+    const dropdown = document.createElement('div');
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
-    dropdown.addEventListener('change', (e) => {
-        const val = e.target.value;
-        console.log(val);
-        options = val != '' ? options.filter(o => o.name.includes(val)) : options;
-    });
 
     const btn = createButton('dropbtn', 'dropbtn', 'Vote');
     styleButton(btn, hexToTextColour(colour), colour);
@@ -1204,6 +1198,92 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
                 const index = Math.floor(Math.random() * options.length);
                 game = options[index].name;
                 btn.textContent = game;
+            }
+
+            if (type == 'vote') {
+                let voteSize = currPlayers.length;
+                let curr = currVotes.find(v => v.name == player.name);
+                if (curr) curr.vote = game;
+                if (!curr) currVotes.push({
+                    player_id: player.player_id,
+                    name: player.name,
+                    vote: game 
+                });
+                if (currVotes.length == voteSize) voteBtn.style.display = 'flex';
+            } else if (type == 'neigh') {
+
+            }
+        });
+        option.addEventListener('mouseenter', () => option.style.filter = 'brightness(90%)');
+        option.addEventListener('mouseleave', () => option.style.filter = 'brightness(100%)');
+        return option;
+    }
+
+    if (random) content.appendChild(create('RANDOM'));
+    options.sort((a, b) => a.name.localeCompare(b.name))
+    .forEach(g => content.appendChild(create(g.name)));
+             
+    dropdown.addEventListener('mouseenter', () => content.style.display = 'block');
+    dropdown.addEventListener('mouseleave', () => content.style.display = 'none');
+    dropdown.appendChild(content);
+
+    return dropdown;
+}*/
+
+function createCustomDropdown(options, colour, random, type = '', player = null) {
+    /*
+    <form action="/action_page.php" method="get">
+        <input list="browsers" name="browser">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <input type="submit">
+    </form>
+    
+    * /
+
+    const input = document.createElement('input');
+    input.list = 'options';
+    */
+    
+    const dropdown = document.createElement('div');
+    dropdown.className = 'dropdown';
+    dropdown.style.position = 'relative';
+    
+    const box = document.createElement('input');
+    box.id = 'dropbtn';
+    box.className = 'dropbtn';
+    box.type = 'text';
+    box.placeholder = 'Vote';
+    styleBox(box, colour);
+    dropdown.appendChild(box);
+
+    const content = document.createElement('div');
+    content.className = 'dropdown-content';
+
+    const create = (value) => {
+        const option = document.createElement('a');
+        option.href = '#';
+        option.textContent = value;
+        option.dataset.value = value;
+        option.style.textAlign = 'center';
+        option.style.background = colour;
+        option.style.color = hexToTextColour(colour);
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            box.textContent = value;
+            box.dataset.value = value;
+            content.style.display = 'none';
+
+            let game = value;
+            if (value == 'RANDOM') {
+                const index = Math.floor(Math.random() * options.length);
+                game = options[index].name;
+                box.textContent = game;
             }
 
             if (type == 'vote') {
