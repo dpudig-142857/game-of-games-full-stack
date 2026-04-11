@@ -1076,7 +1076,11 @@ function openVote() {
             i.pg_cone + i.l_cone + i.c_cone + i.w_cone + i.v_cone : 0;
 
         
-            results.push({ player_id: p.player_id, name: p.name, points, cones });
+        console.log(p);
+        console.log(i);
+        console.log(points);
+        console.log(cones);
+        results.push({ player_id: p.player_id, name: p.name, points, cones });
     });
 
     results.sort((a, b) => {
