@@ -127,7 +127,8 @@ let blue = 'linear-gradient(45deg, rgb(180, 216, 255) 5%, rgb(224, 244, 255) 15%
 function getAllGamesSinceLastReset() {
     if (refreshCount != 0) {
         const lastIndex = theGame.games.findLastIndex(g => {
-            return g.after?.includes('Refreshed games');
+            if (!g.after || g.after.length == 0) return false; 
+            return g.after.includes('Refreshed games');
         });
         if (lastIndex >= 0) return theGame.games.slice(lastIndex + 1);
     }
