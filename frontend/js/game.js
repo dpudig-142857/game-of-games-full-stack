@@ -1113,6 +1113,10 @@ function createVote(player) {
     box.className = 'playerBox';
     box.id = `${player.name}_vote`;
     styleBox(box, info.colour);
+    
+    const placeHeader = header('h2', `${place(player.place)}`);
+    placeHeader.style.textDecoration = 'underline double';
+    box.appendChild(placeHeader);
 
     const votingPlayer = header('h1', player.name);
     votingPlayer.style.textDecoration = 'underline';
@@ -1125,17 +1129,8 @@ function createVote(player) {
     pfp.src = info.avatar_seed;
     box.appendChild(pfp);
     
-    const statusDiv = document.createElement('div');
-    statusDiv.className = 'vote_status';
-    statusDiv.id = `${player.player_id}_vote_status`;
-    box.appendChild(statusDiv);
-    
-    const placeHeader = header('h2', `${place(player.place)}`);
-    placeHeader.style.textDecoration = 'underline double';
-    statusDiv.appendChild(placeHeader);
-
     const statsDiv = document.createElement('div');
-    statsDiv.className = 'vote_stat';
+    statsDiv.className = 'vote_stats';
     box.appendChild(statsDiv);
 
     statsDiv.appendChild(header('h3', `Points: ${player.points}`));

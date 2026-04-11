@@ -575,16 +575,9 @@ header {
     display: none;
 }
 
-.vote_status {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
 .vote_stats {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
 .brackets-viewer {
