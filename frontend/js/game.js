@@ -358,11 +358,11 @@ function timeDisplay() {
         if (mins < 60) {
             const secs = Math.floor((elapsedMs % 60000) / 1000);
             elapsedTime = `⏱️ ${mins}m ${pad(secs)}s`;
-        } else if (hrs < 60) {
+        } else if (hours < 24) {
             elapsedTime = `⏱️ ${hours}h ${pad(mins % 60)}m`;
         } else {
             const days = Math.floor(hours / 24);
-            elapsedTime = `⏱️ ${days} days ${hours}h ${pad(mins % 60)}m`;
+            elapsedTime = `⏱️ ${days} days ${hours % 24}h ${pad((mins / 24) % 60)}m`;
         }
 
         const div = document.getElementById('elapsed-time');
