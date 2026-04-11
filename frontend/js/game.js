@@ -1172,7 +1172,7 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     dropdown.type = 'text';
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
-    dropdown.addEventListener('input', (e) => {
+    dropdown.addEventListener('change', (e) => {
         const val = e.target.value;
         console.log(val);
         options = val != '' ? options.filter(o => o.name.includes(val)) : options;
