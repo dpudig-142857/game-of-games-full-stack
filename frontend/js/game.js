@@ -74,6 +74,7 @@ let currSystem = '';
 let pointsSystem = [];
 let gameSelection = '';
 let gameInSession = false;
+let currOrder = [];
 
 let capturedImage = null;
 
@@ -823,6 +824,7 @@ function onSpinEnd(indicatedSegment, type) {
         if (wheelOrder.length == 0) {
             //growFromBoxToModal(box, modal, gameModal, curr_colour, () => {
                 wheel_order = false;
+                currOrder = [...wheelOrderPlayers];
                 const order = `The order is ${wheelOrderPlayers.join(', ')}`;
                 const starting = header('h2', order, '', 'starting-player');
                 document.getElementById(`${currGame.tag}`).prepend(starting);
@@ -5557,10 +5559,11 @@ function createKnockout() {
         if (place > 3) orderDiv.style.background = blue;
     };
 
-    currPlayers.forEach(player => {
+    
+    currOrder.forEach(player => {
         const playerDiv = document.createElement('div');
         playerDiv.className = 'player-box';
-        playerDiv.textContent = player.name;
+        playerDiv.textContent = player;
         playerDiv.style.color = 'black';
 
         playerDiv.addEventListener('click', () => {
@@ -5571,7 +5574,7 @@ function createKnockout() {
                 const orderDiv = document.createElement('div');
                 orderDiv.className = 'order-box';
                 orderDiv.style.color = 'black';
-                orderDiv.textContent = `${place(order.children.length)}. ${player.name}`;
+                orderDiv.textContent = `${place(order.children.length)}. ${player}`;
 
                 orderDiv.addEventListener('click', () => {
                     playerDiv.classList.remove('selected');
@@ -7306,6 +7309,7 @@ function logGooC(id, type) {
 function createGame() {
     openGameBox();
 
+    currOrder = [];
     const oldGame = document.querySelector('.curr_game');
     console.log(oldGame);
     oldGame.remove();
