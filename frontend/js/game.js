@@ -3053,7 +3053,8 @@ function generate420Results(win) {
 
 function submit420Results(results) {
     four20Results.innerHTML = '';
-    four20Results.appendChild(header('h1', '4:20 Game Results'));
+    const ver = gog_version == 'private' ? '4:20 Game' : 'Photo Game';
+    four20Results.appendChild(header('h1', `${ver} Results`));
 
     const resultsDiv = document.createElement('div');
     resultsDiv.id = 'four20game_results_players';

@@ -199,7 +199,7 @@ export function typeText(ver, type) {
     } else if (ver == 'public') {
         switch (type) {
             case 'overall_cone': return 'Overall Shots:';
-            case 'pg_cone': return 'Pre-Game/Break Shots:';
+            case 'pg_cone': case 'f20g_cone': return 'Pre-Game/Break Shots:';
             case 'l_cone': return 'Losing Shots:';
             case 'c_cone': return 'Coin Flip Shots:';
             case 'w_cone': return 'Wheel Shots:';

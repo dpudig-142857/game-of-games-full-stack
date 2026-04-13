@@ -841,7 +841,7 @@ function setupTotal() {
             stat(div, 'Wheel Cones', log.w_cone);
             stat(div, 'Victory Cones', log.v_cone);
         } else if (shots) {
-            stat(div, 'Pre-Game/Break Shots', log.pg_cone, true);
+            stat(div, 'Pre-Game/Break Shots', log.pg_cone + log.f20g_cone, true);
             stat(div, 'Losing Shots', log.l_cone);
             if (coin) stat(div, 'Coin Flip Shots', log.c_cone);
             stat(div, 'Wheel Shots', log.w_cone);

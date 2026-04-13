@@ -407,7 +407,14 @@ function showLog() {
 
         const name = document.createElement('div');
         name.className = 'cell number';
-        name.appendChild(header('h3', g.name));
+        if (g.name == '4:20 Game') {
+            name.appendChild(header(
+                'h3',
+                gog_version == 'private' ? '4:20 Game' : 'Photo Game'
+            ));
+        } else {
+            name.appendChild(header('h3', g.name));
+        }
         div.appendChild(name);
 
         div.addEventListener('click', () => {
@@ -637,7 +644,7 @@ async function fillGameInfo(game, info) {
 
         const img = document.createElement('img');
         img.src = `${BASE_ROUTE}/photos/${filename}`;
-        img.alt = '4:20 Game Photo';
+        img.alt = gog_version == 'private' ? '4:20 Game Photo' : 'Game Photo';
         img.style.maxWidth = '100%';
         img.style.borderRadius = '1rem';
 
