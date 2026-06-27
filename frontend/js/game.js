@@ -812,8 +812,8 @@ function onSpinEnd(indicatedSegment, type) {
         //growFromBoxToModal(box, modal, gameModal, curr_colour, () => {
             wheel_first = false;
             currOrder = []
-            currOrder.append(result);
-            currOrder.append(currPlayers.filter(p => p.name != result).map(p => p.name));
+            currOrder.push(result);
+            currOrder.push(...currPlayers.filter(p => p.name != result).map(p => p.name));
             const first = `${result} goes first`;
             const starting = header('h2', first, '', 'starting-player');
             document.getElementById(`${currGame.tag}`).prepend(starting);
