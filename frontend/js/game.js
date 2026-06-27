@@ -811,6 +811,9 @@ function onSpinEnd(indicatedSegment, type) {
     } else if (wheel_first) {
         //growFromBoxToModal(box, modal, gameModal, curr_colour, () => {
             wheel_first = false;
+            currOrder = []
+            currOrder.append(result);
+            currOrder.append(currPlayers.filter(p => p.name != result).map(p => p.name));
             const first = `${result} goes first`;
             const starting = header('h2', first, '', 'starting-player');
             document.getElementById(`${currGame.tag}`).prepend(starting);
