@@ -805,6 +805,11 @@ function showConfirmationStep() {
             leftSection.id = 'confirmation-left-section';
             leftSection.appendChild(createConfirmationGeneral());
             section.appendChild(leftSection);
+
+            const middleSection = document.createElement('div');
+            middleSection.id = 'confirmation-middle-section';
+            middleSection.appendChild(createConfirmationPlayers());
+            section.appendChild(middleSection);
         
             const rightSection = document.createElement('div');
             rightSection.id = 'confirmation-right-section';
@@ -812,7 +817,6 @@ function showConfirmationStep() {
     
             const right = document.createElement('div');
             right.id = 'confirming-right-section-boxes';
-            right.appendChild(createConfirmationPlayers());
             right.appendChild(createConfirmationGames());
             rightSection.appendChild(right);
 
@@ -920,10 +924,10 @@ function createConfirmationGeneral() {
 function createConfirmationPlayers() {
     const box = document.createElement('div');
     box.className = 'box';
-    box.id = 'confirmation-right-box';
+    box.id = 'confirmation-left-box';
 
     const boxes = document.createElement('div');
-    boxes.className = 'confirmation-boxes';
+    boxes.className = 'confirmation-boxes-vertical';
     box.appendChild(header('h1', 'Players'));
     box.appendChild(boxes);
 
