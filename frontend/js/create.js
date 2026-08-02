@@ -1028,11 +1028,15 @@ function createConfirmationGames() {
     .forEach(g => {
         let colours = [];
         let specialityText = "";
-        const specialityPlayers = specialityGames.find(sG => sG.game_id == g.game_id);
-        if (specialityPlayers) {
+        const sP = specialityGames.find(sG => sG.game_id == g.game_id);
+        if (sP) {
             let players = [];
             const names = getDisplayNames(thePlayers);
-            specialityPlayers.player_ids.forEach((pId, i) => {
+            sP.player_ids.sort((a, b) => {
+                const nameA = names.find(n => n.player_id == a).name;
+                const nameB = names.find(n => n.player_id == b).name;
+                return nameA.localeCompare(nameB);
+            }).forEach((pId, i) => {
                 const info = allPlayers.find(pI => pI.player_id == pId);
                 colours.push(info.colour);
                 players.push(names.find(n => n.player_id == pId).name);
@@ -1044,12 +1048,14 @@ function createConfirmationGames() {
         gameBox.className = 'confirmation-box';
         gameBox.id = 'confirmation-game-box';
         gameBox.appendChild(header('h4', g.name));
-        gameBox.appendChild(header('h5', specialityText));
+        if (specialityText != "") gameBox.appendChild(header('h5', specialityText));
 
-        const n = colours.length;
+        let n = colours.length;
         console.log(n, ' colours: ', colours);
-        if (n == 0) colours = ['#33EAFF'];
-        const angleDeg = 135;
+        if (n == 0) {
+            colours = ['#33EAFF'];
+            n = 1;
+        }
 
         gameBox.style.color = hexToTextColour(colours[0]);
 
@@ -1062,24 +1068,12 @@ function createConfirmationGames() {
             stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
             stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
         });
-        gameBox.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
+        gameBox.style.background = `linear-gradient(135deg, ${stops.join(', ')})`;
 
-        const rad = (angleDeg * Math.PI) / 180;
-        const dirX = Math.sin(rad);
-        const dirY = -Math.cos(rad);
-
-        const spreadRem = 1.1;
-
-        gameBox.style.boxShadow = colours
-            .map((colour, i) => {
-                const t = n === 1 ? 0 : i / (n - 1) - 0.5;
-                const offsetX = (t * spreadRem * dirX).toFixed(2);
-                const offsetY = (t * spreadRem * dirY).toFixed(2);
-
-                return `${offsetX}rem ${offsetY}rem 0.5rem ${hexToRgba(colour, 0.7)},
-                        ${offsetX}rem ${offsetY}rem 1rem ${hexToRgba(colour, 0.55)}`;
-            })
-            .join(', ');
+        gameBox.style.boxShadow = `
+            0 0 0.5rem ${hexToRgba('#33EAFF', 0.7)},
+            0 0 1rem ${hexToRgba('#33EAFF', 0.55)}
+        `;
 
         gameBox.style.textShadow = 'none';
 
