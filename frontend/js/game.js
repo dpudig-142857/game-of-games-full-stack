@@ -6571,9 +6571,9 @@ async function createTournament(curr) {
         const bracketDiv = document.createElement('div');
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
-        bracketDiv.style.backgroundColor = curr_colour.rgba;
-        bracketDiv.style.borderColor = curr_colour.rgba;
-        bracketDiv.style.color = curr_colour.text;
+        bracketDiv.style.setProperty('--background-colour', curr_colour.rgba);
+        bracketDiv.style.setProperty('--border-colour', curr_colour.rgba);
+        bracketDiv.style.setProperty('--text-colour', curr_colour.text);
         right.appendChild(bracketDiv);
 
         loadBracket(currTournamentId);
