@@ -5702,13 +5702,11 @@ function submitTableGame(results) {
 
 function createCounter() {
     const gameDiv = document.getElementById(`${currGame.tag}_game`);
-    gameDiv.appendChild(document.createElement('br'));
 
     const container = document.createElement('div');
     container.id = `${currGame.tag}_counters`;
     container.className = 'counter_container';
     container.style.display = 'flex';
-    container.style.flexDirection = 'column';
     gameDiv.appendChild(container);
 
     const players = currGame.starting == 'wheel_order' ?
@@ -5718,7 +5716,7 @@ function createCounter() {
         const box = document.createElement('div');
         box.className = 'counter-scorebox';
         box.style.display = 'flex';
-        box.style.flexDirection = 'row';
+        box.style.flexDirection = 'column';
         box.style.alignItems = 'center';
         box.style.backgroundColor = hexToRgba(curr_colour.hex, 0.6);
         box.style.color = curr_colour.text;
