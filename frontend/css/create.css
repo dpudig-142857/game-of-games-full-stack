@@ -581,8 +581,8 @@ header {
 }
 
 .confirmation-pfp {
-    width: clamp(2rem, 8vh, 5rem);
-    height: clamp(2rem, 8vh, 5rem);
+    width: clamp(3rem, 6vh, 5rem);
+    height: clamp(3rem, 6vh, 5rem);
     flex-shrink: 1;
     min-height: 0;
     min-width: 0;

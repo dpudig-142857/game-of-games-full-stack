@@ -1059,12 +1059,10 @@ function createConfirmationGames() {
         if (specialityText != "") gameBox.appendChild(header('h5', specialityText));
 
         let n = colours.length;
-        console.log(n, ' colours: ', colours);
         if (n == 0) {
             colours = ['#33EAFF'];
             n = 1;
         }
-        let angleDeg = 135;
 
         gameBox.style.color = hexToTextColour(colours[0]);
 
@@ -1077,28 +1075,9 @@ function createConfirmationGames() {
             stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
             stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
         });
-        gameBox.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
+        gameBox.style.background = `linear-gradient(135deg, ${stops.join(', ')})`;
 
-        // --- Shadow: strongly separated per colour along the same axis ---
-        const rad = (angleDeg * Math.PI) / 180;
-        const dirX = Math.sin(rad);
-        const dirY = -Math.cos(rad);
-
-        // Grows with n so more colours = more obviously spread out,
-        // instead of collapsing toward the centre.
-        const spreadRem = 0.9 * n;
-
-        gameBox.style.boxShadow = colours
-            .map((colour, i) => {
-                const t = n === 1 ? 0 : i / (n - 1) - 0.5;
-                const offsetX = (t * spreadRem * dirX).toFixed(2);
-                const offsetY = (t * spreadRem * dirY).toFixed(2);
-
-                return `${offsetX}rem ${offsetY}rem 0.6rem 0.1rem ${hexToRgba(colour, 0.75)},
-                        ${offsetX}rem ${offsetY}rem 1.3rem 0.2rem ${hexToRgba(colour, 0.6)}`;
-            })
-            .join(', ');
-
+        gameBox.style.boxShadow = 'none';
         gameBox.style.textShadow = 'none';
 
         boxes.appendChild(gameBox);
