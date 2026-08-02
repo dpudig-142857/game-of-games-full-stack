@@ -924,12 +924,25 @@ function createConfirmationGeneral() {
 function createConfirmationPlayers() {
     const box = document.createElement('div');
     box.className = 'box';
-    box.id = 'confirmation-left-box';
+    box.id = 'confirmation-middle-box';
 
     const boxes = document.createElement('div');
     boxes.className = 'confirmation-boxes-vertical';
     box.appendChild(header('h1', 'Players'));
     box.appendChild(boxes);
+
+    const names = getDisplayNames(allPlayers);
+    names.sort((a, b) => a.name.localeCompare(b.name))
+    .forEach(player => {
+        const info = allPlayers.find(p => p.player_id == player.player_id);
+        const box = document.createElement('div');
+        box.id = `${player.player_id}-box`;
+        box.className = 'player-box';
+        box.appendChild(header('h4', player.name));
+
+        console.log(info);
+        
+    });
 
     const displayNames = getDisplayNames(thePlayers);
     console.log(displayNames);
@@ -940,6 +953,12 @@ function createConfirmationPlayers() {
         const playerBox = document.createElement('div');
         playerBox.className = 'confirmation-box';
         playerBox.appendChild(header('h4', display.name));
+
+        const pfp = document.createElement('img');
+        pfp.className = 'player-box-pfp';
+        pfp.id = `${p.player_id}-box`;
+        pfp.src = info.avatar_seed;
+        playerBox.appendChild(pfp);
 
         if (theNumSpeciality >= 1) {
             const votes = theSpecialities.find(pS => {

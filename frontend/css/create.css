@@ -513,15 +513,6 @@ header {
     overflow-y: auto;
 }
 
-#confirmation-box-system {
-    max-width: 12rem;
-}
-
-#confirmation-right-box {
-    width: 100%;
-    padding: 1.5rem 0;
-}
-
 #confirmation-middle-section {
     width: 25%;
     height: 100%;
@@ -531,8 +522,23 @@ header {
     align-items: flex-start;
 }
 
+#confirmation-middle-box {
+    height: 90%;
+    gap: 0;
+}
+
+#confirmation-box-system {
+    max-width: 12rem;
+}
+
+#confirmation-right-box {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem 0;
+}
+
 #confirmation-right-section {
-    width: 75%;
+    width: 50%;
     height: 100%;
     overflow: visible;
     display: flex;
@@ -560,6 +566,7 @@ header {
 
 #confirmation-games {
     padding: 1rem;
+    flex-wrap: wrap;
 }
 
 .confirmation-box {
