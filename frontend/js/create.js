@@ -1047,7 +1047,8 @@ function createConfirmationGames() {
         gameBox.appendChild(header('h5', specialityText));
 
         const n = colours.length;
-        if (n == 0) colours.push('#33EAFF');
+        console.log(n, ' colours: ', colours);
+        if (n == 0) colours = ['#33EAFF'];
         const angleDeg = 135;
 
         gameBox.style.color = hexToTextColour(colours[0]);
