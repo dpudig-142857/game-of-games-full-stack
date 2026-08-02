@@ -1050,7 +1050,7 @@ function createConfirmationGames() {
         if (n == 0) colours.push('#33EAFF');
         const angleDeg = 135;
 
-        box.style.color = hexToTextColour(colours[0]);
+        gameBox.style.color = hexToTextColour(colours[0]);
 
         const stops = [];
         colours.forEach((colour, i) => {
@@ -1061,7 +1061,7 @@ function createConfirmationGames() {
             stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
             stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
         });
-        box.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
+        gameBox.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
 
         const rad = (angleDeg * Math.PI) / 180;
         const dirX = Math.sin(rad);
@@ -1069,7 +1069,7 @@ function createConfirmationGames() {
 
         const spreadRem = 1.1;
 
-        box.style.boxShadow = colours
+        gameBox.style.boxShadow = colours
             .map((colour, i) => {
                 const t = n === 1 ? 0 : i / (n - 1) - 0.5;
                 const offsetX = (t * spreadRem * dirX).toFixed(2);
@@ -1079,6 +1079,8 @@ function createConfirmationGames() {
                         ${offsetX}rem ${offsetY}rem 1rem ${hexToRgba(colour, 0.55)}`;
             })
             .join(', ');
+
+        gameBox.style.textShadow = 'none';
 
         boxes.appendChild(gameBox);
     });
