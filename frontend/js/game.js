@@ -6559,8 +6559,8 @@ async function createTournament(curr) {
         right.id = 'right_tournament';
         right.className = 'box';
         right.style.backgroundColor = curr_colour.rgba;
-        right.style.borderColor = colour.rgba;
-        right.style.color = colour.text;
+        right.style.borderColor = curr_colour.rgba;
+        right.style.color = curr_colour.text;
         right.style.border = 'none';
         right.style.display = 'flex';
         section.appendChild(right);
@@ -6572,8 +6572,8 @@ async function createTournament(curr) {
         bracketDiv.id = 'tournament_bracket';
         bracketDiv.className = 'brackets-viewer';
         bracketDiv.style.backgroundColor = curr_colour.rgba;
-        bracketDiv.style.borderColor = colour.rgba;
-        bracketDiv.style.color = colour.text;
+        bracketDiv.style.borderColor = curr_colour.rgba;
+        bracketDiv.style.color = curr_colour.text;
         right.appendChild(bracketDiv);
 
         loadBracket(currTournamentId);
