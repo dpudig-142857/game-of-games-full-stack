@@ -1002,7 +1002,7 @@ function createConfirmationGames() {
     boxes.id = 'confirmation-games';
     box.appendChild(boxes);
 
-    specialityGames = [];
+    let specialityGames = [];
     theSpecialities.forEach(pS => {
         pS.games.forEach(v => {
             let game = specialityGames.find(g => g.game_id == v.game_id);
