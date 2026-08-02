@@ -747,12 +747,20 @@ header {
     background-color: rgba(0, 128, 0, 0.1);
 }
 
+.counter-container {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 .counter-scorebox {
     position: relative;
     overflow: hidden;
     width: 12%;
-    min-height: 4rem;
+    min-height: 8rem;
     margin: 0.75rem 0;
     border-radius: 0.75rem;
     display: flex;

@@ -5761,31 +5761,23 @@ function createCounter() {
 
         const topHover = document.createElement('div');
         topHover.className = 'counter-hover-area counter-top-hover';
-        const topSymbol = document.createElement('span');
-        topSymbol.textContent = '-';
-        topSymbol.className = 'counter-hover-symbol';
-        topHover.appendChild(topSymbol);
         box.appendChild(topHover);
 
         const bottomHover = document.createElement('div');
         bottomHover.className = 'counter-hover-area counter-bottom-hover';
-        const bottomSymbol = document.createElement('span');
-        bottomSymbol.textContent = '+';
-        bottomSymbol.className = 'counter-hover-symbol';
-        bottomHover.appendChild(bottomSymbol);
         box.appendChild(bottomHover);
 
         topHover.addEventListener('click', () => {
             editable.dataset.hasEdited = 'true';
             let current = parseInt(editable.textContent, 10);
-            if (isNaN(current)) current = 0;
+            if (isNaN(current) || current <= 0) current = 0;
             editable.textContent = current - 1;
         });
 
         bottomHover.addEventListener('click', () => {
             editable.dataset.hasEdited = 'true';
             let current = parseInt(editable.textContent, 10);
-            if (isNaN(current)) current = 0;
+            if (isNaN(current) || current <= 0) current = 0;
             editable.textContent = current + 1;
         });
 
