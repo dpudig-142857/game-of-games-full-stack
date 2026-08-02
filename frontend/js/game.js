@@ -8279,7 +8279,7 @@ async function initialise(sessionId) {
         headerTitle.appendChild(header('h1', `${theGame.gog_id}`));
         updateHeaderButtons('start');
 
-        gameSelection = 'Choose';
+        gameSelection = 'Choose'; // Swap back to Vote after testing
         startTime = new Date(session.start_time);
     
         overallPlayers = theGame.players;
@@ -8385,7 +8385,7 @@ function startGoG(newGame) {
     }
 
     const result = document.getElementById('pre-game-result');
-    if (newGame && currSystem == 'Points & Cones') {
+    /*if (newGame && currSystem == 'Points & Cones') {
         const div = document.getElementById('pre-game');
         const header = document.getElementById('pre-game-header');
         header.innerHTML = gog_version == 'private' ? 'Has everyone done the pre-game cone?' :
@@ -8438,7 +8438,9 @@ function startGoG(newGame) {
     } else {
         result.style.display = 'none';
         start();
-    }
+    }*/
+   result.style.display = 'none';
+    start();
 }
 
 async function saveGameState(incomplete) {
