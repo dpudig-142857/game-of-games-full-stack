@@ -951,11 +951,11 @@ function createConfirmationPlayers() {
         const info = allPlayers.find(pI => pI.player_id == p.player_id);
         const display = displayNames.find(pI => pI.player_id == p.player_id);
         const playerBox = document.createElement('div');
-        playerBox.className = 'confirmation-box';
+        playerBox.className = 'confirmation-box confirmation-player';
         playerBox.appendChild(header('h4', display.name));
 
         const pfp = document.createElement('img');
-        pfp.className = 'player-box-pfp';
+        pfp.className = 'player-box-pfp confirmation-pfp';
         pfp.id = `${p.player_id}-box`;
         pfp.src = info.avatar_seed;
         playerBox.appendChild(pfp);
@@ -986,7 +986,7 @@ function createConfirmationPlayers() {
         boxes.appendChild(playerBox);
     });
 
-    centerOrStart(boxes, 'justify');
+    centerOrStart(boxes, 'align');
     return box;
 }
 

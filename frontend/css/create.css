@@ -569,6 +569,14 @@ header {
     flex-wrap: wrap;
 }
 
+.confirmation-player {
+    width: 100%;
+}
+
+.confirmation-pfp {
+    width: 5rem;
+}
+
 .confirmation-box {
     display: flex;
     flex-direction: column;
