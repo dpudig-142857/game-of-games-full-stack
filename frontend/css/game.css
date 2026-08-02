@@ -631,13 +631,9 @@ header {
     padding: 2px 6px;
 }
 
-.brackets-viewer .participant:hover {
+.brackets-viewer .participant.hover {
     cursor: pointer;
     background-color: color-mix(in srgb, var(--background-colour) 85%, black) !important;
-}
-
-.brackets-viewer .participant.win {
-    color: #28a745;
 }
 
 .brackets-viewer .participant.loss {
@@ -653,7 +649,7 @@ header {
 }
 
 .brackets-viewer .participant .name.hint {
-    display: none;
+    visibility: hidden;
 }
 
 /*.brackets-viewer .match {
