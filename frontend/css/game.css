@@ -606,6 +606,14 @@ header {
     padding: 2px 6px;
 }*/
 
+.brackets-viewer .bracket h2 {
+    color: var(--text-colour);
+}
+
+.brackets-viewer .round h3 {
+    background-color: var(--background-colour);
+}
+
 .brackets-viewer .participant {
     font-weight: bold;
     font-size: 0.9rem;
