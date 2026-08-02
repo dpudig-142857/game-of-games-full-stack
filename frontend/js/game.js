@@ -992,6 +992,38 @@ const groupings = {
         keyOf: () => 'all',
         order: ['all'],
         labels: { all: '🎮 All Games 🎲' }
+    },
+    results: {
+        label: 'By Results Type',
+        keyOf: game => game.results_type,
+        order: [
+            "counter",
+            "counter_rounds",
+            "knockout",
+            "multiple",
+            "single",
+            "special",
+            "table",
+            "table_rounds",
+            "team",
+            "team_points",
+            "teams",
+            "tournament"
+        ],
+        labels: {
+            counter: "Counter Games",
+            counter_rounds: "Counter Rounds Games",
+            knockout: "Knockout Games",
+            multiple: "Multiple Results Games",
+            single: "Single Player Games",
+            special: "Special Games",
+            table: "Table Games",
+            table_rounds: "Table Rounds Games",
+            team: "Team Games",
+            team_points: "Team Points Games",
+            teams: "Teams Games",
+            tournament: "Tournament Games",
+        }
     }
     // Example for later, once games have e.g. `game.quick` (boolean):
     // duration: {
