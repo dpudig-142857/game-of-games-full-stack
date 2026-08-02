@@ -991,7 +991,7 @@ const groupings = {
         label: 'All Games (no grouping)',
         keyOf: () => 'all',
         order: ['all'],
-        labels: { all: '🎮 All Games' }
+        labels: { all: '🎮 All Games 🎲' }
     }
     // Example for later, once games have e.g. `game.quick` (boolean):
     // duration: {
@@ -1509,6 +1509,87 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     dropdown.className = 'dropdown';
     dropdown.style.position = 'relative';
 
+    // CHANGED: input instead of button so the user can type
+    const btn = document.createElement('input');
+    btn.type = 'text';
+    btn.className = 'dropbtn';
+    btn.placeholder = 'Vote';
+    btn.autocomplete = 'off';
+    styleButton(btn, hexToTextColour(colour), colour);
+    dropdown.appendChild(btn);
+
+    const content = document.createElement('div');
+    content.className = 'dropdown-content';
+
+    const create = (value) => {
+        const option = document.createElement('a');
+        option.href = '#';
+        option.textContent = value;
+        option.dataset.value = value;
+        option.style.textAlign = 'center';
+        option.style.background = colour;
+        option.style.color = hexToTextColour(colour);
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            btn.value = value;          // CHANGED: was btn.textContent
+            btn.dataset.value = value;
+            content.style.display = 'none';
+
+            let game = value;
+            if (value == 'RANDOM') {
+                const index = Math.floor(Math.random() * options.length);
+                game = options[index].name;
+                btn.value = game;       // CHANGED: was btn.textContent
+            }
+
+            if (type == 'vote') {
+                let voteSize = currPlayers.length;
+                let curr = currVotes.find(v => v.name == player.name);
+                if (curr) curr.vote = game;
+                if (!curr) currVotes.push({
+                    player_id: player.player_id,
+                    name: player.name,
+                    vote: game 
+                });
+                if (currVotes.length == voteSize) voteBtn.style.display = 'flex';
+            } else if (type == 'neigh') {
+
+            }
+        });
+        option.addEventListener('mouseenter', () => option.style.filter = 'brightness(90%)');
+        option.addEventListener('mouseleave', () => option.style.filter = 'brightness(100%)');
+        return option;
+    }
+
+    if (random) content.appendChild(create('RANDOM'));
+    options.sort((a, b) => a.name.localeCompare(b.name))
+    .forEach(g => content.appendChild(create(g.name)));
+
+    // NEW: filter options as the user types
+    btn.addEventListener('input', () => {
+        const query = btn.value.trim().toLowerCase();
+        content.style.display = 'block'; // keep it open while typing
+        [...content.children].forEach(option => {
+            const match = option.dataset.value.toLowerCase().includes(query);
+            option.style.display = match ? '' : 'none';
+        });
+    });
+
+    // NEW: also open on focus, since typing requires clicking into the input
+    btn.addEventListener('focus', () => content.style.display = 'block');
+
+    dropdown.addEventListener('mouseenter', () => content.style.display = 'block');
+    dropdown.addEventListener('mouseleave', () => content.style.display = 'none');
+    dropdown.appendChild(content);
+
+    return dropdown;
+}
+
+/*function createCustomDropdown(options, colour, random, type = '', player = null) {
+    const dropdown = document.createElement('div');
+    dropdown.className = 'dropdown';
+    dropdown.style.position = 'relative';
+
     const btn = createButton('dropbtn', 'dropbtn', 'Vote');
     styleButton(btn, hexToTextColour(colour), colour);
     dropdown.appendChild(btn);
@@ -1565,7 +1646,7 @@ function createCustomDropdown(options, colour, random, type = '', player = null)
     dropdown.appendChild(content);
 
     return dropdown;
-}
+}*/
 
 function createCustomDropdown2(options, colour, random, type = '', player = null) {
     /*

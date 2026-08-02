@@ -2272,6 +2272,7 @@ body.modal-active {
 
 .choosing-area {
     display: none;
+    width: 85%;
     height: 85%;
     margin-bottom: -1.2rem;
 }
@@ -2283,7 +2284,7 @@ body.modal-active {
 #choosing {
     --felt: #1F4B3F;
     --dusk: #163A31;
-    --cardstock: #F3ECD9;
+    --cardstock: #33eaff;
     --ink: #1B2420;
     --ember: #C1443C;
     --gold: #D9A62E;
@@ -2310,7 +2311,6 @@ body.modal-active {
     color: var(--ink);
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
     flex-wrap: wrap;
 }
 
@@ -2347,7 +2347,6 @@ body.modal-active {
     padding: 18px 40px 18px 20px;
     font-size: 0.92rem;
     font-weight: 700;
-    letter-spacing: 0.01em;
     color: var(--ink);
     cursor: pointer;
     background-repeat: no-repeat;
@@ -2393,11 +2392,11 @@ body.modal-active {
     font-size: clamp(1.4rem, 2.4vw, 1.9rem);
     color: var(--cardstock);
     margin: 0;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     border-bottom: 2px solid rgba(243, 236, 217, 0.15);
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    gap: 1rem;
 }
 
 /* optional result count next to a heading, e.g. <span class="gameCount">12</span> */
