@@ -525,6 +525,11 @@ header {
 #confirmation-middle-box {
     height: 90%;
     gap: 0;
+    justify-content: space-between;
+}
+
+#confirmation-players-boxes {
+    height: 90%;
 }
 
 #confirmation-box-system {
@@ -570,7 +575,8 @@ header {
 }
 
 .confirmation-player {
-    width: 100%;
+    width: 90% !important;
+    flex-direction: row !important;
 }
 
 .confirmation-pfp {

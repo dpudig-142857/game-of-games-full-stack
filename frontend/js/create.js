@@ -928,6 +928,7 @@ function createConfirmationPlayers() {
 
     const boxes = document.createElement('div');
     boxes.className = 'confirmation-boxes-vertical';
+    boxes.id = 'confirmation-players-boxes';
     box.appendChild(header('h1', 'Players'));
     box.appendChild(boxes);
 
