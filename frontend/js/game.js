@@ -5760,11 +5760,11 @@ function createCounter() {
         box.appendChild(cellDiv);
 
         const topHover = document.createElement('div');
-        topHover.className = 'counter-hover-area counter-top-hover';
+        topHover.className = 'counter-hover-area counter-left-hover';
         box.appendChild(topHover);
 
         const bottomHover = document.createElement('div');
-        bottomHover.className = 'counter-hover-area counter-bottom-hover';
+        bottomHover.className = 'counter-hover-area counter-right-hover';
         box.appendChild(bottomHover);
 
         topHover.addEventListener('click', () => {
