@@ -1034,6 +1034,21 @@ const groupings = {
     // }
 };
 
+/*
+"counter",          # counter not showing
+"counter_rounds",   # not working properly
+"knockout",         # 
+"multiple",         # need to check each
+"single",           # 
+"special",          # 
+"table",            # 
+"table_rounds",     # 
+"team",             # 
+"team_points",      # 
+"teams",            # 
+"tournament"        # 
+*/
+
 const sortings = {
     nameAsc: {
         label: 'Name (A-Z)',
@@ -7472,7 +7487,7 @@ async function generateResults() {
             case 'team_points': return generateTeamPointsResults();
             case 'tournament': return await generateTournamentResults();
             case 'counter': return generateCounterResults();
-            //case 'counter_rounds': return generateCounterRoundsResults();
+            case 'counter_rounds': return generateCounterRoundsResults();
             case 'multiple': return await generateMultipleResults();
             default: return [];
         }
@@ -7500,7 +7515,7 @@ async function submitResults(results) {
             case 'team': submitTeamGame(results); break;
             case 'team_points': submitTeamPointsGame(results); break;
             case 'counter': submitCounterGame(results); break;
-            //case 'counter_rounds': submitCounterRoundsGame(results); break;
+            case 'counter_rounds': submitCounterRoundsGame(results); break;
             case 'multiple': submitMultipleGame(results); break;
         }
     }
@@ -7900,8 +7915,8 @@ function startGame() {
                 case 'tournament': createTournament(shuffle(playerNames)); break;
                 case 'team': playTeam(); break;
                 case 'team_points': playTeamPoints(); break;
-                //case 'counter': createCounter(); break;
-                //case 'counter_rounds': createCounterRounds(); break;
+                case 'counter': createCounter(); break;
+                case 'counter_rounds': createCounterRounds(); break;
                 case 'multiple': createMultiple(); break;
             }
     }
@@ -8264,7 +8279,7 @@ async function initialise(sessionId) {
         headerTitle.appendChild(header('h1', `${theGame.gog_id}`));
         updateHeaderButtons('start');
 
-        gameSelection = 'Vote';
+        gameSelection = 'Choose';
         startTime = new Date(session.start_time);
     
         overallPlayers = theGame.players;
