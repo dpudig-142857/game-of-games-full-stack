@@ -747,8 +747,112 @@ header {
     background-color: rgba(0, 128, 0, 0.1);
 }
 
+
 .counter-scorebox {
-    width: 60%;
+    position: relative;
+    overflow: hidden;
+    width: 12%;
+    min-height: 4rem;
+    margin: 0.75rem 0;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    box-shadow: 0.125rem 0.125rem 0.5rem rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+}
+
+.counter-scorebox h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    position: relative;
+    z-index: 2;
+}
+
+.counter-score-cell {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 3rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.counter-prefix, .counter-suffix {
+    color: gray;
+    font-size: 1rem;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.counter-editable {
+    outline: none;
+    min-width: 1.5rem;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+}
+
+.counter-hover-area {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.counter-top-hover {
+    top: 0;
+    background: rgba(255, 0, 0, 0);
+    transition: background-color 0.2s ease;
+}
+.counter-top-hover:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.counter-bottom-hover {
+    bottom: 0;
+    background: rgba(0, 128, 0, 0);
+    transition: background-color 0.2s ease;
+}
+.counter-bottom-hover:hover {
+    background-color: rgba(0, 128, 0, 0.1);
+}
+
+.counter-hover-symbol {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.counter-top-hover:hover .counter-hover-symbol,
+.counter-bottom-hover:hover .counter-hover-symbol {
+    opacity: 1;
+}
+
+/*.counter-container {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.counter-scorebox {
+    width: 12%;
     min-height: 4rem;
     margin: 0.75rem 0;
     border-radius: 0.75rem;
@@ -816,7 +920,7 @@ header {
 }
 .counter-right-hover:hover {
     background-color: rgba(0, 128, 0, 0.1);
-}
+}*/
 
 /*.hover-area {
     position: absolute;

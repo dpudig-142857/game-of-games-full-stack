@@ -5705,7 +5705,98 @@ function createCounter() {
 
     const container = document.createElement('div');
     container.id = `${currGame.tag}_counters`;
-    container.className = 'counter_container';
+    container.className = 'counter-container';
+    gameDiv.appendChild(container);
+
+    const players = currGame.starting == 'wheel_order' ?
+        [...wheelOrderPlayers] : currPlayers.map(p => p.name).sort();
+
+    players.forEach(player => {
+        const box = document.createElement('div');
+        box.className = 'counter-scorebox';
+        box.style.backgroundColor = hexToRgba(curr_colour.hex, 0.6);
+        box.style.color = curr_colour.text;
+
+        const name = document.createElement('h4');
+        name.textContent = player;
+        name.style.backgroundColor = curr_colour.hex;
+        name.style.color = curr_colour.text;
+        box.appendChild(name);
+
+        const cellDiv = document.createElement('div');
+        cellDiv.className = 'counter-score-cell';
+
+        const prefix = document.createElement('span');
+        prefix.className = 'counter-prefix';
+        const suffix = document.createElement('span');
+        suffix.className = 'counter-suffix';
+
+        if (currGame.name == 'Monopoly' || currGame.name == 'Game of Life') prefix.textContent = '$';
+        if (currGame.name == 'Unstable Unicorns') suffix.textContent = ' unicorns';
+        if (currGame.name == 'Llamas Unleashed') suffix.textContent = ' animals';
+        if (currGame.name == 'Cards Against Humanity') suffix.textContent = ' cards';
+        if (currGame.name == 'Boomerang Fu') suffix.textContent = ' kills';
+
+        const editable = document.createElement('span');
+        editable.className = 'counter-editable';
+        editable.contentEditable = 'true';
+        editable.textContent = '0';
+        editable.dataset.hasEdited = 'false';
+
+        editable.addEventListener('beforeinput', (e) => {
+            const allowed = /^[0-9\-]$/;
+            if (e.inputType == 'insertText' && !allowed.test(e.data)) e.preventDefault();
+            if (e.inputType == 'insertText' && editable.dataset.hasEdited == 'false') {
+                editable.textContent = '';
+                editable.dataset.hasEdited = 'true';
+            }
+        });
+
+        editable.addEventListener('click', (e) => e.stopPropagation());
+
+        cellDiv.appendChild(prefix);
+        cellDiv.appendChild(editable);
+        cellDiv.appendChild(suffix);
+        box.appendChild(cellDiv);
+
+        const topHover = document.createElement('div');
+        topHover.className = 'counter-hover-area counter-top-hover';
+        const topSymbol = document.createElement('span');
+        topSymbol.textContent = '-';
+        topSymbol.className = 'counter-hover-symbol';
+        topHover.appendChild(topSymbol);
+        box.appendChild(topHover);
+
+        const bottomHover = document.createElement('div');
+        bottomHover.className = 'counter-hover-area counter-bottom-hover';
+        const bottomSymbol = document.createElement('span');
+        bottomSymbol.textContent = '+';
+        bottomSymbol.className = 'counter-hover-symbol';
+        bottomHover.appendChild(bottomSymbol);
+        box.appendChild(bottomHover);
+
+        topHover.addEventListener('click', () => {
+            editable.dataset.hasEdited = 'true';
+            let current = parseInt(editable.textContent, 10);
+            if (isNaN(current)) current = 0;
+            editable.textContent = current - 1;
+        });
+
+        bottomHover.addEventListener('click', () => {
+            editable.dataset.hasEdited = 'true';
+            let current = parseInt(editable.textContent, 10);
+            if (isNaN(current)) current = 0;
+            editable.textContent = current + 1;
+        });
+
+        container.appendChild(box);
+    });
+    
+    /*const gameDiv = document.getElementById(`${currGame.tag}_game`);
+
+    const container = document.createElement('div');
+    container.id = `${currGame.tag}_counters`;
+    container.className = 'counter-container';
     container.style.display = 'flex';
     gameDiv.appendChild(container);
 
@@ -5795,6 +5886,7 @@ function createCounter() {
 
         container.appendChild(box);
     });
+    */
     /*
     const gameDiv = document.getElementById(`${currGame.tag}_game`);
     gameDiv.appendChild(document.createElement('br'));
