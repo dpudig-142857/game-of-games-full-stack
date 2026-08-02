@@ -299,18 +299,15 @@ function showGeneralStep() {
 function createPointsSystem() {
     const box = document.createElement('div');
     box.className = 'box';
-    box.appendChild(header('h2', 'Points System'));
+    box.appendChild(header('h2', 'Point System'));
     
     const pointsCheckboxes = document.createElement('div');
     pointsCheckboxes.id = 'points-checkboxes';
     pointsCheckboxes.className = 'checkboxes';
     box.appendChild(pointsCheckboxes);
 
-    console.log("1")
     pointsCheckboxes.appendChild(createCheckbox(0, 'points', 'Just Points'));
-    console.log("2")
     pointsCheckboxes.appendChild(createCheckbox(1, 'points', 'Points & Cones'));
-    console.log("3")
 
     const points = pointsCheckboxes.querySelectorAll('.points-checkbox');
     points.forEach(checkbox => {
@@ -866,7 +863,6 @@ function createNoConfirmation() {
 
 function createConfirmationGeneral() {
     let num = thePlayers.length;
-    let text = `Points System<br>${span(`(1st - ${place(num)})`)}`;
     const currSystem = pointSystems.find(system => {
         if (thePoints == 'Just Points') {
             return system.num == num && system.type == 'points';
@@ -883,7 +879,7 @@ function createConfirmationGeneral() {
 
     const section = document.createElement('div');
     section.className = 'confirmation-boxes-vertical';
-    box.appendChild(header('h1', text));
+    box.appendChild(header('h1', 'Point System'));
     box.appendChild(section);
     
     if (currSystem) {
@@ -1063,6 +1059,7 @@ function createConfirmationGames() {
             colours = ['#33EAFF'];
             n = 1;
         }
+        let angleDeg = 135;
 
         gameBox.style.color = hexToTextColour(colours[0]);
 
@@ -1075,9 +1072,27 @@ function createConfirmationGames() {
             stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
             stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
         });
-        gameBox.style.background = `linear-gradient(135deg, ${stops.join(', ')})`;
+        gameBox.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
 
-        gameBox.style.boxShadow = 'none';
+        // --- Shadow: hugs the box edge, offset just enough to separate colours ---
+        const rad = (angleDeg * Math.PI) / 180;
+        const dirX = Math.sin(rad);
+        const dirY = -Math.cos(rad);
+
+        // Fixed max spread — doesn't grow with n, so it never floats away from the box
+        const maxSpreadRem = 1.4;
+
+        gameBox.style.boxShadow = colours
+            .map((colour, i) => {
+                const t = n === 1 ? 0 : i / (n - 1) - 0.5;
+                const offsetX = (t * maxSpreadRem * dirX).toFixed(2);
+                const offsetY = (t * maxSpreadRem * dirY).toFixed(2);
+
+                // Small blur, no spread radius — keeps each glow tight to the edge
+                return `${offsetX}rem ${offsetY}rem 0.6rem ${hexToRgba(colour, 0.65)}`;
+            })
+            .join(', ');
+        //gameBox.style.boxShadow = 'none';
         gameBox.style.textShadow = 'none';
 
         boxes.appendChild(gameBox);

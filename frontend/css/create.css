@@ -501,6 +501,12 @@ header {
     gap: 0;
 }
 
+#confirmation-left-box h1 {
+    text-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+}
+
 .confirmation-boxes-vertical {
     display: flex;
     flex-direction: column;
@@ -571,13 +577,15 @@ header {
 }
 
 #confirmation-games {
-    padding: 1rem;
+    padding: 1rem 3rem;
     flex-wrap: wrap;
 }
 
 .confirmation-player {
     width: 90% !important;
     flex-direction: row !important;
+    max-width: none !important;
+    justify-content: space-between !important;
 }
 
 .confirmation-pfp {
