@@ -5741,9 +5741,9 @@ function createCounter() {
         cellDiv.className = 'counter-score-cell';
 
         const prefix = document.createElement('span');
-        prefix.className = 'prefix';
+        prefix.className = 'counter-prefix';
         const suffix = document.createElement('span');
-        suffix.className = 'suffix';
+        suffix.className = 'counter-suffix';
 
         if (currGame.name == 'Monopoly' || currGame.name == 'Game of Life') prefix.textContent = '$';
         if (currGame.name == 'Unstable Unicorns') suffix.textContent = ' unicorns';
@@ -5752,7 +5752,7 @@ function createCounter() {
         if (currGame.name == 'Boomerang Fu') suffix.textContent = ' kills';
 
         const editable = document.createElement('span');
-        editable.className = 'editable';
+        editable.className = 'counter-editable';
         editable.contentEditable = 'true';
         editable.textContent = '0';
         editable.dataset.hasEdited = 'false';
@@ -5784,14 +5784,14 @@ function createCounter() {
         leftHover.addEventListener('click', () => {
             editable.dataset.hasEdited = 'true';
             let current = parseInt(editable.textContent, 10);
-            if (isNaN(current)) current = 0;
+            if (isNaN(current) || current <= 0) current = 0;
             editable.textContent = current - 1;
         });
 
         rightHover.addEventListener('click', () => {
             editable.dataset.hasEdited = 'true';
             let current = parseInt(editable.textContent, 10);
-            if (isNaN(current)) current = 0;
+            if (isNaN(current) || current <= 0) current = 0;
             editable.textContent = current + 1;
         });
 
