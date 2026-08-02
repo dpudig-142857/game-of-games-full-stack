@@ -586,6 +586,9 @@ header {
     --background-colour: #f9f9f9;
     --border-colour: #007BFF40;
     --text-colour: #333;
+    background-color: var(--background-colour);
+    border: 2px solid var(--border-colour);
+    color: var(--text-colour);
 }
 
 /* Match block styling *
@@ -607,19 +610,19 @@ header {
 }*/
 
 .brackets-viewer .bracket h2 {
-    color: var(--text-colour);
+    color: var(--text-colour) !important;
 }
 
 .brackets-viewer .round h3 {
-    background-color: var(--background-colour);
+    background-color: var(--background-colour) !important;
 }
 
 .brackets-viewer .participant {
     font-weight: bold;
     font-size: 0.9rem;
     color: var(--text-colour);
-    background-color: var(--background-colour);
-    border-color: var(--border-colour);
+    background-color: var(--background-colour) !important;
+    border-color: var(--border-colour) !important;
     display: flex;
     justify-content: space-between;
     padding: 2px 6px;
@@ -627,7 +630,7 @@ header {
 
 .brackets-viewer .participant:hover {
     cursor: pointer;
-    background-color: color-mix(in srgb, var(--background-colour) 85%, black);
+    background-color: color-mix(in srgb, var(--background-colour) 85%, black) !important;
 }
 
 .brackets-viewer .participant.win {
