@@ -5777,7 +5777,7 @@ function createCounter() {
         bottomHover.addEventListener('click', () => {
             editable.dataset.hasEdited = 'true';
             let current = parseInt(editable.textContent, 10);
-            if (isNaN(current) || current <= 0) current = -1;
+            if (isNaN(current) || current < 0) current = -1;
             editable.textContent = current + 1;
         });
 
