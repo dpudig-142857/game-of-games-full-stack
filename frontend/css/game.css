@@ -620,6 +620,11 @@ header {
     background-color: var(--background-colour) !important;
 }
 
+.brackets-viewer .opponents {
+    background: none !important;
+    border: none !important;
+}
+
 .brackets-viewer .participant {
     font-weight: bold;
     font-size: 0.9rem;
