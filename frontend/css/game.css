@@ -747,6 +747,62 @@ header {
     background-color: rgba(0, 128, 0, 0.1);
 }
 
+.counter-scorebox {
+    width: 60%;
+    min-height: 4rem;
+    margin: 0.75rem 0;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    box-shadow: 0.125rem 0.125rem 0.5rem rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+}
+
+.counter-scorebox h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    flex: 1;
+}
+
+.counter-score-cell {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    text-align: center;
+}
+
+.counter-hover-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.counter-left-hover {
+    background: rgba(255, 0, 0, 0);
+    transition: background-color 0.2s ease;
+}
+.counter-left-hover:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.counter-right-hover {
+    background: rgba(0, 128, 0, 0);
+    transition: background-color 0.2s ease;
+}
+.counter-right-hover:hover {
+    background-color: rgba(0, 128, 0, 0.1);
+}
+
 /*.hover-area {
     position: absolute;
     top: 50%;

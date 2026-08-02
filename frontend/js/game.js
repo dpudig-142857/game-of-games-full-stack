@@ -5716,7 +5716,7 @@ function createCounter() {
 
     players.forEach(player => {
         const box = document.createElement('div');
-        box.className = 'scorebox';
+        box.className = 'counter-scorebox';
         box.style.display = 'flex';
         box.style.flexDirection = 'row';
         box.style.alignItems = 'center';
@@ -5730,15 +5730,15 @@ function createCounter() {
         box.appendChild(name);
 
         const leftHover = document.createElement('div');
-        leftHover.className = 'hover-area left-hover';
+        leftHover.className = 'counter-hover-area counter-left-hover';
         const leftSymbol = document.createElement('span');
         leftSymbol.textContent = '-';
-        leftSymbol.className = 'hover-symbol';
+        leftSymbol.className = 'counter-hover-symbol';
         leftHover.appendChild(leftSymbol);
         box.appendChild(leftHover);
 
         const cellDiv = document.createElement('div');
-        cellDiv.className = 'score-cell';
+        cellDiv.className = 'counter-score-cell';
 
         const prefix = document.createElement('span');
         prefix.className = 'prefix';
@@ -5774,10 +5774,10 @@ function createCounter() {
         box.appendChild(cellDiv);
 
         const rightHover = document.createElement('div');
-        rightHover.className = 'hover-area right-hover';
+        rightHover.className = 'counter-hover-area counter-right-hover';
         const rightSymbol = document.createElement('span');
         rightSymbol.textContent = '+';
-        rightSymbol.className = 'hover-symbol';
+        rightSymbol.className = 'counter-hover-symbol';
         rightHover.appendChild(rightSymbol);
         box.appendChild(rightHover);
 
