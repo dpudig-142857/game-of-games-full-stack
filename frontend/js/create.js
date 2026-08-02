@@ -1017,10 +1017,15 @@ function createConfirmationGames() {
         });
     });
 
-    theGames.sort((a, b) => a.name.localeCompare(b.name))
+    theGames.sort((a, b) => {
+        const sA = specialityGames.find(sG => sG.game_id == a.game_id);
+        const sB = specialityGames.find(sG => sG.game_id == b.game_id);
+        const diff = sB.player_ids.length - sA.player_ids.length;
+        return diff != 0 ? diff : a.name.localeCompare(b.name);
+    })
     .forEach(g => {
         let colours = [];
-        let specialityText = "(";
+        let specialityText = "";
         const specialityPlayers = specialityGames.find(sG => sG.game_id == g.game_id);
         if (specialityPlayers) {
             let players = [];
@@ -1039,11 +1044,11 @@ function createConfirmationGames() {
         gameBox.appendChild(header('h4', g.name));
         gameBox.appendChild(header('h5', specialityText));
 
-        // styleBox(gameBox, '#33EAFF');
         const n = colours.length;
         if (n == 0) colours.push('#33EAFF');
+        const angleDeg = 135;
 
-        gameBox.style.color = hexToTextColour(colours[0]);
+        box.style.color = hexToTextColour(colours[0]);
 
         const stops = [];
         colours.forEach((colour, i) => {
@@ -1054,14 +1059,25 @@ function createConfirmationGames() {
             stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
             stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
         });
+        box.style.background = `linear-gradient(${angleDeg}deg, ${stops.join(', ')})`;
 
-        gameBox.style.background = `linear-gradient(135deg, ${stops.join(', ')})`;
+        const rad = (angleDeg * Math.PI) / 180;
+        const dirX = Math.sin(rad);
+        const dirY = -Math.cos(rad);
 
-        gameBox.style.boxShadow = colours
-            .map(colour => `0 0 0.5rem ${hexToRgba(colour, 0.7)}, 0 0 1rem ${hexToRgba(colour, 0.55)}`)
+        const spreadRem = 1.1;
+
+        box.style.boxShadow = colours
+            .map((colour, i) => {
+                const t = n === 1 ? 0 : i / (n - 1) - 0.5;
+                const offsetX = (t * spreadRem * dirX).toFixed(2);
+                const offsetY = (t * spreadRem * dirY).toFixed(2);
+
+                return `${offsetX}rem ${offsetY}rem 0.5rem ${hexToRgba(colour, 0.7)},
+                        ${offsetX}rem ${offsetY}rem 1rem ${hexToRgba(colour, 0.55)}`;
+            })
             .join(', ');
 
-        gameBox.style.textShadow = 'none';
         boxes.appendChild(gameBox);
     });
     
