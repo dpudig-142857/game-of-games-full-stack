@@ -1070,7 +1070,7 @@ const sortings = {
 };
 
 let choosingFilterText = '';
-let choosingGroupMode = 'type';
+let choosingGroupMode = 'results';
 let choosingSortMode = 'nameAsc';
 
 function openChoosing() {
