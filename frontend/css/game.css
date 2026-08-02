@@ -2333,6 +2333,11 @@ body.modal-active {
     outline-offset: -2px;
 }
 
+#choosingGamesContainer {
+    height: 100%;
+    overflow-y: auto;
+}
+
 .gameSection {
     display: flex;
     flex-direction: column;
@@ -2380,9 +2385,6 @@ body.modal-active {
 }
 
 .gameBox h3 {
-    font-weight: 500;
-    font-size: 1.05rem;
-    margin: 0;
     line-height: 1.25;
 }
 
