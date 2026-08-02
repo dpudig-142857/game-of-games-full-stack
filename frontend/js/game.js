@@ -997,32 +997,38 @@ const groupings = {
         label: 'By Results Type',
         keyOf: game => game.results_type,
         order: [
-            "counter",
-            "counter_rounds",
-            "knockout",
+            // Needs work
+            "counter", // Counter just showing table
+            "counter_rounds", // nothing comes up
+            "team", // tournament needs fixing (names coming up as undefined)
+            "table_rounds", // want to save full table
             "multiple",
-            "single",
+                // pool size needs fixing for teams and adding team rounds
+                // super smash bros knockout and table type needs fixing
             "special",
+                // Lego Party isn't showing up properly, needs to be fixed.
+                // also need to get rid of start button for Lego Party
+            
+            // Looks good
+            "single",
             "table",
-            "table_rounds",
-            "team",
             "team_points",
-            "teams",
+            "knockout",
             "tournament"
         ],
         labels: {
             counter: "Counter Games",
             counter_rounds: "Counter Rounds Games",
-            knockout: "Knockout Games",
-            multiple: "Multiple Results Games",
-            single: "Single Player Games",
-            special: "Special Games",
-            table: "Table Games",
-            table_rounds: "Table Rounds Games",
             team: "Team Games",
-            team_points: "Team Points Games",
-            teams: "Teams Games",
-            tournament: "Tournament Games",
+            table_rounds: "Table Rounds Games",
+            multiple: "Multiple Results Games",
+            special: "Special Games",
+            
+            single: "GOOD - Single Player Games",
+            table: "GOOD - Table Games",
+            team_points: "GOOD - Team Points Games",
+            knockout: "GOOD - Knockout Games",
+            tournament: "GOOD - Tournament Games",
         }
     }
     // Example for later, once games have e.g. `game.quick` (boolean):
@@ -1035,9 +1041,8 @@ const groupings = {
 };
 
 /*
-"counter",          # counter not showing
-"counter_rounds",   # not working properly
-"knockout",         # 
+"counter",          
+"counter_rounds",   # 
 "multiple",         # need to check each
 "single",           # 
 "special",          # 
@@ -5697,6 +5702,96 @@ function submitTableGame(results) {
 
 function createCounter() {
     const gameDiv = document.getElementById(`${currGame.tag}_game`);
+    gameDiv.appendChild(document.createElement('br'));
+
+    const container = document.createElement('div');
+    container.id = `${currGame.tag}_counters`;
+    container.className = 'counter_container';
+    gameDiv.appendChild(container);
+
+    const players = currGame.starting == 'wheel_order' ?
+        [...wheelOrderPlayers] : currPlayers.map(p => p.name).sort();
+
+    players.forEach(player => {
+        const box = document.createElement('div');
+        box.className = 'scorebox';
+        box.style.backgroundColor = hexToRgba(curr_colour.hex, 0.6);
+        box.style.color = curr_colour.text;
+
+        const name = document.createElement('h4');
+        name.textContent = player;
+        name.style.backgroundColor = curr_colour.hex;
+        name.style.color = curr_colour.text;
+        box.appendChild(name);
+
+        const cellDiv = document.createElement('div');
+        cellDiv.className = 'score-cell';
+
+        const prefix = document.createElement('span');
+        prefix.className = 'prefix';
+        const suffix = document.createElement('span');
+        suffix.className = 'suffix';
+
+        if (currGame.name == 'Monopoly' || currGame.name == 'Game of Life') prefix.textContent = '$';
+        if (currGame.name == 'Unstable Unicorns') suffix.textContent = ' unicorns';
+        if (currGame.name == 'Llamas Unleashed') suffix.textContent = ' animals';
+        if (currGame.name == 'Cards Against Humanity') suffix.textContent = ' cards';
+        if (currGame.name == 'Boomerang Fu') suffix.textContent = ' kills';
+
+        const editable = document.createElement('span');
+        editable.className = 'editable';
+        editable.contentEditable = 'true';
+        editable.textContent = '0';
+        editable.dataset.hasEdited = 'false';
+
+        editable.addEventListener('beforeinput', (e) => {
+            const allowed = /^[0-9\-]$/;
+            if (e.inputType == 'insertText' && !allowed.test(e.data)) e.preventDefault();
+            if (e.inputType == 'insertText' && editable.dataset.hasEdited == 'false') {
+                editable.textContent = '';
+                editable.dataset.hasEdited = 'true';
+            }
+        });
+
+        // Stop hover-area clicks from also triggering text editing
+        editable.addEventListener('click', (e) => e.stopPropagation());
+
+        cellDiv.appendChild(prefix);
+        cellDiv.appendChild(editable);
+        cellDiv.appendChild(suffix);
+        box.appendChild(cellDiv);
+
+        const leftHover = document.createElement('div');
+        leftHover.className = 'hover-area left-hover';
+        const leftSymbol = document.createElement('span');
+        leftSymbol.textContent = '-';
+        leftSymbol.className = 'hover-symbol';
+        leftHover.appendChild(leftSymbol);
+        box.appendChild(leftHover);
+
+        const rightHover = document.createElement('div');
+        rightHover.className = 'hover-area right-hover';
+        const rightSymbol = document.createElement('span');
+        rightSymbol.textContent = '+';
+        rightSymbol.className = 'hover-symbol';
+        rightHover.appendChild(rightSymbol);
+        box.appendChild(rightHover);
+
+        box.addEventListener('click', (e) => {
+            const rect = box.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            editable.dataset.hasEdited = 'true';
+
+            let current = parseInt(editable.textContent, 10);
+            if (isNaN(current)) current = 0;
+
+            editable.textContent = clickX < rect.width / 2 ? current - 1 : current + 1;
+        });
+
+        container.appendChild(box);
+    });
+    
+    /*const gameDiv = document.getElementById(`${currGame.tag}_game`);
     
     gameDiv.appendChild(document.createElement('br'));
 
@@ -5775,10 +5870,106 @@ function createCounter() {
         row.appendChild(scoreCell);
 
         tbody.appendChild(row);
-    });
+    });*/
 
     /*
+    
     const WINNING_SCORE = 9;
+
+    let container = document.getElementById('left_tournament');
+    container.innerHTML = '';
+    container.style.display = 'flex';
+    container.style.color = 'black';
+
+    const scores = { [opp1.id]: 0, [opp2.id]: 0 };
+
+    const statusTitle = header('h3', '&nbsp;', '', 'score_status');
+    container.appendChild(statusTitle);
+
+    function createInteractiveScoreBox(player) {
+        function updateMatchStatus() {
+            const p1Score = scores[opp1.id];
+            const p2Score = scores[opp2.id];
+            const maxScore = Math.max(p1Score, p2Score);
+            
+            if (maxScore < WINNING_SCORE - 1) {
+                statusTitle.innerHTML = '&nbsp;';
+                return;
+            }
+
+            const scoreDiff = Math.abs(p1Score - p2Score);
+            const leadingPlayer = p1Score > p2Score ? opp1.name : opp2.name;
+
+            if (p1Score == p2Score) {
+                statusTitle.innerHTML = 'Deuce';
+            } else if (scoreDiff == 1 && maxScore >= WINNING_SCORE) {
+                statusTitle.innerHTML = `Advantage: ${leadingPlayer}`;
+            } else if (scoreDiff >= 2 && maxScore >= WINNING_SCORE) {
+                statusTitle.innerHTML = '&nbsp;';
+            } else {
+                statusTitle.innerHTML = `Game Point: ${leadingPlayer}`;
+            }
+        }
+        
+        const box = document.createElement('div');
+        box.className = 'scorebox';
+
+        const name = document.createElement('h4');
+        name.textContent = player.name;
+        box.appendChild(name);
+
+        const scoreDisplay = document.createElement('div');
+        scoreDisplay.id = `score_${player.id}`;
+        scoreDisplay.textContent = '0';
+        box.appendChild(scoreDisplay);
+
+        const leftHover = document.createElement('div');
+        leftHover.className = 'hover-area left-hover';
+        box.appendChild(leftHover);
+
+        const leftSymbol = document.createElement('span');
+        leftSymbol.textContent = '-';
+        leftSymbol.className = 'hover-symbol';
+        leftHover.appendChild(leftSymbol);
+
+        const rightHover = document.createElement('div');
+        rightHover.className = 'hover-area right-hover';
+        box.appendChild(rightHover);
+
+        const rightSymbol = document.createElement('span');
+        rightSymbol.textContent = '+';
+        rightSymbol.className = 'hover-symbol';
+        rightHover.appendChild(rightSymbol);
+        
+        box.addEventListener('click', (e) => {
+            const rect = box.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+
+            if (clickX < rect.width / 2) {
+                if (scores[player.id] > 0) {
+                    scores[player.id]--;
+                }
+            } else {
+                scores[player.id]++;
+            }
+            scoreDisplay.textContent = scores[player.id];
+            updateMatchStatus();
+
+            const opponentId = (player.id === opp1.id) ? opp2.id : opp1.id;
+            const wonByTwo = (scores[player.id] - scores[opponentId]) >= 2;
+
+            if (scores[player.id] >= WINNING_SCORE && wonByTwo) {
+                submitMatchResult(tournamentId, matchId, player.id, scores);
+                return;
+            }
+        });
+
+        return box;
+    }
+
+otherCounter() {
+
+    const WINNING_SCORE = 11;
 
     let container = document.getElementById('left_tournament');
     container.innerHTML = '';
@@ -5876,6 +6067,7 @@ function createCounter() {
     scoreboard.appendChild(createInteractiveScoreBox(opp1));
     scoreboard.appendChild(createInteractiveScoreBox(opp2));
     container.appendChild(scoreboard);
+}
     */
 }
 
