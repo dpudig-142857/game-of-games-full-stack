@@ -1008,10 +1008,12 @@ function createConfirmationGames() {
             let game = specialityGames.find(g => g.game_id == v.game_id);
             if (game) {
                 game.player_ids.push(pS.player_id);
+                game.num += 1;
             } else {
                 specialityGames.push({
                     game_id: v.game_id,
                     player_ids: [pS.player_id],
+                    num: 1
                 });
             }
         });
@@ -1020,7 +1022,7 @@ function createConfirmationGames() {
     theGames.sort((a, b) => {
         const sA = specialityGames.find(sG => sG.game_id == a.game_id);
         const sB = specialityGames.find(sG => sG.game_id == b.game_id);
-        const diff = sB.player_ids.length - sA.player_ids.length;
+        const diff = (sB?.num || 0) - (sA?.num || 0);
         return diff != 0 ? diff : a.name.localeCompare(b.name);
     })
     .forEach(g => {
