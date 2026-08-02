@@ -1082,17 +1082,15 @@ function createConfirmationGames() {
         // Fixed max spread — doesn't grow with n, so it never floats away from the box
         const maxSpreadRem = 1.4;
 
-        gameBox.style.boxShadow = colours
-            .map((colour, i) => {
-                const t = n === 1 ? 0 : i / (n - 1) - 0.5;
-                const offsetX = (t * maxSpreadRem * dirX).toFixed(2);
-                const offsetY = (t * maxSpreadRem * dirY).toFixed(2);
-
-                // Small blur, no spread radius — keeps each glow tight to the edge
-                return `${offsetX}rem ${offsetY}rem 0.6rem ${hexToRgba(colour, 0.65)}`;
-            })
-            .join(', ');
+        gameBox.style.boxShadow = colours.map((c, i) => {
+            const t = n === 1 ? 0 : i / (n - 1) - 0.5;
+            const offsetX = (t * maxSpreadRem * dirX).toFixed(2);
+            const offsetY = (t * maxSpreadRem * dirY).toFixed(2);
+            const shadow = (s, a) => `${offsetX}rem ${offsetY}rem ${s} ${hexToRgba(c, a)}`;
+            return `${shadow('0.5rem', 0.7)}, ${shadow('1rem', 0.55)}`;
+        }).join(', ');
         //gameBox.style.boxShadow = 'none';
+
         gameBox.style.textShadow = 'none';
 
         boxes.appendChild(gameBox);
