@@ -961,7 +961,7 @@ function createConfirmationPlayers() {
         pfp.src = info.avatar_seed;
         playerBox.appendChild(pfp);
 
-        if (theNumSpeciality >= 1) {
+        /*if (theNumSpeciality >= 1) {
             const votes = theSpecialities.find(pS => {
                 return pS.player_id == p.player_id;
             }).games;
@@ -981,7 +981,7 @@ function createConfirmationPlayers() {
                 div.appendChild(title);
                 votes.forEach(v => div.appendChild(header('h5', v.name)));
             }
-        }
+        }*/
 
         styleBox(playerBox, info.colour);
         boxes.appendChild(playerBox);
@@ -1002,13 +1002,66 @@ function createConfirmationGames() {
     boxes.id = 'confirmation-games';
     box.appendChild(boxes);
 
+    specialityGames = [];
+    theSpecialities.forEach(pS => {
+        pS.games.forEach(v => {
+            let game = specialityGames.find(g => g.game_id == v.game_id);
+            if (game) {
+                game.player_ids.push(pS.player_id);
+            } else {
+                specialityGames.push({
+                    game_id: v.game_id,
+                    player_ids: [pS.player_id],
+                });
+            }
+        });
+    });
+
     theGames.sort((a, b) => a.name.localeCompare(b.name))
     .forEach(g => {
+        let colours = [];
+        let specialityText = "(";
+        const specialityPlayers = specialityGames.find(sG => sG.game_id == g.game_id);
+        if (specialityPlayers) {
+            let players = [];
+            const names = getDisplayNames(thePlayers);
+            specialityPlayers.player_ids.forEach((pId, i) => {
+                const info = allPlayers.find(pI => pI.player_id == pId);
+                colours.push(info.colour);
+                players.push(names.find(n => n.player_id == pId).name);
+            });
+            specialityText = `(${players.join(', ')})`;
+        }
+        
         const gameBox = document.createElement('div');
         gameBox.className = 'confirmation-box';
         gameBox.id = 'confirmation-game-box';
         gameBox.appendChild(header('h4', g.name));
-        styleBox(gameBox, '#33EAFF');
+        gameBox.appendChild(header('h5', specialityText));
+
+        // styleBox(gameBox, '#33EAFF');
+        const n = colours.length;
+        if (n == 0) colours.push('#33EAFF');
+
+        gameBox.style.color = hexToTextColour(colours[0]);
+
+        const stops = [];
+        colours.forEach((colour, i) => {
+            const start = (i / n) * 100;
+            const mid = ((i + 0.5) / n) * 100;
+            const end = ((i + 1) / n) * 100;
+            stops.push(`${hexToRgba(colour, 0.9)} ${start}%`);
+            stops.push(`${hexToRgba(colour, 0.75)} ${mid}%`);
+            stops.push(`${hexToRgba(colour, 0.9)} ${end}%`);
+        });
+
+        gameBox.style.background = `linear-gradient(135deg, ${stops.join(', ')})`;
+
+        gameBox.style.boxShadow = colours
+            .map(colour => `0 0 0.5rem ${hexToRgba(colour, 0.7)}, 0 0 1rem ${hexToRgba(colour, 0.55)}`)
+            .join(', ');
+
+        gameBox.style.textShadow = 'none';
         boxes.appendChild(gameBox);
     });
     
