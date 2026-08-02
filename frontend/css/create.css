@@ -506,11 +506,12 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 3rem;
+    gap: clamp(0.25rem, 2vh, 3rem);
     width: 100%;
     height: 100%;
     padding: 1rem;
-    overflow-y: auto;
+    overflow: hidden;
+    min-height: 0;
 }
 
 #confirmation-middle-section {
@@ -580,33 +581,41 @@ header {
 }
 
 .confirmation-pfp {
-    width: 5rem;
+    width: clamp(2rem, 8vh, 5rem);
+    height: clamp(2rem, 8vh, 5rem);
+    flex-shrink: 1;
+    min-height: 0;
+    min-width: 0;
+    object-fit: cover;
 }
 
 .confirmation-box {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 1rem;
+    justify-content: space-evenly;
+    gap: clamp(0.25rem, 1vh, 2rem);
+    padding: clamp(0.5rem, 1.5vh, 1rem);
     border-radius: 1rem;
     border: none;
-    min-width: 12rem;
-    width: max-content;
-    height: max-content;
+    flex: 1 1 0;
+    min-height: 0;
+    width: 90%;
+    max-width: 12rem;
     align-items: center;
     text-align: center;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
 }
 
 .confirmation-box h4 {
     font-family: 'Audiowide', sans-serif;
-    font-size: 1.75rem;
+    font-size: clamp(0.9rem, 2.2vh, 1.75rem);
 }
 
 .confirmation-box h5 {
     font-family: 'Audiowide', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.6rem, 1.2vh, 1rem);
+    margin-top: -0.5rem;
 }
 
 #confirmation-game-box {

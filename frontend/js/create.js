@@ -889,23 +889,30 @@ function createConfirmationGeneral() {
     if (currSystem) {
         currSystem.rewards.forEach(reward => {
             let text = reward;
+            let other = "";
             if (gog_version == 'private') {
                 if (reward == 'pn') {
-                    text = `Coin Flip<br>${span('Point or Nothing')}`;
+                    text = 'Coin Flip';
+                    other = 'Point or Nothing';
                 } else if (reward == 'pc') {
-                    text = `Coin Flip<br>${span('Point or Cone')}`;
+                    text = 'Coin Flip';
+                    other = 'Point or Cone';
                 } else if (reward == 'nc') {
-                    text = `Coin Flip<br>${span('Nothing or Cone')}`;
+                    text = 'Coin Flip';
+                    other = 'Nothing or Cone';
                 }
             } else if (gog_version == 'public') {
                 if (reward == 'pn') {
-                    text = `Coin Flip<br>${span('Point or Nothing')}`;
+                    text = 'Coin Flip';
+                    other = 'Point or Nothing';
                 } else if (reward == 'pc') {
-                    text = `Coin Flip<br>${span('Point or Shot')}`;
+                    text = 'Coin Flip';
+                    other = 'Point or Shot';
                 } else if (reward == 'nc') {
-                    text = `Coin Flip<br>${span('Nothing or Shot')}`;
+                    text = 'Coin Flip';
+                    other = 'Nothing or Shot';
                 } else if (reward == '1 cone') {
-                    text = `1 shot`;
+                    text = '1 shot';
                 }
             }
 
@@ -913,6 +920,7 @@ function createConfirmationGeneral() {
             rewardBox.id = 'confirmation-box-system';
             rewardBox.className = 'confirmation-box';
             rewardBox.appendChild(header('h4', text));
+            if (other != "") rewardBox.appendChild(header('h5', other));
             styleBox(rewardBox, '#33eaff');
             section.appendChild(rewardBox);
         });
@@ -1080,7 +1088,7 @@ function createConfirmationGames() {
         // instead of collapsing toward the centre.
         const spreadRem = 0.9 * n;
 
-        box.style.boxShadow = colours
+        gameBox.style.boxShadow = colours
             .map((colour, i) => {
                 const t = n === 1 ? 0 : i / (n - 1) - 0.5;
                 const offsetX = (t * spreadRem * dirX).toFixed(2);
