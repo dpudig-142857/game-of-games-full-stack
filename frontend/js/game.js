@@ -980,7 +980,335 @@ const typeLabels = {
     outdoor: '🏕️ Outdoor Games 🏓'
 };
 
+const groupings = {
+    type: {
+        label: 'By Category',
+        keyOf: game => game.type,
+        order: orderedTypes,
+        labels: typeLabels
+    },
+    all: {
+        label: 'All Games (no grouping)',
+        keyOf: () => 'all',
+        order: ['all'],
+        labels: { all: '🎮 All Games' }
+    }
+    // Example for later, once games have e.g. `game.quick` (boolean):
+    // duration: {
+    //     label: 'Quick vs Long',
+    //     keyOf: game => game.quick ? 'quick' : 'long',
+    //     order: ['quick', 'long'],
+    //     labels: { quick: '⚡ Quick Games', long: '⏳ Longer Games' }
+    // }
+};
+
+const sortings = {
+    nameAsc: {
+        label: 'Name (A-Z)',
+        compare: (a, b) => a.name.localeCompare(b.name)
+    },
+    nameDesc: {
+        label: 'Name (Z-A)',
+        compare: (a, b) => b.name.localeCompare(a.name)
+    },
+    random: {
+        label: 'Shuffle',
+        compare: () => Math.random() - 0.5
+    }
+    // Example for later, once games have e.g. `game.players` (number):
+    // playersAsc: {
+    //     label: 'Players (fewest first)',
+    //     compare: (a, b) => a.players - b.players
+    // }
+};
+
+let choosingFilterText = '';
+let choosingGroupMode = 'type';
+let choosingSortMode = 'nameAsc';
+
 function openChoosing() {
+    const choosingDiv = document.createElement('div');
+    choosingDiv.id = 'choosing';
+
+    // --- Controls: search + grouping mode + sort mode ---
+    const controls = document.createElement('div');
+    controls.className = 'choosingControls';
+
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search games...';
+    searchInput.className = 'choosingSearch';
+    searchInput.value = choosingFilterText;
+    searchInput.addEventListener('input', e => {
+        choosingFilterText = e.target.value;
+        renderChoosingGames();
+    });
+    controls.appendChild(searchInput);
+
+    const groupSelect = document.createElement('select');
+    groupSelect.className = 'choosingGroupSelect';
+    Object.keys(groupings).forEach(mode => {
+        const opt = document.createElement('option');
+        opt.value = mode;
+        opt.textContent = groupings[mode].label;
+        if (mode === choosingGroupMode) opt.selected = true;
+        groupSelect.appendChild(opt);
+    });
+    groupSelect.addEventListener('change', e => {
+        choosingGroupMode = e.target.value;
+        renderChoosingGames();
+    });
+    controls.appendChild(groupSelect);
+
+    const sortSelect = document.createElement('select');
+    sortSelect.className = 'choosingSortSelect';
+    Object.keys(sortings).forEach(mode => {
+        const opt = document.createElement('option');
+        opt.value = mode;
+        opt.textContent = sortings[mode].label;
+        if (mode === choosingSortMode) opt.selected = true;
+        sortSelect.appendChild(opt);
+    });
+    sortSelect.addEventListener('change', e => {
+        choosingSortMode = e.target.value;
+        renderChoosingGames();
+    });
+    controls.appendChild(sortSelect);
+
+    choosingDiv.appendChild(controls);
+
+    // --- Container that gets re-rendered on filter/group/sort changes ---
+    const gamesContainer = document.createElement('div');
+    gamesContainer.id = 'choosingGamesContainer';
+    choosingDiv.appendChild(gamesContainer);
+
+    choose.innerHTML = '';
+    choose.appendChild(choosingDiv);
+    choose.style.display = 'flex';
+    choose.parentElement.style.display = 'flex';
+
+    renderChoosingGames();
+}
+
+function renderChoosingGames() {
+    const gamesContainer = document.getElementById('choosingGamesContainer');
+    if (!gamesContainer) return;
+    gamesContainer.innerHTML = '';
+
+    const filterText = choosingFilterText.trim().toLowerCase();
+    const filteredGames = filterText
+        ? gamesLeft.filter(game => game.name.toLowerCase().includes(filterText))
+        : gamesLeft;
+
+    const { keyOf, order, labels } = groupings[choosingGroupMode];
+    const { compare } = sortings[choosingSortMode];
+
+    let groupedGames = {};
+    filteredGames.forEach(game => {
+        const key = keyOf(game);
+        if (!groupedGames[key]) groupedGames[key] = [];
+        groupedGames[key].push(game);
+    });
+
+    order.forEach(key => {
+        if (!groupedGames[key]) return;
+        coloursUsed = [];
+
+        const section = document.createElement('section');
+        section.className = 'gameSection';
+        const heading = document.createElement('h2');
+        heading.className = 'gameHeading';
+        heading.textContent = labels[key];
+        section.appendChild(heading);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gameGrid';
+        wrapper.id = `choosing-${key}`;
+
+        groupedGames[key]
+            .sort(compare)
+            .forEach(game => createChoosingBox(wrapper, game));
+
+        section.appendChild(wrapper);
+        gamesContainer.appendChild(section);
+    });
+
+    if (filteredGames.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'choosingEmpty';
+        empty.textContent = 'No games match your search.';
+        gamesContainer.appendChild(empty);
+    }
+}
+
+function createChoosingBox(div, game) {
+    const box = document.createElement('div');
+    box.className = 'gameBox';
+    box.id = game ? `${game.tag}_box` : 'four20_game_box';
+    const colour = nextColour(game);
+    game.colour = colour;
+    styleBox(box, colour);
+
+    box.appendChild(header('h3', game.name));
+    box.addEventListener('click', () => {
+        const modal = document.getElementById('gameModal');
+        const gameModal = document.getElementById('gameModal-box');
+        curr_colour.hex = colour;
+        curr_colour.rgba = hexToRgba(colour, 1);
+        curr_colour.text = hexToTextColour(colour);
+        growFromBoxToModal(box, modal, gameModal, curr_colour, () => {
+            welcome.style.display = 'none';
+            currGame = game;
+            if (game.name === '4:20 Game') {
+                create420Game();
+            } else {
+                gameTitle.innerHTML = `Game ${gameNumber} - ${game.name}`;
+                gamesLeft = gamesLeft.filter(g => g.name !== game.name);
+                toPlayOrNotToPlay(1);
+                addSpecialityTitle();
+                gameTitle.style.display = 'block';
+            }
+            openGameBox('click');
+        });
+    });
+    div.appendChild(box);
+}
+
+/*function openChoosing() {
+    const choosingDiv = document.createElement('div');
+    choosingDiv.id = 'choosing';
+
+    // --- Controls: search + grouping mode ---
+    const controls = document.createElement('div');
+    controls.className = 'choosingControls';
+
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search games...';
+    searchInput.className = 'choosingSearch';
+    searchInput.value = choosingFilterText;
+    searchInput.addEventListener('input', e => {
+        choosingFilterText = e.target.value;
+        renderChoosingGames();
+    });
+    controls.appendChild(searchInput);
+
+    const groupSelect = document.createElement('select');
+    groupSelect.className = 'choosingGroupSelect';
+    Object.keys(groupings).forEach(mode => {
+        const opt = document.createElement('option');
+        opt.value = mode;
+        opt.textContent = groupings[mode].label;
+        if (mode === choosingGroupMode) opt.selected = true;
+        groupSelect.appendChild(opt);
+    });
+    groupSelect.addEventListener('change', e => {
+        choosingGroupMode = e.target.value;
+        renderChoosingGames();
+    });
+    controls.appendChild(groupSelect);
+
+    choosingDiv.appendChild(controls);
+
+    // --- Container that gets re-rendered on filter/group changes ---
+    const gamesContainer = document.createElement('div');
+    gamesContainer.id = 'choosingGamesContainer';
+    choosingDiv.appendChild(gamesContainer);
+
+    choose.innerHTML = '';
+    choose.appendChild(choosingDiv);
+    choose.style.display = 'flex';
+    choose.parentElement.style.display = 'flex';
+
+    renderChoosingGames();
+}
+
+function renderChoosingGames() {
+    const gamesContainer = document.getElementById('choosingGamesContainer');
+    if (!gamesContainer) return;
+    gamesContainer.innerHTML = '';
+
+    const filterText = choosingFilterText.trim().toLowerCase();
+    const filteredGames = filterText
+        ? gamesLeft.filter(game => game.name.toLowerCase().includes(filterText))
+        : gamesLeft;
+
+    const { keyOf, order, labels } = groupings[choosingGroupMode];
+
+    let groupedGames = {};
+    filteredGames.forEach(game => {
+        const key = keyOf(game);
+        if (!groupedGames[key]) groupedGames[key] = [];
+        groupedGames[key].push(game);
+    });
+
+    order.forEach(key => {
+        if (!groupedGames[key]) return;
+        coloursUsed = [];
+
+        const section = document.createElement('section');
+        section.className = 'gameSection';
+        const heading = document.createElement('h2');
+        heading.className = 'gameHeading';
+        heading.textContent = labels[key];
+        section.appendChild(heading);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gameGrid';
+        wrapper.id = `choosing-${key}`;
+
+        groupedGames[key]
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .forEach(game => createChoosingBox(wrapper, game));
+
+        section.appendChild(wrapper);
+        gamesContainer.appendChild(section);
+    });
+
+    if (filteredGames.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'choosingEmpty';
+        empty.textContent = 'No games match your search.';
+        gamesContainer.appendChild(empty);
+    }
+}
+
+function createChoosingBox(div, game) {
+    const box = document.createElement('div');
+    box.className = 'gameBox';
+    box.id = game ? `${game.tag}_box` : 'four20_game_box';
+    const colour = nextColour(game);
+    game.colour = colour;
+    styleBox(box, colour);
+
+    box.appendChild(header('h3', game.name));
+    box.addEventListener('click', () => {
+        const modal = document.getElementById('gameModal');
+        const gameModal = document.getElementById('gameModal-box');
+        curr_colour.hex = colour;
+        curr_colour.rgba = hexToRgba(colour, 1);
+        curr_colour.text = hexToTextColour(colour);
+        growFromBoxToModal(box, modal, gameModal, curr_colour, () => {
+            welcome.style.display = 'none';
+            currGame = game;
+            if (game.name === '4:20 Game') {
+                create420Game();
+            } else {
+                gameTitle.innerHTML = `Game ${gameNumber} - ${game.name}`;
+                gamesLeft = gamesLeft.filter(g => g.name !== game.name);
+                toPlayOrNotToPlay(1);
+                addSpecialityTitle();
+                gameTitle.style.display = 'block';
+            }
+            openGameBox('click');
+        });
+    });
+    div.appendChild(box);
+}*/
+
+
+
+
+
+/*function openChoosing() {
     const choosingDiv = document.createElement('div');
     choosingDiv.id = 'choosing';
     
@@ -1053,7 +1381,7 @@ function createChoosingBox(div, game) {
         });
     });
     div.appendChild(box);
-}
+}*/
 
 // #endregion
 
